@@ -18,9 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="25dp" >
+                        android:paddingTop="25dp" >
 
             <ImageView
                 android:id="@+id/usernameIcon"
@@ -49,8 +47,7 @@
             android:layout_below="@+id/usernameRL"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
+            
             android:src="@drawable/login_form_separator" />
 
         <RelativeLayout
@@ -58,11 +55,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/separatorLine"
-            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            >
+            android:layout_marginTop="10dp"
+             >
 
             <ImageView
                 android:id="@+id/passwordIcon"
@@ -85,53 +80,49 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <TextView 
-        
+    <TextView
         android:id="@+id/forgotPasswordButton"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
+        android:layout_alignLeft="@+id/loginRL"
+        android:layout_below="@+id/loginRL"
+        android:layout_marginTop="5dp"
+        android:onClick="forgotPasswordClicked"
         android:text="Forgot password?"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:layout_below="@+id/loginRL"
-        android:layout_alignLeft="@+id/loginRL"
-        android:layout_marginTop="5dp"
-        android:onClick="forgotPasswordClicked"/>
-    
-    <Button 
+        android:textSize="12sp" />
+
+    <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_buton"
-        android:layout_below="@+id/forgotPasswordButton"
-        android:layout_marginTop="20dp"
-        android:text="Login"
         android:layout_alignLeft="@+id/loginRL"
         android:layout_alignRight="@+id/loginRL"
-        />
-    
-    <Button 
+        android:layout_below="@+id/forgotPasswordButton"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_buton"
+        android:text="Login" />
+
+    <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/signup_buton"
-        android:layout_below="@+id/loginButton"
-        android:layout_marginTop="20dp"
-        android:text="Register"
         android:layout_alignLeft="@+id/loginRL"
         android:layout_alignRight="@+id/loginRL"
-        />
-    
-    
-    <TextView 
+        android:layout_below="@+id/loginButton"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/signup_buton"
+        android:text="Register" />
+
+    <TextView
         android:id="@+id/encourageTV"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="45dp"
+        android:layout_above="@+id/loginRL"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="ENCOURAGE"
         android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/loginRL"
-        />
+        android:textSize="45dp" />
+
 </RelativeLayout>
