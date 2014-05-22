@@ -1,27 +1,32 @@
 package com.jhl.encourage;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+
+import com.jhl.encourage.activities.JHLoginActivity;
 
 public class JHSplashActivity extends Activity {
 
+	
+	public static int SPLASH_DISPLAY_LENGTH = 2000;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_jhsplash);
 
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		 new Handler().postDelayed(new Runnable(){
+	            @Override
+	            public void run() {
+	                /* Create an Intent that will start the Menu-Activity. */
+	                Intent mainIntent = new Intent(JHSplashActivity.this,JHLoginActivity.class);
+	                startActivity(mainIntent);
+	                finish();
+	            }
+	        }, SPLASH_DISPLAY_LENGTH);
 	}
 
 	@Override
@@ -44,21 +49,21 @@ public class JHSplashActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_jhsplash,
-					container, false);
-			return rootView;
-		}
-	}
+//	/**
+//	 * A placeholder fragment containing a simple view.
+//	 */
+//	public static class PlaceholderFragment extends Fragment {
+//
+//		public PlaceholderFragment() {
+//		}
+//
+//		@Override
+//		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//				Bundle savedInstanceState) {
+//			View rootView = inflater.inflate(R.layout.fragment_jhsplash,
+//					container, false);
+//			return rootView;
+//		}
+//	}
 
 }
