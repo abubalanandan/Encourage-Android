@@ -9,16 +9,29 @@
         android:id="@+id/loginRL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/form" >
+        android:layout_centerInParent="true" >
+
+        <ImageView
+            android:id="@+id/loginFormBG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_form" />
+
+        <ImageView
+            android:id="@+id/separatorLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/separate_form" />
 
         <RelativeLayout
             android:id="@+id/usernameRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-                        android:paddingTop="25dp" >
+            android:layout_alignLeft="@+id/separatorLine"
+            android:layout_alignRight="@+id/separatorLine"
+            android:layout_alignTop="@+id/loginFormBG"
+            android:layout_marginTop="30dp" >
 
             <ImageView
                 android:id="@+id/usernameIcon"
@@ -40,24 +53,14 @@
                 android:textSize="14sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/separatorLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/usernameRL"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            
-            android:src="@drawable/login_form_separator" />
-
         <RelativeLayout
             android:id="@+id/passwordRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/separatorLine"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-             >
+            android:layout_alignBottom="@+id/loginFormBG"
+            android:layout_alignLeft="@+id/separatorLine"
+            android:layout_alignRight="@+id/separatorLine"
+            android:layout_marginBottom="30dp" >
 
             <ImageView
                 android:id="@+id/passwordIcon"
@@ -86,6 +89,7 @@
         android:layout_height="20dp"
         android:layout_alignLeft="@+id/loginRL"
         android:layout_below="@+id/loginRL"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:onClick="forgotPasswordClicked"
         android:text="Forgot password?"
@@ -99,7 +103,7 @@
         android:layout_alignLeft="@+id/loginRL"
         android:layout_alignRight="@+id/loginRL"
         android:layout_below="@+id/forgotPasswordButton"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/login_buton"
         android:text="Login" />
 
@@ -110,19 +114,18 @@
         android:layout_alignLeft="@+id/loginRL"
         android:layout_alignRight="@+id/loginRL"
         android:layout_below="@+id/loginButton"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/signup_buton"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/register_buton"
+        android:onClick="registerButtonClicked"
         android:text="Register" />
 
-    <TextView
-        android:id="@+id/encourageTV"
+    <ImageView
+        android:id="@+id/encourageLogo"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/loginRL"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="ENCOURAGE"
-        android:textColor="@android:color/white"
-        android:textSize="45dp" />
+        android:src="@drawable/login_logo" />
 
 </RelativeLayout>

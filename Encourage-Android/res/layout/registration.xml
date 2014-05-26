@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register_bg" >
+
+    <RelativeLayout
+        android:id="@+id/formRL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <ImageView
+            android:id="@+id/formBG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register_form" />
+
+        <EditText
+            android:id="@+id/lastNameField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/firstSeparator"
+            android:layout_alignRight="@+id/firstSeparator"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:hint="Last Name" />
+
+        <EditText
+            android:id="@+id/firstNameField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/firstSeparator"
+            android:layout_alignRight="@+id/firstSeparator"
+            android:layout_alignTop="@+id/formBG"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:hint="First Name" />
+
+        <ImageView
+            android:id="@+id/firstSeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstNameField"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/separate_form_signup" />
+
+        <EditText
+            android:id="@+id/emailField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/formBG"
+            android:layout_alignLeft="@+id/firstSeparator"
+            android:layout_alignRight="@+id/firstSeparator"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:background="@null"
+            android:hint="Email Address" />
+        
+          <ImageView
+            android:id="@+id/secondSeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/emailField"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/separate_form_signup" />
+    </RelativeLayout>
+
+    
+    <TextView 
+        
+        android:id="@+id/termsTV"
+        android:layout_width="wrap_content"
+        android:layout_alignLeft="@+id/formRL"
+        android:layout_alignRight="@+id/formRL"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/formRL"
+        android:paddingLeft="10dp"
+        android:paddingRight="18dp"
+        android:textSize="10sp"
+        android:textColor="@android:color/white"
+        android:text="By clicking Register, you agree to our Terms and Conditions herein documented"/>
+    
+    <Button 
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/termsTV"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/register_buton_signup"
+        android:text="Register"
+        />
+    
+      <Button 
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/registerButton"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_buton_signup"
+        android:text="Login"
+        android:onClick="loginButtonClicked"
+        />
+    
+    <ImageView
+        android:id="@+id/registerLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/formRL"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/login_logo_signup" />
+
+</RelativeLayout>
