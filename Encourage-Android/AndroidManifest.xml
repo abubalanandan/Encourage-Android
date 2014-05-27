@@ -9,7 +9,7 @@
         android:targetSdkVersion="19" />
 
     <application
-        android:name=".app.EncourageApplication"
+        android:name=".EncourageApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
