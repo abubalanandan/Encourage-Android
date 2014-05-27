@@ -105,6 +105,7 @@
         android:layout_below="@+id/forgotPasswordButton"
         android:layout_marginTop="10dp"
         android:background="@drawable/login_buton"
+        android:onClick="loginButtonClicked"
         android:text="Login" />
 
     <Button

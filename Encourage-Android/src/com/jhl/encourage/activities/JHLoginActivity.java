@@ -24,7 +24,7 @@ public class JHLoginActivity extends Activity {
 
 
 	private void initViews(){
-		emailField = (EditText)findViewById(R.id.emailField);
+		emailField = (EditText)findViewById(R.id.usernameField);
 		passwordField = (EditText)findViewById(R.id.passwordField);
 	}
 	
