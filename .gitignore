@@ -17,3 +17,10 @@ profile
 DerivedData
 *.xccheckout
 *.xcuserstate
+
+# IDEA
+
+.idea/
+gen/
+*.iml
+
