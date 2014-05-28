@@ -30,26 +30,29 @@ public final class R {
         public static final int login_form=0x7f020005;
         public static final int login_logo=0x7f020006;
         public static final int login_logo_signup=0x7f020007;
-        public static final int password_icon=0x7f020008;
-        public static final int register_bg=0x7f020009;
-        public static final int register_buton=0x7f02000a;
-        public static final int register_buton_signup=0x7f02000b;
-        public static final int register_form=0x7f02000c;
-        public static final int separate_form=0x7f02000d;
-        public static final int separate_form_signup=0x7f02000e;
-        public static final int username_icon=0x7f02000f;
+        public static final int message_detail_bg=0x7f020008;
+        public static final int password_icon=0x7f020009;
+        public static final int register_bg=0x7f02000a;
+        public static final int register_buton=0x7f02000b;
+        public static final int register_buton_signup=0x7f02000c;
+        public static final int register_form=0x7f02000d;
+        public static final int separate_form=0x7f02000e;
+        public static final int separate_form_signup=0x7f02000f;
+        public static final int username_icon=0x7f020010;
     }
     public static final class id {
-        public static final int action_settings=0x7f080019;
+        public static final int action_settings=0x7f08001c;
+        public static final int backgroundImageView=0x7f080016;
         public static final int emailField=0x7f080012;
         public static final int encourageLogo=0x7f08000c;
         public static final int firstNameField=0x7f080011;
         public static final int firstSeparator=0x7f080010;
-        public static final int footerView=0x7f080017;
+        public static final int footerView=0x7f08001a;
         public static final int forgotPasswordButton=0x7f080009;
         public static final int formBG=0x7f08000e;
         public static final int formRL=0x7f08000d;
-        public static final int headerView=0x7f080016;
+        public static final int headerView=0x7f080019;
+        public static final int htmlView=0x7f080018;
         public static final int lastNameField=0x7f08000f;
         public static final int loginButton=0x7f08000a;
         public static final int loginFormBG=0x7f080001;
@@ -59,10 +62,11 @@ public final class R {
         public static final int passwordRL=0x7f080006;
         public static final int registerButton=0x7f08000b;
         public static final int registerLogo=0x7f080015;
+        public static final int scrollView=0x7f080017;
         public static final int secondSeparator=0x7f080013;
         public static final int separatorLine=0x7f080002;
         public static final int termsTV=0x7f080014;
-        public static final int timeLineView=0x7f080018;
+        public static final int timeLineView=0x7f08001b;
         public static final int usernameField=0x7f080005;
         public static final int usernameIcon=0x7f080004;
         public static final int usernameRL=0x7f080003;
@@ -72,8 +76,9 @@ public final class R {
         public static final int fragment_jhsplash=0x7f030001;
         public static final int login=0x7f030002;
         public static final int registration=0x7f030003;
-        public static final int timeline=0x7f030004;
-        public static final int timeline_cell=0x7f030005;
+        public static final int terms_and_conditions=0x7f030004;
+        public static final int timeline=0x7f030005;
+        public static final int timeline_cell=0x7f030006;
     }
     public static final class menu {
         public static final int jhsplash=0x7f070000;
@@ -113,5 +118,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int ThemeDialogCustom=0x7f060002;
     }
 }

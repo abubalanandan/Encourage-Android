@@ -82,6 +82,8 @@
         android:paddingRight="18dp"
         android:textSize="10sp"
         android:textColor="@android:color/white"
+        android:onClick="showPolicy"
+        android:clickable="true"
         android:text="By clicking Register, you agree to our Terms and Conditions herein documented"/>
     
     <Button 
