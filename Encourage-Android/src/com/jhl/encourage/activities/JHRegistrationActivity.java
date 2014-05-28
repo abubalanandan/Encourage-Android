@@ -1,8 +1,14 @@
 package com.jhl.encourage.activities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +18,9 @@ import android.widget.EditText;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
 import com.jhl.encourage.apis.SignupService;
-import com.jhl.encourage.apis.SimpleXMLConverter;
+import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.utilities.JHUtility;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import com.jhl.encourage.views.JHTermsAndConditionsDialog;
 
 public class JHRegistrationActivity extends Activity {
@@ -104,9 +106,26 @@ public class JHRegistrationActivity extends Activity {
             @Override
             public void success(SpocResponse spocResponse, Response response) {
 
-                System.out.println("Test");
-                System.out.println("Test");
 
+				ArrayList<SpocObject> responseList = spocResponse
+						.getSpocObjects();
+				for (SpocObject spocObject : responseList) {
+					if (spocObject.getResultTypeCode()
+							.equalsIgnoreCase("STATUS")) {
+						HashMap<String, String> map = spocObject
+								.getMap();
+						String success = map.get("success");
+						if(success.equalsIgnoreCase("true")){
+							System.out.println("success");
+
+						}else{
+							System.out.println("error");
+
+						}
+						
+					}
+				}
+			
             }
 
             @Override

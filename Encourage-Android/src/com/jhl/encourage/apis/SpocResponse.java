@@ -15,4 +15,8 @@ public class SpocResponse {
     @ElementList(inline = true)
     private ArrayList<SpocObject> spocObjects;
 
+	public ArrayList<SpocObject> getSpocObjects() {
+		return spocObjects;
+	}
+
 }

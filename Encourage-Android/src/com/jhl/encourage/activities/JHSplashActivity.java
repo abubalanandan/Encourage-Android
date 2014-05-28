@@ -8,9 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jhl.encourage.R;
-import com.jhl.encourage.R.id;
-import com.jhl.encourage.R.layout;
-import com.jhl.encourage.R.menu;
 
 public class JHSplashActivity extends Activity {
 

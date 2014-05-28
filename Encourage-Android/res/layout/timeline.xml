@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/page_bg">
 
     <RelativeLayout
         android:id="@+id/headerView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/holo_blue_dark"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_header"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" >
     </RelativeLayout>
@@ -15,8 +16,9 @@
     <RelativeLayout
         android:id="@+id/footerView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/holo_blue_dark"
+        android:layout_height="wrap_content"
+        android:background="@drawable/translucent_bottom"
+        android:alpha="0.5"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" >
     </RelativeLayout>

@@ -1,15 +1,26 @@
 package com.jhl.encourage;
 
 
-import android.app.Application;
-import com.jhl.encourage.apis.SimpleXMLConverter;
 import retrofit.RestAdapter;
+import android.app.Application;
+
+import com.jhl.encourage.apis.SimpleXMLConverter;
+import com.jhl.encourage.model.JHUser;
 
 public class EncourageApplication extends Application {
 
 	private static EncourageApplication application;
+	private JHUser currentUser;
+    public JHUser getCurrentUser() {
+		return currentUser;
+	}
 
-    private static RestAdapter restAdapter;
+
+	public void setCurrentUser(JHUser currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	private static RestAdapter restAdapter;
 	
 	@Override
 	public void onCreate() {
