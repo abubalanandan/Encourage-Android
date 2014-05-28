@@ -6,8 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.apis.LoginService;
+import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.utilities.JHUtility;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class JHLoginActivity extends Activity {
 
@@ -56,6 +63,23 @@ public class JHLoginActivity extends Activity {
 	
 	
 	public void invokeLoginApi(String email, String password){
+
+        RestAdapter restAdapter = EncourageApplication.getRestAdapter();
+
+        LoginService service = restAdapter.create(LoginService.class);
+
+        service.loginUser("userLogin",email,password,new Callback<SpocResponse>() {
+            @Override
+            public void success(SpocResponse spocResponse, Response response) {
+
+                System.out.println("success");
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                System.out.println("error");
+            }
+        });
 		
 	}
 	

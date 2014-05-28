@@ -6,10 +6,19 @@ import java.util.regex.Pattern;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.apis.SignupService;
+import com.jhl.encourage.apis.SimpleXMLConverter;
+import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.utilities.JHUtility;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class JHRegistrationActivity extends Activity {
 
@@ -21,6 +30,7 @@ public class JHRegistrationActivity extends Activity {
 	private EditText emailField;
 	private EditText firstNameField;
 	private EditText lastNameField;
+    private Button registerButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,14 @@ public class JHRegistrationActivity extends Activity {
 		emailField = (EditText) findViewById(R.id.emailField);
 		firstNameField = (EditText) findViewById(R.id.firstNameField);
 		lastNameField = (EditText) findViewById(R.id.lastNameField);
+        registerButton = (Button) findViewById(R.id.registerButton);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerButtonClicked(view);
+            }
+        });
 	}
 
 	public void loginButtonClicked(View view) {
@@ -69,6 +87,28 @@ public class JHRegistrationActivity extends Activity {
 	}
 
 	private void invokeRegistrationApi(String firstName, String lastName, String emailAddress) {
+
+        RestAdapter restAdapter = EncourageApplication.getRestAdapter();
+
+        SignupService service = restAdapter.create(SignupService.class);
+
+
+        service.signUpUser("postPersonDetails",firstName,lastName,emailAddress, new Callback<SpocResponse>() {
+            @Override
+            public void success(SpocResponse spocResponse, Response response) {
+
+                System.out.println("Test");
+                System.out.println("Test");
+
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+                System.out.println("Error");
+
+            }
+        });
 
 	}
 }
