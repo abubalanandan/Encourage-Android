@@ -19,6 +19,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import com.jhl.encourage.views.JHTermsAndConditionsDialog;
 
 public class JHRegistrationActivity extends Activity {
 
@@ -86,7 +87,13 @@ public class JHRegistrationActivity extends Activity {
 		}
 	}
 
-	private void invokeRegistrationApi(String firstName, String lastName, String emailAddress) {
+	public void showPolicy(View view) {
+		JHTermsAndConditionsDialog dialog = new JHTermsAndConditionsDialog(this);
+		dialog.show();
+	}
+
+	private void invokeRegistrationApi(String firstName, String lastName,
+			String emailAddress) {
 
         RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
