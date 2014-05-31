@@ -6,6 +6,11 @@ import android.app.Application;
 
 import com.jhl.encourage.apis.SimpleXMLConverter;
 import com.jhl.encourage.model.JHUser;
+import retrofit.android.MainThreadExecutor;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class EncourageApplication extends Application {
 
@@ -26,7 +31,10 @@ public class EncourageApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		application = this;
-        restAdapter = new RestAdapter.Builder().setEndpoint("https://tryencourage.com/hwdsi/hwservice").setConverter(new SimpleXMLConverter()).build();
+        Executor executor = Executors.newFixedThreadPool(5);
+        restAdapter = new RestAdapter.Builder().setEndpoint("https://tryencourage.com/hwdsi/hwservice")
+                .setConverter(new SimpleXMLConverter())
+                .setExecutors(executor, new MainThreadExecutor()).build();
 	}
 
 	
