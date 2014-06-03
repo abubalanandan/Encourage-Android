@@ -104,5 +104,6 @@ public class JHLoginActivity extends Activity {
 	public void registerButtonClicked(View view) {
 		Intent intent = new Intent(this, JHRegistrationActivity.class);
 		startActivity(intent);
+	
 	}
 }

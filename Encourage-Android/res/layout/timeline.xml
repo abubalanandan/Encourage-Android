@@ -9,24 +9,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        >
-        <ImageView 
+        android:layout_alignParentTop="true" >
+
+        <ImageView
             android:id="@+id/headerBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/top_header"
             android:background="@null"
-            />
+            android:src="@drawable/top_header" />
 
         <ImageButton
             android:id="@+id/menuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/menu_select"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-             />
+            android:background="@drawable/menu_select" />
 
         <LinearLayout
             android:id="@+id/topRightMenuLayout"
@@ -34,28 +32,80 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-            <ImageButton
+            <RelativeLayout
                 android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/email_icon"
-                android:layout_weight="0.3" 
-                />
-            <ImageButton
+                android:layout_weight="0.3"
+                android:onClick="emailButtonPressed" >
+
+                <ImageView
+                    android:id="@+id/emailBackgroundImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/email_icon" />
+
+                <TextView
+                    android:id="@+id/emailnumberView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/emailBackgroundImage"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="7dp"
+                    android:text="7"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/alertButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/et_icon" 
-                android:layout_weight="0.3"/>
+                android:layout_weight="0.3"
+                android:onClick="alertButtonPressed" >
 
-            <ImageButton
+                <ImageView
+                    android:id="@+id/alertBackgroundImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/not_icon" />
+
+                <TextView
+                    android:id="@+id/alertnumberView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/alertBackgroundImage"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="7dp"
+                    android:text="7"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/careTaskButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/not_icon"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:onClick="careTaskButtonPressed" >
+
+                <ImageView
+                    android:id="@+id/careTaskBackgroundImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/et_icon" />
+
+                <TextView
+                    android:id="@+id/caretasknumberView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/careTaskBackgroundImage"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="7dp"
+                    android:text="7"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 
@@ -67,6 +117,24 @@
         android:layout_alignParentLeft="true"
         android:alpha="0.5"
         android:background="@drawable/translucent_bottom" >
+
+        <ImageView
+            android:id="@+id/footerLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/bottom_logo" />
+
+        <ImageButton
+            android:id="@+id/reportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/report_buton" />
     </RelativeLayout>
 
     <ListView
