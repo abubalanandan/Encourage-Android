@@ -11,7 +11,7 @@ import retrofit.http.POST;
 public interface LoginService {
 
     @FormUrlEncoded
-    @POST("/userLogin.php")
+    @POST("/hwservice/userLogin.php")
     void loginUser(@Field("operationName") String operationName,  @Field("email_address") String emailAddress, @Field("password") String password, Callback<SpocResponse> callback);
 
 }

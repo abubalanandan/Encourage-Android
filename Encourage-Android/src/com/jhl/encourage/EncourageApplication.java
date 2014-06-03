@@ -32,7 +32,7 @@ public class EncourageApplication extends Application {
 		super.onCreate();
 		application = this;
         Executor executor = Executors.newFixedThreadPool(5);
-        restAdapter = new RestAdapter.Builder().setEndpoint("https://tryencourage.com/hwdsi/hwservice")
+        restAdapter = new RestAdapter.Builder().setEndpoint("https://tryencourage.com/hwdsi")
                 .setConverter(new SimpleXMLConverter())
                 .setExecutors(executor, new MainThreadExecutor()).build();
 	}

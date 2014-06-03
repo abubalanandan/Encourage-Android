@@ -10,7 +10,7 @@ import retrofit.http.POST;
  */
 public interface TimeLineService {
     @FormUrlEncoded
-    @POST("/getTimelineDetails.php")
+    @POST("/hwservice/getTimelineDetails.php")
     void getTimeLineDetails(@Field("operationName") String operationName,  @Field("token") String token, @Field("careTargetid") String careTargetId, @Field("datetime") String dateTime, @Field("timezone") String timeZone, Callback<SpocResponse> callback);
 }
 
