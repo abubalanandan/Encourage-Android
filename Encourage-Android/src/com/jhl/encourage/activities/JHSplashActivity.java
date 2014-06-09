@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.utilities.JHUtility;
 
 public class JHSplashActivity extends Activity {
 
@@ -27,6 +28,8 @@ public class JHSplashActivity extends Activity {
 	                finish();
 	            }
 	        }, SPLASH_DISPLAY_LENGTH);
+		 
+		 
 	}
 
 	@Override

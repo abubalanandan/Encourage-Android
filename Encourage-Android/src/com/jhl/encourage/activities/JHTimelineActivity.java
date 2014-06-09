@@ -9,6 +9,7 @@ import retrofit.client.Response;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -19,6 +20,8 @@ import com.jhl.encourage.adapters.JHTimelineAdapter;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
+import com.jhl.encourage.gcm.JHGCMRegistrant;
+import com.jhl.encourage.utilities.JHUtility;
 
 public class JHTimelineActivity extends Activity {
 
@@ -33,6 +36,8 @@ public class JHTimelineActivity extends Activity {
 			list.add("lala");
 		}
 		initViews();
+		JHGCMRegistrant registrant = new JHGCMRegistrant();
+		registrant.register(getApplicationContext());
 	}
 
 	private void initViews() {

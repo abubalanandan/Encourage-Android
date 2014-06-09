@@ -9,6 +9,11 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <permission android:protectionLevel="signature" android:name="com.jhl.encourage.permission.C2D_MESSAGE"></permission>
+    <uses-permission android:name="com.jhl.encourage.permission.C2D_MESSAGE"/>
 
     <application
         android:name=".EncourageApplication"
@@ -37,6 +42,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <receiver
+            android:name="com.jhl.encourage.gcm.JHGCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.jhl.encourage" />
+            </intent-filter>
+        </receiver>
+       	<service android:name="com.jhl.encourage.gcm.JHGCMMessageHandler" />
+
+        <meta-data android:name="com.google.android.gms.version"
+           android:value="4" />
+
+       
+        
     </application>
 
 </manifest>
