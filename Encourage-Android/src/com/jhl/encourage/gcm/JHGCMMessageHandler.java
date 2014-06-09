@@ -1,16 +1,25 @@
 package com.jhl.encourage.gcm;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.jhl.encourage.activities.JHTimelineActivity;
+import com.jhl.encourage.model.Alert;
+import com.jhl.encourage.model.CareTask;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHNotificationParser;
 import com.jhl.encourage.utilities.JHUtility;
 
+import android.R;
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -18,8 +27,10 @@ import android.widget.Toast;
 
 public class JHGCMMessageHandler extends IntentService {
 
-     String mes;
-     private Handler handler;
+    private String mes;
+    private Handler handler;
+    private Context context;
+    
     public JHGCMMessageHandler() {
         super("GcmMessageHandler");
     }
@@ -29,6 +40,8 @@ public class JHGCMMessageHandler extends IntentService {
         // TODO Auto-generated method stub
         super.onCreate();
         handler = new Handler();
+        context = getApplicationContext();
+        
     }
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -47,6 +60,7 @@ public class JHGCMMessageHandler extends IntentService {
     		   
        if( n != null ) {
        		JHAppStateVariables.addNotification(n);
+       		showLocalNotification(n);
        }
        
        Log.i(JHConstants.LOG_TAG, "Alerts" );
@@ -61,16 +75,32 @@ public class JHGCMMessageHandler extends IntentService {
     	   Log.i(JHConstants.LOG_TAG, "CareTask " + not);
        }
        
+        
        JHGCMBroadcastReceiver.completeWakefulIntent(intent);
 
     }
-
-    public void showToast(){
+    
+    public void showLocalNotification(final Notification no){
         handler.post(new Runnable() {
             public void run() {
-                Toast.makeText(getApplicationContext(),mes , Toast.LENGTH_LONG).show();
+            	NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+            	 
+                Intent intent = new Intent(context, JHTimelineActivity.class);
+                 
+                //use the flag FLAG_UPDATE_CURRENT to override any notification already there
+                PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+             
+                android.app.Notification notification = new android.app.Notification(R.drawable.ic_delete, "Encourage Mobile Notification", System.currentTimeMillis());
+                notification.flags = android.app.Notification.FLAG_AUTO_CANCEL | android.app.Notification.DEFAULT_LIGHTS | android.app.Notification.DEFAULT_SOUND;
+             
+                if(no instanceof Alert)
+                	notification.setLatestEventInfo(context, "Encourage Mobile", "There is a new alert from Encurage Mobile", contentIntent);
+                else if (no instanceof CareTask)
+                	notification.setLatestEventInfo(context, "Encourage Mobile", "There is a new CareTask from Encurage Mobile", contentIntent);
+                
+                notificationManager.notify(10, notification);
+            	
             }
          });
-
     }
 }

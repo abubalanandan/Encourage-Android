@@ -11,4 +11,6 @@ public interface JHConstants {
 	public static final String NOT_XML_KEY_TYPE = "type";
 	public static final String NOT_XML_KEY_MESSAGE = "message";
 	public static final String NOT_XML_KEY_TAG = "data";
+	
+	
 }

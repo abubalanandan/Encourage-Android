@@ -2,17 +2,23 @@ package com.jhl.encourage.activities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.view.View.OnClickListener;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
@@ -21,6 +27,7 @@ import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
 import com.jhl.encourage.gcm.JHGCMRegistrant;
+import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHTimelineActivity extends Activity {
@@ -28,7 +35,7 @@ public class JHTimelineActivity extends Activity {
 	private ListView timelineView;
 	private JHTimelineAdapter adapter;
 	private ArrayList<String> list = new ArrayList<>(3);
-
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
@@ -50,6 +57,12 @@ public class JHTimelineActivity extends Activity {
 		adapter = new JHTimelineAdapter(this, list, false);
 		timelineView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
+		
+		RelativeLayout alertsButton = (RelativeLayout)findViewById(R.id.alertButton);
+		alertsButton.setOnClickListener(new AlertClicked());
+		
+		RelativeLayout ctButton = (RelativeLayout)findViewById(R.id.careTaskButton);
+		ctButton.setOnClickListener(new CTClicked());
 	}
 
 	private void invokeTimelineDetailsApi(String careTargetId, String dateTime,
@@ -94,5 +107,33 @@ public class JHTimelineActivity extends Activity {
 					}
 				});
 
+	}
+	
+	class AlertClicked implements View.OnClickListener {
+		@Override
+		public void onClick(View arg0) {
+			try{
+			    Intent i = new Intent(JHTimelineActivity.this, JHAlertListActivity.class);
+			    startActivity(i);
+			    }
+			    catch(Exception ex)
+			    {
+			        Log.e("main",ex.toString());
+			    }
+		}
+	}
+	
+	class CTClicked implements View.OnClickListener {
+		@Override
+		public void onClick(View arg0) {
+			try{
+			    Intent i = new Intent(JHTimelineActivity.this, JHCareTaskListActivity.class);
+			    startActivity(i);
+			    }
+			    catch(Exception ex)
+			    {
+			        Log.e("main",ex.toString());
+			    }
+		}
 	}
 }

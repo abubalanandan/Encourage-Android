@@ -43,6 +43,16 @@
             </intent-filter>
         </activity>
         
+         <activity
+            android:name="com.jhl.encourage.activities.JHAlertListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+         <activity
+            android:name="com.jhl.encourage.activities.JHCareTaskListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         <receiver
             android:name="com.jhl.encourage.gcm.JHGCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
