@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -63,6 +64,8 @@ public class JHTimelineActivity extends Activity {
 		
 		RelativeLayout ctButton = (RelativeLayout)findViewById(R.id.careTaskButton);
 		ctButton.setOnClickListener(new CTClicked());
+		ImageButton reportButton = (ImageButton) findViewById(R.id.reportButton);
+		reportButton.setOnClickListener(new ReportClicked());
 	}
 
 	private void invokeTimelineDetailsApi(String careTargetId, String dateTime,
@@ -128,6 +131,20 @@ public class JHTimelineActivity extends Activity {
 		public void onClick(View arg0) {
 			try{
 			    Intent i = new Intent(JHTimelineActivity.this, JHCareTaskListActivity.class);
+			    startActivity(i);
+			    }
+			    catch(Exception ex)
+			    {
+			        Log.e("main",ex.toString());
+			    }
+		}
+	}
+	
+	class ReportClicked implements View.OnClickListener {
+		@Override
+		public void onClick(View arg0) {
+			try{
+			    Intent i = new Intent(JHTimelineActivity.this, JHReportWizardActivity.class);
 			    startActivity(i);
 			    }
 			    catch(Exception ex)
