@@ -37,6 +37,7 @@ public class JHTimelineActivity extends Activity {
 	private JHTimelineAdapter adapter;
 	private ArrayList<String> list = new ArrayList<>(3);
 	
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
@@ -49,6 +50,7 @@ public class JHTimelineActivity extends Activity {
 	}
 
 	private void initViews() {
+		
 		timelineView = (ListView) findViewById(R.id.timeLineView);
 
 		ProgressBar dialog = new ProgressBar(this);

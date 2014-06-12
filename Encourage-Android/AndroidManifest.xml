@@ -14,6 +14,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
     <permission android:protectionLevel="signature" android:name="com.jhl.encourage.permission.C2D_MESSAGE"></permission>
     <uses-permission android:name="com.jhl.encourage.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:name=".EncourageApplication"
@@ -48,6 +49,11 @@
             android:screenOrientation="portrait" >
         </activity>
         
+          <activity
+            android:name="com.jhl.encourage.activities.JHContactPickerActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         
          <activity
             android:name="com.jhl.encourage.activities.JHCareTaskListActivity"
             android:screenOrientation="portrait" >
@@ -67,6 +73,10 @@
            android:value="4" />
         <activity android:name="com.jhl.encourage.activities.JHReportWizardActivity"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
        
