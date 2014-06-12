@@ -50,7 +50,7 @@ public class JHContactAdapter extends ArrayAdapter<Contact> {
 	 
 		   holder = new ViewHolder();
 		   //holder.code = (TextView) convertView.findViewById(R.id.code);
-		   holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+		   holder.name = (CheckBox) convertView.findViewById(R.id.cboxCareCircle);
 		   convertView.setTag(holder);
 	 
 		   holder.name.setOnClickListener( new View.OnClickListener() {

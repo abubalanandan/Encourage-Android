@@ -116,7 +116,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/footerView"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true" 
+        >
 
         <ImageView
             android:id="@+id/headerBG"
@@ -129,33 +130,23 @@
             android:id="@+id/contactsList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/contactSelectLayout"
             android:text="TextView" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/contactSelectLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            
             android:layout_centerVertical="true"
             android:orientation="horizontal"
             android:padding="5dp" >
 
-            <RelativeLayout
-                android:id="@+id/emailButton"
+            <CheckBox
+                android:id="@+id/cboxCareCircle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:onClick="emailButtonPressed" >
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/alertButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:onClick="alertButtonPressed" >
-            </RelativeLayout>
+                android:text="Inform my care-circle" />
 
             <RelativeLayout
                 android:id="@+id/rwContactButton"
@@ -163,22 +154,27 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:onClick="rwContactButtonPressed" >
-
-                <ImageView
-                    android:id="@+id/rwContactBackgroundImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/close_buton" />
             </RelativeLayout>
-        </LinearLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/rwContactBackgroundImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/contactSelectLayout"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_add_group" />
 
     </RelativeLayout>
-    
+
     <ProgressBar
-   		android:id="@+id/pbContact"
-   		style="?android:attr/progressBarStyleLarge"
-   		android:layout_width="wrap_content"
-   		android:layout_height="wrap_content"
-   		android:layout_centerHorizontal="true" />
+        android:id="@+id/pbContact"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/reportpager"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="151dp" />
 
 </RelativeLayout>

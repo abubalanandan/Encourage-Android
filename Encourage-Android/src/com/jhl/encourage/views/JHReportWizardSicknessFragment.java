@@ -19,7 +19,7 @@ public class JHReportWizardSicknessFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.sicknessreport, container, false);
 		GridView gridView = (GridView) v.findViewById(R.id.sicknessgrid);
-        gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
+		gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
 		return v;
 	}
 }
