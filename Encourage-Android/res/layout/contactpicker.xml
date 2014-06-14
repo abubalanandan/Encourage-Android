@@ -70,7 +70,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:background="@drawable/report_buton" />
+            android:background="@drawable/report_buton" 
+            android:onClick="contatDoneButtonClicked"/>
     </RelativeLayout>
 
     <ListView

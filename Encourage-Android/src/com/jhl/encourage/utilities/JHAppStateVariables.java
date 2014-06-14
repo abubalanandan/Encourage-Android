@@ -53,5 +53,16 @@ public class JHAppStateVariables {
 		JHAppStateVariables.contacts = contacts;
 	}
 	
+	private static String loginTocken = null;
+
+	public static String getLoginTocken() {
+		return loginTocken;
+	}
+
+	public static void setLoginTocken(String loginTocken) {
+		JHAppStateVariables.loginTocken = loginTocken;
+	}
+	
+	
 	
 }
