@@ -1,23 +1,35 @@
 package com.jhl.encourage.activities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.activities.JHReportWizardActivity.ContactLoadTask;
 import com.jhl.encourage.apis.LoginService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
+import com.jhl.encourage.model.Contact;
+import com.jhl.encourage.utilities.JHAppStateVariables;
+import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHLoginActivity extends Activity {
@@ -43,50 +55,94 @@ public class JHLoginActivity extends Activity {
 		validateFields();
 
 	}
-
+	private String email;
+	private String pswd;
+	private String regId;
+	
 	private void validateFields() {
-		String email = emailField.getText().toString();
-		String pswd = passwordField.getText().toString();
+		this.email = emailField.getText().toString();
+		this.pswd = passwordField.getText().toString();
 
-		if (((email == null) || email.isEmpty())
-				&& ((pswd == null) || pswd.isEmpty()))
-			JHUtility.showDialogOk("",
-					getString(R.string.email_and_pswd_empty_msg), this);
+		if (((email == null) || email.isEmpty()) && ((pswd == null) || pswd.isEmpty()))
+			JHUtility.showDialogOk("",getString(R.string.email_and_pswd_empty_msg), this);
 		else if ((email == null) || email.isEmpty())
-			JHUtility.showDialogOk("", getString(R.string.email_empty_msg),
-					this);
+			JHUtility.showDialogOk("", getString(R.string.email_empty_msg),	this);
 		else if ((pswd == null) || pswd.isEmpty())
-			JHUtility
-					.showDialogOk("", getString(R.string.pswd_empty_msg), this);
-		else
-			this.invokeLoginApi(email, pswd);
+			JHUtility.showDialogOk("", getString(R.string.pswd_empty_msg), this);
+		else {
+			new GCMRegistrationTask().execute();
+		}
 	}
 
-	public void invokeLoginApi(String email, String password) {
+	
+		
+	class GCMRegistrationTask extends AsyncTask<String, Integer, Boolean> {
+			@Override
+			protected void onPreExecute() {
+				
+				super.onPreExecute();
+			}
+
+			@Override
+			protected void onPostExecute(Boolean result) {
+				invokeLoginApi(email, pswd, regId);
+			}
+
+			@Override
+			protected Boolean doInBackground(String... params) {
+				String msg = "";
+                GoogleCloudMessaging gcm = null;
+        		String PROJECT_NUMBER = "291052764949";
+        		boolean retVal = false;
+                try {
+                    if (gcm == null) {
+                        gcm = GoogleCloudMessaging.getInstance(JHLoginActivity.this);
+                    }
+                    regId = gcm.register(PROJECT_NUMBER);
+                    msg = "Device registered, registration ID=" + regId;
+                   
+                    retVal = true;
+                    
+                    
+
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+                    retVal = false;
+
+                }
+                
+                Log.i(JHConstants.LOG_TAG,  msg);
+                
+                return retVal;
+			}
+		}
+	
+	public void invokeLoginApi(String email, String password, String regId) {
 
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
 		LoginService service = restAdapter.create(LoginService.class);
 
-		service.loginUser("userLogin", email, password,
+		service.loginUser("userLogin", email, password,regId, 
 				new Callback<SpocResponse>() {
 					@Override
-					public void success(SpocResponse spocResponse,
-							Response response) {
-						ArrayList<SpocObject> responseList = spocResponse
-								.getSpocObjects();
+					public void success(SpocResponse spocResponse,	Response response) {
+						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
 						for (SpocObject spocObject : responseList) {
-							if (spocObject.getResultTypeCode()
-									.equalsIgnoreCase("STATUS")) {
-								HashMap<String, String> map = spocObject
-										.getMap();
+							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
+								HashMap<String, String> map = spocObject.getMap();
 								String success = map.get("success");
 								if(success.equalsIgnoreCase("true")){
 									System.out.println("success");
-
+									String loginTocken = map.get("token");
+									JHAppStateVariables.setLoginTocken(loginTocken);
+									
+									Intent intent = new Intent(JHLoginActivity.this, JHTimelineActivity.class);
+									startActivity(intent);
+									
 								}else{
 									System.out.println("error");
-
+									JHUtility.showDialogOk("",getString(R.string.login_failed), JHLoginActivity.this);	
 								}
 								
 							}

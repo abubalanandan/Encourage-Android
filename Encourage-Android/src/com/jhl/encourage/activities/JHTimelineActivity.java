@@ -27,7 +27,6 @@ import com.jhl.encourage.adapters.JHTimelineAdapter;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
-import com.jhl.encourage.gcm.JHGCMRegistrant;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHUtility;
 
@@ -45,8 +44,7 @@ public class JHTimelineActivity extends Activity {
 			list.add("lala");
 		}
 		initViews();
-		JHGCMRegistrant registrant = new JHGCMRegistrant();
-		registrant.register(getApplicationContext());
+		
 	}
 
 	private void initViews() {

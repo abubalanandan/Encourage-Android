@@ -10,6 +10,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.jhl.encourage.apis.SignupService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.utilities.JHUtility;
+import com.jhl.encourage.views.JHRegistrationDialog;
 import com.jhl.encourage.views.JHTermsAndConditionsDialog;
 
 public class JHRegistrationActivity extends Activity {
@@ -58,7 +60,9 @@ public class JHRegistrationActivity extends Activity {
 	}
 
 	public void loginButtonClicked(View view) {
+		Intent intent = new Intent(this, JHLoginActivity.class);
 		finish();
+		startActivity(intent);
 	}
 
 	private boolean validate(final String hex) {
@@ -80,6 +84,10 @@ public class JHRegistrationActivity extends Activity {
 				invokeRegistrationApi(firstNameField.getText().toString(),
 						lastNameField.getText().toString(), emailField
 								.getText().toString());
+				JHUtility.showDialogOk("",
+						"Please follow instructions in the Encourage registration confirmation email", this);
+				JHRegistrationDialog dialog = new JHRegistrationDialog(this, this);
+				dialog.show();
 			} else {
 				JHUtility.showDialogOk("",
 						"Please enter a valid email address", this);
@@ -89,6 +97,10 @@ public class JHRegistrationActivity extends Activity {
 		}
 	}
 
+//	private void showLogin(){
+//		
+//	}
+	
 	public void showPolicy(View view) {
 		JHTermsAndConditionsDialog dialog = new JHTermsAndConditionsDialog(this);
 		dialog.show();

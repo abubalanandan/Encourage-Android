@@ -7,4 +7,6 @@
     <string name="email_and_pswd_empty_msg">Please enter your email address and password.</string>
 	<string name="email_empty_msg">Please enter your email address.</string>
 	<string name="pswd_empty_msg">Please enter your password.</string>
+	<string name="login_failed">Login failed.</string>
+	
 </resources>
