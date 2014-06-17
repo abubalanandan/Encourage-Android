@@ -62,7 +62,14 @@ public class JHGCMMessageHandler extends IntentService {
        		boolean showLocalNotification = JHAppStateVariables.addNotification(n);
        		if(showLocalNotification){
        			showLocalNotification(n);
-       			JHAppStateVariables.timeLineActivity.setNotificationCounts();
+       			JHAppStateVariables.timeLineActivity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						JHAppStateVariables.alertNumberView.setText(JHAppStateVariables.getAlertCount()+"");
+						JHAppStateVariables.careTaskNumberView.setText(JHAppStateVariables.getCareTaskCount() + "");
+					}
+				});
        		}
        }
        

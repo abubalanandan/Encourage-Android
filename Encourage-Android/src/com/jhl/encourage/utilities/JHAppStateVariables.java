@@ -3,6 +3,8 @@ package com.jhl.encourage.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.TextView;
+
 import com.jhl.encourage.activities.JHTimelineActivity;
 import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.CareTask;
@@ -10,10 +12,13 @@ import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.model.Notification;
 
 public class JHAppStateVariables {
+	
 	private static List<Notification> alerts = new ArrayList<Notification>();
 	private static List<Notification> careTasks = new ArrayList<Notification>();
 	
 	public static JHTimelineActivity timeLineActivity;
+	public static TextView alertNumberView;
+	public static TextView careTaskNumberView;
 	
 	public static boolean addNotification(Notification notification ) {
 		if (notification instanceof Alert){

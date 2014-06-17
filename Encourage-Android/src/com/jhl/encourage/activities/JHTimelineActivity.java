@@ -75,19 +75,21 @@ public class JHTimelineActivity extends Activity {
 		ImageButton reportButton = (ImageButton) findViewById(R.id.reportButton);
 		reportButton.setOnClickListener(new ReportClicked());
 		
-		setNotificationCounts();
+		TextView alertNumberView = (TextView) findViewById(R.id.alertnumberView);
+		alertNumberView.setText(JHAppStateVariables.getAlertCount()+"");
+		
+		JHAppStateVariables.alertNumberView = alertNumberView;
+		
+		TextView careTaskNumberView = (TextView) findViewById(R.id.caretasknumberView);
+		careTaskNumberView.setText(JHAppStateVariables.getCareTaskCount()+"");
+		
+		JHAppStateVariables.careTaskNumberView = careTaskNumberView;
 		
 		JHAppStateVariables.timeLineActivity = this;
 		
 	}
 	
-	public void setNotificationCounts() {
-		TextView alertNumberView = (TextView) findViewById(R.id.alertnumberView);
-		alertNumberView.setText(JHAppStateVariables.getAlertCount()+"");
-		
-		TextView careTaskNumberView = (TextView) findViewById(R.id.caretasknumberView);
-		careTaskNumberView.setText(JHAppStateVariables.getAlertCount()+"");
-	}
+	
 
 	private void invokeTimelineDetailsApi(String careTargetId, String dateTime,
 			String timeZone) {
