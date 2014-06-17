@@ -3,22 +3,23 @@ package com.jhl.encourage.activities;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
+
+
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
@@ -30,12 +31,14 @@ import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHNotificationParser;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHLoginActivity extends Activity {
 
 	private EditText emailField;
 	private EditText passwordField;
+	private ProgressBar loginSpinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +50,15 @@ public class JHLoginActivity extends Activity {
 
 	private void initViews() {
 		emailField = (EditText) findViewById(R.id.usernameField);
-		passwordField = (EditText) findViewById(R.id.passwordField);
+		passwordField = (EditText) findViewById(R.id.passwordField);	
+		loginSpinner = (ProgressBar) findViewById(R.id.loginSpinner);
+		loginSpinner.setVisibility(View.GONE);
 	}
 
 	public void loginButtonClicked(View view) {
 
+		loginSpinner.setVisibility(View.VISIBLE);
+		
 		validateFields();
 
 	}
@@ -123,6 +130,8 @@ public class JHLoginActivity extends Activity {
 
 		LoginService service = restAdapter.create(LoginService.class);
 
+		Log.d(JHConstants.LOG_TAG, "regId "+regId);
+		
 		service.loginUser("userLogin", email, password,regId, 
 				new Callback<SpocResponse>() {
 					@Override
@@ -135,13 +144,15 @@ public class JHLoginActivity extends Activity {
 								if(success.equalsIgnoreCase("true")){
 									System.out.println("success");
 									String loginTocken = map.get("token");
+									Log.d(JHConstants.LOG_TAG, "loginTocken  " +loginTocken);
 									JHAppStateVariables.setLoginTocken(loginTocken);
-									
+									loginSpinner.setVisibility(View.GONE);
 									Intent intent = new Intent(JHLoginActivity.this, JHTimelineActivity.class);
 									startActivity(intent);
-									
+									finish();
 								}else{
 									System.out.println("error");
+									loginSpinner.setVisibility(View.GONE);
 									JHUtility.showDialogOk("",getString(R.string.login_failed), JHLoginActivity.this);	
 								}
 								
@@ -154,6 +165,7 @@ public class JHLoginActivity extends Activity {
 						System.out.println("error");
 					}
 				});
+		
 
 	}
 

@@ -3,6 +3,7 @@ package com.jhl.encourage.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jhl.encourage.activities.JHTimelineActivity;
 import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.CareTask;
 import com.jhl.encourage.model.Contact;
@@ -12,17 +13,41 @@ public class JHAppStateVariables {
 	private static List<Notification> alerts = new ArrayList<Notification>();
 	private static List<Notification> careTasks = new ArrayList<Notification>();
 	
-	public static void addNotification(Notification notification ) {
+	public static JHTimelineActivity timeLineActivity;
+	
+	public static boolean addNotification(Notification notification ) {
 		if (notification instanceof Alert){
 			if ( !alerts.contains(notification) ) {
 				alerts.add(notification);
+				return true;
 			}
 		} else if (notification instanceof CareTask){
 			if ( !careTasks.contains(notification) ) {
 				careTasks.add(notification);
+				return true;
 			}
 		} 
+		return false;
 	}
+	
+	public static int getAlertCount(){
+		return alerts.size();
+	}
+	
+	public static void removeAlert(String alertKey){
+		Notification n = new Notification(alertKey);
+		alerts.remove(n);
+	}
+	
+	public static int getCareTaskCount() {
+		return careTasks.size();
+	}
+	
+	public static void removeCareTask(String alertKey){
+		Notification n = new Notification(alertKey);
+		careTasks.remove(n);
+	}
+	
 	
 	public static List<Notification> getNotifications(String type){
 		if (type.equals(JHConstants.NOT_TYPE_ALERT)){
@@ -32,6 +57,7 @@ public class JHAppStateVariables {
 		}
 		return null;
 	}
+	
 	
 	private static String contactListString = "";
 	

@@ -5,16 +5,28 @@ import com.jhl.encourage.R;
 public interface JHConstants {
 	public static final String LOG_TAG = "EncourageLog";
 	
-	public static final String NOT_TYPE_ALERT = "1";
+	public static final String NOT_TYPE_ALERT = "alert";
 	public static final String NOT_TYPE_CARE_TASK = "2";
 	
 	
 	public static final String NOT_XML_KEY_ID = "id";
-	public static final String NOT_XML_KEY_TYPE = "type";
+	public static final String NOT_XML_KEY_TYPE = "notification_type";
+	public static final String NOT_XML_KEY_ALERT_KEY = "alertkey";
+	public static final String NOT_XML_KEY_DATE_TIME = "datetime";
+	public static final String NOT_XML_KEY_DATE_TIME_DIFF = "datetimediff";
+	public static final String NOT_XML_KEY_CONTENT_TYPE = "contentype";
+	public static final String NOT_XML_KEY_READ_STATUS = "read_status";
+	public static final String NOT_XML_KEY_AUTHOR_NAME = "authorname";
+	public static final String NOT_XML_KEY_TITLE = "title";
+	public static final String NOT_XML_KEY_DETAILS = "details";
+
+			
 	public static final String NOT_XML_KEY_MESSAGE = "message";
-	public static final String NOT_XML_KEY_TAG = "data";
-	
-	
+	public static final String NOT_XML_TAG_RESPONSE = "SPOCResponse";
+	public static final String NOT_XML_TAG_OBJECT = "SpocObject";
+	public static final String NOT_XML_TAG_MAP = "map";
+	public static final String NOT_XML_TAG_ENTRY = "entry";
+	public static final String NOT_XML_TAG_ATRIB_KEY = "key";
 	
 	public static final int SICKNESS_sore_throat = 1;
 	public static final int SICKNESS_tired = 2;

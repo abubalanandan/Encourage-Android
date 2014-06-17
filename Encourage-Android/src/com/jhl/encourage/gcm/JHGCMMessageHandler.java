@@ -52,15 +52,18 @@ public class JHGCMMessageHandler extends IntentService {
         // in your BroadcastReceiver.
         String messageType = gcm.getMessageType(intent);
 
-       mes = extras.getString("title");
+       mes = extras.getString("content");
        //showToast();
-       Log.i(JHConstants.LOG_TAG, "Received : (" +messageType+")  "+extras.getString("title"));
+       Log.i(JHConstants.LOG_TAG, "Received : (" +messageType+")  "+extras.getString("content"));
        JHNotificationParser parser = new JHNotificationParser () ;
        Notification n = parser.parse(mes);
     		   
        if( n != null ) {
-       		JHAppStateVariables.addNotification(n);
-       		showLocalNotification(n);
+       		boolean showLocalNotification = JHAppStateVariables.addNotification(n);
+       		if(showLocalNotification){
+       			showLocalNotification(n);
+       			JHAppStateVariables.timeLineActivity.setNotificationCounts();
+       		}
        }
        
        Log.i(JHConstants.LOG_TAG, "Alerts" );
