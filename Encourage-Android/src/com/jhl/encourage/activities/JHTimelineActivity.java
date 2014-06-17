@@ -37,6 +37,8 @@ import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
+import com.jhl.encourage.views.JHAlertsTeaserDialog;
+import com.jhl.encourage.views.JHTermsAndConditionsDialog;
 
 public class JHTimelineActivity extends Activity {
 
@@ -76,12 +78,12 @@ public class JHTimelineActivity extends Activity {
 		reportButton.setOnClickListener(new ReportClicked());
 		
 		TextView alertNumberView = (TextView) findViewById(R.id.alertnumberView);
-		alertNumberView.setText(JHAppStateVariables.getAlertCount()+"");
+		alertNumberView.setText(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT)+"");
 		
 		JHAppStateVariables.alertNumberView = alertNumberView;
 		
 		TextView careTaskNumberView = (TextView) findViewById(R.id.caretasknumberView);
-		careTaskNumberView.setText(JHAppStateVariables.getCareTaskCount()+"");
+		careTaskNumberView.setText(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK)+"");
 		
 		JHAppStateVariables.careTaskNumberView = careTaskNumberView;
 		
@@ -138,14 +140,10 @@ public class JHTimelineActivity extends Activity {
 	class AlertClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
-			try{
-			    Intent i = new Intent(JHTimelineActivity.this, JHAlertListActivity.class);
-			    startActivity(i);
-			    }
-			    catch(Exception ex)
-			    {
-			        Log.e("main",ex.toString());
-			    }
+			if(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT)>0){
+				JHAlertsTeaserDialog dialog = new JHAlertsTeaserDialog(JHTimelineActivity.this);
+				dialog.show();
+			}
 		}
 	}
 	
@@ -176,6 +174,7 @@ public class JHTimelineActivity extends Activity {
 			    }
 		}
 	}
+	
 	
 	
 //	class AlertPollTask extends AsyncTask<String, Integer, Boolean> {

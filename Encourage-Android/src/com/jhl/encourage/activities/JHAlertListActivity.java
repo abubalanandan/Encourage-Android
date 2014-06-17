@@ -2,6 +2,7 @@ package com.jhl.encourage.activities;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import retrofit.client.Response;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.adapters.JHAlertsAdapter;
 import com.jhl.encourage.apis.LoginService;
 import com.jhl.encourage.apis.MarkAlertReadService;
 import com.jhl.encourage.apis.SpocObject;
@@ -36,25 +38,29 @@ public class JHAlertListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alerts);
-        listView = (ListView) findViewById(R.id.alertlist);
+       // listView = (ListView) findViewById(R.id.alertlist);
         
         List<Notification> alerts = JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_ALERT);
-        int size = alerts.size();
-        String[] values = new String[size];
-        
-        for(int i = 0 ; i<size; i++){
-        	Notification alert = alerts.get(i);
-        	values[i] = alert.toString();
-        }
-        
-        Log.d(JHConstants.LOG_TAG, "Care task values "+values);
-        
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-          android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter); 
+        Collections.sort(alerts);
+//        int size = alerts.size();
+//        String[] values = new String[size];
+//        
+//        for(int i = 0 ; i<size; i++){
+//        	Notification alert = alerts.get(i);
+//        	values[i] = alert.toString();
+//        }
+//        
+//        Log.d(JHConstants.LOG_TAG, "Care task values "+values);
+//        
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//          android.R.layout.simple_list_item_1, android.R.id.text1, values);
+//
+//
+//        // Assign adapter to ListView
+//        listView.setAdapter(adapter); 
+        JHAlertsAdapter alertAdapter = new JHAlertsAdapter(this, R.layout.alertitem, alerts);
+        ListView alertsList = (ListView)findViewById(R.id.alertListView);
+        alertsList.setAdapter(alertAdapter);
         
         
     }
@@ -102,6 +108,19 @@ public class JHAlertListActivity extends Activity {
 						System.out.println("error");
 					}
 				});
+    }
+    
+    public void closeButtonPressed(View view){
+    	finish();
+    	try{
+		    Intent i = new Intent(JHAlertListActivity.this, JHTimelineActivity.class);
+		    startActivity(i);
+		    
+		    }
+		    catch(Exception ex)
+		    {
+		        Log.e("main",ex.toString());
+		    }
     }
 
 }

@@ -28,6 +28,9 @@ public interface JHConstants {
 	public static final String NOT_XML_TAG_ENTRY = "entry";
 	public static final String NOT_XML_TAG_ATRIB_KEY = "key";
 	
+	public static final String NOT_STATUS_UNREAD = "unread";
+	public static final String NOT_STATUS_READ = "read";
+	
 	public static final int SICKNESS_sore_throat = 1;
 	public static final int SICKNESS_tired = 2;
 	public static final int SICKNESS_back_pain = 3; 

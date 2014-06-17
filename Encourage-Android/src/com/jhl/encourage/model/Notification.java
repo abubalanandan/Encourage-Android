@@ -1,6 +1,11 @@
 package com.jhl.encourage.model;
 
-public class Notification {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class Notification implements Comparable<Notification>{
 	
 	private String notificationType;
 	private String alertKey;
@@ -11,6 +16,7 @@ public class Notification {
 	private String authorName;
 	private String title;
 	private String details;
+	private Date date;
 	
 	public Notification() {
 		
@@ -42,6 +48,12 @@ public class Notification {
 
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
+		try {
+			this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(this.dateTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getDateTimeDiff() {
@@ -91,6 +103,10 @@ public class Notification {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+	
+	public Date getDate() {
+		return this.date;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -105,7 +121,11 @@ public class Notification {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return this.alertKey + " " + this.details;
+	}
+	
+	@Override
+	public int compareTo(Notification another) {
+		return this.date.compareTo(another.getDate());
 	}
 }

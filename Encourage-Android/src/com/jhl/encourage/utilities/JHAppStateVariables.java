@@ -35,8 +35,20 @@ public class JHAppStateVariables {
 		return false;
 	}
 	
-	public static int getAlertCount(){
-		return alerts.size();
+	public static int getUnreadNotificationCount(String type){
+		List<Notification> oldList = null;
+		List<Notification> newList = new ArrayList<>();
+		if (type.equals(JHConstants.NOT_TYPE_ALERT)){
+			oldList = alerts;
+		}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {
+			oldList = careTasks;
+		}
+		for (Notification n : oldList){
+			if ( n.getReadStatus().equals(JHConstants.NOT_STATUS_UNREAD)) {
+				newList.add(n);
+			}
+		}
+		return newList.size();
 	}
 	
 	public static void removeAlert(String alertKey){
@@ -44,9 +56,7 @@ public class JHAppStateVariables {
 		alerts.remove(n);
 	}
 	
-	public static int getCareTaskCount() {
-		return careTasks.size();
-	}
+	
 	
 	public static void removeCareTask(String alertKey){
 		Notification n = new Notification(alertKey);
@@ -63,6 +73,49 @@ public class JHAppStateVariables {
 		return null;
 	}
 	
+	
+	public static List<Notification> getUnreadNotifications(String type){
+		List<Notification> oldList = null;
+		List<Notification> newList = new ArrayList<>();
+		if (type.equals(JHConstants.NOT_TYPE_ALERT)){
+			oldList = alerts;
+		}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {
+			oldList = careTasks;
+		}
+		for (Notification n : oldList){
+			if ( n.getReadStatus().equals(JHConstants.NOT_STATUS_UNREAD)) {
+				newList.add(n);
+			}
+		}
+		
+		return newList;
+	}
+	
+	public static void markAsRead(String type, String key){
+		List<Notification> oldList = null;
+		
+		if (type.equals(JHConstants.NOT_TYPE_ALERT)){
+			oldList = alerts;
+		}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {
+			oldList = careTasks;
+		}
+		for (Notification n : oldList){
+			if ( n.getAlertKey().equals(key)) {
+				n.setReadStatus(JHConstants.NOT_STATUS_READ);
+				break;
+			}
+		}
+		
+		JHAppStateVariables.timeLineActivity.runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				JHAppStateVariables.alertNumberView.setText(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT)+"");
+				JHAppStateVariables.careTaskNumberView.setText(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK) + "");
+			}
+		});
+		
+	}
 	
 	private static String contactListString = "";
 	

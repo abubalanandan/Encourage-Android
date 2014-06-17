@@ -1,6 +1,6 @@
 package com.jhl.encourage.activities;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.jhl.encourage.R;
@@ -10,15 +10,10 @@ import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
