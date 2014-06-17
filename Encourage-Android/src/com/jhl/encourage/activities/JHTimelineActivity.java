@@ -2,23 +2,18 @@ package com.jhl.encourage.activities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.view.View.OnClickListener;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
@@ -27,8 +22,6 @@ import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
 import com.jhl.encourage.gcm.JHGCMRegistrant;
-import com.jhl.encourage.model.Notification;
-import com.jhl.encourage.utilities.JHUtility;
 
 public class JHTimelineActivity extends Activity {
 
@@ -39,9 +32,17 @@ public class JHTimelineActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
-		for (int i = 0; i < 9; i++) {
-			list.add("lala");
-		}
+//		for (int i = 0; i < 9; i++) {
+//			list.add("lala");
+//		}
+		String getMapURL = "http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=1080x1920&markers=size:mid|color:red|rockville"  
+				
+				+ "&sensor=false";
+		list.add(getMapURL);
+		list.add("http://c1038.r38.cf3.rackcdn.com/group1/building7332/media/awnw_bmw_headquarters_building.jpg");
+		list.add("https://tryencourage.com/hwdsi/hwAttachedfile/2b289cc910c293ab042e295d7177c7df/705C9D80-EF12-7DD6-EF66-86F395FD6708.10%20pm");
+		list.add("");
+		list.add("http://image.eurotuner.com/f/featuredvehicles/8307328/eurp_0802_16_z%2B1975_bmw_530i%2Btop_view.jpg");
 		initViews();
 		JHGCMRegistrant registrant = new JHGCMRegistrant();
 		registrant.register(getApplicationContext());
