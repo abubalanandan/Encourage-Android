@@ -86,7 +86,7 @@ public class JHRegistrationActivity extends Activity {
 								.getText().toString());
 				JHUtility.showDialogOk("",
 						"Please follow instructions in the Encourage registration confirmation email", this);
-				JHRegistrationDialog dialog = new JHRegistrationDialog(this, this);
+				JHRegistrationDialog dialog = new JHRegistrationDialog(this);
 				dialog.show();
 			} else {
 				JHUtility.showDialogOk("",

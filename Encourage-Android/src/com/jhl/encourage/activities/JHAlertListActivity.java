@@ -65,50 +65,7 @@ public class JHAlertListActivity extends Activity {
         
     }
     
-    public void invokeMarkAlertReadApi(String token, final String alertkey) {
-    	
-    	RestAdapter restAdapter = EncourageApplication.getRestAdapter();
-
-    	MarkAlertReadService service = restAdapter.create(MarkAlertReadService.class);
-
-		Log.d(JHConstants.LOG_TAG, "token "+token);
-		Log.d(JHConstants.LOG_TAG, "alertkey "+alertkey);
-		
-		String timeZone = JHUtility.getTimeZoneString();
-		String dateTime = JHUtility.getDateTime();
-		String longitude = "";
-		String latitude = "";
-		
-		service.updateAlertRead("updateUnreadAlertStatus", token, alertkey,timeZone, dateTime, longitude, latitude, 
-				new Callback<SpocResponse>() {
-					@Override
-					public void success(SpocResponse spocResponse,	Response response) {
-						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
-						for (SpocObject spocObject : responseList) {
-							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
-								HashMap<String, String> map = spocObject.getMap();
-								String success = map.get("success");
-								if(success.equalsIgnoreCase("true")){
-									System.out.println("success");
-									JHAppStateVariables.removeAlert(alertkey);
-									Intent intent = new Intent(JHAlertListActivity.this, JHTimelineActivity.class);
-									startActivity(intent);
-									finish();
-								}else{
-									System.out.println("error");
-									JHUtility.showDialogOk("",getString(R.string.alert_updation_failed), JHAlertListActivity.this);	
-								}
-								
-							}
-						}
-					}
-
-					@Override
-					public void failure(RetrofitError retrofitError) {
-						System.out.println("error");
-					}
-				});
-    }
+    
     
     public void closeButtonPressed(View view){
     	finish();

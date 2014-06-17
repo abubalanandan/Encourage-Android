@@ -22,10 +22,10 @@ public class JHRegistrationDialog extends Dialog {
 
 	Activity regiActity;
 
-	public JHRegistrationDialog(Context context, Activity regiActity) {
+	public JHRegistrationDialog(Context context) {
 		super(context);
 		setContentView(R.layout.regstration_dialogue);
-		this.regiActity = regiActity;
+		this.regiActity = (Activity)regiActity;
 		initViews();
 
 		// TODO Auto-generated constructor stub
