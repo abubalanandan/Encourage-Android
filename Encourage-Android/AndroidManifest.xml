@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    
+    
     <permission
         android:name="com.jhl.encourage.permission.C2D_MESSAGE"
         android:protectionLevel="signature" >
@@ -57,6 +61,32 @@
             android:screenOrientation="portrait" >
         </activity>
 
+          
+       
+        
+          <activity
+            android:name="com.jhl.encourage.activities.JHContactPickerActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         
+               
+        <receiver
+            android:name="com.jhl.encourage.gcm.JHGCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.jhl.encourage" />
+            </intent-filter>
+        </receiver>
+       	<service android:name="com.jhl.encourage.gcm.JHGCMMessageHandler" />
+
+        <meta-data android:name="com.google.android.gms.version"
+           android:value="4" />
+        <activity android:name="com.jhl.encourage.activities.JHReportWizardActivity"
+            android:screenOrientation="portrait" >  
+        </activity>
+        
+        
         <receiver
             android:name="com.jhl.encourage.gcm.JHGCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -78,5 +108,13 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAbrfAY8KFIzcZVx9TLEgNHxudeL1Vk7L4" />
     </application>
+
+
+
+   
+               
+      
+       
+        
 
 </manifest>

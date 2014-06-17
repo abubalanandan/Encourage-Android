@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/container_shadow"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/cell_headerRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="5dp" >
+
+            <TextView
+                android:id="@+id/alertTaserAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="Brian Wheeler"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/alertTeaserTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignLeft="@+id/alertTaserAuthor"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/alertTaserAuthor"
+                android:gravity="center_vertical"
+                android:text="Brian Wheeler"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/separatorLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:src="@drawable/post_separator" />
+    </LinearLayout>
+
+</FrameLayout>

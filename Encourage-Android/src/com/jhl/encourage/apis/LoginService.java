@@ -12,6 +12,11 @@ public interface LoginService {
 
     @FormUrlEncoded
     @POST("/hwservice/userLogin.php")
-    void loginUser(@Field("operationName") String operationName,  @Field("email_address") String emailAddress, @Field("password") String password, Callback<SpocResponse> callback);
+    void loginUser(
+    			@Field("operationName") String operationName,  
+    			@Field("email_address") String emailAddress, 
+    			@Field("password") String password, 
+    			@Field("gcmRegistrationId") String gcmRegistrationId ,
+    			Callback<SpocResponse> callback);
 
 }

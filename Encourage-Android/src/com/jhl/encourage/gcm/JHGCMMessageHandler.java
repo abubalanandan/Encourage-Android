@@ -45,38 +45,52 @@ public class JHGCMMessageHandler extends IntentService {
     }
     @Override
     protected void onHandleIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-
-        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
-        // The getMessageType() intent parameter must be the intent you received
-        // in your BroadcastReceiver.
-        String messageType = gcm.getMessageType(intent);
-
-       mes = extras.getString("title");
-       //showToast();
-       Log.i(JHConstants.LOG_TAG, "Received : (" +messageType+")  "+extras.getString("title"));
-       JHNotificationParser parser = new JHNotificationParser () ;
-       Notification n = parser.parse(mes);
-    		   
-       if( n != null ) {
-       		JHAppStateVariables.addNotification(n);
-       		showLocalNotification(n);
-       }
-       
-       Log.i(JHConstants.LOG_TAG, "Alerts" );
-       
-       for ( Notification not : JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_ALERT) ) {
-    	   Log.i(JHConstants.LOG_TAG, "Alert " + not);
-       }
-       
-       Log.i(JHConstants.LOG_TAG, "CareTasks" ); 
-       
-       for ( Notification not : JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK) ) {
-    	   Log.i(JHConstants.LOG_TAG, "CareTask " + not);
-       }
-       
-        
-       JHGCMBroadcastReceiver.completeWakefulIntent(intent);
+    	
+    	if (JHAppStateVariables.timeLineActivity != null ){// skip message as  UI cannot be updated
+	    	
+	        Bundle extras = intent.getExtras();
+	
+	        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
+	        // The getMessageType() intent parameter must be the intent you received
+	        // in your BroadcastReceiver.
+	        String messageType = gcm.getMessageType(intent);
+	
+	       mes = extras.getString("content");
+	       //showToast();
+	       Log.i(JHConstants.LOG_TAG, "Received : (" +messageType+")  "+extras.getString("content"));
+	       JHNotificationParser parser = new JHNotificationParser () ;
+	       Notification n = parser.parse(mes);
+	    		   
+	       if( n != null ) {
+	       		boolean showLocalNotification = JHAppStateVariables.addNotification(n);
+	       		if(showLocalNotification ){
+	       			showLocalNotification(n);
+	       			JHAppStateVariables.timeLineActivity.runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							JHAppStateVariables.alertNumberView.setText(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT)+"");
+							JHAppStateVariables.careTaskNumberView.setText(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK) + "");
+						}
+					});
+	       		}
+	       }
+	       
+	       Log.i(JHConstants.LOG_TAG, "Alerts" );
+	       
+	       for ( Notification not : JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_ALERT) ) {
+	    	   Log.i(JHConstants.LOG_TAG, "Alert " + not);
+	       }
+	       
+	       Log.i(JHConstants.LOG_TAG, "CareTasks" ); 
+	       
+	       for ( Notification not : JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK) ) {
+	    	   Log.i(JHConstants.LOG_TAG, "CareTask " + not);
+	       }
+	       
+	        
+	       JHGCMBroadcastReceiver.completeWakefulIntent(intent);
+    	}
 
     }
     
