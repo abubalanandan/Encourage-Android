@@ -152,4 +152,8 @@ public class JHReportWizardMapFragment extends Fragment {
 	public String getDescription() {
 		return mapReportDescText.getText().toString();
 	}
+	
+	public void setDate(String date){
+		mapReportDateText.setText(date);
+	}
 }	

@@ -31,10 +31,21 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/emoDate"
                 android:layout_width="fill_parent"
                 android:background="@drawable/rounded_corner_text"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" 
+                android:onClick="emoDatePressed"/>
+
+            <EditText
+                android:id="@+id/emoDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_text"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
 
         </LinearLayout>
 

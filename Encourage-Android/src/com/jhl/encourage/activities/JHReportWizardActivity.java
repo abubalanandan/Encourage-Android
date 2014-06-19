@@ -2,10 +2,15 @@ package com.jhl.encourage.activities;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+
+
+
+
 
 
 
@@ -32,6 +37,8 @@ import com.jhl.encourage.views.JHReportWizardMapFragment;
 import com.jhl.encourage.views.JHReportWizardSicknessFragment;
 import com.jhl.encourage.views.JHReportWizardVideoFragment;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +57,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
@@ -72,6 +80,11 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	
 	List<Fragment> fragments = null;
 	private ProgressBar spinner;
+	
+	private Calendar cal;
+	private int day;
+	private int month;
+	private int year;
 
 	/**
 	 * Maintains extrinsic info of a tab's construct
@@ -134,6 +147,12 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		}
 		spinner = (ProgressBar)findViewById(R.id.pbContact);
 		spinner.setVisibility(View.GONE);
+		
+		cal = Calendar.getInstance();
+		day = cal.get(Calendar.DAY_OF_MONTH);
+		month = cal.get(Calendar.MONTH);
+		year = cal.get(Calendar.YEAR);
+		
 		// Intialise ViewPager
 		this.intialiseViewPager();
 	}
@@ -470,4 +489,73 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	         
 	    }
 	}
+	
+	
+	private static int SICK_DATE_DIALOGUE = 1;
+	private static int EMO_DATE_DIALOGUE = 2;
+	private static int IMAGE_DATE_DIALOGUE = 3;
+	private static int MAP_DATE_DIALOGUE = 4;
+	
+	public void sickDatePressed(View view) {
+		showDialog(SICK_DATE_DIALOGUE);
+	}
+	
+	public void emoDatePressed(View view) {
+		showDialog(EMO_DATE_DIALOGUE);
+	}
+	
+	public void imageDatePressed(View view) {
+		showDialog(IMAGE_DATE_DIALOGUE);
+	}
+	
+	public void mapDatePressed(View view) {
+		showDialog(MAP_DATE_DIALOGUE);
+	}
+	
+	
+	
+	protected Dialog onCreateDialog(int id) {		
+		switch (id) {
+		case 1:
+			return new DatePickerDialog(this, sickDatePickerListener, year, month, day);
+		case 2:	
+			return new DatePickerDialog(this, emoDatePickerListener, year, month, day);
+		case 3:	
+			return new DatePickerDialog(this, imageDatePickerListener, year, month, day);
+		case 4:	
+			return new DatePickerDialog(this, mapDatePickerListener, year, month, day);	
+		default:
+			break;
+		}
+		return null;
+	}
+	
+	private DatePickerDialog.OnDateSetListener sickDatePickerListener = new DatePickerDialog.OnDateSetListener() {
+		 public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+			 String date =  (selectedMonth + 1) + "/" + selectedDay + "/" + selectedYear;
+			 sickFragment.setDate(date);
+		 }
+	};
+	
+	private DatePickerDialog.OnDateSetListener emoDatePickerListener = new DatePickerDialog.OnDateSetListener() {
+		 public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+			 String date =  (selectedMonth + 1) + "/" + selectedDay + "/" + selectedYear;
+			 emoFragment.setDate(date);
+		 }
+	};
+	
+	private DatePickerDialog.OnDateSetListener imageDatePickerListener = new DatePickerDialog.OnDateSetListener() {
+		 public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+			 String date =  (selectedMonth + 1) + "/" + selectedDay + "/" + selectedYear;
+			 imageFragment.setDate(date);
+		 }
+	};
+	
+	private DatePickerDialog.OnDateSetListener mapDatePickerListener = new DatePickerDialog.OnDateSetListener() {
+		 public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+			 String date =  (selectedMonth + 1) + "/" + selectedDay + "/" + selectedYear;
+			 mapFragment.setDate(date);
+		 }
+	};
+	
 }

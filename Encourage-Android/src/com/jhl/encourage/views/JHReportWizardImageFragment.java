@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
@@ -42,30 +43,46 @@ public class JHReportWizardImageFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.imagereport, container, false);
-
+		initView(v);
+		return v;
+	}
+	
+	private void initView(View v){
 		imageHolder = (ImageView) v.findViewById(R.id.imageHolder);
 		imageDate = (TextView) v.findViewById(R.id.imageDate);
 		imageName = (TextView) v.findViewById(R.id.imageName);
-
 		imageDate.setText(JHUtility.getFormattedDate());
 		
-		imageDate.setOnClickListener(new View.OnClickListener() {
+		imageName.setOnTouchListener(new View.OnTouchListener() {
 			
 			@Override
-			public void onClick(View v) {
-				
-				
+			public boolean onTouch(View v, MotionEvent event) {
+				imageName.requestFocusFromTouch();
+				return true;
 			}
 		});
 		
-		imageName.setOnFocusChangeListener(new ImageNameFocusChangeLister());
+		
+		imageName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				String text = imageName.getText().toString().trim();
+				if (!hasFocus) {
+					if(text.length() == 0){
+						imageName.setText("Event Name");
+					}
+				}else{
+					if (text.equals("Event Name")){
+						imageName.setText("");
+					}
+				}
+			}
+		});
+		
+		
 
 		uploadProgress = (ProgressBar)v.findViewById(R.id.uploadProgress);
 		uploadProgress.setVisibility(View.GONE);
-
-		setCurrentDate();
-
-		return v;
 	}
 	
 	public void showProgrees() {
@@ -76,33 +93,14 @@ public class JHReportWizardImageFragment extends Fragment {
 		uploadProgress.setVisibility(View.GONE);
 	}
 	
-	public void setCurrentDate() {
-
-		final Calendar c = Calendar.getInstance();
-		 year = c.get(Calendar.YEAR);
-		 month = c.get(Calendar.MONTH);
-		 day = c.get(Calendar.DAY_OF_MONTH);
-
-		//imageDP.init(year, month, day, null);
-
+	public void setDate(String date){
+		imageDate.setText(date);
 	}
 
 	public void setImage(String path) {
 		Log.d(JHConstants.LOG_TAG, path);
 		imageHolder.setImageBitmap(BitmapFactory.decodeFile(path));
 		imagePath = path;
-	}
-
-	class ImageNameFocusChangeLister implements OnFocusChangeListener {
-		@Override
-		public void onFocusChange(View v, boolean hasFocus) {
-			if (hasFocus) {
-				imageName.setText("");
-			} else {
-				imageName.setText("Event Name");
-			}
-
-		}
 	}
 	
 	public String getImagePath() {
