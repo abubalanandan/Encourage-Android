@@ -1,16 +1,30 @@
 package com.jhl.encourage.activities;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+
+
+
+
+
+
+
+
+
 import com.jhl.encourage.R;
+import com.jhl.encourage.activities.JHLoginActivity.GCMRegistrationTask;
 import com.jhl.encourage.adapters.JHReportWizardPageAdapter;
 import com.jhl.encourage.apis.ReportWizartAPICaller;
 import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHHTTPClient;
+import com.jhl.encourage.utilities.JHUploadResponseParser;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHReportWizardEmotionalFragment;
 import com.jhl.encourage.views.JHReportWizardImageFragment;
@@ -22,6 +36,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -39,7 +55,6 @@ import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 
-//public class JHReportWizardActivity extends FragmentActivity {
 
 public class JHReportWizardActivity extends FragmentActivity implements
 		TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
@@ -356,6 +371,11 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			apiCaller.invokeSickenssEmotionalApi(JHUtility.getDate(), JHAppStateVariables.getSickEmoReport(), "", false);
 			break;
 		case 2:	
+			
+			String date = imageFragment.getDate();
+			String name = imageFragment.getName();
+			imageFragment.showProgrees();
+			imageUpload(apiCaller, date, name);
 			break;
 		case 3:
 			break;
@@ -366,5 +386,88 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			break;
 		}
 	}
+	
+	private void imageUpload(ReportWizartAPICaller apiCaller, String date, String name) {
+		String url = "https://tryencourage.com/hwdsi/hwservice/fileUpload.php";
+		String token = JHAppStateVariables.getLoginTocken();
+		Log.d(JHConstants.LOG_TAG, "token "+token);
+		
+		
+		String UUID = JHUtility.getUUID();
+		
+		Log.d(JHConstants.LOG_TAG, "UUID "+UUID);
+		
+		String imagePath = imageFragment.getImagePath();
+		String extenstion = imagePath.substring(imagePath.lastIndexOf("."), imagePath.length());
+		String fileName = imagePath.substring(imagePath.lastIndexOf("/")+1, imagePath.length());
+		Map<String, String> paramters = new HashMap<String, String>();
+		paramters.put("operationName", "fileUpload");
+		paramters.put("token", token);
+		paramters.put("imagetype", extenstion.substring(1, extenstion.length()));
+		Log.d(JHConstants.LOG_TAG, extenstion);
+		Log.d(JHConstants.LOG_TAG, imagePath);
+		//url = url + "/" + token + "/" + UUID + extenstion;
+		Log.d(JHConstants.LOG_TAG, "url "+url);
+		
+		new FileUploadTask(imagePath, url, paramters, fileName, apiCaller, name, date, false).execute();
+		
+	}
+	
+	private class FileUploadTask extends AsyncTask<String, Void, String> {
+		 
+		String sourceFileUri;
+		String uploadUrl;
+		Map<String, String> parameters;
+		String fileName;
+		ReportWizartAPICaller apiCaller;
+		String date;
+		String name;
+		boolean ics;
+		public FileUploadTask(String sourceFileUri, String uploadUrl, Map<String, String> parameters, String fileName, ReportWizartAPICaller apiCaller, String name, String data, boolean ics) {
+			this.sourceFileUri = sourceFileUri;
+			this.uploadUrl = uploadUrl;
+			this.parameters = parameters;
+			this.fileName = fileName;
+			this.apiCaller = apiCaller;
+			
+			
+		}
+		
+		private void onPostExecute() {
+			imageFragment.endProgress();
+			
+			Intent intent = new Intent(JHReportWizardActivity.this, JHTimelineActivity.class);
+			startActivity(intent);
+			finish();
+			
 
+		}
+		
+	    @Override
+	    protected String doInBackground(String... params) {
+	        
+	    	JHHTTPClient client = new JHHTTPClient();
+	    	String response = client.uploadFile(sourceFileUri, uploadUrl, parameters, fileName);
+	    	
+	    	
+	    	JHUploadResponseParser parser = new JHUploadResponseParser();
+	    	
+	    	Map<String, String> responseMap = parser.parse(response);
+	    	
+	    	String success = responseMap.get("success");
+	    	if(success.equals("true")) {
+	    		String fileName = responseMap.get("filename");
+	    		apiCaller.invokeImageApi(date, name, ics, fileName);
+	    	}else {
+	    		
+	    	}
+	    	
+	        return null;
+	    }
+	 
+	    @Override
+	    protected void onPostExecute(String data) {           
+	         
+	    }
+	}
 }

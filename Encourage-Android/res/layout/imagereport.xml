@@ -15,6 +15,14 @@
             android:layout_height="300dp"
             android:src="@drawable/active_page" />
 
+        <ProgressBar
+            android:id="@+id/uploadProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -56,9 +64,9 @@
             android:src="@android:drawable/btn_star" />
     </RelativeLayout>
 
-    <DatePicker
+  <!--   <DatePicker
         android:id="@+id/imageDP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" /> -->
     
 </RelativeLayout>

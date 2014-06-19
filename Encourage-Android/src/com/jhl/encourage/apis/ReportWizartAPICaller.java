@@ -117,4 +117,54 @@ public class ReportWizartAPICaller {
 		
 
 	}
+	
+	
+	public void invokeImageApi(String date, String name, boolean ics, String fileName) {
+
+		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
+
+		ImageReportService service = restAdapter.create(ImageReportService.class);
+
+		String icsString = "no";
+		if(ics){
+			icsString = "yes";
+		}
+		
+		String upload_files = "{\"blob_upload_file\":{\"dtl_file_actualname\":{\"dtl_file_actualname\":\"" + fileName + "\",\"data_type\":\"documentactualname\"},\"dtl_file_name\":{\"dtl_file_name\":\"download\",\"data_type\":\"filename\"},\"dtl_file_type\":{\"dtl_file_type\":\"image\\/jpg\",\"data_type\":\"documenttype\"},\"text_file_description\":{\"data_type\":\"description\"},\"dtl_file_author\":{\"data_type\":\"authorname\"},\"dtl_file_category\":{\"data_type\":\"category\"},\"blob_upload_file\":\"" + fileName + "\"}}";
+		
+		service.postReport("getSelfReportedImage", date, "datetime", "Date", "","1", "", name, "varchar", "Event Name", "", "2","", 
+				"timeline-image-form", "selfreport_image", "blob_upload_image",icsString,JHUtility.getDateTime(),
+				JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken(), "postReportWizardData", upload_files, 
+				new Callback<SpocResponse>() {
+					@Override
+					public void success(SpocResponse spocResponse,	Response response) {
+						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
+						for (SpocObject spocObject : responseList) {
+							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
+								HashMap<String, String> map = spocObject.getMap();
+								String success = map.get("success");
+								
+								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
+								
+								if(success.equalsIgnoreCase("true")){
+									Intent intent = new Intent(activity, JHTimelineActivity.class);
+									activity.startActivity(intent);
+									activity.finish();
+								}else{
+									
+								}
+								
+							}
+						}
+					}
+
+					@Override
+					public void failure(RetrofitError retrofitError) {
+						System.out.println("error");
+					}
+				});
+		
+
+	}
+	
 }

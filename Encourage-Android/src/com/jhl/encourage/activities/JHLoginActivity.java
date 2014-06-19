@@ -155,7 +155,6 @@ public class JHLoginActivity extends Activity {
 									loginSpinner.setVisibility(View.GONE);
 									JHUtility.showDialogOk("",getString(R.string.login_failed), JHLoginActivity.this);	
 								}
-								
 							}
 						}
 					}

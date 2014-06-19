@@ -1,9 +1,13 @@
 package com.jhl.encourage.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHUtility;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class JHReportWizardImageFragment extends Fragment {
@@ -26,9 +31,13 @@ public class JHReportWizardImageFragment extends Fragment {
 	private ImageView imageHolder = null;
 	private TextView imageDate = null;
 	private TextView imageName = null;
-
-	private DatePicker imageDP;
+	private ProgressBar uploadProgress = null;
+	
+	//private DatePicker imageDP;
 	private int day, month, year;
+	
+	private String imagePath ;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -38,6 +47,8 @@ public class JHReportWizardImageFragment extends Fragment {
 		imageDate = (TextView) v.findViewById(R.id.imageDate);
 		imageName = (TextView) v.findViewById(R.id.imageName);
 
+		imageDate.setText(JHUtility.getFormattedDate());
+		
 		imageDate.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -49,13 +60,22 @@ public class JHReportWizardImageFragment extends Fragment {
 		
 		imageName.setOnFocusChangeListener(new ImageNameFocusChangeLister());
 
-		imageDP = (DatePicker) v.findViewById(R.id.imageDP);
+		uploadProgress = (ProgressBar)v.findViewById(R.id.uploadProgress);
+		uploadProgress.setVisibility(View.GONE);
 
 		setCurrentDate();
 
 		return v;
 	}
-
+	
+	public void showProgrees() {
+		uploadProgress.setVisibility(View.VISIBLE);
+	}
+	
+	public void endProgress() {
+		uploadProgress.setVisibility(View.GONE);
+	}
+	
 	public void setCurrentDate() {
 
 		final Calendar c = Calendar.getInstance();
@@ -63,13 +83,14 @@ public class JHReportWizardImageFragment extends Fragment {
 		 month = c.get(Calendar.MONTH);
 		 day = c.get(Calendar.DAY_OF_MONTH);
 
-		imageDP.init(year, month, day, null);
+		//imageDP.init(year, month, day, null);
 
 	}
 
 	public void setImage(String path) {
 		Log.d(JHConstants.LOG_TAG, path);
 		imageHolder.setImageBitmap(BitmapFactory.decodeFile(path));
+		imagePath = path;
 	}
 
 	class ImageNameFocusChangeLister implements OnFocusChangeListener {
@@ -82,6 +103,10 @@ public class JHReportWizardImageFragment extends Fragment {
 			}
 
 		}
+	}
+	
+	public String getImagePath() {
+		return imagePath;
 	}
 
 	
@@ -101,9 +126,28 @@ public class JHReportWizardImageFragment extends Fragment {
 					.append(" "));
 
 			// set selected date into datepicker also
-			imageDP.init(year, month, day, null);
+			//imageDP.init(year, month, day, null);
 
 		}
 	};
+	
+	public String getDate(){
+		String dateString = imageDate.getText().toString();
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		try {
+			Date date = formatter.parse(dateString);
+			formatter = new SimpleDateFormat("yyyy-MM-dd");
+			dateString = formatter.format(date);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return	dateString;
+	}
+	
+	public String getName() {
+		return imageName.getText().toString();
+	}
 
 }
