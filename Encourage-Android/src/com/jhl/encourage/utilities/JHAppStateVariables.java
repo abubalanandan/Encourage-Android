@@ -3,6 +3,7 @@ package com.jhl.encourage.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import com.jhl.encourage.activities.JHTimelineActivity;
@@ -19,6 +20,49 @@ public class JHAppStateVariables {
 	public static JHTimelineActivity timeLineActivity;
 	public static TextView alertNumberView;
 	public static TextView careTaskNumberView;
+	
+	
+	public static int currentRwPage = 0;
+	
+	private static List<String> sicknesses = new ArrayList<String>();
+	
+	public static void addSickenss(String sickness) {
+		sicknesses.add(sickness);
+	}
+	
+	public static void removeSickenss(String sickness) {
+		sicknesses.remove(sickness);
+		
+	}
+	
+	
+	private static List<String> emotionals = new ArrayList<String>();
+	
+	public static void addEmotionals(String emotional) {
+		emotionals.add(emotional);
+	}
+	
+	public static void removeEmotionals(String emotional) {
+		emotionals.remove(emotional);
+		
+	}
+	
+	public static String getSickEmoReport(){
+		StringBuffer reportBuffer = new StringBuffer();
+		for (String sickness : sicknesses) {
+			reportBuffer.append(sickness);
+			reportBuffer.append("~~");
+		}
+		
+		for (String emotional : emotionals) {
+			reportBuffer.append(emotional);
+			reportBuffer.append("~~");
+		}
+		
+		Log.d(JHConstants.LOG_TAG, reportBuffer.toString());
+		
+		return reportBuffer.toString();
+	}
 	
 	public static boolean addNotification(Notification notification ) {
 		if (notification instanceof Alert){
@@ -140,6 +184,7 @@ public class JHAppStateVariables {
 	private static String loginTocken = null;
 
 	public static String getLoginTocken() {
+		Log.d(JHConstants.LOG_TAG, "loginTocken "+loginTocken);
 		return loginTocken;
 	}
 

@@ -9,7 +9,6 @@ import com.jhl.encourage.model.JHUser;
 import retrofit.android.MainThreadExecutor;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class EncourageApplication extends Application {

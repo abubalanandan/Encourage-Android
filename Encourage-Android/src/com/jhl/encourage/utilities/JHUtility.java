@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -45,15 +46,29 @@ public class JHUtility {
 	}
 
 	public static String getDateTime() {
-		// java.text.DateFormat dateFormat =
-		// android.text.format.DateFormat.getDateFormat(context);
-		// String date = dateFormat.format(new Date());
-
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String date = s.format(new Date());
 
 		Log.d(JHConstants.LOG_TAG, "datetime " + date);
 		return date;
 	}
+	public static String getDate() {
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+		String date = s.format(new Date());
 
+		Log.d(JHConstants.LOG_TAG, "date " + date);
+		return date;
+	}
+	
+	public static String getFormattedDate() {
+		SimpleDateFormat s = new SimpleDateFormat("MM/dd/yyyy");
+		String date = s.format(new Date());
+
+		Log.d(JHConstants.LOG_TAG, "date " + date);
+		return date;
+	}
+	
+	public static String getUUID () {
+		return UUID.randomUUID().toString();
+	}
 }

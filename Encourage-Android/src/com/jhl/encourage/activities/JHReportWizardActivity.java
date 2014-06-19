@@ -7,9 +7,11 @@ import java.util.Vector;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHReportWizardPageAdapter;
+import com.jhl.encourage.apis.ReportWizartAPICaller;
 import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHReportWizardEmotionalFragment;
 import com.jhl.encourage.views.JHReportWizardImageFragment;
 import com.jhl.encourage.views.JHReportWizardMapFragment;
@@ -47,6 +49,12 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, JHReportWizardActivity.TabInfo>();
 	private PagerAdapter mPagerAdapter;
 
+	private JHReportWizardSicknessFragment sickFragment;
+	private JHReportWizardEmotionalFragment emoFragment;
+	private JHReportWizardImageFragment imageFragment;
+	private JHReportWizardVideoFragment videoFragment;
+	private JHReportWizardMapFragment mapFragment;
+	
 	List<Fragment> fragments = null;
 	private ProgressBar spinner;
 
@@ -107,14 +115,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		// Initialise the TabHost
 		this.initialiseTabHost(savedInstanceState);
 		if (savedInstanceState != null) {
-			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); // set
-																				// the
-																				// tab
-																				// as
-																				// per
-																				// the
-																				// saved
-																				// state
+			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); // set the tab  as per the saved state
 		}
 		spinner = (ProgressBar)findViewById(R.id.pbContact);
 		spinner.setVisibility(View.GONE);
@@ -128,8 +129,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	 * @see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
 	 */
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putString("tab", mTabHost.getCurrentTabTag()); // save the tab
-																// selected
+		outState.putString("tab", mTabHost.getCurrentTabTag()); // save the tab selected
 		super.onSaveInstanceState(outState);
 	}
 
@@ -139,11 +139,17 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private void intialiseViewPager() {
 
 		List<Fragment> fragments = new Vector<Fragment>();
-		fragments.add(new JHReportWizardSicknessFragment());
-		fragments.add(new JHReportWizardEmotionalFragment());
-		fragments.add(new JHReportWizardImageFragment());
-		fragments.add(new JHReportWizardVideoFragment());
-		fragments.add(new JHReportWizardMapFragment());
+		sickFragment = new JHReportWizardSicknessFragment();
+		emoFragment = new JHReportWizardEmotionalFragment();
+		imageFragment = new JHReportWizardImageFragment();
+		videoFragment = new JHReportWizardVideoFragment();
+		mapFragment = new JHReportWizardMapFragment();
+		
+		fragments.add(sickFragment);
+		fragments.add(emoFragment);
+		fragments.add(imageFragment);
+		fragments.add(videoFragment);
+		fragments.add(mapFragment);
 
 		this.mPagerAdapter = new JHReportWizardPageAdapter(
 				super.getSupportFragmentManager(), fragments);
@@ -178,12 +184,12 @@ public class JHReportWizardActivity extends FragmentActivity implements
 						JHReportWizardImageFragment.class, args)));
 		this.mapTabInfo.put(tabInfo.tag, tabInfo);
 		JHReportWizardActivity.addTab(this, this.mTabHost, this.mTabHost
-				.newTabSpec("Tab3").setIndicator("Video"),
+				.newTabSpec("Tab4").setIndicator("Video"),
 				(tabInfo = new TabInfo("Video",
 						JHReportWizardVideoFragment.class, args)));
 		this.mapTabInfo.put(tabInfo.tag, tabInfo);
 		JHReportWizardActivity.addTab(this, this.mTabHost, this.mTabHost
-				.newTabSpec("Tab3").setIndicator("Map"),
+				.newTabSpec("Tab5").setIndicator("Map"),
 				(tabInfo = new TabInfo("Map", JHReportWizardMapFragment.class,
 						args)));
 		this.mapTabInfo.put(tabInfo.tag, tabInfo);
@@ -215,9 +221,10 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	 * @see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
 	 */
 	public void onTabChanged(String tag) {
-		// TabInfo newTab = this.mapTabInfo.get(tag);
 		int pos = this.mTabHost.getCurrentTab();
 		this.mViewPager.setCurrentItem(pos);
+		JHAppStateVariables.currentRwPage = pos;
+		
 	}
 
 	@Override
@@ -232,9 +239,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onPageSelected(int arg0) {
-		// int pos = this.mTabHost.getCurrentTab();
-		// this.mViewPager.setCurrentItem(arg0);
+	public void onPageSelected(int arg0) {		
+		JHAppStateVariables.currentRwPage = arg0;
 		this.mTabHost.setCurrentTab(arg0);
 	}
 
@@ -252,16 +258,14 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			Uri selectedImage = data.getData();
 			String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-			Cursor cursor = getContentResolver().query(selectedImage,
-					filePathColumn, null, null, null);
+			Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
 			cursor.moveToFirst();
 
 			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 			String picturePath = cursor.getString(columnIndex);
 			cursor.close();
 
-			JHReportWizardImageFragment iFrag = (JHReportWizardImageFragment) fragments
-					.get(2);
+			JHReportWizardImageFragment iFrag = (JHReportWizardImageFragment) fragments .get(2);
 			iFrag.setImage(picturePath);
 
 		}
@@ -281,8 +285,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		@Override
 		protected void onPostExecute(Boolean result) {
 			try {
-				Intent i = new Intent(JHReportWizardActivity.this,
-						JHContactPickerActivity.class);
+				Intent i = new Intent(JHReportWizardActivity.this, JHContactPickerActivity.class);
 				startActivity(i);
 			} catch (Exception ex) {
 				Log.e("main", ex.toString());
@@ -337,6 +340,31 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		
 		Log.d(JHConstants.LOG_TAG, "my request code "+JHConstants.REQUEST_CODE_IMAGE_LIB);
 		startActivityForResult(i, JHConstants.REQUEST_CODE_IMAGE_LIB);
+	}
+	
+	
+	public void sendReportButtonPressed(View view) {
+		int page = JHAppStateVariables.currentRwPage;
+		
+		Log.d(JHConstants.LOG_TAG, "page "+page);
+		
+		ReportWizartAPICaller apiCaller = new ReportWizartAPICaller(this);
+		switch (page) {
+		case 0:
+			apiCaller.invokeSickenssEmotionalApi(JHUtility.getDate(), JHAppStateVariables.getSickEmoReport(), "", false);
+		case 1:
+			apiCaller.invokeSickenssEmotionalApi(JHUtility.getDate(), JHAppStateVariables.getSickEmoReport(), "", false);
+			break;
+		case 2:	
+			break;
+		case 3:
+			break;
+		case 4:	
+			apiCaller.invokeMapApi(mapFragment.getDate(), mapFragment.getName(),mapFragment.getAddress(), mapFragment.getDescription(), false);
+			break;
+		default:
+			break;
+		}
 	}
 
 }

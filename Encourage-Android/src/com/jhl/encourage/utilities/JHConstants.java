@@ -1,6 +1,5 @@
 package com.jhl.encourage.utilities;
 
-import com.jhl.encourage.R;
 
 public interface JHConstants {
 	public static final String LOG_TAG = "EncourageLog";
@@ -32,17 +31,49 @@ public interface JHConstants {
 	public static final String NOT_STATUS_READ = "read";
 	
 	public static final int SICKNESS_sore_throat = 1;
+	public static final String SICKNESS_TEXT_sore_throat = "Sore Throat";
 	public static final int SICKNESS_tired = 2;
+	public static final String SICKNESS_TEXT_tired = "Tired";
 	public static final int SICKNESS_back_pain = 3; 
+	public static final String SICKNESS_TEXT_back_pain = "Back Pain";
 	public static final int SICKNESS_dizziness = 4;
+	public static final String SICKNESS_TEXT_dizziness = "Dizziness";
 	public static final int SICKNESS_cant_sleep = 5;
+	public static final String SICKNESS_TEXT_cant_sleep = "Can't sleep";
 	public static final int SICKNESS_joint_pain = 6;
+	public static final String SICKNESS_TEXT_joint_pain = "Joint pain";
 	public static final int SICKNESS_dry_skin = 7;
+	public static final String SICKNESS_TEXT_dry_skin = "Dry Skin";
 	public static final int SICKNESS_nosebleed = 8;
-	public static final int SICKNESS_shortness_of_breath = 9; 
+	public static final String SICKNESS_TEXT_nosebleed = "Nosebleed";
+	public static final int SICKNESS_shortness_of_breath = 9;
+	public static final String SICKNESS_TEXT_shortness_of_breath = "Shortness of Breath";
 	public static final int SICKNESS_breathless = 10; 
-	public static final int SICKNESS_tingling_sensation = 11;  
+	public static final String SICKNESS_TEXT_breathless = "Breathless";
+	public static final int SICKNESS_tingling_sensation = 11;
+	public static final String SICKNESS_TEXT_tingling_sensation = "Tingling sensation";
 	public static final int SICKNESS_other = 12;
+	public static final String SICKNESS_TEXT_other = "Other";
+	
+	
+	public static final int EMO_worried = 21;
+	public static final String EMO_TEXT_worried = "Worried";
+	public static final int EMO_Anxious = 22;
+	public static final String EMO_TEXT_Anxious = "Anxious";
+	public static final int EMO_Depressed = 23; 
+	public static final String EMO_TEXT_Depressed = "Depressed";
+	public static final int EMO_Angry = 24;
+	public static final String EMO_TEXT_Angry = "Angry";
+	public static final int EMO_Sad = 25;
+	public static final String EMO_TEXT_Sad = "Sad";
+	public static final int EMO_Happy = 26;
+	public static final String EMO_TEXT_Happy = "Happy";
+	public static final int EMO_Restless = 27;
+	public static final String EMO_TEXT_Restless = "Restless";
+	public static final int EMO_cant_sleep = 28;
+	public static final String EMO_TEXT_cant_sleep = "Can't sleep";
+
+	
 	
 	public static final int BUTTON_SELECTED = 1;
 	public static final int BUTTON_UNSELECTED = 0;
@@ -51,5 +82,10 @@ public interface JHConstants {
 	public static final int REQUEST_CODE_IMAGE_LIB = 2;
 	public static final int REQUEST_CODE_VIDEO_LIB = 3;
 	
-	
+	public static final int RW_PAGER_FRAG_SICK = 0;
+	public static final int RW_PAGER_FRAG_EMO = 1;
+	public static final int RW_PAGER_FRAG_IMAGE = 2;
+	public static final int RW_PAGER_FRAG_MAP = 3;
+	public static final int RW_PAGER_FRAG_VIDEO = 4;
+
 }

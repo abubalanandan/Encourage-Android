@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.model.ReportButton;
+import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.content.Context;
@@ -93,10 +94,14 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 					selectedButtons.add(button);
 					button.setState(JHConstants.BUTTON_SELECTED);
 					imageView.setImageResource(R.drawable.ic_action_add_group);
+					String sickness = getSicknessByButtonPosition(button.getPosition());
+					JHAppStateVariables.addSickenss(sickness);
 				}else {
 					selectedButtons.remove(button);
 					button.setState(JHConstants.BUTTON_UNSELECTED);
 					imageView.setImageResource(imageIDs[button.getPosition()]);
+					String sickness = getSicknessByButtonPosition(button.getPosition());
+					JHAppStateVariables.removeSickenss(sickness);
 				}
 			}
 		}
@@ -106,6 +111,37 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 				if (imageView == button.getImageView()){
 					return button;
 				}
+			}
+			return null;
+		}
+		
+		private String getSicknessByButtonPosition(int position){
+			switch (position) {
+			case 0:
+				return JHConstants.SICKNESS_TEXT_sore_throat;
+			case 1:
+				return JHConstants.SICKNESS_TEXT_tired;
+			case 2:
+				return JHConstants.SICKNESS_TEXT_back_pain;
+			case 3:
+				return JHConstants.SICKNESS_TEXT_dizziness;
+			case 4:
+				return JHConstants.SICKNESS_TEXT_cant_sleep;
+			case 5:
+				return JHConstants.SICKNESS_TEXT_joint_pain;
+			case 6:
+				return JHConstants.SICKNESS_TEXT_dry_skin;
+			case 7:
+				return JHConstants.SICKNESS_TEXT_nosebleed;
+			case 8:
+				return JHConstants.SICKNESS_TEXT_shortness_of_breath;
+			case 9:
+				return JHConstants.SICKNESS_TEXT_breathless;
+			case 10:
+				return JHConstants.SICKNESS_TEXT_tingling_sensation;
+			case 11:
+				return JHConstants.SICKNESS_TEXT_other;
+				
 			}
 			return null;
 		}
