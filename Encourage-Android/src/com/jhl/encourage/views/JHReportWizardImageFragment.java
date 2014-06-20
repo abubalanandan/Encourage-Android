@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 
@@ -27,14 +28,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class JHReportWizardImageFragment extends Fragment {
+public class JHReportWizardImageFragment extends Fragment implements JHReportFragment{
 
 	private ImageView imageHolder = null;
 	private TextView imageDate = null;
 	private TextView imageName = null;
 	private ProgressBar uploadProgress = null;
-	
-	//private DatePicker imageDP;
+	private Contact contact;
 	private int day, month, year;
 	
 	private String imagePath ;
@@ -44,6 +44,7 @@ public class JHReportWizardImageFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.imagereport, container, false);
 		initView(v);
+		contact = new Contact();
 		return v;
 	}
 	
@@ -146,6 +147,16 @@ public class JHReportWizardImageFragment extends Fragment {
 	
 	public String getName() {
 		return imageName.getText().toString();
+	}
+	
+	@Override
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+	
+	@Override
+	public Contact getContact() {
+		return contact;
 	}
 
 }

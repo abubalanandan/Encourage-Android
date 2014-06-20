@@ -9,6 +9,7 @@ import android.util.Log;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.activities.JHReportWizardActivity;
 import com.jhl.encourage.activities.JHTimelineActivity;
+import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
@@ -27,7 +28,7 @@ public class ReportWizartAPICaller {
 		this.activity = activity;
 	}
 	
-	public void invokeSickenssEmotionalApi(String date, String data, String description, boolean ics) {
+	public void invokeSickenssEmotionalApi(String date, String data, String description, boolean ics, Contact contact) {
 
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
@@ -37,10 +38,18 @@ public class ReportWizartAPICaller {
 		if(ics){
 			icsString = "yes";
 		}
+		String addToCC1 = "no";
+		if(contact.isAddToCC1()){
+			addToCC1 = "yes";
+		}
+		String addToCC2 = "no";
+		if(contact.isAddToCC1()){
+			addToCC2 = "yes";
+		}
 		
 		service.postReport("getSelfReportedData", date, "datetime", "Date", "","1", "", data, "varchar", "Complaint", "", "2","", "", "text", 
-				"Description", "", "3", "", "", "", "", "", "self_reported_form", "selfreport_data" , icsString, 
-				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", "no", "no", 
+				"Description", "", "3", "", contact.getName1(), contact.getEmail1(), contact.getName2(), contact.getEmail2(), "self_reported_form", "selfreport_data" , icsString, 
+				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", addToCC1, addToCC2, 
 				new Callback<SpocResponse>() {
 					@Override
 					public void success(SpocResponse spocResponse,	Response response) {
@@ -73,7 +82,7 @@ public class ReportWizartAPICaller {
 
 	}
 	
-	public void invokeMapApi(String date, String name, String address, String description, boolean ics) {
+	public void invokeMapApi(String date, String name, String address, String description, boolean ics, Contact contact) {
 
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 

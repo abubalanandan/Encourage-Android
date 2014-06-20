@@ -21,6 +21,10 @@ import java.util.Vector;
 
 
 
+
+
+
+
 import com.jhl.encourage.R;
 import com.jhl.encourage.activities.JHLoginActivity.GCMRegistrationTask;
 import com.jhl.encourage.adapters.JHReportWizardPageAdapter;
@@ -31,6 +35,9 @@ import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHHTTPClient;
 import com.jhl.encourage.utilities.JHUploadResponseParser;
 import com.jhl.encourage.utilities.JHUtility;
+import com.jhl.encourage.views.JHAlertsTeaserDialog;
+import com.jhl.encourage.views.JHContactDialog;
+import com.jhl.encourage.views.JHReportFragment;
 import com.jhl.encourage.views.JHReportWizardEmotionalFragment;
 import com.jhl.encourage.views.JHReportWizardImageFragment;
 import com.jhl.encourage.views.JHReportWizardMapFragment;
@@ -57,6 +64,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -71,7 +79,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private ViewPager mViewPager;
 	private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, JHReportWizardActivity.TabInfo>();
 	private PagerAdapter mPagerAdapter;
-
+	private CheckBox cboxCareCircle;
 	private JHReportWizardSicknessFragment sickFragment;
 	private JHReportWizardEmotionalFragment emoFragment;
 	private JHReportWizardImageFragment imageFragment;
@@ -79,7 +87,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private JHReportWizardMapFragment mapFragment;
 	
 	List<Fragment> fragments = null;
-	private ProgressBar spinner;
+	
 	
 	private Calendar cal;
 	private int day;
@@ -145,9 +153,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); // set the tab  as per the saved state
 		}
-		spinner = (ProgressBar)findViewById(R.id.pbContact);
-		spinner.setVisibility(View.GONE);
 		
+		cboxCareCircle = (CheckBox)findViewById(R.id.cboxCareCircle);
 		cal = Calendar.getInstance();
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		month = cal.get(Calendar.MONTH);
@@ -305,67 +312,94 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		}
 	}
 
+	private JHReportFragment getCurrentFragment(int page){
+		JHReportFragment fragment = null;
+		switch (page) {
+		case 0:
+			fragment = sickFragment;			
+			break;
+		case 1:
+			fragment = emoFragment;			
+			break;
+		case 2:
+			fragment = imageFragment;			
+			break;
+		case 3:
+			fragment = videoFragment;			
+			break;
+		case 4:
+			fragment = mapFragment;
+			break;
+		}
+		return fragment;
+		
+	}
+	
 	public void rwContactButtonPressed(View view) {
-		new ContactLoadTask().execute();
+		
+		int page = JHAppStateVariables.currentRwPage;
+		JHReportFragment fragment = getCurrentFragment(page);
+		JHContactDialog dialog = new JHContactDialog(this, fragment);
+		dialog.show();
 	}
 
-	class ContactLoadTask extends AsyncTask<String, Integer, Boolean> {
-		@Override
-		protected void onPreExecute() {
-			spinner.setVisibility(View.VISIBLE);
-			super.onPreExecute();
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			try {
-				Intent i = new Intent(JHReportWizardActivity.this, JHContactPickerActivity.class);
-				startActivity(i);
-			} catch (Exception ex) {
-				Log.e("main", ex.toString());
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(String... params) {
-			Contact contact;
-			List<Contact> contacts = new ArrayList<Contact>();
-			ContentResolver cr = getContentResolver();
-			Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null,
-					null, null, null);
-			if (cur.getCount() > 0) {
-				while (cur.moveToNext()) {
-					String id = cur.getString(cur
-							.getColumnIndex(ContactsContract.Contacts._ID));
-					Cursor cur1 = cr.query(
-							ContactsContract.CommonDataKinds.Email.CONTENT_URI,
-							null,
-							ContactsContract.CommonDataKinds.Email.CONTACT_ID
-									+ " = ?", new String[] { id }, null);
-					while (cur1.moveToNext()) {
-						// to get the contact names
-						String name = cur1
-								.getString(cur1
-										.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-						// Log.e("Name :", name);
-						String email = cur1
-								.getString(cur1
-										.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-						// Log.e("Email", email);
-						if (email != null) {
-							contact = new Contact(name, email, false);
-							contacts.add(contact);
-						}
-					}
-					cur1.close();
-				}
-			}
-			JHAppStateVariables.setContacts(contacts);
-			Log.d(JHConstants.LOG_TAG, "doInBackground done");
-
-			return true;
-		}
-	}
+//	class ContactLoadTask extends AsyncTask<String, Integer, Boolean> {
+//		@Override
+//		protected void onPreExecute() {
+//			spinner.setVisibility(View.VISIBLE);
+//			super.onPreExecute();
+//		}
+//
+//		@Override
+//		protected void onPostExecute(Boolean result) {
+//			try {
+//				Intent i = new Intent(JHReportWizardActivity.this, JHContactPickerActivity.class);
+//				startActivity(i);
+//			} catch (Exception ex) {
+//				Log.e("main", ex.toString());
+//			}
+//		}
+//
+//		@Override
+//		protected Boolean doInBackground(String... params) {
+//			Contact contact;
+//			List<Contact> contacts = new ArrayList<Contact>();
+//			ContentResolver cr = getContentResolver();
+//			Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null,
+//					null, null, null);
+//			if (cur.getCount() > 0) {
+//				while (cur.moveToNext()) {
+//					String id = cur.getString(cur
+//							.getColumnIndex(ContactsContract.Contacts._ID));
+//					Cursor cur1 = cr.query(
+//							ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+//							null,
+//							ContactsContract.CommonDataKinds.Email.CONTACT_ID
+//									+ " = ?", new String[] { id }, null);
+//					while (cur1.moveToNext()) {
+//						// to get the contact names
+//						String name = cur1
+//								.getString(cur1
+//										.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+//						// Log.e("Name :", name);
+//						String email = cur1
+//								.getString(cur1
+//										.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+//						// Log.e("Email", email);
+//						if (email != null) {
+//							contact = new Contact(name, email, false);
+//							contacts.add(contact);
+//						}
+//					}
+//					cur1.close();
+//				}
+//			}
+//			JHAppStateVariables.setContacts(contacts);
+//			Log.d(JHConstants.LOG_TAG, "doInBackground done");
+//
+//			return true;
+//		}
+//	}
 	
 	public void imageButtonClicked(View view){
 		Intent i = new Intent(
@@ -378,20 +412,29 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	
 	
 	public void sendReportButtonPressed(View view) {
-		int page = JHAppStateVariables.currentRwPage;
-		
+		int page = JHAppStateVariables.currentRwPage;		
 		Log.d(JHConstants.LOG_TAG, "page "+page);
+		JHReportFragment fragment = getCurrentFragment(page);
 		
 		ReportWizartAPICaller apiCaller = new ReportWizartAPICaller(this);
 		switch (page) {
 		case 0:
-			apiCaller.invokeSickenssEmotionalApi(JHUtility.getDate(), JHAppStateVariables.getSickEmoReport(), "", false);
+			String date = sickFragment.getSickDate();
+			if(date == null || date.trim().equals("")) {
+				date = JHUtility.getDate();
+			}
+			apiCaller.invokeSickenssEmotionalApi(date, JHAppStateVariables.getSickEmoReport(), sickFragment.getSickDesc(), cboxCareCircle.isChecked(), fragment.getContact());
+			break;
 		case 1:
-			apiCaller.invokeSickenssEmotionalApi(JHUtility.getDate(), JHAppStateVariables.getSickEmoReport(), "", false);
+			date = emoFragment.getEmoDate();
+			if(date == null || date.trim().equals("")) {
+				date = JHUtility.getDate();
+			}
+			apiCaller.invokeSickenssEmotionalApi(date, JHAppStateVariables.getSickEmoReport(), emoFragment.getEmoDesc(), cboxCareCircle.isChecked(), fragment.getContact());
 			break;
 		case 2:	
 			
-			String date = imageFragment.getDate();
+			date = imageFragment.getDate();
 			String name = imageFragment.getName();
 			imageFragment.showProgrees();
 			imageUpload(apiCaller, date, name);
@@ -399,7 +442,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		case 3:
 			break;
 		case 4:	
-			apiCaller.invokeMapApi(mapFragment.getDate(), mapFragment.getName(),mapFragment.getAddress(), mapFragment.getDescription(), false);
+			apiCaller.invokeMapApi(mapFragment.getDate(), mapFragment.getName(),mapFragment.getAddress(), mapFragment.getDescription(), cboxCareCircle.isChecked(), fragment.getContact());
 			break;
 		default:
 			break;

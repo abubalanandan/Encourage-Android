@@ -100,14 +100,7 @@
         		>
           </android.support.v4.view.ViewPager>  
           
-         <ProgressBar
-        	android:id="@+id/pbContact"
-       	 	style="?android:attr/progressBarStyleLarge"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_alignTop="@+id/reportpager"
-        	android:layout_centerHorizontal="true"
-        	android:layout_marginTop="151dp" />
+        
             
          </LinearLayout>
         
@@ -115,7 +108,47 @@
     
     
 		
-	
+	<RelativeLayout
+        android:id="@+id/contactview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" 
+        android:layout_alignParentBottom="true" 
+        android:layout_below="@+id/textview"
+        >
+
+        <ImageView
+            android:id="@+id/contactBG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/top_header" />
+
+        <TextView
+            android:id="@+id/contactsList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <RelativeLayout
+            android:id="@+id/contactSelectLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <CheckBox
+                android:id="@+id/cboxCareCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Inform my care-circle" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
     
     
 
@@ -146,8 +179,25 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="Send Report" 
-            android:onClick="sendReportButtonPressed"/>
+            android:onClick="sendReportButtonPressed"
+            android:text="Send" />
+
+        <RelativeLayout
+            android:id="@+id/rwContactButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/sendReportButon"
+            android:layout_weight="0.3"
+            android:onClick="rwContactButtonPressed" >
+
+            <ImageView
+                android:id="@+id/rwContactBackgroundImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_add_group" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

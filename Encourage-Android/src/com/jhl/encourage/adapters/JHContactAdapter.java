@@ -29,51 +29,51 @@ public class JHContactAdapter extends ArrayAdapter<Contact> {
 		   this.context = context;
 	}
 	
-	private class ViewHolder {
-		TextView code;
-		CheckBox name;
-	}
-	
-	public List<Contact>  getContacts() {
-		return contacts;
-	}
-	
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-	 
-	   ViewHolder holder = null;
-	   Log.d(JHConstants.LOG_TAG, String.valueOf(position));
-	 
-	   if (convertView == null) {
-		   LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		   convertView = vi.inflate(R.layout.contactitem, null);
-	 
-		   holder = new ViewHolder();
-		   //holder.code = (TextView) convertView.findViewById(R.id.code);
-		   holder.name = (CheckBox) convertView.findViewById(R.id.cboxCareCircle);
-		   convertView.setTag(holder);
-	 
-		   holder.name.setOnClickListener( new View.OnClickListener() {
-			   public void onClick(View v) { 
-				   CheckBox cb = (CheckBox) v ; 
-				   Contact contact = (Contact) cb.getTag(); 
-//				   Toast.makeText(context,"Clicked on Checkbox: " + cb.getText() +" is " + cb.isChecked(),Toast.LENGTH_LONG).show();
-				   contact.setSelected(cb.isChecked());
-			   } 
-		   }); 
-	   }
-	   else {
-		   holder = (ViewHolder) convertView.getTag();
-	   }
-	 
-	   Contact contact = contacts.get(position);
-	   //holder.code.setText(" (" +  contact.getId() + ")");
-	   holder.name.setText(contact.getName());
-	   holder.name.setChecked(contact.isSelected());
-	   holder.name.setTag(contact);
-	 
-	   return convertView;
-	 
-	  }
+//	private class ViewHolder {
+//		TextView code;
+//		CheckBox name;
+//	}
+//	
+//	public List<Contact>  getContacts() {
+//		return contacts;
+//	}
+//	
+//	@Override
+//	public View getView(int position, View convertView, ViewGroup parent) {
+//	 
+//	   ViewHolder holder = null;
+//	   Log.d(JHConstants.LOG_TAG, String.valueOf(position));
+//	 
+//	   if (convertView == null) {
+//		   LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//		   convertView = vi.inflate(R.layout.contactitem, null);
+//	 
+//		   holder = new ViewHolder();
+//		   //holder.code = (TextView) convertView.findViewById(R.id.code);
+//		   holder.name = (CheckBox) convertView.findViewById(R.id.cboxCareCircle);
+//		   convertView.setTag(holder);
+//	 
+//		   holder.name.setOnClickListener( new View.OnClickListener() {
+//			   public void onClick(View v) { 
+//				   CheckBox cb = (CheckBox) v ; 
+//				   Contact contact = (Contact) cb.getTag(); 
+////				   Toast.makeText(context,"Clicked on Checkbox: " + cb.getText() +" is " + cb.isChecked(),Toast.LENGTH_LONG).show();
+//				   contact.setSelected(cb.isChecked());
+//			   } 
+//		   }); 
+//	   }
+//	   else {
+//		   holder = (ViewHolder) convertView.getTag();
+//	   }
+//	 
+//	   Contact contact = contacts.get(position);
+//	   //holder.code.setText(" (" +  contact.getId() + ")");
+//	   holder.name.setText(contact.getName());
+//	   holder.name.setChecked(contact.isSelected());
+//	   holder.name.setTag(contact);
+//	 
+//	   return convertView;
+//	 
+//	  }
 	
 }

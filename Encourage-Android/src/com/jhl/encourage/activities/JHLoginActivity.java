@@ -24,7 +24,7 @@ import android.widget.ProgressBar;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
-import com.jhl.encourage.activities.JHReportWizardActivity.ContactLoadTask;
+
 import com.jhl.encourage.apis.LoginService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;

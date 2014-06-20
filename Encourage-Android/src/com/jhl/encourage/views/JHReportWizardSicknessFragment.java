@@ -3,6 +3,7 @@ package com.jhl.encourage.views;
 import com.jhl.encourage.R;
 import com.jhl.encourage.activities.JHRegistrationActivity;
 import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
+import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHUtility;
 
@@ -18,11 +19,11 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
-public class JHReportWizardSicknessFragment extends Fragment {
+public class JHReportWizardSicknessFragment extends Fragment implements JHReportFragment{
 	
 	TextView sickDate;
 	TextView sickDesc;
-	
+	private Contact contact;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -30,11 +31,11 @@ public class JHReportWizardSicknessFragment extends Fragment {
 		GridView gridView = (GridView) v.findViewById(R.id.sicknessgrid);
 		gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
 		
-		TextView contactList = (TextView)v.findViewById(R.id.contactsList);
-		contactList.setText(JHAppStateVariables.getContactsListString());
+//		TextView contactList = (TextView)v.findViewById(R.id.contactsList);
+//		contactList.setText(JHAppStateVariables.getContactsListString());
 		
 		initViews(v);
-		
+		contact = new Contact();
 		return v;
 	}
 	
@@ -74,5 +75,27 @@ public class JHReportWizardSicknessFragment extends Fragment {
 	
 	public void setDate(String date){
 		sickDate.setText(date);
+	}
+	
+	@Override
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+	
+	@Override
+	public Contact getContact() {
+		return contact;
+	}
+	
+	public String getSickDate(){
+		return sickDate.getText().toString();
+	}
+	
+	public String getSickDesc(){
+		String desc = sickDesc.getText().toString();
+		if(desc.equals("Enter a description")){
+			desc = "";
+		}
+		return desc;
 	}
 }

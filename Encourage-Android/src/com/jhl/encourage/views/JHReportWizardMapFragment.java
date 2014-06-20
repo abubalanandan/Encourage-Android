@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHUtility;
 
 import android.os.Bundle;
@@ -16,17 +17,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class JHReportWizardMapFragment extends Fragment {
+public class JHReportWizardMapFragment extends Fragment implements JHReportFragment{
 	
 	TextView mapReportDateText ;
 	TextView mapReportNameText ;
 	TextView mapReportAddressText ;
 	TextView mapReportDescText ;
+	
+	private Contact contact;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.mapreport, container, false);
 		initView(v);
+		contact = new Contact();
 		return v;
 	}
 	
@@ -155,5 +160,15 @@ public class JHReportWizardMapFragment extends Fragment {
 	
 	public void setDate(String date){
 		mapReportDateText.setText(date);
+	}
+	
+	@Override
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+	
+	@Override
+	public Contact getContact() {
+		return contact;
 	}
 }	

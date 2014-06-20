@@ -2,6 +2,7 @@ package com.jhl.encourage.views;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
+import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHUtility;
 
 import android.os.Bundle;
@@ -13,10 +14,12 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
-public class JHReportWizardEmotionalFragment extends Fragment {
+public class JHReportWizardEmotionalFragment extends Fragment implements JHReportFragment{
 	
 	TextView emoDate;
 	TextView emoDesc;
+	
+	private Contact contact;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,6 +28,7 @@ public class JHReportWizardEmotionalFragment extends Fragment {
 		GridView gridView = (GridView) v.findViewById(R.id.emotionalgrid);
 		gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
 		initViews(v);
+		contact = new Contact();
 		return v;
 	}
 	
@@ -64,6 +68,28 @@ public class JHReportWizardEmotionalFragment extends Fragment {
 	
 	public void setDate(String date){
 		emoDate.setText(date);
+	}
+	
+	@Override
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+	
+	@Override
+	public Contact getContact() {
+		return contact;
+	}
+	
+	public String getEmoDate(){
+		return emoDate.getText().toString();
+	}
+	
+	public String getEmoDesc(){
+		String desc = emoDesc.getText().toString();
+		if(desc.equals("Enter a description")){
+			desc = "";
+		}
+		return desc;
 	}
 	
 }

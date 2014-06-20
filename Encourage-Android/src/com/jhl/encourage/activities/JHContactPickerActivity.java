@@ -31,28 +31,28 @@ public class JHContactPickerActivity extends Activity {
 	}
 
 	public void contatDoneButtonClicked(View view) {
-		try {
-
-			StringBuffer contactList = new StringBuffer();
-
-			List<Contact> contacts = contactAdapter.getContacts();
-			for (int i = 0; i < contacts.size(); i++) {
-				Contact contact = contacts.get(i);
-				if (contact.isSelected()) {
-					contactList.append(contact.getEmail() + ";");
-				}
-			}
-
-			Log.d(JHConstants.LOG_TAG, "Contacts " + contactList.toString());
-
-			JHAppStateVariables.setContactsListString(contactList.toString());
-			Intent i = new Intent(JHContactPickerActivity.this,
-					JHReportWizardActivity.class);
-			startActivity(i);
-			
-		} catch (Exception ex) {
-			Log.e("main", ex.toString());
-		}
+//		try {
+//
+//			StringBuffer contactList = new StringBuffer();
+//
+//			List<Contact> contacts = contactAdapter.getContacts();
+//			for (int i = 0; i < contacts.size(); i++) {
+//				Contact contact = contacts.get(i);
+//				if (contact.isSelected()) {
+//					contactList.append(contact.getEmail() + ";");
+//				}
+//			}
+//
+//			Log.d(JHConstants.LOG_TAG, "Contacts " + contactList.toString());
+//
+//			JHAppStateVariables.setContactsListString(contactList.toString());
+//			Intent i = new Intent(JHContactPickerActivity.this,
+//					JHReportWizardActivity.class);
+//			startActivity(i);
+//			
+//		} catch (Exception ex) {
+//			Log.e("main", ex.toString());
+//		}
 
 	}
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/alertBackgroundImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/page_bg" />
+
+    <LinearLayout
+        android:id="@+id/contactsLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/contactName1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_text"
+            android:ems="10"
+            android:text="Enter name of person that you want to inform" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/contactEmail1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_text"
+            android:ems="10"
+            android:text="Enter email address" />
+
+        <CheckBox
+            android:id="@+id/addtoCC1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make a member of my Care-cricle" />
+
+        <EditText
+            android:id="@+id/contactName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_text"
+            android:ems="10"
+            android:text="Enter name of person that you want to inform" />
+
+        <EditText
+            android:id="@+id/contactEmail2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_text"
+            android:ems="10"
+            android:text="Enter email address" />
+
+        <CheckBox
+            android:id="@+id/addtoCC2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make a member of my Care-cricle" />
+
+        <Button
+            android:id="@+id/btnContactSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done" />
+
+    </LinearLayout>
+
+</RelativeLayout>
