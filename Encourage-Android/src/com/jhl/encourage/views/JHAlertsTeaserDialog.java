@@ -84,7 +84,7 @@ public class JHAlertsTeaserDialog extends Dialog {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Notification n = alerts.get(position);
-			JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_ALERT, n.getAlertKey());
+			JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_ALERT, n.getId());
 			
 			try{
 			    Intent i = new Intent(context, JHAlertListActivity.class);

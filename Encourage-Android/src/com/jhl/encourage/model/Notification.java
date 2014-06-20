@@ -7,23 +7,26 @@ import java.util.Locale;
 
 public class Notification implements Comparable<Notification>{
 	
-	private String notificationType;
-	private String alertKey;
-	private String dateTime;
-	private String dateTimeDiff;
-	private String contenType;
-	private String readStatus;
-	private String authorName;
-	private String title;
-	private String details;
-	private Date date;
+	protected String notificationType;
+	protected String id;
+	protected String readStatus;
+	protected Date date;
+	protected String dateTime;
+	
+	public String getReadStatus() {
+		return readStatus;
+	}
+
+	public void setReadStatus(String readStatus) {
+		this.readStatus = readStatus;
+	}
 	
 	public Notification() {
 		
 	}
 	
-	public Notification(String alertKey){
-		this.alertKey = alertKey;
+	public Notification(String id){
+		this.id = id;
 	}
 	
 	public String getNotificationType() {
@@ -34,18 +37,9 @@ public class Notification implements Comparable<Notification>{
 		this.notificationType = notificationType;
 	}
 
-	public String getAlertKey() {
-		return alertKey;
-	}
-
-	public void setAlertKey(String alertKey) {
-		this.alertKey = alertKey;
-	}
-
 	public String getDateTime() {
 		return dateTime;
 	}
-
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 		try {
@@ -56,74 +50,29 @@ public class Notification implements Comparable<Notification>{
 		}
 	}
 
-	public String getDateTimeDiff() {
-		return dateTimeDiff;
-	}
-
-	public void setDateTimeDiff(String dateTimeDiff) {
-		this.dateTimeDiff = dateTimeDiff;
-	}
-
-	public String getContenType() {
-		return contenType;
-	}
-
-	public void setContenType(String contenType) {
-		this.contenType = contenType;
-	}
-
-	public String getReadStatus() {
-		return readStatus;
-	}
-
-	public void setReadStatus(String readStatus) {
-		this.readStatus = readStatus;
-	}
-
-	public String getAuthorName() {
-		return authorName;
-	}
-
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDetails() {
-		return details;
-	}
-
-	public void setDetails(String details) {
-		this.details = details;
-	}
-	
 	public Date getDate() {
 		return this.date;
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof Notification){
 			Notification n = (Notification)o;
-			if(alertKey.equals(n.getAlertKey())){
+			if(id.equals(n.getId()) && notificationType.equals(n.getNotificationType())){
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	@Override
-	public String toString() {
-		return this.alertKey + " " + this.details;
+	public String getId() {
+		return id;
 	}
-	
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public int compareTo(Notification another) {
 		return this.date.compareTo(another.getDate());

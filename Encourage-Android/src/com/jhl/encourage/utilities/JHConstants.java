@@ -5,7 +5,7 @@ public interface JHConstants {
 	public static final String LOG_TAG = "EncourageLog";
 	
 	public static final String NOT_TYPE_ALERT = "alert";
-	public static final String NOT_TYPE_CARE_TASK = "2";
+	public static final String NOT_TYPE_CARE_TASK = "caretask";
 	
 	
 	public static final String NOT_XML_KEY_ID = "id";
@@ -18,8 +18,13 @@ public interface JHConstants {
 	public static final String NOT_XML_KEY_AUTHOR_NAME = "authorname";
 	public static final String NOT_XML_KEY_TITLE = "title";
 	public static final String NOT_XML_KEY_DETAILS = "details";
-
-			
+	public static final String NOT_XML_KEY_CARETASK_KEY = "caretaskid";
+	public static final String NOT_XML_KEY_CARETASK_TYPE = "caretask_type";
+	public static final String NOT_XML_KEY_CARETASK_DATE_TIME = "caretask_datetime";
+	public static final String NOT_XML_KEY_PRPVIDER_NAE = "provider_name";
+	public static final String NOT_XML_KEY_CAREPLAN_NAME = "careplan_name";
+	public static final String NOT_XML_KEY_CP_DETAILS = "cp_details";
+				
 	public static final String NOT_XML_KEY_MESSAGE = "message";
 	public static final String NOT_XML_TAG_RESPONSE = "SPOCResponse";
 	public static final String NOT_XML_TAG_OBJECT = "SpocObject";

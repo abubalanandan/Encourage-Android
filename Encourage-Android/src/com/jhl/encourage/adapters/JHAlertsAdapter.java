@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.Notification;
-
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.content.Context;
@@ -64,13 +64,13 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 	   }
 	 
 	 
-	   Notification notification = alerts.get(position);
+	   Alert alert = (Alert)alerts.get(position);
 	
 	 
-	   holder.author.setText(notification.getAuthorName());
-	   holder.title.setText(notification.getTitle());
-	   holder.details.setText(notification.getDetails());
-	   holder.dateTime.setText(notification.getDateTime());
+	   holder.author.setText(alert.getAuthorName());
+	   holder.title.setText(alert.getTitle());
+	   holder.details.setText(alert.getDetails());
+	   holder.dateTime.setText(alert.getDateTime());
 	   
 //	   holder.author.setTag(notification.getAuthorName());
 //	   holder.title.setTag(notification.getTitle());

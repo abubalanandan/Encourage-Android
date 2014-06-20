@@ -21,7 +21,7 @@ public class JHCareTaskListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.caretasks);
-        listView = (ListView) findViewById(R.id.ctlist);
+        listView = (ListView) findViewById(R.id.careTaksList);
         
         List<Notification> alerts = JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK);
         int size = alerts.size();

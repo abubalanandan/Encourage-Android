@@ -1,11 +1,11 @@
 package com.jhl.encourage.adapters;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.Notification;
-import com.jhl.encourage.utilities.JHAppStateVariables;
+
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+
 import android.widget.TextView;
 
 
@@ -62,15 +62,15 @@ public class JHAlertsTeaserAdapter extends ArrayAdapter<Notification> {
 	 
 	   Log.d(JHConstants.LOG_TAG, "position "+position);
 	   
-	   Notification notification = alerts.get(position);
+	   Alert alert = (Alert)alerts.get(position);
 	
-	   Log.d(JHConstants.LOG_TAG, "notification.getAuthorName() "+notification.getAuthorName());
-	   Log.d(JHConstants.LOG_TAG, "notification.getTitle() "+notification.getTitle());
+	   Log.d(JHConstants.LOG_TAG, "alert.getAuthorName() "+alert.getAuthorName());
+	   Log.d(JHConstants.LOG_TAG, "alert.getTitle() "+alert.getTitle());
 	   
-	   holder.author.setText(notification.getAuthorName());
-	   holder.title.setText(notification.getTitle());
-	   holder.author.setTag(notification.getAuthorName());
-	   holder.title.setTag(notification.getTitle());
+	   holder.author.setText(alert.getAuthorName());
+	   holder.title.setText(alert.getTitle());
+	   holder.author.setTag(alert.getAuthorName());
+	   holder.title.setTag(alert.getTitle());
 	 
 	   return convertView;
 	 

@@ -41,32 +41,10 @@ public class JHNotificationParser {
 	}
 	
 	public Notification parse(String xml){
-		Notification notification = null;
+		Alert alert = null;
+		CareTask careTask = null ; 
 		Document doc = getDomElement(xml);
 		
-//		NodeList nl = doc.getElementsByTagName(JHConstants.NOT_XML_KEY_TAG);
-//		Log.d(JHConstants.LOG_TAG, "nl.getLength() "+nl.getLength());
-//		
-//        // looping through all item nodes <item>
-//        for (int i = 0; i < nl.getLength(); i++) {
-//        	
-//            Element e = (Element) nl.item(i);
-//            String type = getValue(e, JHConstants.NOT_XML_KEY_TYPE);
-//            
-//            Log.d(JHConstants.LOG_TAG, "type "+type);
-//            
-//            
-//            if (type.equals(JHConstants.NOT_TYPE_ALERT)){
-//            	notification = new Alert();
-//            	notification = setValues(notification, e);
-//            	
-//            	
-//            }else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)){
-//            	notification = new CareTask();
-//            	notification = setValues(notification, e);
-//            }
-//                       
-//        }
 		
 		NodeList nl = doc.getElementsByTagName(JHConstants.NOT_XML_TAG_RESPONSE);
 		Log.d(JHConstants.LOG_TAG, "nl.getLength() "+nl.getLength());
@@ -84,22 +62,36 @@ public class JHNotificationParser {
 			
 			String type = entryMap.get(JHConstants.NOT_XML_KEY_TYPE);
 			if(type.equals(JHConstants.NOT_TYPE_ALERT)){
-				notification = new Alert();
-				notification.setAlertKey(entryMap.get(JHConstants.NOT_XML_KEY_ALERT_KEY));
-				notification.setAuthorName(entryMap.get(JHConstants.NOT_XML_KEY_AUTHOR_NAME));
-				notification.setContenType(entryMap.get(JHConstants.NOT_XML_KEY_CONTENT_TYPE));
-				notification.setDateTime(entryMap.get(JHConstants.NOT_XML_KEY_DATE_TIME));
-				notification.setDateTimeDiff(entryMap.get(JHConstants.NOT_XML_KEY_DATE_TIME_DIFF));
-				notification.setDetails(entryMap.get(JHConstants.NOT_XML_KEY_DETAILS));
-				notification.setNotificationType(entryMap.get(JHConstants.NOT_XML_KEY_TYPE));
-				notification.setReadStatus(entryMap.get(JHConstants.NOT_XML_KEY_READ_STATUS));
-				notification.setTitle(entryMap.get(JHConstants.NOT_XML_KEY_TITLE));
+				alert = new Alert();
+				alert.setId(entryMap.get(JHConstants.NOT_XML_KEY_ALERT_KEY));
+				alert.setAuthorName(entryMap.get(JHConstants.NOT_XML_KEY_AUTHOR_NAME));
+				alert.setContenType(entryMap.get(JHConstants.NOT_XML_KEY_CONTENT_TYPE));
+				alert.setDateTime(entryMap.get(JHConstants.NOT_XML_KEY_DATE_TIME));
+				alert.setDateTimeDiff(entryMap.get(JHConstants.NOT_XML_KEY_DATE_TIME_DIFF));
+				alert.setDetails(entryMap.get(JHConstants.NOT_XML_KEY_DETAILS));
+				alert.setNotificationType(entryMap.get(JHConstants.NOT_XML_KEY_TYPE));
+				alert.setReadStatus(entryMap.get(JHConstants.NOT_XML_KEY_READ_STATUS));
+				alert.setTitle(entryMap.get(JHConstants.NOT_XML_KEY_TITLE));
+				
+				Log.d(JHConstants.LOG_TAG, alert.toString());
+				
+				return (Notification)alert;
+				
+			}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {
+				
+				careTask = new CareTask();
+				careTask.setId(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_KEY));
+				careTask.setCareTaskType(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_TYPE));
+				careTask.setDateTime(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_DATE_TIME));
+				careTask.setProviderName(entryMap.get(JHConstants.NOT_XML_KEY_PRPVIDER_NAE));
+				careTask.setCareplanName(entryMap.get(JHConstants.NOT_XML_KEY_CAREPLAN_NAME));
+				careTask.setCpDetails(entryMap.get(JHConstants.NOT_XML_KEY_CP_DETAILS));
+				
+				return (Notification)careTask;
 			}
 		}
 		
-		Log.d(JHConstants.LOG_TAG, notification.toString());
-		
-		return notification;
+		return null;
 	}
 	
 	
