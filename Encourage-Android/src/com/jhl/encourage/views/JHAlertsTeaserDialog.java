@@ -84,28 +84,17 @@ public class JHAlertsTeaserDialog extends Dialog {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Notification n = alerts.get(position);
-			JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_ALERT, n.getId());
 			
-			try{
-			    Intent i = new Intent(context, JHAlertListActivity.class);
-			    context.startActivity(i);
-			    cancel();
-			    }
-			    catch(Exception ex)
-			    {
-			        Log.e("main",ex.toString());
-			    }
-			
+			invokeMarkAlertReadApi(n.getId());			
 		}
 	}
 	
-public void invokeMarkAlertReadApi(String token, final String alertkey) {
+public void invokeMarkAlertReadApi(final String alertkey) {
     	
     	RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
     	MarkAlertReadService service = restAdapter.create(MarkAlertReadService.class);
 
-		Log.d(JHConstants.LOG_TAG, "token "+token);
 		Log.d(JHConstants.LOG_TAG, "alertkey "+alertkey);
 		
 		String timeZone = JHUtility.getTimeZoneString();
@@ -113,7 +102,7 @@ public void invokeMarkAlertReadApi(String token, final String alertkey) {
 		String longitude = "";
 		String latitude = "";
 		
-		service.updateAlertRead("updateUnreadAlertStatus", token, alertkey,timeZone, dateTime, longitude, latitude, 
+		service.updateAlertRead("updateUnreadAlertStatus", JHAppStateVariables.getLoginTocken(), alertkey,timeZone, dateTime, longitude, latitude, 
 				new Callback<SpocResponse>() {
 					@Override
 					public void success(SpocResponse spocResponse,	Response response) {
@@ -124,9 +113,9 @@ public void invokeMarkAlertReadApi(String token, final String alertkey) {
 								String success = map.get("success");
 								if(success.equalsIgnoreCase("true")){
 									System.out.println("success");
-									JHAppStateVariables.removeAlert(alertkey);
-									Intent intent = new Intent(context, JHTimelineActivity.class);
-									context.startActivity(intent);
+									JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_ALERT, alertkey);
+									Intent i = new Intent(context, JHAlertListActivity.class);
+									context.startActivity(i);
 									cancel();
 								}else{
 									System.out.println("error");

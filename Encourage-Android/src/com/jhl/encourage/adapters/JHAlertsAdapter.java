@@ -79,4 +79,8 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 	 
 	  }
 	
+	@Override
+	public int getCount() {
+		return alerts.size();
+	}
 }

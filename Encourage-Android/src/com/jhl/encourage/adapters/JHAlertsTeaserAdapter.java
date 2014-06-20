@@ -76,4 +76,10 @@ public class JHAlertsTeaserAdapter extends ArrayAdapter<Notification> {
 	 
 	  }
 	
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return alerts.size();
+	}
+	
 }

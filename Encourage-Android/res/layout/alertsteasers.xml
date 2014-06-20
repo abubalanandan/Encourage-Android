@@ -9,24 +9,20 @@
         android:layout_height="wrap_content"
         android:src="@drawable/page_bg" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/alertBackgroundImageView"
-        android:layout_alignLeft="@+id/alertBackgroundImageView"
-        android:layout_alignRight="@+id/alertBackgroundImageView"
-        android:layout_alignTop="@+id/alertBackgroundImageView" 
-        android:layout_above="@+id/buttonView"
-        android:padding="15dp">
+    
 
         <ListView
             android:id="@+id/alertTeaserList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent" 
+             android:layout_alignBottom="@+id/alertBackgroundImageView"
+        android:layout_alignLeft="@+id/alertBackgroundImageView"
+        android:layout_alignRight="@+id/alertBackgroundImageView"
+        android:layout_alignTop="@+id/alertBackgroundImageView" 
+        android:layout_above="@+id/buttonView">
         </ListView>
 
-    </ScrollView>
+   
 
     <RelativeLayout
         android:id="@+id/buttonView"

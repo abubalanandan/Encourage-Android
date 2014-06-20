@@ -126,8 +126,8 @@ public class JHAppStateVariables {
 		}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {
 			oldList = careTasks;
 		}
-		for (Notification n : oldList){
-			if ( n.getReadStatus().equals(JHConstants.NOT_STATUS_UNREAD)) {
+		for (Notification n : oldList){ // care tasks does not have a read status
+			if ( n.getReadStatus() == null || n.getReadStatus().equals(JHConstants.NOT_STATUS_UNREAD)) {
 				newList.add(n);
 			}
 		}

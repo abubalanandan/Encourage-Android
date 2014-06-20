@@ -25,6 +25,8 @@ import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.views.JHAlertsTeaserDialog;
+import com.jhl.encourage.views.JHCareTasksDialog;
 
 public class JHTimelineActivity extends Activity {
 
@@ -71,28 +73,21 @@ public class JHTimelineActivity extends Activity {
 	class AlertClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
-			try{
-			    Intent i = new Intent(JHTimelineActivity.this, JHAlertListActivity.class);
-			    startActivity(i);
-			    }
-			    catch(Exception ex)
-			    {
-			        Log.e("main",ex.toString());
-			    }
+			if(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT) > 0 ) { 
+				JHAlertsTeaserDialog dialog = new JHAlertsTeaserDialog(JHTimelineActivity.this);
+				dialog.show();
+			}
 		}
 	}
 	
 	class CTClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
-			try{
-			    Intent i = new Intent(JHTimelineActivity.this, JHCareTaskListActivity.class);
-			    startActivity(i);
-			    }
-			    catch(Exception ex)
-			    {
-			        Log.e("main",ex.toString());
-			    }
+			if(JHAppStateVariables.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK) > 0 ) { 
+				JHCareTasksDialog dialog = new JHCareTasksDialog(JHTimelineActivity.this);
+				dialog.show();
+			}
+			
 		}
 	}
 
@@ -197,82 +192,6 @@ public class JHTimelineActivity extends Activity {
 	
 	
 	
-//	class AlertPollTask extends AsyncTask<String, Integer, Boolean> {
-//		@Override
-//		protected void onPreExecute() {
-//			
-//			super.onPreExecute();
-//		}
-//
-//		@Override
-//		protected void onPostExecute(Boolean result) {
-//			invokeLoginApi(email, pswd, regId);
-//		}
-//
-//		@Override
-//		protected Boolean doInBackground(String... params) {
-//			String msg = "";
-//            GoogleCloudMessaging gcm = null;
-//    		String PROJECT_NUMBER = "291052764949";
-//    		boolean retVal = false;
-//            try {
-//                if (gcm == null) {
-//                    gcm = GoogleCloudMessaging.getInstance(JHLoginActivity.this);
-//                }
-//                regId = gcm.register(PROJECT_NUMBER);
-//                msg = "Device registered, registration ID=" + regId;
-//               
-//                retVal = true;
-//            } catch (IOException ex) {
-//                msg = "Error :" + ex.getMessage();
-//                retVal = false;
-//
-//            }
-//            
-//            Log.i(JHConstants.LOG_TAG,  msg);
-//            
-//            return retVal;
-//		}
-//	}
-	
-//	public void invokeAlertApi(String token) {
-//
-//		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
-//
-//		AlertClicked service = restAdapter.create(AlertClicked.class);
-//		String timeZone = JHUtility.getTimeZoneString();
-//		String dateTime = JHUtility.getDateTime();
-//		service.loginUser("getUnreadAlerts", token, timeZone,dateTime, 
-//				new Callback<SpocResponse>() {
-//					@Override
-//					public void success(SpocResponse spocResponse,	Response response) {
-//						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
-//						for (SpocObject spocObject : responseList) {
-//							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
-//								HashMap<String, String> map = spocObject.getMap();
-//								String success = map.get("success");
-//								if(success.equalsIgnoreCase("true")){
-//									System.out.println("success");
-//									String loginTocken = map.get("token");
-//									Log.d(JHConstants.LOG_TAG, "loginTocken  " +loginTocken);
-//									JHAppStateVariables.setLoginTocken(loginTocken);
-//									Intent intent = new Intent(JHLoginActivity.this, JHTimelineActivity.class);
-//									startActivity(intent);
-//								}else{
-//									System.out.println("error");
-//									JHUtility.showDialogOk("",getString(R.string.login_failed), JHLoginActivity.this);	
-//								}
-//								
-//							}
-//						}
-//					}
-//
-//					@Override
-//					public void failure(RetrofitError retrofitError) {
-//						System.out.println("error");
-//					}
-//				});
 
-	//}
 	
 }

@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.jhl.encourage.utilities.JHConstants;
+
+import android.util.Log;
+
 public class Notification implements Comparable<Notification>{
 	
 	protected String notificationType;
@@ -58,6 +62,12 @@ public class Notification implements Comparable<Notification>{
 	public boolean equals(Object o) {
 		if(o instanceof Notification){
 			Notification n = (Notification)o;
+			
+			Log.d(JHConstants.LOG_TAG, "equals id "+id);
+			Log.d(JHConstants.LOG_TAG, "equals n.getId() "+n.getId());
+			Log.d(JHConstants.LOG_TAG, "equals notificationType "+notificationType);
+			Log.d(JHConstants.LOG_TAG, "equals n.getNotificationType() "+n.getNotificationType());
+			
 			if(id.equals(n.getId()) && notificationType.equals(n.getNotificationType())){
 				return true;
 			}

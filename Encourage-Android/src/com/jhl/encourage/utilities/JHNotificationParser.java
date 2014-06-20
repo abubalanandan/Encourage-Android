@@ -64,6 +64,7 @@ public class JHNotificationParser {
 			if(type.equals(JHConstants.NOT_TYPE_ALERT)){
 				alert = new Alert();
 				alert.setId(entryMap.get(JHConstants.NOT_XML_KEY_ALERT_KEY));
+				alert.setNotificationType(entryMap.get(JHConstants.NOT_XML_KEY_TYPE));
 				alert.setAuthorName(entryMap.get(JHConstants.NOT_XML_KEY_AUTHOR_NAME));
 				alert.setContenType(entryMap.get(JHConstants.NOT_XML_KEY_CONTENT_TYPE));
 				alert.setDateTime(entryMap.get(JHConstants.NOT_XML_KEY_DATE_TIME));
@@ -81,6 +82,7 @@ public class JHNotificationParser {
 				
 				careTask = new CareTask();
 				careTask.setId(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_KEY));
+				careTask.setNotificationType(entryMap.get(JHConstants.NOT_XML_KEY_TYPE));
 				careTask.setCareTaskType(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_TYPE));
 				careTask.setDateTime(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_DATE_TIME));
 				careTask.setProviderName(entryMap.get(JHConstants.NOT_XML_KEY_PRPVIDER_NAE));
