@@ -161,6 +161,7 @@ public class JHAppStateVariables {
 		
 	}
 	
+	
 	private static String contactListString = "";
 	
 	public static void setContactsListString(String list) {

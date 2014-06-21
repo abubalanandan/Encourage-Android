@@ -33,6 +33,7 @@ public class JHTimelineActivity extends Activity {
 	private ListView timelineView;
 	private JHTimelineAdapter adapter;
 	private ArrayList<String> list = new ArrayList<>(3);
+	private int lastCount=0;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class JHTimelineActivity extends Activity {
 		list.add("");
 		list.add("http://image.eurotuner.com/f/featuredvehicles/8307328/eurp_0802_16_z%2B1975_bmw_530i%2Btop_view.jpg");
 		initViews();
+		invokeTimelineDetailsApi("", "2014-06-22 01:07:18", "Asia/Kolkata");
 		}
 
 //	private void initViews() {
@@ -127,6 +129,7 @@ public class JHTimelineActivity extends Activity {
 		
 		JHAppStateVariables.timeLineActivity = this;
 		
+		
 	}
 	
 	
@@ -136,8 +139,8 @@ public class JHTimelineActivity extends Activity {
 
 		TimeLineService service = EncourageApplication.getRestAdapter().create(
 				TimeLineService.class);
-		String token = null;
-
+		String token = JHAppStateVariables.getLoginTocken();
+		
 		service.getTimeLineDetails("getTimelineDetails", token, careTargetId,
 				dateTime, timeZone, new Callback<SpocResponse>() {
 					@Override
@@ -160,6 +163,14 @@ public class JHTimelineActivity extends Activity {
 
 								}
 
+							}else if (spocObject.getResultTypeCode().equalsIgnoreCase("READONLY_FORM")){
+								HashMap<String, String> map = spocObject.getMap();
+								if(map.containsKey("lastcount")){
+									lastCount =Integer.parseInt(map.get("lastcount"));
+								}else{
+									
+									
+								}
 							}
 						}
 
@@ -190,7 +201,10 @@ public class JHTimelineActivity extends Activity {
 		}
 	}
 	
-	
+	@Override
+	public void onBackPressed(){
+		//Disabled back button action
+	}
 	
 
 	

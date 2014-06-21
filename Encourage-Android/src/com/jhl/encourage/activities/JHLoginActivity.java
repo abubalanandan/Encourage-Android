@@ -144,7 +144,7 @@ public class JHLoginActivity extends Activity {
 								if(success.equalsIgnoreCase("true")){
 									System.out.println("success");
 									String loginTocken = map.get("token");
-									Log.d(JHConstants.LOG_TAG, "loginTocken  " +loginTocken);
+									Log.d(JHConstants.LOG_TAG, "loginToken  " +loginTocken);
 									JHAppStateVariables.setLoginTocken(loginTocken);
 									loginSpinner.setVisibility(View.GONE);
 									Intent intent = new Intent(JHLoginActivity.this, JHTimelineActivity.class);
