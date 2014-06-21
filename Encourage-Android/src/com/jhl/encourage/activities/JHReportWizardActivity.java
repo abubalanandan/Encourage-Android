@@ -60,7 +60,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private JHReportWizardSicknessFragment sickFragment;
 	private JHReportWizardEmotionalFragment emoFragment;
 	private JHReportWizardImageFragment imageFragment;
-	private JHReportWizardVideoFragment videoFragment;
+	//private JHReportWizardVideoFragment videoFragment;
 	private JHReportWizardMapFragment mapFragment;
 	
 	List<Fragment> fragments = null;
@@ -160,13 +160,13 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		sickFragment = new JHReportWizardSicknessFragment();
 		emoFragment = new JHReportWizardEmotionalFragment();
 		imageFragment = new JHReportWizardImageFragment();
-		videoFragment = new JHReportWizardVideoFragment();
+		//videoFragment = new JHReportWizardVideoFragment();
 		mapFragment = new JHReportWizardMapFragment();
 		
 		fragments.add(sickFragment);
 		fragments.add(emoFragment);
 		fragments.add(imageFragment);
-		fragments.add(videoFragment);
+		//fragments.add(videoFragment);
 		fragments.add(mapFragment);
 
 		this.mPagerAdapter = new JHReportWizardPageAdapter(
@@ -201,10 +201,10 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				(tabInfo = new TabInfo("Image",
 						JHReportWizardImageFragment.class, args)));
 		this.mapTabInfo.put(tabInfo.tag, tabInfo);
-		JHReportWizardActivity.addTab(this, this.mTabHost, this.mTabHost
-				.newTabSpec("Tab4").setIndicator("Video"),
-				(tabInfo = new TabInfo("Video",
-						JHReportWizardVideoFragment.class, args)));
+//		JHReportWizardActivity.addTab(this, this.mTabHost, this.mTabHost
+//				.newTabSpec("Tab4").setIndicator("Video"),
+//				(tabInfo = new TabInfo("Video",
+//						JHReportWizardVideoFragment.class, args)));
 		this.mapTabInfo.put(tabInfo.tag, tabInfo);
 		JHReportWizardActivity.addTab(this, this.mTabHost, this.mTabHost
 				.newTabSpec("Tab5").setIndicator("Map"),
@@ -302,11 +302,9 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			fragment = imageFragment;			
 			break;
 		case 3:
-			fragment = videoFragment;			
+			fragment = mapFragment;			
 			break;
-		case 4:
-			fragment = mapFragment;
-			break;
+		
 		}
 		return fragment;
 		
@@ -417,8 +415,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			imageUpload(apiCaller, date, name);
 			break;
 		case 3:
-			break;
-		case 4:	
+			
 			apiCaller.invokeMapApi(mapFragment.getDate(), mapFragment.getName(),mapFragment.getAddress(), mapFragment.getDescription(), cboxCareCircle.isChecked(), fragment.getContact());
 			break;
 		default:
