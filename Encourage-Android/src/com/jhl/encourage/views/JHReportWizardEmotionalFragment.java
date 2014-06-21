@@ -1,5 +1,9 @@
 package com.jhl.encourage.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
 import com.jhl.encourage.model.Contact;
@@ -81,7 +85,22 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 	}
 	
 	public String getEmoDate(){
-		return emoDate.getText().toString();
+
+
+			String dateString = emoDate.getText().toString();
+			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			try {
+				Date date = formatter.parse(dateString);
+				formatter = new SimpleDateFormat("yyyy-MM-dd");
+				dateString = formatter.format(date);
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return	dateString;
+		
+		
 	}
 	
 	public String getEmoDesc(){

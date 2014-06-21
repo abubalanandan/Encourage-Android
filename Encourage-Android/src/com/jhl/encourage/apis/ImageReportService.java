@@ -32,7 +32,7 @@ public interface ImageReportService {
     		@Field("timezone") String timezone,
     		@Field("token") String token,
     		@Field("doaction") String doaction,
-    		@Field("upload_files") String upload_files,
+    		@Field("blob_upload_file") String blob_upload_file,
     		Callback<SpocResponse> callback);
 
 }

@@ -1,5 +1,9 @@
 package com.jhl.encourage.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.jhl.encourage.R;
 import com.jhl.encourage.activities.JHRegistrationActivity;
 import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
@@ -88,7 +92,19 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 	}
 	
 	public String getSickDate(){
-		return sickDate.getText().toString();
+		String dateString = sickDate.getText().toString();
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		try {
+			Date date = formatter.parse(dateString);
+			formatter = new SimpleDateFormat("yyyy-MM-dd");
+			dateString = formatter.format(date);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return	dateString;
+		
 	}
 	
 	public String getSickDesc(){

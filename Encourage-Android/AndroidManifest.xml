@@ -25,6 +25,8 @@
     </permission>
 
     <uses-permission android:name="com.jhl.encourage.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name=".EncourageApplication"
@@ -39,7 +41,11 @@
             android:name="com.jhl.encourage.activities.JHLoginActivity"
             android:screenOrientation="portrait" >
             
-           
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.jhl.encourage.activities.JHRegistrationActivity"
@@ -48,11 +54,7 @@
         <activity
             android:name="com.jhl.encourage.activities.JHTimelineActivity"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+           
              
         </activity>
         <activity
