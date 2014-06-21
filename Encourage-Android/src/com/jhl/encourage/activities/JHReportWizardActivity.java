@@ -599,4 +599,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		 }
 	};
 	
+	public void rwCloseButtonPressed(View view){
+		finish();
+	}
+	
 }
