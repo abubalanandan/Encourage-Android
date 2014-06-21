@@ -1,9 +1,13 @@
 package com.jhl.encourage.adapters;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +16,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.jhl.encourage.R;
 import com.jhl.encourage.imageloader.JHImageLoader;
+import com.jhl.encourage.model.TimeLineItem;
 import com.jhl.encourage.views.JHTimelineItemView;
 
 public class JHTimelineAdapter extends BaseAdapter {
@@ -27,11 +34,11 @@ public class JHTimelineAdapter extends BaseAdapter {
 	private TextView fishCountField;
 	public Boolean needLoadMoreMsg;
 	private TextView msgField;
-	private ArrayList<String> msgList;
+	private ArrayList<TimeLineItem> msgList;
 	private GoogleMap map;
 	private JHImageLoader imageLoader;
 
-	public JHTimelineAdapter(Context context, ArrayList<String> list,
+	public JHTimelineAdapter(Context context, ArrayList<TimeLineItem> list,
 			Boolean needLoadMore) {
 
 		this.ctx = context;
@@ -43,8 +50,8 @@ public class JHTimelineAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 
-		if (needLoadMoreMsg || msgList.isEmpty())
-			return msgList.size() + 1;
+//		if (needLoadMoreMsg || msgList.isEmpty())
+//			return msgList.size() + 1;
 
 		return msgList.size();
 	}
@@ -70,20 +77,27 @@ public class JHTimelineAdapter extends BaseAdapter {
 		}
 		LinearLayout postLL = (LinearLayout) convertView
 				.findViewById(R.id.postLL);
-		postLL.removeAllViews();
-		if (position == 4) {
-			for (int i = 0; i < position; i++) {
-				LayoutParams params = new LayoutParams(
-						RelativeLayout.LayoutParams.WRAP_CONTENT,
-						RelativeLayout.LayoutParams.WRAP_CONTENT);
-				JHTimelineItemView itemView = new JHTimelineItemView(ctx);
-				itemView.setLayoutParams(params);
-				postLL.addView(itemView);
-			}
-		}  else {
+		TableLayout postDetailsTL = (TableLayout)convertView.findViewById(R.id.postDetailsTL);
+		//postLL.removeAllViews();
+		int count = postLL.getChildCount();
+		postLL.removeViews(1, count-1);
+		
+		if(msgList.get(position).getDatatype().equalsIgnoreCase("image")){
+			DisplayMetrics metrics = ctx.getResources().getDisplayMetrics();	
+			int width = metrics.widthPixels;
+			LayoutParams params = new LayoutParams(width, width);
 
-		//	int width = postLL.getLayoutParams().width;
-			
+			ImageView imageView = new ImageView(ctx);
+			imageView.setLayoutParams(params);
+			postLL.addView(imageView);
+
+		//	 imageView.setBackgroundColor(ctx.getResources().getColor(android.R.color.darker_gray));
+				Log.i("IMAGE_URL",msgList.get(position).getFilename());
+
+			imageLoader.DisplayImage(msgList.get(position).getFilename(), imageView);
+		}else if(msgList.get(position).getDatatype().equalsIgnoreCase("map")){
+			String mapURL = "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=1080x1920&markers=size:mid|color:red|" + msgList.get(position).getEventAddress();
+			Log.i("MAP!!!!!",mapURL);
 			DisplayMetrics metrics = ctx.getResources().getDisplayMetrics();	
 			int width = metrics.widthPixels;
 			LayoutParams params = new LayoutParams(width, width);
@@ -93,9 +107,39 @@ public class JHTimelineAdapter extends BaseAdapter {
 			postLL.addView(imageView);
 
 			// imageView.setBackgroundColor(ctx.getResources().getColor(android.R.color.darker_gray));
-			imageLoader.DisplayImage(msgList.get(position), imageView);
+			imageLoader.DisplayImage(mapURL, imageView);
 
 		}
+		
+		Iterator iterator = msgList.get(position).getDetails().entrySet().iterator();
+		postDetailsTL.removeAllViews();
+		while(iterator.hasNext()){
+			Map.Entry<String, String> pairs = (Map.Entry<String, String>)iterator.next();
+			TableRow.LayoutParams params = new TableRow.LayoutParams(
+					TableRow.LayoutParams.MATCH_PARENT,
+					TableRow.LayoutParams.WRAP_CONTENT);
+//			JHTimelineItemView itemView = new JHTimelineItemView(ctx);
+//			itemView.setLayoutParams(params);
+//			itemView.getKeyTV().setText(pairs.getKey());
+//			itemView.getValueTV().setText(pairs.getValue());
+//			postLL.addView(itemView);
+			
+			TableRow row = new TableRow(ctx);
+			row.setLayoutParams(params);
+			TextView keyTV = new TextView(ctx);
+			TextView valueTV = new TextView(ctx);
+			row.addView(keyTV);
+			row.addView(valueTV);
+			keyTV.setText(pairs.getKey());
+			valueTV.setText(pairs.getValue());
+			
+			postDetailsTL.addView(row);
+			
+	}
+		
+		
+		
+		
 
 		return convertView;
 	}

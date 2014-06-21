@@ -21,15 +21,15 @@ public class JHTimelineItemView extends RelativeLayout{
 		LayoutInflater li;
 		li = (LayoutInflater) context.getSystemService(infService);
 		li.inflate(R.layout.timeline_item, this, true);
-		initViews();
+		//initViews();
 	}
 	
-	private void initViews(){
-		keyTV = (TextView)findViewById(R.id.keyTV);
-		valueTV = (TextView)findViewById(R.id.valueTV);
-		
-		
-	}
+//	private void initViews(){
+//		keyTV = (TextView)findViewById(R.id.keyTV);
+//		valueTV = (TextView)findViewById(R.id.valueTV);
+//		
+//		
+//	}
 
 	public TextView getKeyTV() {
 		return keyTV;

@@ -17,6 +17,7 @@ public interface TimeLineService {
 			@Field("careTargetid") String careTargetId,
 			@Field("datetime") String dateTime, 
 			@Field("timezone") String timeZone, 
+			@Field("lastcount") int lastCount,
 			Callback<SpocResponse> callback);
 }
 

@@ -1,15 +1,17 @@
 package com.jhl.encourage;
 
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import retrofit.RestAdapter;
+import retrofit.android.MainThreadExecutor;
 import android.app.Application;
+import android.text.Html;
+import android.util.Log;
 
 import com.jhl.encourage.apis.SimpleXMLConverter;
 import com.jhl.encourage.model.JHUser;
-import retrofit.android.MainThreadExecutor;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class EncourageApplication extends Application {
 
@@ -34,6 +36,7 @@ public class EncourageApplication extends Application {
         restAdapter = new RestAdapter.Builder().setEndpoint("https://tryencourage.com/hwdsi")
                 .setConverter(new SimpleXMLConverter())
                 .setExecutors(executor, new MainThreadExecutor()).build();
+        
 	}
 
 	
