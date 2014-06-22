@@ -81,7 +81,7 @@ public class JHAppStateVariables {
 	
 	public static int getUnreadNotificationCount(String type){
 		List<Notification> oldList = null;
-		List<Notification> newList = new ArrayList<>();
+		List<Notification> newList = new ArrayList<Notification>();
 		if (type.equals(JHConstants.NOT_TYPE_ALERT)){
 			oldList = alerts;
 		}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {
@@ -120,7 +120,7 @@ public class JHAppStateVariables {
 	
 	public static List<Notification> getUnreadNotifications(String type){
 		List<Notification> oldList = null;
-		List<Notification> newList = new ArrayList<>();
+		List<Notification> newList = new ArrayList<Notification>();
 		if (type.equals(JHConstants.NOT_TYPE_ALERT)){
 			oldList = alerts;
 		}else if (type.equals(JHConstants.NOT_TYPE_CARE_TASK)) {

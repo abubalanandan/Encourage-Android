@@ -32,7 +32,7 @@ public class JHTimelineActivity extends Activity {
 
 	private ListView timelineView;
 	private JHTimelineAdapter adapter;
-	private ArrayList<String> list = new ArrayList<>(3);
+	private ArrayList<String> list = new ArrayList<String>(3);
 	private int lastCount=0;
 	
 	protected void onCreate(Bundle savedInstanceState) {

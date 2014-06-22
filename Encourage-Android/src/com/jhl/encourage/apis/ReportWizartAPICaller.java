@@ -190,7 +190,7 @@ public class ReportWizartAPICaller {
 		
 			String upload_files = "{\"blob_upload_file\":{\"dtl_file_actualname\":{\"dtl_file_actualname\":\"" +uploadedfileName+ "\",\"data_type\":\"documentactualname\"},\"dtl_file_name\":{\"dtl_file_name\":\"download\",\"data_type\":\"filename\"},\"dtl_file_type\":{\"dtl_file_type\":\"image\\/jpeg\",\"data_type\":\"documenttype\"},\"text_file_description\":{\"data_type\":\"description\"},\"dtl_file_author\":{\"data_type\":\"authorname\"},\"dtl_file_category\":{\"data_type\":\"category\"},\"blob_upload_file\":\"" +uploadedfileName+ "\"}}";
 			
-			Map<String, String> parameters = new HashMap<>();
+			Map<String, String> parameters = new HashMap<String, String>();
 	
 			parameters.put("operationName","getSelfReportedImage");
 			parameters.put("dtl_rwzimge_date[dtl_rwzimge_date]",date);

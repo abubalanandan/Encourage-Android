@@ -45,6 +45,7 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 		
 		for(int i = 0; i< imageIDs.length; i++ ){
 			button = new ReportButton(getButtonImageView(imageIDs[i]), sickenesses[i], JHConstants.BUTTON_UNSELECTED, i);
+
 			buttons.add(button);
 			
 		}
@@ -54,11 +55,12 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 	private ImageView getButtonImageView (int imageId) {
 		ImageView imageView = new ImageView(context);
 		imageView.setLayoutParams(new
-		        GridView.LayoutParams(140, 140));
+		        GridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		        imageView.setScaleType(
 		        ImageView.ScaleType.CENTER_CROP);
 		        imageView.setPadding(20, 20, 20, 20);
 		imageView.setImageResource(imageId);
+        imageView.setBackground(null);
 		imageView.setOnClickListener(new ButtonClickListener());       
 		return imageView;
 	}
@@ -80,6 +82,7 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ReportButton button = buttons.get(position);
 		ImageView imageView = button.getImageView();
+
         return imageView;
 	}
 	

@@ -13,6 +13,7 @@ import com.jhl.encourage.utilities.JHUtility;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,7 +34,10 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.sicknessreport, container, false);
 		GridView gridView = (GridView) v.findViewById(R.id.sicknessgrid);
+//        gridView.setBackground(getResources().getDrawable(R.drawable.page_bg));
+//        gridView.setBackgroundResource(R.drawable.page_bg);
 		gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
+
 		
 //		TextView contactList = (TextView)v.findViewById(R.id.contactsList);
 //		contactList.setText(JHAppStateVariables.getContactsListString());

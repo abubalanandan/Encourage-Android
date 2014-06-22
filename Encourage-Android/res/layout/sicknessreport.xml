@@ -7,13 +7,18 @@
     <RelativeLayout
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/page_bg"
+        android:layout_above="@+id/textview">
 
         <GridView
             android:id="@+id/sicknessgrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:numColumns="3" >
+            android:numColumns="3"
+            android:gravity="center"
+            android:background="#13294d">
+
         </GridView>
 
     </RelativeLayout>
@@ -22,7 +27,7 @@
         android:id="@+id/textview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_below="@+id/gridView"
+        android:layout_alignParentBottom="true"
         >
 
         <LinearLayout

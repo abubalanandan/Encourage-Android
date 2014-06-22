@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.adapters.JHEmotonalButtonsAdapter;
 import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
 import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHUtility;
@@ -30,7 +31,8 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.emotionalsreport, container, false);
 		GridView gridView = (GridView) v.findViewById(R.id.emotionalgrid);
-		gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
+       // gridView.setBackground(getResources().getDrawable(R.drawable.page_bg));
+		gridView.setAdapter(new JHEmotonalButtonsAdapter(v.getContext()));
 		initViews(v);
 		contact = new Contact();
 		return v;

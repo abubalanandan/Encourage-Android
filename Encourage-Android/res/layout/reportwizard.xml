@@ -72,7 +72,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/footerView"
-        android:layout_below="@+id/headerView" >
+        android:layout_below="@+id/headerView"
+        android:background="@null">
         
         <LinearLayout
             android:orientation="vertical"
@@ -112,17 +113,19 @@
         android:id="@+id/contactview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/footerView"
         android:layout_alignParentLeft="true" 
-        android:layout_alignParentBottom="true" 
-        android:layout_below="@+id/textview"
+        android:layout_alignParentBottom="true"
         >
+
 
         <ImageView
             android:id="@+id/contactBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/top_header" />
+            android:src="@drawable/top_header"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/contactsList"
