@@ -44,7 +44,7 @@
                 android:orientation="horizontal"
                 android:padding="5dp" >
 
-                <RelativeLayout
+               <!--  <RelativeLayout
                     android:id="@+id/emailButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                         android:layout_marginRight="7dp"
                         android:text="7"
                         android:textStyle="bold" />
-                </RelativeLayout>
+                </RelativeLayout> -->
 
                 <RelativeLayout
                     android:id="@+id/alertButton"
