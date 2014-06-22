@@ -1,8 +1,12 @@
 package com.jhl.encourage.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
-public class TimeLineItem {
+public class TimeLineItem implements Comparable<TimeLineItem>{
 
 	private String timelineDate;
 	private String filename;
@@ -12,7 +16,12 @@ public class TimeLineItem {
 	private String title;
 	private String datatype;
 	private String eventAddress;
+	private Date date;
 
+	public Date getDate(){
+		return date;
+	}
+	
 	public String getEventAddress() {
 		return eventAddress;
 	}
@@ -29,7 +38,12 @@ public class TimeLineItem {
 
 	public void setTimelineDate(String timelineDate) {
 		this.timelineDate = timelineDate;
-	}
+		try {
+			this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(this.timelineDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	}
 
 	public String getFilename() {
 		return filename;
@@ -100,4 +114,28 @@ public class TimeLineItem {
 			}
 		}
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof TimeLineItem){
+			TimeLineItem item = (TimeLineItem)o;
+			
+		
+			if(timelineid.equalsIgnoreCase(item.getTimelineid()) ){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public int compareTo(TimeLineItem another) {
+		return this.date.compareTo(another.getDate());
+	}
+
+	@Override
+	public int hashCode() {
+		return Integer.parseInt(this.timelineid);
+	}
+
 }

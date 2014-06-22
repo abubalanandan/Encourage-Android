@@ -17,7 +17,17 @@ public interface TimeLineService {
 			@Field("careTargetid") String careTargetId,
 			@Field("datetime") String dateTime, 
 			@Field("timezone") String timeZone, 
-			@Field("lastcount") int lastCount,
+			Callback<SpocResponse> callback);
+    
+    @FormUrlEncoded
+    @POST("/hwservice/getTimelineDetails.php")
+	void getAdditionalTimeLineDetails(
+			@Field("operationName") String operationName,
+			@Field("token") String token,
+			@Field("careTargetid") String careTargetId,
+			@Field("datetime") String dateTime, 
+			@Field("timezone") String timeZone, 
+			@Field("start") int start,
 			Callback<SpocResponse> callback);
 }
 
