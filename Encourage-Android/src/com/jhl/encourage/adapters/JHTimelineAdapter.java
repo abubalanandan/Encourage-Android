@@ -20,6 +20,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.internal.co;
 import com.google.android.gms.maps.GoogleMap;
 import com.jhl.encourage.R;
 import com.jhl.encourage.imageloader.JHImageLoader;
@@ -75,6 +76,16 @@ public class JHTimelineAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(ctx).inflate(
 					R.layout.timeline_cell, parent, false);
 		}
+		
+		
+		TextView dateTV = (TextView)convertView.findViewById(R.id.dateAndTimeTV);
+		TextView typeTV = (TextView)convertView.findViewById(R.id.typeTV);
+		TextView profileNameTV = (TextView)convertView.findViewById(R.id.profileNameTV);
+		
+		dateTV.setText(msgList.get(position).getTimelineDate());
+		typeTV.setText(msgList.get(position).getType());
+		profileNameTV.setText(msgList.get(position).getPerson());
+		
 		LinearLayout postLL = (LinearLayout) convertView
 				.findViewById(R.id.postLL);
 		TableLayout postDetailsTL = (TableLayout)convertView.findViewById(R.id.postDetailsTL);

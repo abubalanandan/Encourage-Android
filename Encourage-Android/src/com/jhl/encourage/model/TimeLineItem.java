@@ -15,6 +15,16 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 	private String person;
 	private String title;
 	private String datatype;
+	private String type;
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	private String eventAddress;
 	private Date date;
 

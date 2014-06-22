@@ -234,6 +234,7 @@ public class JHTimelineActivity extends Activity {
 										TimeLineItem item = new TimeLineItem();
 										Log.e("crash", "CRASHHHHHHH");
 										Log.e("crash", map.toString());
+										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
 											item.setDatatype("map");
 											item.setEventAddress(map
@@ -327,6 +328,7 @@ public class JHTimelineActivity extends Activity {
 										TimeLineItem item = new TimeLineItem();
 										Log.e("crash", "CRASHHHHHHH");
 										Log.e("crash", map.toString());
+										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
 											item.setDatatype("map");
 											item.setEventAddress(map
