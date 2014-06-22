@@ -4,41 +4,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
-
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.opengl.Visibility;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
-
 import com.jhl.encourage.apis.LoginService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
-import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
-import com.jhl.encourage.utilities.JHNotificationParser;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHLoginActivity extends Activity {
 
 	private EditText emailField;
 	private EditText passwordField;
-	private ProgressBar loginSpinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +48,11 @@ public class JHLoginActivity extends Activity {
 	private void initViews() {
 		emailField = (EditText) findViewById(R.id.usernameField);
 		passwordField = (EditText) findViewById(R.id.passwordField);	
-		loginSpinner = (ProgressBar) findViewById(R.id.loginSpinner);
-		loginSpinner.setVisibility(View.GONE);
 	}
 
 	public void loginButtonClicked(View view) {
 
-		loginSpinner.setVisibility(View.VISIBLE);
-		
+		JHUtility.showProgressDialog("Logging in ...", this);		
 		validateFields();
 
 	}
@@ -146,13 +140,13 @@ public class JHLoginActivity extends Activity {
 									String loginTocken = map.get("token");
 									Log.d(JHConstants.LOG_TAG, "loginToken  " +loginTocken);
 									JHAppStateVariables.setLoginTocken(loginTocken);
-									loginSpinner.setVisibility(View.GONE);
+									JHUtility.dismissProgressDialog(JHLoginActivity.this);
 									Intent intent = new Intent(JHLoginActivity.this, JHTimelineActivity.class);
 									startActivity(intent);
 									finish();
 								}else{
 									System.out.println("error");
-									loginSpinner.setVisibility(View.GONE);
+									JHUtility.dismissProgressDialog(JHLoginActivity.this);
 									JHUtility.showDialogOk("",getString(R.string.login_failed), JHLoginActivity.this);	
 								}
 							}
@@ -162,6 +156,8 @@ public class JHLoginActivity extends Activity {
 					@Override
 					public void failure(RetrofitError retrofitError) {
 						System.out.println("error");
+						JHUtility.dismissProgressDialog(JHLoginActivity.this);
+
 					}
 				});
 		

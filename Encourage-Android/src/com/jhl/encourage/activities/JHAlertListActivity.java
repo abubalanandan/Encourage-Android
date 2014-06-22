@@ -40,15 +40,5 @@ public class JHAlertListActivity extends Activity {
     
     public void closeButtonPressed(View view){
     	finish();
-    	try{
-		    Intent i = new Intent(JHAlertListActivity.this, JHTimelineActivity.class);
-		    startActivity(i);
-		    
-		    }
-		    catch(Exception ex)
-		    {
-		        Log.e("main",ex.toString());
-		    }
-    }
-
+    	}
 }
