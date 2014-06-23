@@ -41,7 +41,7 @@ public class JHTimelineActivity extends Activity {
 
 	private ListView timelineView;
 	private JHTimelineAdapter adapter;
-	private ArrayList<TimeLineItem> list = new ArrayList<>(3);
+	private ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>(3);
 	private int lastCount = 0;
 	private int currentFirstVisibleItem=0;
 	private int currentVisibleItemCount=0;

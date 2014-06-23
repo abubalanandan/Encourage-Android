@@ -24,6 +24,8 @@ public class JHUtility {
 		new AlertDialog.Builder(activity).setTitle(title).setMessage(message)
 				.setPositiveButton("Ok", null).setCancelable(false).create()
 				.show();
+		
+		
 	}
 
 	public static void CopyStream(InputStream is, OutputStream os) {

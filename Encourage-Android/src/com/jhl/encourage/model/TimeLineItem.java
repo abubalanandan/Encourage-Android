@@ -140,7 +140,7 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 	
 	@Override
 	public int compareTo(TimeLineItem another) {
-		return this.date.compareTo(another.getDate());
+		return another.getDate().compareTo(this.date);
 	}
 
 	@Override
