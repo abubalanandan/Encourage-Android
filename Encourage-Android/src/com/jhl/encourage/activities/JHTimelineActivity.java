@@ -148,7 +148,7 @@ public class JHTimelineActivity extends Activity {
 			}
 
 			private void isScrollCompleted() {
-				if (JHTimelineActivity.this.currentFirstVisibleItem ==(list.size()-1)
+				if (JHTimelineActivity.this.currentFirstVisibleItem + JHTimelineActivity.this.currentVisibleItemCount==(list.size()-1)
 						&& JHTimelineActivity.this.currentScrollState == SCROLL_STATE_FLING) {
 					
 					if(timelineView.getFooterViewsCount()<=0){
