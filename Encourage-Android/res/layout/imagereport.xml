@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/page_bg" >
+    android:background="#13294d" >
 
     <RelativeLayout
         android:id="@+id/imageLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#13294d">
+        android:background="#13294d" >
 
         <ImageView
             android:id="@+id/imageHolder"
@@ -23,35 +23,32 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp" />
-
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/textsLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" 
-        android:layout_below="@+id/imageLayout">
+        android:layout_below="@+id/imageLayout"
+        android:orientation="vertical" >
 
         <EditText
             android:id="@+id/imageDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="Event Date" 
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner_text"
-            android:onClick="imageDatePressed">
+            android:editable="false"
+            android:onClick="imageDatePressed"
+            android:textColor="@android:color/primary_text_light" >
         </EditText>
 
         <EditText
             android:id="@+id/imageName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="Event Name" 
+            android:layout_height="60dp"
             android:background="@drawable/rounded_corner_text"
-            />
-
+            android:hint="Event Name"
+            android:textColor="@android:color/primary_text_light" />
     </LinearLayout>
 
     <RelativeLayout
@@ -67,6 +64,6 @@
             android:layout_height="wrap_content"
             android:onClick="imageButtonClicked"
             android:src="@android:drawable/btn_star" />
-    </RelativeLayout>   
-    
+    </RelativeLayout>
+
 </RelativeLayout>

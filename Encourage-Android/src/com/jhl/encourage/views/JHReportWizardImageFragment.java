@@ -54,31 +54,31 @@ public class JHReportWizardImageFragment extends Fragment implements JHReportFra
 		imageName = (TextView) v.findViewById(R.id.imageName);
 		imageDate.setText(JHUtility.getFormattedDate());
 		
-		imageName.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				imageName.requestFocusFromTouch();
-				return true;
-			}
-		});
-		
-		
-		imageName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String text = imageName.getText().toString().trim();
-				if (!hasFocus) {
-					if(text.length() == 0){
-						imageName.setText("Event Name");
-					}
-				}else{
-					if (text.equals("Event Name")){
-						imageName.setText("");
-					}
-				}
-			}
-		});
+//		imageName.setOnTouchListener(new View.OnTouchListener() {
+//			
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				imageName.requestFocusFromTouch();
+//				return true;
+//			}
+//		});
+//		
+//		
+//		imageName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//			@Override
+//			public void onFocusChange(View v, boolean hasFocus) {
+//				String text = imageName.getText().toString().trim();
+//				if (!hasFocus) {
+//					if(text.length() == 0){
+//						imageName.setText("Event Name");
+//					}
+//				}else{
+//					if (text.equals("Event Name")){
+//						imageName.setText("");
+//					}
+//				}
+//			}
+//		});
 		
 		
 

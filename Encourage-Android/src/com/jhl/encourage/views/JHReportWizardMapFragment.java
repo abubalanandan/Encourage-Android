@@ -40,94 +40,15 @@ public class JHReportWizardMapFragment extends Fragment implements JHReportFragm
 		
 		mapReportDateText.setText(JHUtility.getFormattedDate());
 		mapReportNameText = (TextView) v.findViewById(R.id.mapReportNameText);
-		mapReportNameText.setText("Event Name");
 		
-		mapReportNameText.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				mapReportNameText.requestFocusFromTouch();
-				return true;
-			}
-		});
-		
-		
-		mapReportNameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String text = mapReportNameText.getText().toString().trim();
-				if (!hasFocus) {
-					if(text.length() == 0){
-						mapReportNameText.setText("Event Name");
-					}
-				}else{
-					if (text.equals("Event Name")){
-						mapReportNameText.setText("");
-					}
-				}
-			}
-		});
-		
-		
+				
 		
 		mapReportAddressText = (TextView) v.findViewById(R.id.mapReportAddressText);
-		mapReportAddressText.setText("Event Address");
 		
-		mapReportAddressText.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				mapReportAddressText.requestFocusFromTouch();
-				return true;
-			}
-		});
-		
-		
-		mapReportAddressText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String text = mapReportAddressText.getText().toString().trim();
-				if (!hasFocus) {
-					if(text.length() == 0){
-						mapReportAddressText.setText("Event Address");
-					}
-				}else{
-					if (text.equals("Event Address")){
-						mapReportAddressText.setText("");
-					}
-				}
-			}
-		});
-		
+				
 		mapReportDescText = (TextView) v.findViewById(R.id.mapReportDescText);
-		mapReportDescText.setText("Event Description");
 		
-		mapReportDescText.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				mapReportDescText.requestFocusFromTouch();
-				return true;
-			}
-		});
-		
-		
-		mapReportDescText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String text = mapReportDescText.getText().toString().trim();
-				if (!hasFocus) {
-					if(text.length() == 0){
-						mapReportDescText.setText("Event Description");
-					}
-				}else{
-					if (text.equals("Event Description")){
-						mapReportDescText.setText("");
-					}
-				}
-			}
-		});
-		
+	
 	
 	}
 	

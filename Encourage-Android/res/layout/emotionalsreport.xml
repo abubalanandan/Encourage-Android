@@ -2,57 +2,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#13294d">
-    
+    android:background="#13294d" >
+
     <RelativeLayout
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textview">
+        android:layout_above="@+id/textview" >
 
         <GridView
             android:id="@+id/emotionalgrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="3"
+            android:background="@null"
             android:gravity="center"
-            android:background="@null">
+            android:numColumns="3" >
         </GridView>
-
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/textview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
             <EditText
                 android:id="@+id/emoDate"
                 android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/rounded_corner_text"
-                android:layout_height="wrap_content" 
-                android:onClick="emoDatePressed"/>
+                android:editable="false"
+                android:onClick="emoDatePressed"
+                android:textColor="@android:color/primary_text_light" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
             <EditText
                 android:id="@+id/emoDesc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/rounded_corner_text"
-                android:ems="10" >
+                android:hint="Enter a description"
+                android:textColor="@android:color/primary_text_light" />
 
-                <requestFocus />
-            </EditText>
-
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
         </LinearLayout>
-
     </RelativeLayout>
 
-        
 </RelativeLayout>

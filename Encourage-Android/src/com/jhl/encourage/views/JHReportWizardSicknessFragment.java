@@ -51,33 +51,32 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 		sickDate = (TextView)v.findViewById(R.id.sickDate);
 		sickDate.setText(JHUtility.getFormattedDate());
 		sickDesc = (TextView)v.findViewById(R.id.sickDesc);
-		sickDesc.setText("Enter a description");
 		
-		sickDesc.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				sickDesc.requestFocusFromTouch();
-				return true;
-			}
-		});
-		
-		
-		sickDesc.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String text = sickDesc.getText().toString().trim();
-				if (!hasFocus) {
-					if(text.length() == 0){
-						sickDesc.setText("Enter a description");
-					}
-				}else{
-					if (text.equals("Enter a description")){
-						sickDesc.setText("");
-					}
-				}
-			}
-		});
+//		sickDesc.setOnTouchListener(new View.OnTouchListener() {
+//			
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				sickDesc.requestFocusFromTouch();
+//				return true;
+//			}
+//		});
+//		
+//		
+//		sickDesc.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//			@Override
+//			public void onFocusChange(View v, boolean hasFocus) {
+//				String text = sickDesc.getText().toString().trim();
+//				if (!hasFocus) {
+//					if(text.length() == 0){
+//						sickDesc.setText("Enter a description");
+//					}
+//				}else{
+//					if (text.equals("Enter a description")){
+//						sickDesc.setText("");
+//					}
+//				}
+//			}
+//		});  ENTHONNADAI ITHU!!!!! CHUMMA ORU HINT KODUKKAN AAYT
 		
 	}
 	

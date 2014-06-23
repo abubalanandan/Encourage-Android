@@ -7,44 +7,65 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:gravity="center_vertical"
         android:orientation="vertical" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <EditText
             android:id="@+id/mapReportDateText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" 
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_corner_text"
+            android:editable="false"
             android:onClick="mapDatePressed"
-            android:background="@drawable/rounded_corner_text">
+            android:textColor="@android:color/primary_text_light" />
 
-            <requestFocus />
-        </EditText>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <EditText
             android:id="@+id/mapReportNameText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" 
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/rounded_corner_text"
-            />
+            android:hint="Event Name"
+            android:textColor="@android:color/primary_text_light" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <EditText
             android:id="@+id/mapReportAddressText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" 
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/rounded_corner_text"
-            />
+            android:hint="Event Address"
+            android:textColor="@android:color/primary_text_light" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <EditText
             android:id="@+id/mapReportDescText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" 
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/rounded_corner_text"
-            />
-
+            android:hint="Event Description"
+            android:textColor="@android:color/primary_text_light" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -11,13 +11,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
 
-        <ImageView
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_header" >
+
+            <TextView
+                android:id="@+id/headerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="REPORTING WIZARD" 
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+       <!--  <ImageView
             android:id="@+id/headerBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/top_header" />
-        
+            android:src="@drawable/top_header" /> -->
+
         <ImageButton
             android:id="@+id/menuButton"
             android:layout_width="wrap_content"
@@ -66,78 +80,63 @@
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-	
+
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/footerView"
         android:layout_below="@+id/headerView"
-        android:background="@null">
-        
+        android:background="@null" >
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            >
-            
+            android:orientation="vertical" >
+
             <TabWidget
                 android:id="@android:id/tabs"
-                android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                />
+                android:background="#13294d"
+                android:orientation="horizontal" />
+
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="0"/>
+                android:layout_weight="0" />
+
             <android.support.v4.view.ViewPager
-        		xmlns:android="http://schemas.android.com/apk/res/android"
-        		android:id="@+id/reportpager"
-        		android:layout_width="fill_parent"
-        		android:layout_height="wrap_content"
-        		>
-          </android.support.v4.view.ViewPager>  
-          
-        
-            
-         </LinearLayout>
-        
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/reportpager"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </android.support.v4.view.ViewPager>
+        </LinearLayout>
     </TabHost>
-    
-    
-		
-	<RelativeLayout
+
+    <RelativeLayout
         android:id="@+id/contactview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/footerView"
-        android:layout_alignParentLeft="true" 
         android:layout_alignParentBottom="true"
-        >
-
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/footerView" >
 
         <ImageView
             android:id="@+id/contactBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/top_header"
-            android:scaleType="fitXY"/>
-
-        <TextView
-            android:id="@+id/contactsList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:scaleType="fitXY"
+            android:src="@drawable/top_header" />
 
         <RelativeLayout
             android:id="@+id/contactSelectLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
             android:layout_centerVertical="true"
             android:orientation="horizontal"
             android:padding="5dp" >
@@ -146,18 +145,10 @@
                 android:id="@+id/cboxCareCircle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:text="Inform my care-circle" />
-
+                android:text="Inform care-circle" />
         </RelativeLayout>
-
     </RelativeLayout>
-    
-    
 
-    
-	
-    
     <RelativeLayout
         android:id="@+id/footerView"
         android:layout_width="match_parent"
@@ -167,32 +158,24 @@
         android:alpha="0.5"
         android:background="@drawable/translucent_bottom" >
 
-        <ImageView
-            android:id="@+id/footerLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/bottom_logo" />
-
-        <Button
+        <ImageButton
             android:id="@+id/sendReportButon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:onClick="sendReportButtonPressed"
-            android:text="Send" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/report_buton"
+            android:onClick="sendReportButtonPressed" />
 
         <RelativeLayout
             android:id="@+id/rwContactButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/sendReportButon"
-            android:layout_weight="0.3"
             android:onClick="rwContactButtonPressed" >
 
             <ImageView
@@ -201,11 +184,6 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_add_group" />
         </RelativeLayout>
-
     </RelativeLayout>
-
-    
-
-    
 
 </RelativeLayout>

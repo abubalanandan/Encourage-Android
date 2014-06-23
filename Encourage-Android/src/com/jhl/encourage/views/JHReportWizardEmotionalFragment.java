@@ -42,34 +42,8 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 		emoDate = (TextView)v.findViewById(R.id.emoDate);
 		emoDate.setText(JHUtility.getFormattedDate());
 		emoDesc = (TextView)v.findViewById(R.id.emoDesc);
-		emoDesc.setText("Enter a description");
 		
-		emoDesc.setOnTouchListener(new View.OnTouchListener() {
 			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				emoDesc.requestFocusFromTouch();
-				return true;
-			}
-		});
-		
-		
-		emoDesc.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String text = emoDesc.getText().toString().trim();
-				if (!hasFocus) {
-					if(text.length() == 0){
-						emoDesc.setText("Enter a description");
-					}
-				}else{
-					if (text.equals("Enter a description")){
-						emoDesc.setText("");
-					}
-				}
-			}
-		});
-		
 	}
 	
 	public void setDate(String date){
