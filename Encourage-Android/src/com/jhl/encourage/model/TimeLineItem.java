@@ -2,6 +2,7 @@ package com.jhl.encourage.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -40,7 +41,7 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 		this.eventAddress = eventAddress;
 	}
 
-	private HashMap<String, String> details;
+	private ArrayList<String[]> details;
 
 	public String getTimelineDate() {
 		return timelineDate;
@@ -103,24 +104,17 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 		this.datatype = datatype;
 	}
 
-	public HashMap<String, String> getDetails() {
+	public ArrayList<String[]> getDetails() {
 		return details;
 	}
 
 	public void setDetails(String detailObject) {
-		this.details = new HashMap<String,String>();
+		this.details = new ArrayList<String[]>();
 		if(detailObject!=null && detailObject.length() > 0){
 			String[] details = detailObject.split("\\^~\\^");
 			for(String detail:details){
 				String[] pair = detail.split("&nbsp;\\|&nbsp;");
-				String key ="";
-				String value="";
-				if(pair.length!=0)
-				 key = pair[0];
-				
-				if(pair.length>1)
-				 value = pair[1];
-				this.details.put(key, value);
+				this.details.add(pair);
 			}
 		}
 	}

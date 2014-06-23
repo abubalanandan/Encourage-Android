@@ -122,10 +122,11 @@ public class JHTimelineAdapter extends BaseAdapter {
 
 		}
 		
-		Iterator iterator = msgList.get(position).getDetails().entrySet().iterator();
+		Iterator iterator = msgList.get(position).getDetails().iterator();
 		postDetailsTL.removeAllViews();
 		while(iterator.hasNext()){
-			Map.Entry<String, String> pairs = (Map.Entry<String, String>)iterator.next();
+			String[] pairs = (String[])iterator.next();
+			if(pairs!=null && pairs.length==2){
 			TableRow.LayoutParams params = new TableRow.LayoutParams(
 					TableRow.LayoutParams.MATCH_PARENT,
 					TableRow.LayoutParams.WRAP_CONTENT);
@@ -141,10 +142,11 @@ public class JHTimelineAdapter extends BaseAdapter {
 			TextView valueTV = new TextView(ctx);
 			row.addView(keyTV);
 			row.addView(valueTV);
-			keyTV.setText(pairs.getKey());
-			valueTV.setText(pairs.getValue());
+			keyTV.setText(pairs[0]);
+			valueTV.setText(pairs[1]);
 			
 			postDetailsTL.addView(row);
+			}
 			
 	}
 		
