@@ -23,15 +23,13 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 	List<ReportButton> selectedButtons = new ArrayList<ReportButton>();
 	
 	Integer[] imageIDs = {
-		    R.drawable.sore_throat,R.drawable.tired, R.drawable.back_pain, 
-		    R.drawable.dizziness, R.drawable.cant_sleep, R.drawable.joint_pain,
-		    R.drawable.dry_skin, R.drawable.nosebleed, R.drawable.shortness_of_breath, 
-		    R.drawable.breathless, R.drawable.tingling_sensation,  R.drawable.other
+			R.drawable.worried,R.drawable.anxious,R.drawable.depressed,R.drawable.angry, 
+			R.drawable.sad, R.drawable.happy, R.drawable.restless,R.drawable.cant_sleep_e
+		     
 	};
-	int[] sickenesses = {JHConstants.SICKNESS_sore_throat, JHConstants.SICKNESS_tired ,	JHConstants.SICKNESS_back_pain,JHConstants.SICKNESS_dizziness,
-			JHConstants.SICKNESS_cant_sleep,	JHConstants.SICKNESS_joint_pain,	JHConstants.SICKNESS_dry_skin,	JHConstants.SICKNESS_nosebleed,	
-			JHConstants.SICKNESS_shortness_of_breath,
-			JHConstants.SICKNESS_breathless ,	JHConstants.SICKNESS_tingling_sensation,	JHConstants.SICKNESS_other};
+	int[] sickenesses = {JHConstants.EMO_worried, JHConstants.EMO_Anxious ,	JHConstants.EMO_Depressed,JHConstants.EMO_Angry,
+			JHConstants.EMO_Sad,	JHConstants.EMO_Happy,	JHConstants.EMO_Restless,	JHConstants.EMO_cant_sleep	
+			};
 	
 	public JHEmotonalButtonsAdapter(Context context) {
 		this.context = context;
