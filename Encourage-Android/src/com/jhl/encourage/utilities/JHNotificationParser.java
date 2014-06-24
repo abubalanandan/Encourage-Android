@@ -27,6 +27,7 @@ import org.xml.sax.SAXException;
 
 
 
+
 import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.CareTask;
 import com.jhl.encourage.model.Notification;
@@ -74,6 +75,25 @@ public class JHNotificationParser {
 				alert.setReadStatus(entryMap.get(JHConstants.NOT_XML_KEY_READ_STATUS));
 				alert.setTitle(entryMap.get(JHConstants.NOT_XML_KEY_TITLE));
 				
+				alert.setAlertType(entryMap.get(JHConstants.NOT_XML_KEY_ALERT_TYPE));
+				
+				String url = entryMap.get(JHConstants.NOT_XML_KEY_ALERT_LINK_KEY);
+				String address = entryMap.get(JHConstants.NOT_XML_KEY_ALERT_MAP_KEY);
+				String imageName = entryMap.get(JHConstants.NOT_XML_KEY_ALERT_IMAGE_KEY);
+				
+				if(url != null && ! url.trim().equals("")){
+					alert.setUrl(url);
+				}
+				
+				if(address != null && ! address.trim().equals("")){
+					alert.setAddress(address);
+				}
+				
+				
+				if(imageName != null && ! imageName.trim().equals("")){
+					alert.setImageName(imageName);
+				}
+				
 				Log.d(JHConstants.LOG_TAG, alert.toString());
 				
 				return (Notification)alert;
@@ -82,6 +102,7 @@ public class JHNotificationParser {
 				
 				careTask = new CareTask();
 				careTask.setId(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_KEY));
+				careTask.setTitle(entryMap.get(JHConstants.NOT_XML_KEY_TITLE));
 				careTask.setNotificationType(entryMap.get(JHConstants.NOT_XML_KEY_TYPE));
 				careTask.setCareTaskType(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_TYPE));
 				careTask.setDateTime(entryMap.get(JHConstants.NOT_XML_KEY_CARETASK_DATE_TIME));

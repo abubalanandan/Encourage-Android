@@ -60,7 +60,7 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 		        ImageView.ScaleType.CENTER_CROP);
 		        imageView.setPadding(20, 20, 20, 20);
 		imageView.setImageResource(imageId);
-        imageView.setBackground(null);
+        //imageView.setBackground(null);
 		imageView.setOnClickListener(new ButtonClickListener());       
 		return imageView;
 	}

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.utilities.JHUtility;
+import com.jhl.encourage.views.JHCustomOkDialog;
 
 public class JHSplashActivity extends Activity {
 
@@ -22,6 +23,7 @@ public class JHSplashActivity extends Activity {
 		 new Handler().postDelayed(new Runnable(){
 	            @Override
 	            public void run() {
+	            	
 	                /* Create an Intent that will start the Menu-Activity. */
 	                Intent mainIntent = new Intent(JHSplashActivity.this,JHLoginActivity.class);
 	                startActivity(mainIntent);

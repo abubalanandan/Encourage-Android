@@ -13,7 +13,20 @@ public class Alert extends Notification{
 	private String details;
 	
 	
+	private String alertType;
 	
+	
+	private String address; // New Jersey City University 2039 Kennedy Boulevard
+	private String url; // full url
+	private String imageName; // 70799886-2AB7-E64A-0A8D-8DDE2C55D992.jpg etc
+
+	public String getAlertType() {
+		return alertType;
+	}
+
+	public void setAlertType(String alertType) {
+		this.alertType = alertType;
+	}
 
 	public String getDateTimeDiff() {
 		return dateTimeDiff;
@@ -32,6 +45,30 @@ public class Alert extends Notification{
 	}
 
 	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
 
 	public String getAuthorName() {
 		return authorName;
