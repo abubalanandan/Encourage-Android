@@ -2,36 +2,31 @@ package com.jhl.encourage.views;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+
+import android.app.DatePickerDialog;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 public class JHReportWizardImageFragment extends Fragment implements JHReportFragment{
 
 	private ImageView imageHolder = null;
-	private TextView imageDate = null;
+	private EditText imageDate = null;
 	private TextView imageName = null;
 	private ProgressBar uploadProgress = null;
 	private Contact contact;
@@ -50,7 +45,7 @@ public class JHReportWizardImageFragment extends Fragment implements JHReportFra
 	
 	private void initView(View v){
 		imageHolder = (ImageView) v.findViewById(R.id.imageHolder);
-		imageDate = (TextView) v.findViewById(R.id.imageDate);
+		imageDate = (EditText) v.findViewById(R.id.imageDate);
 		imageName = (TextView) v.findViewById(R.id.imageName);
 		imageDate.setText(JHUtility.getFormattedDate());
 		
