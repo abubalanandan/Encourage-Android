@@ -12,8 +12,14 @@ public class CareTask extends Notification{
 	private String careplanName;
 	private String cpDetails;
 	
+	private String title;
 	
-	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getCareTaskType() {
 		return careTaskType;
 	}

@@ -392,6 +392,9 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		JHReportFragment fragment = getCurrentFragment(page);
 		
 		ReportWizartAPICaller apiCaller = new ReportWizartAPICaller(this);
+		
+		JHUtility.showProgressDialog("Uploading...", this);
+		
 		switch (page) {
 		case 0:
 			String date = sickFragment.getSickDate();
@@ -512,7 +515,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	    	if(status.equals("true")) {
 	    		apiCaller.invokeImageApi(eventDate, eventName, ics, uploadefileName, actualFileName);
 	    	}else {
-	    		
+	    		JHUtility.showDialogOk("Reporing error", "Report posting failed", JHReportWizardActivity.this);
 	    	}
 	    	
 	        return null;
@@ -521,9 +524,6 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	    @Override
 	    protected void onPostExecute(String data) {           
 	    	imageFragment.endProgress();
-			
-			Intent intent = new Intent(JHReportWizardActivity.this, JHTimelineActivity.class);
-			startActivity(intent);
 			finish();
 	    }
 	}

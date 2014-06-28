@@ -24,6 +24,16 @@ public interface JHConstants {
 	public static final String NOT_XML_KEY_PRPVIDER_NAE = "provider_name";
 	public static final String NOT_XML_KEY_CAREPLAN_NAME = "careplan_name";
 	public static final String NOT_XML_KEY_CP_DETAILS = "cp_details";
+	public static final String NOT_XML_KEY_ALERT_TYPE = "contentype";
+	public static final String NOT_XML_KEY_ALERT_TYPE_LINK = "Link";
+	public static final String NOT_XML_KEY_ALERT_TYPE_NOTE = "Note";
+	public static final String NOT_XML_KEY_ALERT_TYPE_IMAGE = "Image";
+	public static final String NOT_XML_KEY_ALERT_TYPE_MAP = "Map";
+	
+	public static final String NOT_XML_KEY_ALERT_IMAGE_KEY = "documentactualname";
+	public static final String NOT_XML_KEY_ALERT_MAP_KEY = "eventaddress";
+	public static final String NOT_XML_KEY_ALERT_LINK_KEY = "url";
+	
 				
 	public static final String NOT_XML_KEY_MESSAGE = "message";
 	public static final String NOT_XML_TAG_RESPONSE = "SPOCResponse";

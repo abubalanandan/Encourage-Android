@@ -53,6 +53,8 @@ public class ReportWizartAPICaller {
 			addToCC2 = "yes";
 		}
 		
+		System.out.println("DATAAAAAAAAAAAAAA "+data);
+		
 		service.postReport("getSelfReportedData", date, "datetime", "Date", "","1", "", data, "varchar", "Complaint", "", "2","", "", "text", 
 				"Description", "", "3", "", contact.getName1(), contact.getEmail1(), contact.getName2(), contact.getEmail2(), "self_reported_form", "selfreport_data" , icsString, 
 				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", addToCC1, addToCC2, 
@@ -68,11 +70,12 @@ public class ReportWizartAPICaller {
 								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
 								
 								if(success.equalsIgnoreCase("true")){
-									Intent intent = new Intent(activity, JHTimelineActivity.class);
-									activity.startActivity(intent);
+									
 									activity.finish();
 								}else{
+									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 									
+									activity.finish();
 								}
 								
 							}
@@ -81,7 +84,9 @@ public class ReportWizartAPICaller {
 
 					@Override
 					public void failure(RetrofitError retrofitError) {
-						System.out.println("error");
+						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+						
+						activity.finish();
 					}
 				});
 		
@@ -113,11 +118,13 @@ public class ReportWizartAPICaller {
 								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
 								
 								if(success.equalsIgnoreCase("true")){
-									Intent intent = new Intent(activity, JHTimelineActivity.class);
-									activity.startActivity(intent);
+									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+									
 									activity.finish();
 								}else{
+									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 									
+									activity.finish();
 								}
 								
 							}
@@ -126,7 +133,9 @@ public class ReportWizartAPICaller {
 
 					@Override
 					public void failure(RetrofitError retrofitError) {
-						System.out.println("error");
+						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+						
+						activity.finish();
 					}
 				});
 		
@@ -227,11 +236,13 @@ public class ReportWizartAPICaller {
 			status = status.replaceAll("\"", "");
 			
 			if(status.equals("true")) {
-				Intent intent = new Intent(activity, JHTimelineActivity.class);
-				activity.startActivity(intent);
+				JHUtility.showDialogOk("Reporing sucess", "Report postinged", activity);
+				
 				activity.finish();
 	    	}else {
+	    		JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 	    		
+				activity.finish();
 	    	}
 		}
 	
