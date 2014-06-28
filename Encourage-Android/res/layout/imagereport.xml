@@ -4,70 +4,80 @@
     android:layout_height="match_parent"
     android:background="#13294d" >
 
-    <RelativeLayout
-        android:id="@+id/imageLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#13294d" >
+    <ScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-        <ImageView
-            android:id="@+id/imageHolder"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="250dp"
-            android:src="@drawable/active_page" />
-
-        <ProgressBar
-            android:id="@+id/uploadProgress"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp" />
-    </RelativeLayout>
+            android:layout_height="wrap_content" >
 
-    <LinearLayout
-        android:id="@+id/textsLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageLayout"
-        android:layout_above="@+id/buttonLayout"
-        android:orientation="vertical" >
+            <RelativeLayout
+                android:id="@+id/imageLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#13294d" >
 
-        <EditText
-            android:id="@+id/imageDate"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/rounded_corner_text"
-            android:editable="false"
-            android:onClick="imageDatePressed"
-            android:layout_margin="10dp"
-            android:textColor="@android:color/primary_text_light" >
-        </EditText>
+                <ImageView
+                    android:id="@+id/imageHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/active_page" />
 
-        <EditText
-            android:id="@+id/imageName"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_corner_text"
-            android:hint="Event Name"
-            android:textColor="@android:color/primary_text_light" />
-    </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/uploadProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="50dp" />
+            </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/buttonLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" >
+            <LinearLayout
+                android:id="@+id/textsLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageLayout"
+                android:orientation="vertical" >
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="imageButtonClicked"
-            android:src="@android:drawable/btn_star" />
-    </RelativeLayout>
+                <EditText
+                    android:id="@+id/imageDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_corner_text"
+                    android:editable="false"
+                    android:onClick="imageDatePressed"
+                    android:textColor="@android:color/primary_text_light" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/imageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_corner_text"
+                    android:hint="Event Name"
+                    android:textColor="@android:color/primary_text_light" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textsLayout"
+                android:layout_alignParentLeft="true" >
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="imageButtonClicked"
+                    android:src="@android:drawable/btn_star" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
