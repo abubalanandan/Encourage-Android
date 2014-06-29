@@ -9,18 +9,13 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.AudioManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
@@ -77,6 +72,14 @@ public class JHLoginActivity extends Activity {
 
 	
 		
+	public void forgotPasswordClicked(View view){
+		
+		String url = "tryencourage.com";
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(url));
+		startActivity(intent);
+	}
+	
 	class GCMRegistrationTask extends AsyncTask<String, Integer, Boolean> {
 			@Override
 			protected void onPreExecute() {
