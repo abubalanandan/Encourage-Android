@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.utilities.JHUtility;
-import com.jhl.encourage.views.JHCustomOkDialog;
 
 public class JHSplashActivity extends Activity {
 

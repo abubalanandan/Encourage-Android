@@ -1,5 +1,6 @@
 package com.jhl.encourage.model;
 
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class ReportButton {
@@ -9,7 +10,7 @@ public class ReportButton {
 	private int state;
 	private int position;
 	
-	public ReportButton(ImageView imageView, int sickcnes, int state, int position) {
+		public ReportButton(ImageView imageView, int sickcnes, int state, int position) {
 		this.imageView = imageView;
 		this.sickness = sickcnes;
 		this.state = state;

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHTimelineAdapter;
+import com.jhl.encourage.apis.LogoutService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
@@ -68,11 +69,11 @@ public class JHTimelineActivity extends Activity {
 	                             @Override
 	                             public void onDrawerClosed(View drawerView){
 	                                     super.onDrawerClosed(drawerView);
+	                                     invokeLogoutApi();
 
 	                             }
 	                     });
 	                     drawer.closeDrawer(navList);
-	                     Toast.makeText(JHTimelineActivity.this, "perform logout", Toast.LENGTH_LONG).show();
 	             }
 	     });
 	    
@@ -87,6 +88,48 @@ public class JHTimelineActivity extends Activity {
 
 	}
 
+	
+	private void invokeLogoutApi(){
+		
+		LogoutService service = EncourageApplication.getRestAdapter().create(LogoutService.class);
+		
+		JHUtility.showProgressDialog("Logging out..", this);
+		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(), new Callback<SpocResponse>() {
+
+			@Override
+			public void failure(RetrofitError arg0) {
+				// TODO Auto-generated method stub
+				JHUtility.dismissProgressDialog(JHTimelineActivity.this);
+				JHUtility.showDialogOk("Error", "Logout failed. Please try again!", JHTimelineActivity.this);
+			}
+
+			@Override
+			public void success(SpocResponse spocResponse, Response arg1) {
+				// TODO Auto-generated method stub
+				ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
+				for (SpocObject spocObject : responseList) {
+					if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
+						HashMap<String, String> map = spocObject.getMap();
+						String success = map.get("success");
+						if(success.equalsIgnoreCase("true")){
+							System.out.println("success");
+							JHAppStateVariables.setLoginTocken(null);
+							JHUtility.dismissProgressDialog(JHTimelineActivity.this);
+							Intent intent = new Intent(JHTimelineActivity.this, JHLoginActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+							finish();
+						}else{
+							System.out.println("error");
+							JHUtility.dismissProgressDialog(JHTimelineActivity.this);
+							JHUtility.showDialogOk("Error", "Logout failed. Please try again!", JHTimelineActivity.this);
+						}
+					}
+				}
+				
+			}
+		});
+	}
 	class AlertClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {

@@ -24,9 +24,16 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 	
 	Integer[] imageIDs = {
 			R.drawable.worried,R.drawable.anxious,R.drawable.depressed,R.drawable.angry, 
-			R.drawable.sad, R.drawable.happy, R.drawable.restless,R.drawable.cant_sleep_e
+			R.drawable.sad, R.drawable.happy, R.drawable.restless,R.drawable.cant_sleep
 		     
 	};
+	
+	Integer[] selectedImageIDs = {
+			R.drawable.worried_hover,R.drawable.anxious_hover,R.drawable.depresed_hover,R.drawable.angry_hover, 
+			R.drawable.sad_hover, R.drawable.happy_hover, R.drawable.restless_hover,R.drawable.cant_sleep_hover
+		     
+	};
+	
 	int[] sickenesses = {JHConstants.EMO_worried, JHConstants.EMO_Anxious ,	JHConstants.EMO_Depressed,JHConstants.EMO_Angry,
 			JHConstants.EMO_Sad,	JHConstants.EMO_Happy,	JHConstants.EMO_Restless,	JHConstants.EMO_cant_sleep	
 			};
@@ -91,7 +98,7 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 				if (button.getState() == JHConstants.BUTTON_UNSELECTED){
 					selectedButtons.add(button);
 					button.setState(JHConstants.BUTTON_SELECTED);
-					imageView.setImageResource(R.drawable.ic_action_add_group);
+					imageView.setImageResource(selectedImageIDs[button.getPosition()]);
 				}else {
 					selectedButtons.remove(button);
 					button.setState(JHConstants.BUTTON_UNSELECTED);

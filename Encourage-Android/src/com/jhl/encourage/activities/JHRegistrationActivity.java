@@ -10,6 +10,8 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -84,10 +86,9 @@ public class JHRegistrationActivity extends Activity {
 				invokeRegistrationApi(firstNameField.getText().toString(),
 						lastNameField.getText().toString(), emailField
 								.getText().toString());
-				JHUtility.showDialogOk("",
-						"Please follow instructions in the Encourage registration confirmation email", this);
-				JHRegistrationDialog dialog = new JHRegistrationDialog(this);
-				dialog.show();
+				
+//				JHRegistrationDialog dialog = new JHRegistrationDialog(this);
+//				dialog.show();
 			} else {
 				JHUtility.showDialogOk("",
 						"Please enter a valid email address", this);
@@ -112,7 +113,7 @@ public class JHRegistrationActivity extends Activity {
         RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
         SignupService service = restAdapter.create(SignupService.class);
-
+        JHUtility.showProgressDialog("Signing up..", this);
 
         service.signUpUser("postPersonDetails",firstName,lastName,emailAddress, new Callback<SpocResponse>() {
             @Override
@@ -129,8 +130,21 @@ public class JHRegistrationActivity extends Activity {
 						String success = map.get("success");
 						if(success.equalsIgnoreCase("true")){
 							System.out.println("success");
+							JHUtility.dismissProgressDialog(JHRegistrationActivity.this);
+							AlertDialog dialog = new AlertDialog.Builder(JHRegistrationActivity.this).setTitle("Success").setMessage("Please follow instructions in the Encourage registration confirmation email").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									finish();
+								}
+							}).create();
+							dialog.show();
 
 						}else{
+							JHUtility.dismissProgressDialog(JHRegistrationActivity.this);
+
+							JHUtility.showDialogOk("Error", "Registration Failed. Please try again", JHRegistrationActivity.this);
 							System.out.println("error");
 
 						}
@@ -144,6 +158,10 @@ public class JHRegistrationActivity extends Activity {
             public void failure(RetrofitError retrofitError) {
 
                 System.out.println("Error");
+                JHUtility.dismissProgressDialog(JHRegistrationActivity.this);
+
+				JHUtility.showDialogOk("Error", "Registration Failed. Please try again", JHRegistrationActivity.this);
+
 
             }
         });

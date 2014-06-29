@@ -28,6 +28,13 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 		    R.drawable.dry_skin, R.drawable.nosebleed, R.drawable.shortness_of_breath, 
 		    R.drawable.breathless, R.drawable.tingling_sensation,  R.drawable.other
 	};
+	
+	Integer[] selectedImageIDs = {
+		    R.drawable.sore_throat_hover,R.drawable.tired_hover, R.drawable.back_pain_hover, 
+		    R.drawable.dizziness_hover, R.drawable.cant_sleep_hover, R.drawable.joint_pain_hover,
+		    R.drawable.dry_skin_hover, R.drawable.nosebleed_hover, R.drawable.shortness_of_breath_hover, 
+		    R.drawable.breathless_hover, R.drawable.tingling_sensation_hover,  R.drawable.other_hover
+	};
 	int[] sickenesses = {JHConstants.SICKNESS_sore_throat, JHConstants.SICKNESS_tired ,	JHConstants.SICKNESS_back_pain,JHConstants.SICKNESS_dizziness,
 			JHConstants.SICKNESS_cant_sleep,	JHConstants.SICKNESS_joint_pain,	JHConstants.SICKNESS_dry_skin,	JHConstants.SICKNESS_nosebleed,	
 			JHConstants.SICKNESS_shortness_of_breath,
@@ -96,12 +103,13 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 				if (button.getState() == JHConstants.BUTTON_UNSELECTED){
 					selectedButtons.add(button);
 					button.setState(JHConstants.BUTTON_SELECTED);
-					imageView.setImageResource(R.drawable.ic_action_add_group);
+					imageView.setImageResource(selectedImageIDs[button.getPosition()]);
 					String sickness = getSicknessByButtonPosition(button.getPosition());
 					JHAppStateVariables.addSickenss(sickness);
 				}else {
 					selectedButtons.remove(button);
 					button.setState(JHConstants.BUTTON_UNSELECTED);
+					
 					imageView.setImageResource(imageIDs[button.getPosition()]);
 					String sickness = getSicknessByButtonPosition(button.getPosition());
 					JHAppStateVariables.removeSickenss(sickness);
