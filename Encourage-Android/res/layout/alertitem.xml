@@ -21,50 +21,29 @@
             android:paddingBottom="5dp" >
 
             <TextView
-                android:id="@+id/alertAuthor"
+                android:id="@+id/profileNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_marginLeft="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
-                android:text="Author"
+                android:text="Brian Wheeler"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/alertDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/alertTitle"
-                android:layout_marginLeft="5dp"
-                android:gravity="center_vertical"
-                android:text="Details"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/alertDateTime"
+                android:id="@+id/dateAndTimeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_below="@+id/alertDetails"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_below="@+id/profileNameTV"
+                android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="Date"
+                android:text="Brian Wheeler"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/alertTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_alignLeft="@+id/alertText"
-                android:layout_below="@+id/alertAuthor"
-                android:gravity="center_vertical"
-                android:text="Title"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
-
         </RelativeLayout>
 
         <ImageView
@@ -90,8 +69,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                
-                
+                <TableLayout
+                    android:id="@+id/postDetailsTL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="0,1"
+                    android:stretchColumns="*" >
+                </TableLayout>
             </LinearLayout>
 
             <!--
@@ -105,8 +89,8 @@
                 android:layout_marginTop="5dp"
                 android:textSize="12sp"
                 android:text="asfkanfalnfanfa\nasfkjasjafa\nasfafasfas"
-                />
-            -->
+                />   -->
+
         </RelativeLayout>
     </LinearLayout>
 

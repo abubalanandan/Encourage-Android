@@ -284,7 +284,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			cursor.close();
 
 			JHReportWizardImageFragment iFrag = (JHReportWizardImageFragment) fragments .get(2);
-			iFrag.setImage(picturePath);
+			iFrag.setImage(selectedImage, picturePath);
 
 		}
 	}

@@ -236,11 +236,11 @@ public class ReportWizartAPICaller {
 			status = status.replaceAll("\"", "");
 			
 			if(status.equals("true")) {
-				JHUtility.showDialogOk("Reporing sucess", "Report postinged", activity);
+				//JHUtility.showDialogOk("Reporting sucess", "Report posting succeeded", activity);
 				
 				activity.finish();
 	    	}else {
-	    		JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+	    	//	JHUtility.showDialogOk("Reporting error", "Report posting failed", activity);
 	    		
 				activity.finish();
 	    	}

@@ -6,6 +6,7 @@ import java.util.Date;
 
 import android.app.DatePickerDialog;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -93,9 +94,10 @@ public class JHReportWizardImageFragment extends Fragment implements JHReportFra
 		imageDate.setText(date);
 	}
 
-	public void setImage(String path) {
+	public void setImage(Uri uri,String path) {
 		Log.d(JHConstants.LOG_TAG, path);
-		imageHolder.setImageBitmap(BitmapFactory.decodeFile(path));
+		//imageHolder.setImageBitmap(BitmapFactory.decodeFile(path));
+		imageHolder.setImageURI(uri);
 		imagePath = path;
 	}
 	

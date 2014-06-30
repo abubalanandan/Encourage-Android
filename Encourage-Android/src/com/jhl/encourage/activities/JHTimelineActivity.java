@@ -44,92 +44,114 @@ public class JHTimelineActivity extends Activity {
 	private JHTimelineAdapter adapter;
 	private ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>(3);
 	private int lastCount = 0;
-	private int currentFirstVisibleItem=0;
-	private int currentVisibleItemCount=0;
+	private int currentFirstVisibleItem = 0;
+	private int currentVisibleItemCount = 0;
 	private int currentScrollState = 0;
 	ProgressBar dialog;
 	private boolean loadingItems = false;
 	private DrawerLayout drawer;
-	
-	final String[] data ={"Logout"};
-	
+
+	final String[] data = { "Logout" };
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
 
-	     drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
-	     final ListView navList = (ListView) findViewById(R.id.left_drawer);
-	     navList.setAdapter(adapter);
-	     navList.setOnItemClickListener(new OnItemClickListener(){
-	             @Override
-	             public void onItemClick(AdapterView<?> parent, View view, final int pos,long id){
-	                     drawer.setDrawerListener( new DrawerLayout.SimpleDrawerListener(){
-	                             @Override
-	                             public void onDrawerClosed(View drawerView){
-	                                     super.onDrawerClosed(drawerView);
-	                                     invokeLogoutApi();
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, data);
 
-	                             }
-	                     });
-	                     drawer.closeDrawer(navList);
-	             }
-	     });
-	    
-		
-		
+		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		final ListView navList = (ListView) findViewById(R.id.left_drawer);
+		navList.setAdapter(adapter);
+		navList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int pos, long id) {
+				drawer.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+					@Override
+					public void onDrawerClosed(View drawerView) {
+						super.onDrawerClosed(drawerView);
+						invokeLogoutApi();
+
+					}
+				});
+				drawer.closeDrawer(navList);
+			}
+		});
+
 		initViews();
 	}
 
 	protected void onResume() {
 		super.onResume();
-		invokeTimelineDetailsApi("", JHUtility.getDateTime(), JHUtility.getTimeZoneString(), 0);
+		if (JHAppStateVariables.getLoginTocken() == null) {
+			Intent intent = new Intent(JHTimelineActivity.this,
+					JHLoginActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 
+		} else {
+			invokeTimelineDetailsApi("", JHUtility.getDateTime(),
+					JHUtility.getTimeZoneString(), 0);
+		}
 	}
 
-	
-	private void invokeLogoutApi(){
-		
-		LogoutService service = EncourageApplication.getRestAdapter().create(LogoutService.class);
-		
+	private void invokeLogoutApi() {
+
+		LogoutService service = EncourageApplication.getRestAdapter().create(
+				LogoutService.class);
+
 		JHUtility.showProgressDialog("Logging out..", this);
-		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(), new Callback<SpocResponse>() {
+		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(),
+				new Callback<SpocResponse>() {
 
-			@Override
-			public void failure(RetrofitError arg0) {
-				// TODO Auto-generated method stub
-				JHUtility.dismissProgressDialog(JHTimelineActivity.this);
-				JHUtility.showDialogOk("Error", "Logout failed. Please try again!", JHTimelineActivity.this);
-			}
-
-			@Override
-			public void success(SpocResponse spocResponse, Response arg1) {
-				// TODO Auto-generated method stub
-				ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
-				for (SpocObject spocObject : responseList) {
-					if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
-						HashMap<String, String> map = spocObject.getMap();
-						String success = map.get("success");
-						if(success.equalsIgnoreCase("true")){
-							System.out.println("success");
-							JHAppStateVariables.setLoginTocken(null);
-							JHUtility.dismissProgressDialog(JHTimelineActivity.this);
-							Intent intent = new Intent(JHTimelineActivity.this, JHLoginActivity.class);
-							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(intent);
-							finish();
-						}else{
-							System.out.println("error");
-							JHUtility.dismissProgressDialog(JHTimelineActivity.this);
-							JHUtility.showDialogOk("Error", "Logout failed. Please try again!", JHTimelineActivity.this);
-						}
+					@Override
+					public void failure(RetrofitError arg0) {
+						// TODO Auto-generated method stub
+						JHUtility
+								.dismissProgressDialog(JHTimelineActivity.this);
+						JHUtility.showDialogOk("Error",
+								"Logout failed. Please try again!",
+								JHTimelineActivity.this);
 					}
-				}
-				
-			}
-		});
+
+					@Override
+					public void success(SpocResponse spocResponse, Response arg1) {
+						// TODO Auto-generated method stub
+						ArrayList<SpocObject> responseList = spocResponse
+								.getSpocObjects();
+						for (SpocObject spocObject : responseList) {
+							if (spocObject.getResultTypeCode()
+									.equalsIgnoreCase("STATUS")) {
+								HashMap<String, String> map = spocObject
+										.getMap();
+								String success = map.get("success");
+								if (success.equalsIgnoreCase("true")) {
+									System.out.println("success");
+									JHAppStateVariables.setLoginTocken(null);
+									JHUtility
+											.dismissProgressDialog(JHTimelineActivity.this);
+									Intent intent = new Intent(
+											JHTimelineActivity.this,
+											JHLoginActivity.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+									startActivity(intent);
+									finish();
+								} else {
+									System.out.println("error");
+									JHUtility
+											.dismissProgressDialog(JHTimelineActivity.this);
+									JHUtility.showDialogOk("Error",
+											"Logout failed. Please try again!",
+											JHTimelineActivity.this);
+								}
+							}
+						}
+
+					}
+				});
 	}
+
 	class AlertClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
@@ -158,7 +180,7 @@ public class JHTimelineActivity extends Activity {
 	private void initViews() {
 
 		timelineView = (ListView) findViewById(R.id.timeLineView);
-		
+
 		dialog = new ProgressBar(this);
 		dialog.setProgressDrawable(getResources().getDrawable(
 				android.R.drawable.progress_indeterminate_horizontal));
@@ -166,7 +188,7 @@ public class JHTimelineActivity extends Activity {
 		adapter = new JHTimelineAdapter(this, list, false);
 		timelineView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
-		
+
 		timelineView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
 			@Override
@@ -175,29 +197,31 @@ public class JHTimelineActivity extends Activity {
 				JHTimelineActivity.this.currentScrollState = scrollState;
 				this.isScrollCompleted();
 
-
 			}
 
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-				
-				
+
 				JHTimelineActivity.this.currentFirstVisibleItem = firstVisibleItem;
 				JHTimelineActivity.this.currentVisibleItemCount = visibleItemCount;
 				this.isScrollCompleted();
 
-				
 			}
 
 			private void isScrollCompleted() {
-				if (JHTimelineActivity.this.currentFirstVisibleItem + JHTimelineActivity.this.currentVisibleItemCount==(list.size()-1)
+				if (JHTimelineActivity.this.currentFirstVisibleItem
+						+ JHTimelineActivity.this.currentVisibleItemCount == (list
+						.size() - 1)
 						&& JHTimelineActivity.this.currentScrollState == SCROLL_STATE_FLING) {
-					
-					if(timelineView.getFooterViewsCount()<=0){
+
+					if (timelineView.getFooterViewsCount() <= 0) {
 						if (!loadingItems) {
 							timelineView.addFooterView(dialog);
-							invokeTimelineDetailsApi("", JHUtility.getDateTime(), JHUtility.getTimeZoneString(), list.size()+1);
+							invokeTimelineDetailsApi("",
+									JHUtility.getDateTime(),
+									JHUtility.getTimeZoneString(),
+									list.size() + 1);
 
 						}
 					}
@@ -263,7 +287,10 @@ public class JHTimelineActivity extends Activity {
 										loadingItems = false;
 										timelineView.removeFooterView(dialog);
 
-										Toast.makeText(JHTimelineActivity.this, "Failed to fetch latest feed. Please try again.", Toast.LENGTH_LONG).show();
+										Toast.makeText(
+												JHTimelineActivity.this,
+												"Failed to fetch latest feed. Please try again.",
+												Toast.LENGTH_LONG).show();
 									}
 
 								} else if (spocObject.getResultTypeCode()
@@ -279,6 +306,11 @@ public class JHTimelineActivity extends Activity {
 										Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
+											if(map.get("eventAddress")==null){
+												continue;
+											}
+												
+												
 											item.setDatatype("map");
 											item.setEventAddress(map
 													.get("eventaddress"));
@@ -320,7 +352,7 @@ public class JHTimelineActivity extends Activity {
 							}
 							Collections.sort(list);
 							adapter.notifyDataSetChanged();
-													}
+						}
 
 						@Override
 						public void failure(RetrofitError retrofitError) {
@@ -357,7 +389,6 @@ public class JHTimelineActivity extends Activity {
 										loadingItems = false;
 										timelineView.removeFooterView(dialog);
 
-
 									}
 
 								} else if (spocObject.getResultTypeCode()
@@ -414,7 +445,7 @@ public class JHTimelineActivity extends Activity {
 							}
 							Collections.sort(list);
 							adapter.notifyDataSetChanged();
-													}
+						}
 
 						@Override
 						public void failure(RetrofitError retrofitError) {
@@ -440,12 +471,12 @@ public class JHTimelineActivity extends Activity {
 		}
 	}
 
-	public void menuButtonClicked(View view){
+	public void menuButtonClicked(View view) {
 		drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
 		drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-		
+
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		// Disabled back button action

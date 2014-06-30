@@ -43,18 +43,29 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dueDateAndTimeTV"
+                android:id="@+id/dueByTV"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_below="@+id/careTaskTitleTV"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/medTypeImageView"
                 android:gravity="center_vertical"
-                android:text="Brian Wheeler"
+                android:text="Due by:"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp" />
 
-                  </RelativeLayout>
+            <TextView
+                android:id="@+id/dueDateAndTimeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/careTaskTitleTV"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/dueByTV"
+                android:gravity="center_vertical"
+                android:text="Brian Wheeler"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/separatorLine"
@@ -83,8 +94,8 @@
                     android:id="@+id/postDetailsTL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="*" 
-                    android:shrinkColumns="*">
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*" >
                 </TableLayout>
             </LinearLayout>
 
@@ -99,7 +110,8 @@
                 android:layout_marginTop="5dp"
                 android:textSize="12sp"
                 android:text="asfkanfalnfanfa\nasfkjasjafa\nasfafasfas"
-                />     -->
+                />
+            -->
 
         </RelativeLayout>
 
