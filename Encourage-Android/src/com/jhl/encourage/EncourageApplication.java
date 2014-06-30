@@ -11,13 +11,25 @@ import android.text.Html;
 import android.util.Log;
 
 import com.jhl.encourage.apis.SimpleXMLConverter;
+import com.jhl.encourage.imageloader.JHImageLoader;
 import com.jhl.encourage.model.JHUser;
 
 public class EncourageApplication extends Application {
 
 	private static EncourageApplication application;
 	private JHUser currentUser;
-    public JHUser getCurrentUser() {
+	private JHImageLoader imageLoader;
+	public JHImageLoader getImageLoader() {
+		return imageLoader;
+	}
+
+
+	public void setImageLoader(JHImageLoader imageLoader) {
+		this.imageLoader = imageLoader;
+	}
+
+
+	public JHUser getCurrentUser() {
 		return currentUser;
 	}
 

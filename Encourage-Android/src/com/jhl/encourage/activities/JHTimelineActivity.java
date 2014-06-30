@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ import com.jhl.encourage.apis.LogoutService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
+import com.jhl.encourage.imageloader.JHImageLoader;
 import com.jhl.encourage.model.TimeLineItem;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
@@ -50,7 +52,7 @@ public class JHTimelineActivity extends Activity {
 	ProgressBar dialog;
 	private boolean loadingItems = false;
 	private DrawerLayout drawer;
-
+	private JHImageLoader imageLoader;
 	final String[] data = { "Logout" };
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,8 @@ public class JHTimelineActivity extends Activity {
 				drawer.closeDrawer(navList);
 			}
 		});
-
+		imageLoader  = new JHImageLoader(this);
+		EncourageApplication.getSharedApplication().setImageLoader(imageLoader);
 		initViews();
 	}
 
@@ -129,6 +132,9 @@ public class JHTimelineActivity extends Activity {
 								if (success.equalsIgnoreCase("true")) {
 									System.out.println("success");
 									JHAppStateVariables.setLoginTocken(null);
+									if(EncourageApplication.getSharedApplication().getImageLoader()!=null){
+										EncourageApplication.getSharedApplication().getImageLoader().clearCache();
+									}
 									JHUtility
 											.dismissProgressDialog(JHTimelineActivity.this);
 									Intent intent = new Intent(
@@ -185,10 +191,27 @@ public class JHTimelineActivity extends Activity {
 		dialog.setProgressDrawable(getResources().getDrawable(
 				android.R.drawable.progress_indeterminate_horizontal));
 		timelineView.addFooterView(dialog);
-		adapter = new JHTimelineAdapter(this, list, false);
+		adapter = new JHTimelineAdapter(this, list, false,imageLoader);
 		timelineView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
+		timelineView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				if(list.get(position).getDatatype().equalsIgnoreCase("Map")|| list.get(position).getDatatype().equalsIgnoreCase("Image")){
+					ImageView imageView = (ImageView)view.findViewWithTag(list.get(position).getTimelineid());
+					if(imageView!=null){
+						if(imageView.getBackground().equals(getResources().getDrawable(R.drawable.retry)))
+						imageLoader.DisplayImage(list.get(position).getFilename(), imageView);
+					}
+				}
+				
+			}
+		});
+		
 		timelineView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
 			@Override

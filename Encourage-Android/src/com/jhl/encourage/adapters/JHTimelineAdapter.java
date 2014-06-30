@@ -40,12 +40,12 @@ public class JHTimelineAdapter extends BaseAdapter {
 	private JHImageLoader imageLoader;
 
 	public JHTimelineAdapter(Context context, ArrayList<TimeLineItem> list,
-			Boolean needLoadMore) {
+			Boolean needLoadMore,JHImageLoader imageLoader) {
 
 		this.ctx = context;
 		this.msgList = list;
 		this.needLoadMoreMsg = needLoadMore;
-		imageLoader = new JHImageLoader(ctx.getApplicationContext());
+		this.imageLoader = imageLoader;
 	}
 
 	@Override
@@ -115,6 +115,7 @@ public class JHTimelineAdapter extends BaseAdapter {
 
 			ImageView imageView = new ImageView(ctx);
 			imageView.setLayoutParams(params);
+			imageView.setTag(msgList.get(position).getTimelineid());
 			postLL.addView(imageView);
 
 			// imageView.setBackgroundColor(ctx.getResources().getColor(android.R.color.darker_gray));
@@ -151,7 +152,7 @@ public class JHTimelineAdapter extends BaseAdapter {
 	}
 		
 		
-		
+	
 		
 
 		return convertView;

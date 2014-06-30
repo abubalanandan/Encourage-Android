@@ -24,6 +24,8 @@ import android.os.Handler;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class JHImageLoader {
@@ -52,7 +54,7 @@ public class JHImageLoader {
     
     // default image show in list (Before online image download)
     final int stub_id=R.drawable.image_size;
-    
+    final int retry_id = R.drawable.retry;
     public void DisplayImage(String url, ImageView imageView)
     {
     	//Store image and url in Map
@@ -76,6 +78,7 @@ public class JHImageLoader {
             imageView.setImageResource(stub_id);
         }
     	}
+    	
     }
         
     private void queuePhoto(String url, ImageView imageView)
@@ -115,7 +118,7 @@ public class JHImageLoader {
                 if(imageViewReused(photoToLoad))
                     return;
                 // download image from web url
-                Bitmap bmp = getBitmap(photoToLoad.url);
+                Bitmap bmp = getBitmap(photoToLoad.url,photoToLoad.imageView);
                 
                 // set image data in Memory Cache
                 memoryCache.put(photoToLoad.url, bmp);
@@ -137,19 +140,19 @@ public class JHImageLoader {
         }
     }
     
-    private Bitmap getBitmap(String url) 
+    private Bitmap getBitmap(String url,ImageView imageView) 
     {
         File f=fileCache.getFile(url);
         
         //from SD cache
         //CHECK : if trying to decode file which not exist in cache return null
-        Bitmap b = decodeFile(f);
+        Bitmap b = decodeFile(f,imageView);
         if(b!=null)
             return b;
         
         // Download image file from web
         try {
-        	
+        	Log.i("IMAGEURL", url);
             Bitmap bitmap=null;
             URL imageUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();
@@ -172,7 +175,7 @@ public class JHImageLoader {
             
             //Now file created and going to resize file with defined height
             // Decodes image and scales it to reduce memory consumption
-            bitmap = decodeFile(f);
+            bitmap = decodeFile(f,imageView);
             
             return bitmap;
             
@@ -185,7 +188,7 @@ public class JHImageLoader {
     }
 
     //Decodes image and scales it to reduce memory consumption
-    private Bitmap decodeFile(File f){
+    private Bitmap decodeFile(File f,ImageView imageView){
     	
         try {
         	
@@ -199,18 +202,20 @@ public class JHImageLoader {
           //Find the correct scale value. It should be the power of 2.
          
             // Set width/height of recreated image
-            final int REQUIRED_SIZE=1920;
             
+            DisplayMetrics metrics = EncourageApplication.getSharedApplication().getResources().getDisplayMetrics();
+            
+            final int reqWidth = metrics.widthPixels;
+            final int reqHeight = reqWidth;
             int width_tmp=o.outWidth, height_tmp=o.outHeight;
             int scale=1;
             while(true){
-                if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
+                if(width_tmp/2<reqWidth || height_tmp/2<reqHeight)
                     break;
                 width_tmp/=2;
                 height_tmp/=2;
                 scale*=2;
             }
-            scale =1;
             //decode with current scale values
             BitmapFactory.Options o2 = new BitmapFactory.Options();
             o2.inSampleSize=scale;
@@ -251,7 +256,7 @@ public class JHImageLoader {
             if(bitmap!=null)
                 photoToLoad.imageView.setImageBitmap(bitmap);
             else
-                photoToLoad.imageView.setImageResource(stub_id);
+                photoToLoad.imageView.setImageResource(retry_id);
         }
     }
 

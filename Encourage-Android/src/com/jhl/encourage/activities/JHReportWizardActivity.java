@@ -476,7 +476,11 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		String imagePath = imageFragment.getImagePath();
 
 		File file = new File(imagePath);
-
+		if(file.length()>4194304){
+			JHUtility.dismissProgressDialog(this);
+			JHUtility.showDialogOk("Size Limit", "Please choose a file of size less than 4MB", this);
+			return;
+		}
 		String extenstion = imagePath.substring(imagePath.lastIndexOf("."),
 				imagePath.length());
 		String actualfileName = imagePath.substring(
@@ -568,6 +572,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			imageFragment.endProgress();
 			finish();
 		}
+		
+		
 	}
 
 	private static int SICK_DATE_DIALOGUE = 1;
