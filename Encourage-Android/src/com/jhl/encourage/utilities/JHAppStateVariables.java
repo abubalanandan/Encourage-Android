@@ -47,6 +47,13 @@ public class JHAppStateVariables {
 		
 	}
 	
+	public static boolean isReadyForSubmission(){
+		if(sicknesses.size()==0 && emotionals.size()==0){
+			return false;
+		}
+		return true;
+	}
+	
 	public static String getSickEmoReport(){
 		StringBuffer reportBuffer = new StringBuffer();
 		for (String sickness : sicknesses) {
