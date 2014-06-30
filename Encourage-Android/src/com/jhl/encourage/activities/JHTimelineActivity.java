@@ -132,6 +132,7 @@ public class JHTimelineActivity extends Activity {
 								if (success.equalsIgnoreCase("true")) {
 									System.out.println("success");
 									JHAppStateVariables.setLoginTocken(null);
+									JHAppStateVariables.clearAppStateVariables();
 									if(EncourageApplication.getSharedApplication().getImageLoader()!=null){
 										EncourageApplication.getSharedApplication().getImageLoader().clearCache();
 									}
