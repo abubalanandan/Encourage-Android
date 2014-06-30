@@ -1,11 +1,36 @@
 package com.jhl.encourage.activities;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.TabHost;
+import android.widget.TabHost.TabContentFactory;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHReportWizardPageAdapter;
@@ -22,27 +47,6 @@ import com.jhl.encourage.views.JHReportWizardEmotionalFragment;
 import com.jhl.encourage.views.JHReportWizardImageFragment;
 import com.jhl.encourage.views.JHReportWizardMapFragment;
 import com.jhl.encourage.views.JHReportWizardSicknessFragment;
-import com.jhl.encourage.views.JHReportWizardVideoFragment;
-
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
-import android.widget.TabHost;
-import android.widget.TabHost.TabContentFactory;
 
 public class JHReportWizardActivity extends FragmentActivity implements
 		TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
@@ -319,6 +323,24 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		JHReportFragment fragment = getCurrentFragment(page);
 		JHContactDialog dialog = new JHContactDialog(this, fragment);
 		dialog.show();
+		// getAllContacts(getContentResolver());
+	}
+
+	public void getAllContacts(ContentResolver cr) {
+		ArrayList<String> emails = new ArrayList<String>();
+		Log.i("Start ", new Date().toString());
+		Cursor phones = cr.query(
+				ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, null,
+				null, null);
+		while (phones.moveToNext()) {
+			String email = phones
+					.getString(phones
+							.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
+			emails.add(email);
+		}
+
+		phones.close();
+		Log.i("End", new Date().toString());
 	}
 
 	// class ContactLoadTask extends AsyncTask<String, Integer, Boolean> {
@@ -476,9 +498,10 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		String imagePath = imageFragment.getImagePath();
 
 		File file = new File(imagePath);
-		if(file.length()>4194304){
+		if (file.length() > 4194304) {
 			JHUtility.dismissProgressDialog(this);
-			JHUtility.showDialogOk("Size Limit", "Please choose a file of size less than 4MB", this);
+			JHUtility.showDialogOk("Size Limit",
+					"Please choose a file of size less than 4MB", this);
 			return;
 		}
 		String extenstion = imagePath.substring(imagePath.lastIndexOf("."),
@@ -572,8 +595,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			imageFragment.endProgress();
 			finish();
 		}
-		
-		
+
 	}
 
 	private static int SICK_DATE_DIALOGUE = 1;
