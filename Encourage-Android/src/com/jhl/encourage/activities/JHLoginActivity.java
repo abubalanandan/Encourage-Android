@@ -47,7 +47,6 @@ public class JHLoginActivity extends Activity {
 
 	public void loginButtonClicked(View view) {
 
-		JHUtility.showProgressDialog("Logging in ...", this);		
 		validateFields();
 
 	}
@@ -66,6 +65,7 @@ public class JHLoginActivity extends Activity {
 		else if ((pswd == null) || pswd.isEmpty())
 			JHUtility.showDialogOk("", getString(R.string.pswd_empty_msg), this);
 		else {
+			JHUtility.showProgressDialog("Logging in ...", this);		
 			new GCMRegistrationTask().execute();
 		}
 	}

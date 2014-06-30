@@ -55,6 +55,7 @@ public class JHAlertsTeaserDialog extends Dialog {
 		
 		teaserAdapter = new JHAlertsTeaserAdapter(context, R.layout.alertteaseritem, alerts);
 		listView.setAdapter(teaserAdapter);
+		
 		listView.setOnItemClickListener(new ListItemClickListener());
 		
 		Button viewAll = (Button)findViewById(R.id.viewAllAlerts);

@@ -56,6 +56,7 @@ public class JHImageLoader {
     public void DisplayImage(String url, ImageView imageView)
     {
     	//Store image and url in Map
+    	if(!imageViews.containsKey(imageView)){
         imageViews.put(imageView, url);
         
         //Check image is stored in MemoryCache Map or not (see MemoryCache.java)
@@ -74,6 +75,7 @@ public class JHImageLoader {
             //Before downloading image show default image 
             imageView.setImageResource(stub_id);
         }
+    	}
     }
         
     private void queuePhoto(String url, ImageView imageView)
