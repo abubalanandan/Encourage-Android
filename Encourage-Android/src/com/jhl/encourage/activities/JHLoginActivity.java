@@ -74,7 +74,7 @@ public class JHLoginActivity extends Activity {
 		
 	public void forgotPasswordClicked(View view){
 		
-		String url = "tryencourage.com";
+		String url = "https://tryencourage.com";
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(url));
 		startActivity(intent);

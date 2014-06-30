@@ -96,6 +96,7 @@
         android:onClick="forgotPasswordClicked"
         android:text="Forgot password?"
         android:textColor="@android:color/white"
+        android:clickable="true"
         android:textSize="12sp" />
 
     <Button
