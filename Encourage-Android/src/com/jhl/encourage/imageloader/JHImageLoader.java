@@ -15,6 +15,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
 import com.jhl.encourage.utilities.JHUtility;
 
@@ -50,7 +51,7 @@ public class JHImageLoader {
     }
     
     // default image show in list (Before online image download)
-    final int stub_id=R.drawable.stub;
+    final int stub_id=R.drawable.image_size;
     
     public void DisplayImage(String url, ImageView imageView)
     {

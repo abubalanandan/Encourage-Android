@@ -22,9 +22,9 @@
                 <ImageView
                     android:id="@+id/imageHolder"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:src="@drawable/active_page" />
+                    android:src="@drawable/image_size" />
 
                 <ProgressBar
                     android:id="@+id/uploadProgress"
@@ -72,10 +72,11 @@
 
                 <ImageButton
                     android:id="@+id/imageButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="imageButtonClicked"
-                    android:src="@android:drawable/btn_star" />
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/select_image" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

@@ -393,7 +393,6 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		
 		ReportWizartAPICaller apiCaller = new ReportWizartAPICaller(this);
 		
-		JHUtility.showProgressDialog("Uploading...", this);
 		
 		switch (page) {
 		case 0:
@@ -401,6 +400,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			if(date == null || date.trim().equals("")) {
 				date = JHUtility.getDate();
 			}
+			JHUtility.showProgressDialog("Uploading...", this);
 			apiCaller.invokeSickenssEmotionalApi(date, JHAppStateVariables.getSickEmoReport(), sickFragment.getSickDesc(), cboxCareCircle.isChecked(), fragment.getContact());
 			break;
 		case 1:
@@ -408,18 +408,23 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			if(date == null || date.trim().equals("")) {
 				date = JHUtility.getDate();
 			}
+			JHUtility.showProgressDialog("Uploading...", this);
 			apiCaller.invokeSickenssEmotionalApi(date, JHAppStateVariables.getSickEmoReport(), emoFragment.getEmoDesc(), cboxCareCircle.isChecked(), fragment.getContact());
 			break;
 		case 2:	
-			
+			JHUtility.showProgressDialog("Uploading...", this);
 			date = imageFragment.getDate();
 			String name = imageFragment.getName();
 			imageFragment.showProgrees();
 			imageUpload(apiCaller, date, name);
 			break;
 		case 3:
-			
+			if(mapFragment.getAddress()!=null && mapFragment.getAddress().length()!=0){
+				JHUtility.showProgressDialog("Uploading...", this);
 			apiCaller.invokeMapApi(mapFragment.getDate(), mapFragment.getName(),mapFragment.getAddress(), mapFragment.getDescription(), cboxCareCircle.isChecked(), fragment.getContact());
+			}else{
+				JHUtility.showDialogOk(null, "Please Enter the address of the event", this);
+			}
 			break;
 		default:
 			break;

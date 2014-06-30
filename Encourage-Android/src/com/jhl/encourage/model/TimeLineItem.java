@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import android.text.Html;
+
 public class TimeLineItem implements Comparable<TimeLineItem>{
 
 	private String timelineDate;
@@ -114,7 +116,12 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 			String[] details = detailObject.split("\\^~\\^");
 			for(String detail:details){
 				String[] pair = detail.split("&nbsp;\\|&nbsp;");
+				if(pair!=null){
+				for(int i=0;i<pair.length;i++){
+					pair[i] =org.apache.commons.lang3.StringEscapeUtils.unescapeXml(pair[i]);
+				}
 				this.details.add(pair);
+				}
 			}
 		}
 	}

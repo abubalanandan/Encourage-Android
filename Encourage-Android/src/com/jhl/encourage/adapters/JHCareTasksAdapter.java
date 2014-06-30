@@ -3,16 +3,29 @@ package com.jhl.encourage.adapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
-import com.jhl.encourage.activities.JHTimelineActivity;
 import com.jhl.encourage.apis.MarkCareTaskService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
@@ -22,16 +35,6 @@ import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHCareTasksDialog;
-
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
@@ -51,8 +54,9 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 	private class ViewHolder {
 		TextView title;
 		TextView due;
-		Button doneButton;
-		Button notDoneButton;
+		ImageButton doneButton;
+		ImageButton notDoneButton;
+		ImageView medTypeImageView;
 	}
 	
 	public List<Notification>  getCareTasks() {
@@ -70,11 +74,11 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 		   convertView = vi.inflate(R.layout.caretask, null);
 	 
 		   holder = new ViewHolder();
-		   holder.title = (TextView) convertView.findViewById(R.id.careTaskTitle);
-		   holder.due = (TextView) convertView.findViewById(R.id.careTaskDue);
-		   holder.doneButton = (Button)convertView.findViewById(R.id.btnDone);
-		   holder.notDoneButton = (Button)convertView.findViewById(R.id.btnNotDone);	   
-		   
+		   holder.title = (TextView) convertView.findViewById(R.id.careTaskTitleTV);
+		   holder.due = (TextView) convertView.findViewById(R.id.dueDateAndTimeTV);
+		   holder.doneButton = (ImageButton)convertView.findViewById(R.id.btnDone);
+		   holder.notDoneButton = (ImageButton)convertView.findViewById(R.id.btnNotDone);	   
+		   holder.medTypeImageView = (ImageView)convertView.findViewById(R.id.medTypeImageView);
 		   holder.doneButton.setOnClickListener(new DoneButtonClicked(position));
 		   holder.notDoneButton.setOnClickListener(new NotDoneButtonClicked(position));
 		   
@@ -95,9 +99,69 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 	   
 	   holder.due.setText(careTask.getDateTime());
 	   holder.title.setText(careTask.getCareplanName());
-	   holder.due.setTag(careTask.getDateTime());
-	   holder.title.setTag(careTask.getCareplanName());
-	 
+	   
+	   
+	   if(careTask.getCareTaskType().equalsIgnoreCase("Medication")|| careTask.getCareTaskType().equalsIgnoreCase("Physical Therapy")){
+		   holder.medTypeImageView.setBackground(context.getResources().getDrawable(R.drawable.med));
+	   }else if(careTask.getCareTaskType().equalsIgnoreCase("Diet Management")){
+		   holder.medTypeImageView.setBackground(context.getResources().getDrawable(R.drawable.food));
+
+	   }else if(careTask.getCareTaskType().equalsIgnoreCase("Appointment")){
+		   holder.medTypeImageView.setBackground(context.getResources().getDrawable(R.drawable.doc));
+
+	   }
+	   
+	   LinearLayout postLL = (LinearLayout) convertView
+				.findViewById(R.id.postLL);
+		TableLayout postDetailsTL = (TableLayout)convertView.findViewById(R.id.postDetailsTL);
+		//postLL.removeAllViews();
+		int count = postLL.getChildCount();
+		postLL.removeViews(1, count-1);
+		
+		
+		String details = careTask.getCpDetails();
+		details = details.replace('{', ' ');
+		details = details.replace('}', ' ');
+		details = details.trim();
+		String[] elements = details.split(",");
+		ArrayList<String[]>detailList = new ArrayList<String[]>();
+		for(String element:elements){
+			String[] pairs = element.split(":");
+			detailList.add(pairs);
+		}
+		
+		Iterator iterator = detailList.iterator();
+		
+		
+		postDetailsTL.removeAllViews();
+		while(iterator.hasNext()){
+			String[] pairs = (String[])iterator.next();
+			if(pairs!=null && pairs.length==2){
+				pairs[0] = pairs[0].replaceAll("\"", "");
+				pairs[1] = pairs[1].replaceAll("\"", "");
+			TableRow.LayoutParams params = new TableRow.LayoutParams(
+					TableRow.LayoutParams.MATCH_PARENT,
+					TableRow.LayoutParams.WRAP_CONTENT);
+//			JHTimelineItemView itemView = new JHTimelineItemView(ctx);
+//			itemView.setLayoutParams(params);
+//			itemView.getKeyTV().setText(pairs.getKey());
+//			itemView.getValueTV().setText(pairs.getValue());
+//			postLL.addView(itemView);
+			TableRow row = new TableRow(context);
+			row.setLayoutParams(params);
+			TextView keyTV = new TextView(context);
+			TextView valueTV = new TextView(context);
+			row.addView(keyTV);
+			row.addView(valueTV);
+			keyTV.setText(pairs[0]);
+			valueTV.setText(pairs[1]);
+			
+			postDetailsTL.addView(row);
+			}
+			
+		}
+	   
+	   
 	   return convertView;
 	 
 	  }
@@ -137,6 +201,7 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 
 		MarkCareTaskService service = restAdapter.create(MarkCareTaskService.class);
 		
+		JHUtility.showProgressDialog("Updating caretask status...",(Activity) context);
 		service.updateCareTask("updateCareTaskStatus",careTaskId, status, JHAppStateVariables.getLoginTocken(), JHUtility.getDateTime(), 
 				JHUtility.getTimeZoneString(), logitude, latitude, 
 				new Callback<SpocResponse>() {
@@ -149,13 +214,17 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 								String success = map.get("success");
 								
 								Log.d(JHConstants.LOG_TAG, "invokeMarkCareTaskApi success "+success);
-								
 								if(success.equalsIgnoreCase("true")){
+									JHUtility.dismissProgressDialog((Activity)context);
 									JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_CARE_TASK, careTaskId);
-									JHAppStateVariables.removeCareTask(careTaskId);
-									dialog.cancel();
+									Notification n = new Notification(careTaskId);
+									n.setNotificationType(JHConstants.NOT_TYPE_CARE_TASK);
+									careTasks.remove(n);
+									//JHAppStateVariables.removeCareTask(careTaskId);
+									JHCareTasksAdapter.this.notifyDataSetChanged();
 								}else{
-									
+									JHUtility.dismissProgressDialog((Activity)context);
+
 								}
 								
 							}
@@ -165,6 +234,8 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 					@Override
 					public void failure(RetrofitError retrofitError) {
 						System.out.println("error");
+						JHUtility.dismissProgressDialog((Activity)context);
+
 					}
 				});
 		
