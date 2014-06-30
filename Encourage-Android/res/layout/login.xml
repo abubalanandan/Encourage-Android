@@ -49,7 +49,6 @@
                 android:background="@null"
                 android:hint="User name"
                 android:inputType="textCapWords"
-                android:text="abu.316@gmail.com"
                 android:textColor="@android:color/background_dark"
                 android:textSize="14sp" />
 
@@ -80,7 +79,6 @@
                 android:layout_toRightOf="@+id/passwordIcon"
                 android:background="@null"
                 android:hint="Password"
-                android:text="Sachin@10"
                 android:inputType="textPassword"
                 android:textColor="@android:color/background_dark"
                 android:textSize="14sp" />
