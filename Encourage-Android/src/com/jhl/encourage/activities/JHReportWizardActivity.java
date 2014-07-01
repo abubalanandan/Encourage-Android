@@ -194,6 +194,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private void initialiseTabHost(Bundle args) {
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup();
+		
 		TabInfo tabInfo = null;
 		JHReportWizardActivity.addTab(this, this.mTabHost, this.mTabHost
 				.newTabSpec("Tab1").setIndicator("Sick"),

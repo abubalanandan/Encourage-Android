@@ -77,7 +77,8 @@
                     android:id="@+id/rwCloseBackgroundImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/close_buton" />
+                    android:background="@drawable/close_buton"
+                    android:layout_marginRight="5dp" />
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
