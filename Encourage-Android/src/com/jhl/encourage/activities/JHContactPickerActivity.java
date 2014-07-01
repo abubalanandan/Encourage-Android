@@ -11,6 +11,8 @@ import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
@@ -96,8 +98,25 @@ public class JHContactPickerActivity extends Activity {
 	}
 
 	public void closeContactButtonPressed(View view) {
-		JHAppStateVariables.setSelectedContacts(null);
-		finish();
+		AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Warning").setMessage("Are you sure you want to clear the selected contacts?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				JHAppStateVariables.setSelectedContacts(null);
+				finish();
+			}
+		}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+			}
+		}).create();
+		dialog.show();
+		
+		
 	}
 
 }
