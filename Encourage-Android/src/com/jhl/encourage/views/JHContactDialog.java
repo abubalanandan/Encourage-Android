@@ -164,15 +164,15 @@ public class JHContactDialog extends Dialog {
 		
 		@Override
 		public void onClick(View v) {
-			Contact contact = new Contact();
-			contact.setName1(contactName1.getText().toString());
-			contact.setEmail1(contactEmail1.getText().toString());
-			contact.setName2(contactName2.getText().toString());
-			contact.setEmail2(contactEmail2.getText().toString());
-			contact.setAddToCC1(addtoCC1.isChecked());
-			contact.setAddToCC2(addtoCC2.isChecked());
-			
-			fragment.setContact(contact);
+//			Contact contact = new Contact();
+//			contact.setName1(contactName1.getText().toString());
+//			contact.setEmail1(contactEmail1.getText().toString());
+//			contact.setName2(contactName2.getText().toString());
+//			contact.setEmail2(contactEmail2.getText().toString());
+//			contact.setAddToCC1(addtoCC1.isChecked());
+//			contact.setAddToCC2(addtoCC2.isChecked());
+//			
+//			fragment.setContact(contact);
 			cancel();
 		}
 	}

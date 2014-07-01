@@ -41,54 +41,54 @@ public class ReportWizartAPICaller {
 		SickEmotionReportService service = restAdapter.create(SickEmotionReportService.class);
 
 		String icsString = "no";
-		if(ics){
-			icsString = "yes";
-		}
-		String addToCC1 = "no";
-		if(contact.isAddToCC1()){
-			addToCC1 = "yes";
-		}
-		String addToCC2 = "no";
-		if(contact.isAddToCC1()){
-			addToCC2 = "yes";
-		}
+//		if(ics){
+//			icsString = "yes";
+//		}
+//		String addToCC1 = "no";
+//		if(contact.isAddToCC1()){
+//			addToCC1 = "yes";
+//		}
+//		String addToCC2 = "no";
+//		if(contact.isAddToCC1()){
+//			addToCC2 = "yes";
+//		}
 		
 		System.out.println("DATAAAAAAAAAAAAAA "+data);
 		
-		service.postReport("getSelfReportedData", date, "datetime", "Date", "","1", "", data, "varchar", "Complaint", "", "2","", "", "text", 
-				"Description", "", "3", "", contact.getName1(), contact.getEmail1(), contact.getName2(), contact.getEmail2(), "self_reported_form", "selfreport_data" , icsString, 
-				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", addToCC1, addToCC2, 
-				new Callback<SpocResponse>() {
-					@Override
-					public void success(SpocResponse spocResponse,	Response response) {
-						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
-						for (SpocObject spocObject : responseList) {
-							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
-								HashMap<String, String> map = spocObject.getMap();
-								String success = map.get("success");
-								
-								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
-								
-								if(success.equalsIgnoreCase("true")){
-									
-									activity.finish();
-								}else{
-									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
-									
-									activity.finish();
-								}
-								
-							}
-						}
-					}
-
-					@Override
-					public void failure(RetrofitError retrofitError) {
-						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
-						
-						activity.finish();
-					}
-				});
+//		service.postReport("getSelfReportedData", date, "datetime", "Date", "","1", "", data, "varchar", "Complaint", "", "2","", "", "text", 
+//				"Description", "", "3", "", contact.getName1(), contact.getEmail1(), contact.getName2(), contact.getEmail2(), "self_reported_form", "selfreport_data" , icsString, 
+//				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", addToCC1, addToCC2, 
+//				new Callback<SpocResponse>() {
+//					@Override
+//					public void success(SpocResponse spocResponse,	Response response) {
+//						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
+//						for (SpocObject spocObject : responseList) {
+//							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
+//								HashMap<String, String> map = spocObject.getMap();
+//								String success = map.get("success");
+//								
+//								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
+//								
+//								if(success.equalsIgnoreCase("true")){
+//									
+//									activity.finish();
+//								}else{
+//									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+//									
+//									activity.finish();
+//								}
+//								
+//							}
+//						}
+//					}
+//
+//					@Override
+//					public void failure(RetrofitError retrofitError) {
+//						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+//						
+//						activity.finish();
+//					}
+//				});
 		
 
 	}

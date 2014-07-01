@@ -8,6 +8,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -98,9 +100,20 @@ public class JHTimelineActivity extends Activity {
 					JHUtility.getTimeZoneString(), 0);
 		}
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.cancel(10);
+	}
 
 	private void invokeLogoutApi() {
 
+		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.cancel(10);
+		
 		LogoutService service = EncourageApplication.getRestAdapter().create(
 				LogoutService.class);
 
@@ -505,5 +518,7 @@ public class JHTimelineActivity extends Activity {
 	public void onBackPressed() {
 		// Disabled back button action
 	}
+	
+
 
 }

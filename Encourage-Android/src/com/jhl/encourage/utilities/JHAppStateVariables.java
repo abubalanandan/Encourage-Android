@@ -170,14 +170,15 @@ public class JHAppStateVariables {
 
 	}
 
-	private static String contactListString = "";
+	//private static String contactListString = "";
 
-	public static void setContactsListString(String list) {
-		JHAppStateVariables.contactListString = list;
+	private static List<Contact> selectedContacts;
+	public static void setSelectedContacts(List<Contact> selectedContacts) {
+		JHAppStateVariables.selectedContacts = selectedContacts;
 	}
 
-	public static String getContactsListString() {
-		return contactListString;
+	public static List<Contact> getSelectedContacts() {
+		return JHAppStateVariables.selectedContacts;
 	}
 
 	private static List<Contact> contacts;
@@ -207,7 +208,7 @@ public class JHAppStateVariables {
 		careTasks.clear();
 		if (contacts != null)
 			contacts.clear();
-		contactListString = null;
+		selectedContacts = null;
 		alertNumberView.setText("0");
 		careTaskNumberView.setText("0");
 		sicknesses.clear();

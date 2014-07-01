@@ -35,6 +35,7 @@ import android.widget.TabHost.TabContentFactory;
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHReportWizardPageAdapter;
 import com.jhl.encourage.apis.ReportWizartAPICaller;
+import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.model.JHUploadResponse;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
@@ -320,26 +321,40 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	public void rwContactButtonPressed(View view) {
 
 		int page = JHAppStateVariables.currentRwPage;
-		JHReportFragment fragment = getCurrentFragment(page);
-		JHContactDialog dialog = new JHContactDialog(this, fragment);
-		dialog.show();
-		// getAllContacts(getContentResolver());
+//		JHReportFragment fragment = getCurrentFragment(page);
+//		JHContactDialog dialog = new JHContactDialog(this, fragment);
+		//dialog.show();
+		getAllContacts(getContentResolver());
 	}
 
 	public void getAllContacts(ContentResolver cr) {
-		ArrayList<String> emails = new ArrayList<String>();
+		Contact contact;
+		List<Contact> contacts = new ArrayList<Contact>();
 		Log.i("Start ", new Date().toString());
 		Cursor phones = cr.query(
 				ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, null,
 				null, null);
 		while (phones.moveToNext()) {
+			String name =  phones
+			.getString(phones
+					.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
 			String email = phones
 					.getString(phones
 							.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
-			emails.add(email);
+			contact = new Contact(name, email, false, false);
+			contacts.add(contact);
 		}
-
+		JHAppStateVariables.setContacts(contacts);
 		phones.close();
+		
+		try {
+			 Intent i = new Intent(JHReportWizardActivity.this,
+			 JHContactPickerActivity.class);
+			 startActivity(i);
+			 } catch (Exception ex) {
+			 Log.e("main", ex.toString());
+			 }
+		
 		Log.i("End", new Date().toString());
 	}
 

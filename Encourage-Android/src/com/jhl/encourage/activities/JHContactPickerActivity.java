@@ -1,6 +1,7 @@
 package com.jhl.encourage.activities;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jhl.encourage.R;
@@ -31,28 +32,25 @@ public class JHContactPickerActivity extends Activity {
 	}
 
 	public void contatDoneButtonClicked(View view) {
-//		try {
-//
-//			StringBuffer contactList = new StringBuffer();
-//
-//			List<Contact> contacts = contactAdapter.getContacts();
-//			for (int i = 0; i < contacts.size(); i++) {
-//				Contact contact = contacts.get(i);
-//				if (contact.isSelected()) {
-//					contactList.append(contact.getEmail() + ";");
-//				}
-//			}
-//
-//			Log.d(JHConstants.LOG_TAG, "Contacts " + contactList.toString());
-//
-//			JHAppStateVariables.setContactsListString(contactList.toString());
-//			Intent i = new Intent(JHContactPickerActivity.this,
-//					JHReportWizardActivity.class);
-//			startActivity(i);
-//			
-//		} catch (Exception ex) {
-//			Log.e("main", ex.toString());
-//		}
+		try {
+
+			List<Contact> selectedContacts = new ArrayList<Contact>();
+			List<Contact> contacts = contactAdapter.getContacts();
+			for (int i = 0; i < contacts.size(); i++) {
+				Contact contact = contacts.get(i);
+				if (contact.isSelected()) {
+					selectedContacts.add(contact);
+				}
+			}
+
+			Log.d(JHConstants.LOG_TAG, "Contacts " + selectedContacts.toString());
+
+			JHAppStateVariables.setSelectedContacts(selectedContacts);
+			finish();
+			
+		} catch (Exception ex) {
+			Log.e("main", ex.toString());
+		}
 
 	}
 
@@ -97,32 +95,9 @@ public class JHContactPickerActivity extends Activity {
 		});
 	}
 
-//	class CloseClicked implements View.OnClickListener {
-//		@Override
-//		public void onClick(View arg0) {
-//			try {
-//
-//				StringBuffer contactList = new StringBuffer();
-//
-//				List<Contact> contacts = contactAdapter.getContacts();
-//				for (int i = 0; i < contacts.size(); i++) {
-//					Contact contact = contacts.get(i);
-//					if (contact.isSelected()) {
-//						contactList.append(contact.getEmail() + ";");
-//					}
-//				}
-//
-//				Log.d(JHConstants.LOG_TAG, "Contacts " + contactList.toString());
-//
-//				JHAppStateVariables.setContactsListString(contactList
-//						.toString());
-//				Intent i = new Intent(JHContactPickerActivity.this,
-//						JHReportWizardActivity.class);
-//				startActivity(i);
-//			} catch (Exception ex) {
-//				Log.e("main", ex.toString());
-//			}
-//		}
-//	}
+	public void closeContactButtonPressed(View view) {
+		JHAppStateVariables.setSelectedContacts(null);
+		finish();
+	}
 
 }
