@@ -221,22 +221,22 @@ public class JHTimelineActivity extends Activity {
 		timelineView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
-		timelineView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				if(list.get(position).getDatatype().equalsIgnoreCase("Map")|| list.get(position).getDatatype().equalsIgnoreCase("Image")){
-					ImageView imageView = (ImageView)view.findViewWithTag(list.get(position).getTimelineid());
-					if(imageView!=null){
-						if(imageView.getBackground().equals(getResources().getDrawable(R.drawable.retry)))
-						imageLoader.DisplayImage(list.get(position).getFilename(), imageView);
-					}
-				}
-				
-			}
-		});
+//		timelineView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				// TODO Auto-generated method stub
+//				if(list.get(position).getDatatype().equalsIgnoreCase("Map")|| list.get(position).getDatatype().equalsIgnoreCase("Image")){
+//					ImageView imageView = (ImageView)view.findViewWithTag(list.get(position).getTimelineid());
+//					if(imageView!=null){
+//						if(imageView.getBackground().equals(getResources().getDrawable(R.drawable.retry)))
+//						imageLoader.DisplayImage(list.get(position).getFilename(), imageView);
+//					}
+//				}
+//				
+//			}
+//		});
 		
 		timelineView.setOnScrollListener(new AbsListView.OnScrollListener() {
 

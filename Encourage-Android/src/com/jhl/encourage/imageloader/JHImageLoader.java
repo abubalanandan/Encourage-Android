@@ -54,7 +54,6 @@ public class JHImageLoader {
     
     // default image show in list (Before online image download)
     final int stub_id=R.drawable.image_size;
-    final int retry_id = R.drawable.retry;
     public void DisplayImage(String url, ImageView imageView)
     {
     	//Store image and url in Map
@@ -256,7 +255,7 @@ public class JHImageLoader {
             if(bitmap!=null)
                 photoToLoad.imageView.setImageBitmap(bitmap);
             else
-                photoToLoad.imageView.setImageResource(retry_id);
+                photoToLoad.imageView.setImageResource(stub_id);
         }
     }
 
