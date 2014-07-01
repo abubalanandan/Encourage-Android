@@ -120,4 +120,8 @@ public class JHContactPickerActivity extends Activity {
 		
 	}
 
+	@Override
+	public void onBackPressed(){
+		
+	}
 }
