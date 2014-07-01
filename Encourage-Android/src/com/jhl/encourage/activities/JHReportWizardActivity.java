@@ -323,9 +323,9 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	public void rwContactButtonPressed(View view) {
 
 		int page = JHAppStateVariables.currentRwPage;
-//		JHReportFragment fragment = getCurrentFragment(page);
-//		JHContactDialog dialog = new JHContactDialog(this, fragment);
-		//dialog.show();
+		// JHReportFragment fragment = getCurrentFragment(page);
+		// JHContactDialog dialog = new JHContactDialog(this, fragment);
+		// dialog.show();
 		getAllContacts(getContentResolver());
 	}
 
@@ -337,32 +337,33 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, null,
 				null, null);
 		while (phones.moveToNext()) {
-			String name =  phones
-			.getString(phones
-					.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+			String name = phones
+					.getString(phones
+							.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
 			String email = phones
 					.getString(phones
 							.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
-			if(name != null && email != null){
+			if (name != null && email != null) {
 				name = name.trim();
 				email = email.trim();
-				if(! (name.equals("") || email.equals(""))){
+				if (!(name.equals("") || email.equals(""))) {
 					contact = new Contact(name, email, false, false);
-					contacts.add(contact);
+					if (!contacts.contains(contact))
+						contacts.add(contact);
 				}
 			}
 		}
 		JHAppStateVariables.setContacts(contacts);
 		phones.close();
-		
+
 		try {
-			 Intent i = new Intent(JHReportWizardActivity.this,
-			 JHContactPickerActivity.class);
-			 startActivity(i);
-			 } catch (Exception ex) {
-			 Log.e("main", ex.toString());
-			 }
-		
+			Intent i = new Intent(JHReportWizardActivity.this,
+					JHContactPickerActivity.class);
+			startActivity(i);
+		} catch (Exception ex) {
+			Log.e("main", ex.toString());
+		}
+
 		Log.i("End", new Date().toString());
 	}
 
@@ -441,15 +442,16 @@ public class JHReportWizardActivity extends FragmentActivity implements
 
 		ReportWizartAPICaller apiCaller = new ReportWizartAPICaller(this);
 
-		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHReportWizardActivity.this);
+		JHGPSTracker gpsTracker = JHGPSTracker
+				.getGPSTracker(JHReportWizardActivity.this);
 		Location location = gpsTracker.getLocation();
 		String latitude = "";
 		String longitude = "";
-		if(location != null ){
-			latitude = location.getLatitude()+"";
-			longitude = location.getLongitude()+"";
+		if (location != null) {
+			latitude = location.getLatitude() + "";
+			longitude = location.getLongitude() + "";
 		}
-		
+
 		switch (page) {
 		case 0:
 			String date = sickFragment.getSickDate();
@@ -612,16 +614,17 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			Log.d(JHConstants.LOG_TAG, "uploadefileName " + uploadefileName);
 
 			if (status.equals("true")) {
-				
-				JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHReportWizardActivity.this);
+
+				JHGPSTracker gpsTracker = JHGPSTracker
+						.getGPSTracker(JHReportWizardActivity.this);
 				Location location = gpsTracker.getLocation();
 				String latitude = "";
 				String longitude = "";
-				if(location != null ){
-					latitude = location.getLatitude()+"";
-					longitude = location.getLongitude()+"";
+				if (location != null) {
+					latitude = location.getLatitude() + "";
+					longitude = location.getLongitude() + "";
 				}
-				
+
 				apiCaller.invokeImageApi(eventDate, eventName, ics,
 						uploadefileName, actualFileName, latitude, longitude);
 			} else {
