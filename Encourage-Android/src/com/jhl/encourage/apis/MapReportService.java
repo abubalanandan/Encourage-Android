@@ -36,10 +36,6 @@ public interface MapReportService {
     		@Field("txt_mapevent_desc[data_type_code]") String data_type_code4,
     		@Field("txt_mapevent_desc[sequence]") String sequence4, 
     		@Field("txt_mapevent_desc[record_uuid]") String record_uuid4,
-    		@Field("nimyc_person1") String nimyc_person1,
-    		@Field("nimyc_mail1") String nimyc_mail1,
-    		@Field("nimyc_person2") String nimyc_person2,
-    		@Field("nimyc_mail2") String nimyc_mail2,
     		@Field("form") String form,
     		@Field("event_type") String event_type,
     		@Field("inform_carecircle") String inform_carecircle,
@@ -47,8 +43,14 @@ public interface MapReportService {
     		@Field("timezone") String timezone,
     		@Field("token") String token,
     		@Field("doaction") String doaction,
-    		@Field("add_to_mycc1") String add_to_mycc1,
-    		@Field("add_to_mycc2") String add_to_mycc2,
+    		
+    		@Field("nimyc_persons") String nimyc_persons,
+    		@Field("nimyc_mails") String nimyc_mails, 
+    		@Field("add_to_myccs") String add_to_myccs,
+    		
+    		@Field("latitude") String latitude,
+    		@Field("longitude") String longitude,
+    		
     		Callback<SpocResponse> callback);
 
 }

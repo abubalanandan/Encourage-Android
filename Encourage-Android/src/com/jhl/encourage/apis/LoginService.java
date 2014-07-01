@@ -17,6 +17,10 @@ public interface LoginService {
     			@Field("email_address") String emailAddress, 
     			@Field("password") String password, 
     			@Field("gcmRegistrationId") String gcmRegistrationId ,
+    			@Field("datetime") String datetime, 
+    			@Field("timezone") String timezone,
+    			@Field("latitude") String latitude,
+        		@Field("longitude") String longitude,
     			Callback<SpocResponse> callback);
 
 }

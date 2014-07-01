@@ -13,6 +13,17 @@ import retrofit.http.POST;
 public interface SignupService {
     @FormUrlEncoded
     @POST("/hwservice/postPersonDetails.php")
-    void signUpUser(@Field("operationName") String operationName, @Field("fname") String fname, @Field("lname") String lname, @Field("email_address") String emailAddress, Callback<SpocResponse> callback);
+    void signUpUser(
+    		@Field("operationName") String operationName, 
+    		@Field("fname") String fname, 
+    		@Field("lname") String lname, 
+    		@Field("email_address") String emailAddress, 
+    		
+    		@Field("datetime") String datetime, 
+			@Field("timezone") String timezone,
+			@Field("latitude") String latitude,
+    		@Field("longitude") String longitude,
+    		
+    		Callback<SpocResponse> callback);
 
 }

@@ -214,5 +214,27 @@ public class JHAppStateVariables {
 		sicknesses.clear();
 		emotionals.clear();
 	}
+	
+	public static String[] getAddToCCDetails() {
+		String[] details = new String[3];
+		StringBuffer names = new StringBuffer();
+		StringBuffer emails = new StringBuffer();
+		StringBuffer yesNos = new StringBuffer();
+		
+		for(Contact contact : selectedContacts) {
+			names.append(contact.getName());
+			names.append("~~");
+			emails.append(contact.getEmail());
+			emails.append("~~");
+			yesNos.append("yes");
+			yesNos.append("~~");
+		}
+		
+		details[0] = names.toString();
+		details[1] = emails.toString();
+		details[2] = yesNos.toString();
+		
+		return details;
+	}
 
 }

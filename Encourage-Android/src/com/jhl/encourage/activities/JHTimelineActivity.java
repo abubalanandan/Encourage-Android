@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -38,6 +39,7 @@ import com.jhl.encourage.imageloader.JHImageLoader;
 import com.jhl.encourage.model.TimeLineItem;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHAlertsTeaserDialog;
 import com.jhl.encourage.views.JHCareTasksDialog;
@@ -118,7 +120,17 @@ public class JHTimelineActivity extends Activity {
 				LogoutService.class);
 
 		JHUtility.showProgressDialog("Logging out..", this);
-		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(),
+		
+		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHTimelineActivity.this);
+		Location location = gpsTracker.getLocation();
+		String latitude = "";
+		String longitude = "";
+		if(location != null ){
+			latitude = location.getLatitude()+"";
+			longitude = location.getLongitude()+"";
+		}
+		
+		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(), JHUtility.getDateTime(), JHUtility.getTimeZoneString(), latitude, longitude, 
 				new Callback<SpocResponse>() {
 
 					@Override

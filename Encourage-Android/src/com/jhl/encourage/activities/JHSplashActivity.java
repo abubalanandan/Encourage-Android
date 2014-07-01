@@ -2,12 +2,14 @@ package com.jhl.encourage.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHSplashActivity extends Activity {
@@ -30,7 +32,8 @@ public class JHSplashActivity extends Activity {
 	            }
 	        }, SPLASH_DISPLAY_LENGTH);
 		 
-		 
+		 JHGPSTracker gpsTraker = JHGPSTracker.getGPSTracker(JHSplashActivity.this);
+		 Location location = gpsTraker.getLocation(); // To initialize LocationListener
 	}
 
 	@Override

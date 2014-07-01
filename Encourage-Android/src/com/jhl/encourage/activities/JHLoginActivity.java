@@ -10,6 +10,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHLoginActivity extends Activity {
@@ -129,7 +131,15 @@ public class JHLoginActivity extends Activity {
 
 		Log.d(JHConstants.LOG_TAG, "regId "+regId);
 		
-		service.loginUser("userLogin", email, password,regId, 
+		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHLoginActivity.this);
+		Location location = gpsTracker.getLocation();
+		String latitude = "";
+		String longitude = "";
+		if(location != null ){
+			latitude = location.getLatitude()+"";
+			longitude = location.getLongitude()+"";
+		}
+		service.loginUser("userLogin", email, password,regId, JHUtility.getDateTime(), JHUtility.getTimeZoneString(), latitude, longitude, 
 				new Callback<SpocResponse>() {
 					@Override
 					public void success(SpocResponse spocResponse,	Response response) {

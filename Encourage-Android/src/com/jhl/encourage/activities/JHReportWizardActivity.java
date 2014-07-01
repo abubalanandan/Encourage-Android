@@ -15,6 +15,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.model.JHUploadResponse;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHHTTPClient;
 import com.jhl.encourage.utilities.JHUploadResponseParser;
 import com.jhl.encourage.utilities.JHUtility;
@@ -341,8 +343,14 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			String email = phones
 					.getString(phones
 							.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
-			contact = new Contact(name, email, false, false);
-			contacts.add(contact);
+			if(name != null && email != null){
+				name = name.trim();
+				email = email.trim();
+				if(! (name.equals("") || email.equals(""))){
+					contact = new Contact(name, email, false, false);
+					contacts.add(contact);
+				}
+			}
 		}
 		JHAppStateVariables.setContacts(contacts);
 		phones.close();
@@ -433,6 +441,15 @@ public class JHReportWizardActivity extends FragmentActivity implements
 
 		ReportWizartAPICaller apiCaller = new ReportWizartAPICaller(this);
 
+		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHReportWizardActivity.this);
+		Location location = gpsTracker.getLocation();
+		String latitude = "";
+		String longitude = "";
+		if(location != null ){
+			latitude = location.getLatitude()+"";
+			longitude = location.getLongitude()+"";
+		}
+		
 		switch (page) {
 		case 0:
 			String date = sickFragment.getSickDate();
@@ -444,7 +461,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				apiCaller.invokeSickenssEmotionalApi(date,
 						JHAppStateVariables.getSickEmoReport(),
 						sickFragment.getSickDesc(), cboxCareCircle.isChecked(),
-						fragment.getContact());
+						latitude, longitude);
 			} else {
 				JHUtility.showDialogOk("Error",
 						"Please choose a sickness/emotion",
@@ -462,7 +479,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				apiCaller.invokeSickenssEmotionalApi(date,
 						JHAppStateVariables.getSickEmoReport(),
 						emoFragment.getEmoDesc(), cboxCareCircle.isChecked(),
-						fragment.getContact());
+						latitude, longitude);
 			} else {
 				JHUtility.showDialogOk("Error",
 						"Please choose a sickness/emotion",
@@ -483,7 +500,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				apiCaller.invokeMapApi(mapFragment.getDate(),
 						mapFragment.getName(), mapFragment.getAddress(),
 						mapFragment.getDescription(),
-						cboxCareCircle.isChecked(), fragment.getContact());
+						cboxCareCircle.isChecked(), latitude, longitude);
 			} else {
 				JHUtility.showDialogOk(null,
 						"Please Enter the address of the event", this);
@@ -595,8 +612,18 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			Log.d(JHConstants.LOG_TAG, "uploadefileName " + uploadefileName);
 
 			if (status.equals("true")) {
+				
+				JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHReportWizardActivity.this);
+				Location location = gpsTracker.getLocation();
+				String latitude = "";
+				String longitude = "";
+				if(location != null ){
+					latitude = location.getLatitude()+"";
+					longitude = location.getLongitude()+"";
+				}
+				
 				apiCaller.invokeImageApi(eventDate, eventName, ics,
-						uploadefileName, actualFileName);
+						uploadefileName, actualFileName, latitude, longitude);
 			} else {
 				JHUtility.showDialogOk("Reporing error",
 						"Report posting failed", JHReportWizardActivity.this);

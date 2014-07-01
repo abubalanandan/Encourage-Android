@@ -12,6 +12,10 @@ public interface LogoutService {
 	    void logoutUser(
 	    			@Field("operationName") String operationName,  
 	    			@Field("token") String token,
+	    			@Field("datetime") String datetime, 
+	    			@Field("timezone") String timezone,
+	    			@Field("latitude") String latitude,
+	        		@Field("longitude") String longitude,
 	    			Callback<SpocResponse> callback);
 
 

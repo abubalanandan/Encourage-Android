@@ -3,8 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="6dip" >
+    >
  
+    <ImageView
+        android:id="@+id/contacttBackgroundImageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/container_shadow" />
+    
     <CheckBox
         android:id="@+id/cboxCareCircle"
         android:layout_width="wrap_content"
@@ -12,8 +18,7 @@
         android:layout_alignParentLeft="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="CheckBox" />
- 
-   
+        android:text="CheckBox" 
+        android:textColor="@android:color/black"/>
  
 </RelativeLayout>

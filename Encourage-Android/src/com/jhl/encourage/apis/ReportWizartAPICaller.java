@@ -34,66 +34,61 @@ public class ReportWizartAPICaller {
 		this.activity = activity;
 	}
 	
-	public void invokeSickenssEmotionalApi(String date, String data, String description, boolean ics, Contact contact) {
+	public void invokeSickenssEmotionalApi(String date, String data, String description, boolean ics, String latitude, String longitude) {
 
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
 		SickEmotionReportService service = restAdapter.create(SickEmotionReportService.class);
 
 		String icsString = "no";
-//		if(ics){
-//			icsString = "yes";
-//		}
-//		String addToCC1 = "no";
-//		if(contact.isAddToCC1()){
-//			addToCC1 = "yes";
-//		}
-//		String addToCC2 = "no";
-//		if(contact.isAddToCC1()){
-//			addToCC2 = "yes";
-//		}
+		if(ics){
+			icsString = "yes";
+		}
+		
+		String[] addToCCDetails = JHAppStateVariables.getAddToCCDetails();
 		
 		System.out.println("DATAAAAAAAAAAAAAA "+data);
 		
-//		service.postReport("getSelfReportedData", date, "datetime", "Date", "","1", "", data, "varchar", "Complaint", "", "2","", "", "text", 
-//				"Description", "", "3", "", contact.getName1(), contact.getEmail1(), contact.getName2(), contact.getEmail2(), "self_reported_form", "selfreport_data" , icsString, 
-//				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", addToCC1, addToCC2, 
-//				new Callback<SpocResponse>() {
-//					@Override
-//					public void success(SpocResponse spocResponse,	Response response) {
-//						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
-//						for (SpocObject spocObject : responseList) {
-//							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
-//								HashMap<String, String> map = spocObject.getMap();
-//								String success = map.get("success");
-//								
-//								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
-//								
-//								if(success.equalsIgnoreCase("true")){
-//									
-//									activity.finish();
-//								}else{
-//									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
-//									
-//									activity.finish();
-//								}
-//								
-//							}
-//						}
-//					}
-//
-//					@Override
-//					public void failure(RetrofitError retrofitError) {
-//						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
-//						
-//						activity.finish();
-//					}
-//				});
+		service.postReport("getSelfReportedData", date, "datetime", "Date", "","1", "", data, "varchar", "Complaint", "", "2","", description, "text", 
+				"Description", "", "3", "", "self_reported_form", "selfreport_data" , icsString, 
+				JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardDataa", addToCCDetails[0], addToCCDetails[1],addToCCDetails[2], 
+				latitude, longitude, 
+				new Callback<SpocResponse>() {
+					@Override
+					public void success(SpocResponse spocResponse,	Response response) {
+						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
+						for (SpocObject spocObject : responseList) {
+							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
+								HashMap<String, String> map = spocObject.getMap();
+								String success = map.get("success");
+								
+								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
+								
+								if(success.equalsIgnoreCase("true")){
+									
+									activity.finish();
+								}else{
+									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+									
+									activity.finish();
+								}
+								
+							}
+						}
+					}
+
+					@Override
+					public void failure(RetrofitError retrofitError) {
+						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+						
+						activity.finish();
+					}
+				});
 		
 
 	}
 	
-	public void invokeMapApi(String date, String name, String address, String description, boolean ics, Contact contact) {
+	public void invokeMapApi(String date, String name, String address, String description, boolean ics, String latitude, String longitude) {
 
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
@@ -104,8 +99,11 @@ public class ReportWizartAPICaller {
 			icsString = "yes";
 		}
 		
-		service.postReport("getSelfReportedMap", date, "datetime", "Date", "","1", "", name, "varchar", "Event Name", "", "2","", address, "text", "Event Address", "", "3", "",  description, "text", "Description", "", "4", "","", "", "", "","timeline-map-form", "selfreport_map", icsString, 
-		JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardData", "no", "no", 
+		String[] addToCCDetails = JHAppStateVariables.getAddToCCDetails();
+		
+		service.postReport("getSelfReportedMap", date, "datetime", "Date", "","1", "", name, "varchar", "Event Name", "", "2","", address, "text", "Event Address", "", "3", "", 
+				description, "text", "Description", "", "4", "", "timeline-map-form", "selfreport_map", icsString, 
+		JHUtility.getDateTime(), JHUtility.getTimeZoneString(), JHAppStateVariables.getLoginTocken() , "postReportWizardData", addToCCDetails[0], addToCCDetails[1], addToCCDetails[2],latitude, longitude, 
 				new Callback<SpocResponse>() {
 					@Override
 					public void success(SpocResponse spocResponse,	Response response) {
@@ -143,7 +141,7 @@ public class ReportWizartAPICaller {
 	}
 	
 	
-	public void invokeImageApi(String date, String name, boolean ics, String uploadedfileName, String actualfileName) {
+	public void invokeImageApi(String date, String name, boolean ics, String uploadedfileName, String actualfileName, String latitude, String longitude) {
 
 		
 		System.out.println("XXXXXXXXXXXXx invokeImageApi");
@@ -223,7 +221,14 @@ public class ReportWizartAPICaller {
 			parameters.put("token",JHAppStateVariables.getLoginTocken());
 			parameters.put("doaction","postReportWizardData");
 			parameters.put("upload_files",upload_files);	
+			parameters.put("latitude",latitude);
+			parameters.put("longitude",longitude);
 			
+			String[] addToCCDetails = JHAppStateVariables.getAddToCCDetails();
+			
+			parameters.put("nimyc_persons",addToCCDetails[0]);
+			parameters.put("nimyc_mails",addToCCDetails[1]);
+			parameters.put("add_to_myccs",addToCCDetails[2]);
 			
 			String url = "https://tryencourage.com/ajaxRequest.php";
 			

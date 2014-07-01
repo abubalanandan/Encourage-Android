@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.jhl.encourage.R;
 import com.jhl.encourage.apis.SignupService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHRegistrationDialog;
 import com.jhl.encourage.views.JHTermsAndConditionsDialog;
@@ -115,7 +117,17 @@ public class JHRegistrationActivity extends Activity {
         SignupService service = restAdapter.create(SignupService.class);
         JHUtility.showProgressDialog("Signing up..", this);
 
-        service.signUpUser("postPersonDetails",firstName,lastName,emailAddress, new Callback<SpocResponse>() {
+		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHRegistrationActivity.this);
+		Location location = gpsTracker.getLocation();
+		String latitude = "";
+		String longitude = "";
+		if(location != null ){
+			latitude = location.getLatitude()+"";
+			longitude = location.getLongitude()+"";
+		}
+        
+        service.signUpUser("postPersonDetails",firstName,lastName,emailAddress, JHUtility.getDateTime(), JHUtility.getTimeZoneString(), latitude, longitude, 
+        		new Callback<SpocResponse>() {
             @Override
             public void success(SpocResponse spocResponse, Response response) {
 
