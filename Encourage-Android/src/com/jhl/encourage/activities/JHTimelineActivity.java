@@ -311,9 +311,18 @@ public class JHTimelineActivity extends Activity {
 				TimeLineService.class);
 		String token = JHAppStateVariables.getLoginTocken();
 
+		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHTimelineActivity.this);
+		Location location = gpsTracker.getLocation();
+		String latitude = "";
+		String longitude = "";
+		if(location != null ){
+			latitude = location.getLatitude()+"";
+			longitude = location.getLongitude()+"";
+		}
+		
 		if (start != 0) {
 			service.getAdditionalTimeLineDetails("getTimelineDetails", token,
-					careTargetId, dateTime, timeZone, start,
+					careTargetId, dateTime, timeZone, start,latitude, longitude, 
 					new Callback<SpocResponse>() {
 						@Override
 						public void success(SpocResponse spocResponse,
@@ -412,7 +421,7 @@ public class JHTimelineActivity extends Activity {
 					});
 		} else {
 			service.getTimeLineDetails("getTimelineDetails", token,
-					careTargetId, dateTime, timeZone,
+					careTargetId, dateTime, timeZone,latitude, longitude, 
 					new Callback<SpocResponse>() {
 						@Override
 						public void success(SpocResponse spocResponse,

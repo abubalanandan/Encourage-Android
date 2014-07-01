@@ -17,6 +17,8 @@ public interface TimeLineService {
 			@Field("careTargetid") String careTargetId,
 			@Field("datetime") String dateTime, 
 			@Field("timezone") String timeZone, 
+			@Field("latitude") String latitude,
+    		@Field("longitude") String longitude,
 			Callback<SpocResponse> callback);
     
     @FormUrlEncoded
@@ -28,6 +30,8 @@ public interface TimeLineService {
 			@Field("datetime") String dateTime, 
 			@Field("timezone") String timeZone, 
 			@Field("start") int start,
+			@Field("latitude") String latitude,
+    		@Field("longitude") String longitude,
 			Callback<SpocResponse> callback);
 }
 
