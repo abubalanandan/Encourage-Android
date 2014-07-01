@@ -18,31 +18,34 @@
             android:background="@null"
             android:src="@drawable/top_header" />
 
-        <LinearLayout
-            android:id="@+id/topRightMenuLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal"
-            android:padding="5dp" >
+      <TextView 
+          android:id="@+id/headingTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="CONTACT PICKER"
+          android:layout_centerVertical="true"
+          android:layout_centerHorizontal="true"
+          android:textStyle="bold"
+          android:textSize="15sp"
+          />
 
             <RelativeLayout
                 android:id="@+id/closeContactButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
                 android:onClick="closeContactButtonPressed" >
 
                 <ImageView
                     android:id="@+id/closeContactBackgroundImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/close_buton" />
+                    android:background="@drawable/close_buton" />
 
                 
-            </RelativeLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout

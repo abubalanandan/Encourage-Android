@@ -360,6 +360,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			Intent i = new Intent(JHReportWizardActivity.this,
 					JHContactPickerActivity.class);
 			startActivity(i);
+			overridePendingTransition(R.anim.slide_up, 0);
 		} catch (Exception ex) {
 			Log.e("main", ex.toString());
 		}

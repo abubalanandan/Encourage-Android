@@ -5,20 +5,44 @@
     android:orientation="vertical"
     >
  
-    <ImageView
+     <ImageView
         android:id="@+id/contacttBackgroundImageView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/container_shadow" />
     
-    <CheckBox
+     <CheckBox
         android:id="@+id/cboxCareCircle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="CheckBox" 
         android:textColor="@android:color/black"/>
+    
+    <TextView 
+        android:id="@+id/contactNameTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/cboxCareCircle"
+        android:text="Abu Balanandan"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/primary_text_light"
+        
+        />
+    
+    <TextView 
+        android:id="@+id/contactEmailTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/cboxCareCircle"
+        android:layout_below="@+id/contactNameTV"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:text="abub@qburst.com"
+        />
  
 </RelativeLayout>

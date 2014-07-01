@@ -48,6 +48,7 @@ public class JHContactPickerActivity extends Activity {
 
 			JHAppStateVariables.setSelectedContacts(selectedContacts);
 			finish();
+			overridePendingTransition(0, R.anim.slide_down);
 			
 		} catch (Exception ex) {
 			Log.e("main", ex.toString());
@@ -104,6 +105,7 @@ public class JHContactPickerActivity extends Activity {
 				// TODO Auto-generated method stub
 				JHAppStateVariables.setSelectedContacts(null);
 				finish();
+				overridePendingTransition(0, R.anim.slide_down);
 			}
 		}).setNegativeButton("No", new DialogInterface.OnClickListener() {
 			

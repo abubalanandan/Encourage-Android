@@ -31,8 +31,9 @@ public class JHContactAdapter extends ArrayAdapter<Contact> {
 	}
 	
 	private class ViewHolder {
-		TextView code;
-		CheckBox name;
+		TextView nameTV;
+		TextView emailTV;
+		CheckBox checkbox;
 	}
 	
 	public List<Contact>  getContacts() {
@@ -51,10 +52,12 @@ public class JHContactAdapter extends ArrayAdapter<Contact> {
 	 
 		   holder = new ViewHolder();
 		   //holder.code = (TextView) convertView.findViewById(R.id.code);
-		   holder.name = (CheckBox) convertView.findViewById(R.id.cboxCareCircle);
+		   holder.checkbox = (CheckBox) convertView.findViewById(R.id.cboxCareCircle);
+		   holder.nameTV = (TextView)convertView.findViewById(R.id.contactNameTV);
+		   holder.emailTV = (TextView)convertView.findViewById(R.id.contactEmailTV);
 		   convertView.setTag(holder);
 	 
-		   holder.name.setOnClickListener( new View.OnClickListener() {
+		   holder.checkbox.setOnClickListener( new View.OnClickListener() {
 			   public void onClick(View v) { 
 				   CheckBox cb = (CheckBox) v ; 
 				   Contact contact = (Contact) cb.getTag(); 
@@ -69,12 +72,13 @@ public class JHContactAdapter extends ArrayAdapter<Contact> {
 	 
 	   Contact contact = contacts.get(position);
 	   //holder.code.setText(" (" +  contact.getId() + ")");
-	   holder.name.setText(contact.getName());
+	   holder.nameTV.setText(contact.getName());
+	   holder.emailTV.setText(contact.getEmail());
 	   
 	   boolean checked = ((JHAppStateVariables.getSelectedContacts() != null && JHAppStateVariables.getSelectedContacts().contains(contact)) || contact.isSelected());
 	   
-	   holder.name.setChecked(checked);
-	   holder.name.setTag(contact);
+	   holder.checkbox.setChecked(checked);
+	   holder.checkbox.setTag(contact);
 	 
 	   return convertView;
 	 
