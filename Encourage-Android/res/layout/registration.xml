@@ -88,28 +88,25 @@
         android:clickable="true"
         android:text="By clicking Register, you agree to our Terms and Conditions herein documented"/>
     
-    <Button 
+    <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/termsTV"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/register_buton_signup"
-        android:text="Register"
+        android:background="@drawable/register_selector"
         />
     
-      <Button 
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/registerButton"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/login_buton_signup"
-        android:text="Login"
-        android:onClick="loginButtonClicked"
-        />
+      <Button
+          android:id="@+id/loginButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/registerButton"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="10dp"
+          android:background="@drawable/login_selector"
+          android:onClick="loginButtonClicked" />
     
     <ImageView
         android:id="@+id/registerLogo"

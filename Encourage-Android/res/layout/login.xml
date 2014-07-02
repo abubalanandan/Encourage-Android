@@ -49,7 +49,7 @@
                 android:background="@null"
                 android:hint="User name"
                 android:inputType="textCapWords"
-                android:text="abu.316@gmail.com"
+                android:text="chanchal.jacob@gmail.com"
                 android:textColor="@android:color/primary_text_dark"
                 android:textSize="14sp" />
 
@@ -81,7 +81,7 @@
                 android:background="@null"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:text="Sachin@10"
+                android:text="ecPa55w0rd"
                 android:textColor="@android:color/primary_text_dark"
                 android:textSize="14sp" />
         </RelativeLayout>
@@ -109,9 +109,8 @@
         android:layout_alignRight="@+id/loginRL"
         android:layout_below="@+id/forgotPasswordButton"
         android:layout_marginTop="10dp"
-        android:background="@drawable/login_buton"
-        android:onClick="loginButtonClicked"
-        android:text="Login" />
+        android:background="@drawable/login_selector"
+        android:onClick="loginButtonClicked" />
 
     <Button
         android:id="@+id/registerButton"
@@ -121,9 +120,8 @@
         android:layout_alignRight="@+id/loginRL"
         android:layout_below="@+id/loginButton"
         android:layout_marginTop="10dp"
-        android:background="@drawable/register_buton"
-        android:onClick="registerButtonClicked"
-        android:text="Register" />
+        android:background="@drawable/register_selector"
+        android:onClick="registerButtonClicked" />
 
     <ImageView
         android:id="@+id/encourageLogo"

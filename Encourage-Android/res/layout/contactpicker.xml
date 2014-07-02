@@ -42,7 +42,7 @@
                     android:id="@+id/closeContactBackgroundImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/close_buton" />
+                    android:background="@drawable/ic_action_cancel" />
 
                 
         </RelativeLayout>
@@ -73,8 +73,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:background="@drawable/report_buton" 
-            android:onClick="contatDoneButtonClicked"/>
+            android:background="@drawable/report_buton_hover"
+            android:onClick="contatDoneButtonClicked" />
+
     </RelativeLayout>
 
     <ListView
