@@ -6,6 +6,7 @@ import java.util.List;
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHSicknessButtonsAdapter.ButtonClickListener;
 import com.jhl.encourage.model.ReportButton;
+import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.content.Context;
@@ -99,10 +100,14 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 					selectedButtons.add(button);
 					button.setState(JHConstants.BUTTON_SELECTED);
 					imageView.setImageResource(selectedImageIDs[button.getPosition()]);
+					String emotional = getEmotionalByButtonPosition(button.getPosition());
+					JHAppStateVariables.addEmotionals(emotional);
 				}else {
 					selectedButtons.remove(button);
 					button.setState(JHConstants.BUTTON_UNSELECTED);
 					imageView.setImageResource(imageIDs[button.getPosition()]);
+					String emotional = getEmotionalByButtonPosition(button.getPosition());
+					JHAppStateVariables.removeEmotionals(emotional);
 				}
 			}
 		}
@@ -112,6 +117,29 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 				if (imageView == button.getImageView()){
 					return button;
 				}
+			}
+			return null;
+		}
+		
+		private String getEmotionalByButtonPosition(int position){
+			switch (position) {
+			case 0:
+				return JHConstants.EMO_TEXT_worried;
+			case 1:
+				return JHConstants.EMO_TEXT_Anxious;
+			case 2:
+				return JHConstants.EMO_TEXT_Depressed;
+			case 3:
+				return JHConstants.EMO_TEXT_Angry;
+			case 4:
+				return JHConstants.EMO_TEXT_Sad;
+			case 5:
+				return JHConstants.EMO_TEXT_Happy;
+			case 6:
+				return JHConstants.EMO_TEXT_Restless;
+			case 7:
+				return JHConstants.EMO_TEXT_cant_sleep;
+				
 			}
 			return null;
 		}

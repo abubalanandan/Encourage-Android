@@ -67,10 +67,12 @@ public class ReportWizartAPICaller {
 								if(success.equalsIgnoreCase("true")){
 									
 									activity.finish();
+									JHAppStateVariables.clearSickEmoReport();
 								}else{
 									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 									
 									activity.finish();
+									JHAppStateVariables.clearSickEmoReport();
 								}
 								
 							}
@@ -82,6 +84,7 @@ public class ReportWizartAPICaller {
 						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 						
 						activity.finish();
+						JHAppStateVariables.clearSickEmoReport();
 					}
 				});
 		

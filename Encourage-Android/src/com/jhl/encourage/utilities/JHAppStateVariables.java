@@ -68,6 +68,11 @@ public class JHAppStateVariables {
 
 		return reportBuffer.toString();
 	}
+	
+	public static void clearSickEmoReport() {
+		sicknesses = new ArrayList<String>();
+		emotionals = new ArrayList<String>();
+	}
 
 	public static boolean addNotification(Notification notification) {
 		if (notification instanceof Alert) {
@@ -221,18 +226,25 @@ public class JHAppStateVariables {
 		StringBuffer emails = new StringBuffer();
 		StringBuffer yesNos = new StringBuffer();
 		
-		for(Contact contact : selectedContacts) {
-			names.append(contact.getName());
-			names.append("~~");
-			emails.append(contact.getEmail());
-			emails.append("~~");
-			yesNos.append("yes");
-			yesNos.append("~~");
+		if(selectedContacts != null ) {
+		
+			for(Contact contact : selectedContacts) {
+				names.append(contact.getName());
+				names.append("~~");
+				emails.append(contact.getEmail());
+				emails.append("~~");
+				yesNos.append("yes");
+				yesNos.append("~~");
+			}
 		}
 		
 		details[0] = names.toString();
 		details[1] = emails.toString();
 		details[2] = yesNos.toString();
+		
+		Log.d(JHConstants.LOG_TAG, "names "+details[0]);
+		Log.d(JHConstants.LOG_TAG, "emails "+details[1]);
+		Log.d(JHConstants.LOG_TAG, "yesnos "+details[2]);
 		
 		return details;
 	}
