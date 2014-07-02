@@ -197,6 +197,33 @@ public class JHAppStateVariables {
 	}
 
 	private static String loginTocken = null;
+	private static String username;
+	private static String profilePicURL;
+	private static String email;
+	
+	public static String getEmail() {
+		return email;
+	}
+
+	public static void setEmail(String email) {
+		JHAppStateVariables.email = email;
+	}
+
+	public static String getUsername() {
+		return username;
+	}
+
+	public static void setUsername(String username) {
+		JHAppStateVariables.username = username;
+	}
+
+	public static String getProfilePicURL() {
+		return profilePicURL;
+	}
+
+	public static void setProfilePicURL(String profilePicURL) {
+		JHAppStateVariables.profilePicURL = profilePicURL;
+	}
 
 	public static String getLoginTocken() {
 		Log.d(JHConstants.LOG_TAG, "loginTocken " + loginTocken);
@@ -218,6 +245,9 @@ public class JHAppStateVariables {
 		careTaskNumberView.setText("0");
 		sicknesses.clear();
 		emotionals.clear();
+		username = null;
+		profilePicURL = null;
+		email = null;
 	}
 	
 	public static String[] getAddToCCDetails() {

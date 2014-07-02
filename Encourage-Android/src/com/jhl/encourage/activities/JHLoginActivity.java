@@ -44,7 +44,7 @@ public class JHLoginActivity extends Activity {
 
 	private void initViews() {
 		emailField = (EditText) findViewById(R.id.usernameField);
-		passwordField = (EditText) findViewById(R.id.passwordField);	
+		passwordField = (EditText) findViewById(R.id.passwordField);
 	}
 
 	public void loginButtonClicked(View view) {
@@ -52,115 +52,148 @@ public class JHLoginActivity extends Activity {
 		validateFields();
 
 	}
+
 	private String email;
 	private String pswd;
 	private String regId;
-	
+
 	private void validateFields() {
 		this.email = emailField.getText().toString();
 		this.pswd = passwordField.getText().toString();
 
-		if (((email == null) || email.isEmpty()) && ((pswd == null) || pswd.isEmpty()))
-			JHUtility.showDialogOk("",getString(R.string.email_and_pswd_empty_msg), this);
+		if (((email == null) || email.isEmpty())
+				&& ((pswd == null) || pswd.isEmpty()))
+			JHUtility.showDialogOk("",
+					getString(R.string.email_and_pswd_empty_msg), this);
 		else if ((email == null) || email.isEmpty())
-			JHUtility.showDialogOk("", getString(R.string.email_empty_msg),	this);
+			JHUtility.showDialogOk("", getString(R.string.email_empty_msg),
+					this);
 		else if ((pswd == null) || pswd.isEmpty())
-			JHUtility.showDialogOk("", getString(R.string.pswd_empty_msg), this);
+			JHUtility
+					.showDialogOk("", getString(R.string.pswd_empty_msg), this);
 		else {
-			JHUtility.showProgressDialog("Logging in ...", this);		
+			JHUtility.showProgressDialog("Logging in ...", this);
 			new GCMRegistrationTask().execute();
 		}
 	}
 
-	
-		
-	public void forgotPasswordClicked(View view){
-		
+	public void forgotPasswordClicked(View view) {
+
 		String url = "https://tryencourage.com";
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(url));
 		startActivity(intent);
 	}
-	
+
 	class GCMRegistrationTask extends AsyncTask<String, Integer, Boolean> {
-			@Override
-			protected void onPreExecute() {
-				
-				super.onPreExecute();
-			}
+		@Override
+		protected void onPreExecute() {
 
-			@Override
-			protected void onPostExecute(Boolean result) {
-				invokeLoginApi(email, pswd, regId);
-			}
-
-			@Override
-			protected Boolean doInBackground(String... params) {
-				String msg = "";
-                GoogleCloudMessaging gcm = null;
-        		String PROJECT_NUMBER = "291052764949";
-        		boolean retVal = false;
-                try {
-                    if (gcm == null) {
-                        gcm = GoogleCloudMessaging.getInstance(JHLoginActivity.this);
-                    }
-                    regId = gcm.register(PROJECT_NUMBER);
-                    msg = "Device registered, registration ID=" + regId;
-                   
-                    retVal = true;
-                    
-                    
-
-                } catch (IOException ex) {
-                    msg = "Error :" + ex.getMessage();
-                    retVal = false;
-
-                }
-                
-                Log.i(JHConstants.LOG_TAG,  msg);
-                
-                return retVal;
-			}
+			super.onPreExecute();
 		}
-	
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			invokeLoginApi(email, pswd, regId);
+		}
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			String msg = "";
+			GoogleCloudMessaging gcm = null;
+			String PROJECT_NUMBER = "291052764949";
+			boolean retVal = false;
+			try {
+				if (gcm == null) {
+					gcm = GoogleCloudMessaging
+							.getInstance(JHLoginActivity.this);
+				}
+				regId = gcm.register(PROJECT_NUMBER);
+				msg = "Device registered, registration ID=" + regId;
+
+				retVal = true;
+
+			} catch (IOException ex) {
+				msg = "Error :" + ex.getMessage();
+				retVal = false;
+
+			}
+
+			Log.i(JHConstants.LOG_TAG, msg);
+
+			return retVal;
+		}
+	}
+
 	public void invokeLoginApi(String email, String password, String regId) {
 
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
 		LoginService service = restAdapter.create(LoginService.class);
 
-		Log.d(JHConstants.LOG_TAG, "regId "+regId);
-		
-		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHLoginActivity.this);
+		Log.d(JHConstants.LOG_TAG, "regId " + regId);
+
+		JHGPSTracker gpsTracker = JHGPSTracker
+				.getGPSTracker(JHLoginActivity.this);
 		Location location = gpsTracker.getLocation();
 		String latitude = "";
 		String longitude = "";
-		if(location != null ){
-			latitude = location.getLatitude()+"";
-			longitude = location.getLongitude()+"";
+		if (location != null) {
+			latitude = location.getLatitude() + "";
+			longitude = location.getLongitude() + "";
 		}
-		service.loginUser("userLogin", email, password,regId, JHUtility.getDateTime(), JHUtility.getTimeZoneString(), latitude, longitude, 
-				new Callback<SpocResponse>() {
+		service.loginUser("userLogin", email, password, regId,
+				JHUtility.getDateTime(), JHUtility.getTimeZoneString(),
+				latitude, longitude, new Callback<SpocResponse>() {
 					@Override
-					public void success(SpocResponse spocResponse,	Response response) {
-						ArrayList<SpocObject> responseList = spocResponse.getSpocObjects();
+					public void success(SpocResponse spocResponse,
+							Response response) {
+						ArrayList<SpocObject> responseList = spocResponse
+								.getSpocObjects();
 						for (SpocObject spocObject : responseList) {
-							if (spocObject.getResultTypeCode().equalsIgnoreCase("STATUS")) {
-								HashMap<String, String> map = spocObject.getMap();
+							if (spocObject.getResultTypeCode()
+									.equalsIgnoreCase("STATUS")) {
+								HashMap<String, String> map = spocObject
+										.getMap();
 								String success = map.get("success");
-								if(success.equalsIgnoreCase("true")){
+								if (success.equalsIgnoreCase("true")) {
 									System.out.println("success");
+									JHAppStateVariables.setEmail(emailField.getText().toString());
+									emailField.setText("");
+									passwordField.setText("");
 									String loginTocken = map.get("token");
-									Log.d(JHConstants.LOG_TAG, "loginToken  " +loginTocken);
-									JHAppStateVariables.setLoginTocken(loginTocken);
-									JHUtility.dismissProgressDialog(JHLoginActivity.this);
-									Intent intent = new Intent(JHLoginActivity.this, JHTimelineActivity.class);
+									Log.d(JHConstants.LOG_TAG, "loginToken  "
+											+ loginTocken);
+									JHAppStateVariables
+											.setLoginTocken(loginTocken);
+									JHUtility
+											.dismissProgressDialog(JHLoginActivity.this);
+									Intent intent = new Intent(
+											JHLoginActivity.this,
+											JHTimelineActivity.class);
 									startActivity(intent);
 									finish();
-								}else{
+								} else {
 									System.out.println("error");
-									JHUtility.dismissProgressDialog(JHLoginActivity.this);
-									JHUtility.showDialogOk("",getString(R.string.login_failed), JHLoginActivity.this);	
+									JHUtility
+											.dismissProgressDialog(JHLoginActivity.this);
+									JHUtility.showDialogOk("",
+											getString(R.string.login_failed),
+											JHLoginActivity.this);
+								}
+							} else if (spocObject.getResultTypeCode()
+									.equalsIgnoreCase("POPUP_FORM")) {
+								HashMap<String, String> map = spocObject
+										.getMap();
+								if (map.get("username") != null) {
+									JHAppStateVariables.setUsername(map
+											.get("username"));
+									JHAppStateVariables.setProfilePicURL("https://tryencourage.com/hwdsi/hwAttachedfile/"
+											+ JHAppStateVariables
+													.getLoginTocken()
+											+ "/"
+											+ map.get("profilepic"));
+
 								}
 							}
 						}
@@ -173,13 +206,12 @@ public class JHLoginActivity extends Activity {
 
 					}
 				});
-		
 
 	}
 
 	public void registerButtonClicked(View view) {
 		Intent intent = new Intent(this, JHRegistrationActivity.class);
 		startActivity(intent);
-	
+
 	}
 }

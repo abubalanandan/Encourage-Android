@@ -201,10 +201,15 @@ public class JHImageLoader {
           //Find the correct scale value. It should be the power of 2.
          
             // Set width/height of recreated image
-            
+            final int required = imageView.getWidth();
+            final int reqWidth;
+            if(required==0){
             DisplayMetrics metrics = EncourageApplication.getSharedApplication().getResources().getDisplayMetrics();
             
-            final int reqWidth = metrics.widthPixels;
+            reqWidth = metrics.widthPixels;
+            }else{
+            	reqWidth = required;
+            }
             final int reqHeight = reqWidth;
             int width_tmp=o.outWidth, height_tmp=o.outHeight;
             int scale=1;

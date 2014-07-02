@@ -15,7 +15,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -59,32 +62,70 @@ public class JHTimelineActivity extends Activity {
 	private JHImageLoader imageLoader;
 	final String[] data = { "Logout" };
 
+	private class MenuAdapter extends ArrayAdapter<String> {
+
+		public MenuAdapter(Context context, int resource, String[] objects) {
+			super(context, resource, objects);
+			// TODO Auto-generated constructor stub
+
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater vi = (LayoutInflater) JHTimelineActivity.this
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				convertView = vi.inflate(R.layout.menu_item, null);
+			}
+			TextView option = (TextView) convertView.findViewById(R.id.option);
+			option.setText(data[position]);
+			return convertView;
+
+		}
+
+	}
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.timeline);
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, data);
+		setContentView(R.layout.timeline);
+		MenuAdapter adapter = new MenuAdapter(this,
+				R.layout.menu_item, data);
 
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		imageLoader = new JHImageLoader(this);
 		final ListView navList = (ListView) findViewById(R.id.left_drawer);
+		View headerView = getLayoutInflater().inflate(R.layout.navlist_header,
+				null);
+		ImageView profilePicIconView = (ImageView) headerView
+				.findViewById(R.id.profilePicView);
+		imageLoader.DisplayImage(JHAppStateVariables.getProfilePicURL(),
+				profilePicIconView);
+		TextView userNameTV = (TextView) headerView
+				.findViewById(R.id.profileNameTV);
+		TextView userEmailTV = (TextView) headerView
+				.findViewById(R.id.profileEmailTV);
+		userNameTV.setText(JHAppStateVariables.getUsername());
+		userEmailTV.setText(JHAppStateVariables.getEmail());
+		navList.addHeaderView(headerView);
 		navList.setAdapter(adapter);
+		drawer.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				super.onDrawerClosed(drawerView);
+			}
+
+		});
 		navList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					final int pos, long id) {
-				drawer.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-					@Override
-					public void onDrawerClosed(View drawerView) {
-						super.onDrawerClosed(drawerView);
-						invokeLogoutApi();
-
-					}
-				});
+				invokeLogoutApi();
 				drawer.closeDrawer(navList);
 			}
 		});
-		imageLoader  = new JHImageLoader(this);
+
 		EncourageApplication.getSharedApplication().setImageLoader(imageLoader);
 		initViews();
 	}
@@ -102,36 +143,38 @@ public class JHTimelineActivity extends Activity {
 					JHUtility.getTimeZoneString(), 0);
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancel(10);
 	}
 
 	private void invokeLogoutApi() {
 
-		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancel(10);
-		
+
 		LogoutService service = EncourageApplication.getRestAdapter().create(
 				LogoutService.class);
 
 		JHUtility.showProgressDialog("Logging out..", this);
-		
-		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHTimelineActivity.this);
+
+		JHGPSTracker gpsTracker = JHGPSTracker
+				.getGPSTracker(JHTimelineActivity.this);
 		Location location = gpsTracker.getLocation();
 		String latitude = "";
 		String longitude = "";
-		if(location != null ){
-			latitude = location.getLatitude()+"";
-			longitude = location.getLongitude()+"";
+		if (location != null) {
+			latitude = location.getLatitude() + "";
+			longitude = location.getLongitude() + "";
 		}
-		
-		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(), JHUtility.getDateTime(), JHUtility.getTimeZoneString(), latitude, longitude, 
-				new Callback<SpocResponse>() {
+
+		service.logoutUser("userLogout", JHAppStateVariables.getLoginTocken(),
+				JHUtility.getDateTime(), JHUtility.getTimeZoneString(),
+				latitude, longitude, new Callback<SpocResponse>() {
 
 					@Override
 					public void failure(RetrofitError arg0) {
@@ -157,9 +200,14 @@ public class JHTimelineActivity extends Activity {
 								if (success.equalsIgnoreCase("true")) {
 									System.out.println("success");
 									JHAppStateVariables.setLoginTocken(null);
-									JHAppStateVariables.clearAppStateVariables();
-									if(EncourageApplication.getSharedApplication().getImageLoader()!=null){
-										EncourageApplication.getSharedApplication().getImageLoader().clearCache();
+									JHAppStateVariables
+											.clearAppStateVariables();
+									if (EncourageApplication
+											.getSharedApplication()
+											.getImageLoader() != null) {
+										EncourageApplication
+												.getSharedApplication()
+												.getImageLoader().clearCache();
 									}
 									JHUtility
 											.dismissProgressDialog(JHTimelineActivity.this);
@@ -217,27 +265,30 @@ public class JHTimelineActivity extends Activity {
 		dialog.setProgressDrawable(getResources().getDrawable(
 				android.R.drawable.progress_indeterminate_horizontal));
 		timelineView.addFooterView(dialog);
-		adapter = new JHTimelineAdapter(this, list, false,imageLoader);
+		adapter = new JHTimelineAdapter(this, list, false, imageLoader);
 		timelineView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 
-//		timelineView.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//				// TODO Auto-generated method stub
-//				if(list.get(position).getDatatype().equalsIgnoreCase("Map")|| list.get(position).getDatatype().equalsIgnoreCase("Image")){
-//					ImageView imageView = (ImageView)view.findViewWithTag(list.get(position).getTimelineid());
-//					if(imageView!=null){
-//						if(imageView.getBackground().equals(getResources().getDrawable(R.drawable.retry)))
-//						imageLoader.DisplayImage(list.get(position).getFilename(), imageView);
-//					}
-//				}
-//				
-//			}
-//		});
-		
+		// timelineView.setOnItemClickListener(new OnItemClickListener() {
+		//
+		// @Override
+		// public void onItemClick(AdapterView<?> parent, View view,
+		// int position, long id) {
+		// // TODO Auto-generated method stub
+		// if(list.get(position).getDatatype().equalsIgnoreCase("Map")||
+		// list.get(position).getDatatype().equalsIgnoreCase("Image")){
+		// ImageView imageView =
+		// (ImageView)view.findViewWithTag(list.get(position).getTimelineid());
+		// if(imageView!=null){
+		// if(imageView.getBackground().equals(getResources().getDrawable(R.drawable.retry)))
+		// imageLoader.DisplayImage(list.get(position).getFilename(),
+		// imageView);
+		// }
+		// }
+		//
+		// }
+		// });
+
 		timelineView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
 			@Override
@@ -311,19 +362,20 @@ public class JHTimelineActivity extends Activity {
 				TimeLineService.class);
 		String token = JHAppStateVariables.getLoginTocken();
 
-		JHGPSTracker gpsTracker = JHGPSTracker.getGPSTracker(JHTimelineActivity.this);
+		JHGPSTracker gpsTracker = JHGPSTracker
+				.getGPSTracker(JHTimelineActivity.this);
 		Location location = gpsTracker.getLocation();
 		String latitude = "";
 		String longitude = "";
-		if(location != null ){
-			latitude = location.getLatitude()+"";
-			longitude = location.getLongitude()+"";
+		if (location != null) {
+			latitude = location.getLatitude() + "";
+			longitude = location.getLongitude() + "";
 		}
-		
+
 		if (start != 0) {
 			service.getAdditionalTimeLineDetails("getTimelineDetails", token,
-					careTargetId, dateTime, timeZone, start,latitude, longitude, 
-					new Callback<SpocResponse>() {
+					careTargetId, dateTime, timeZone, start, latitude,
+					longitude, new Callback<SpocResponse>() {
 						@Override
 						public void success(SpocResponse spocResponse,
 								Response response) {
@@ -364,11 +416,10 @@ public class JHTimelineActivity extends Activity {
 										Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
-											if(map.get("eventAddress")==null){
+											if (map.get("eventAddress") == null) {
 												continue;
 											}
-												
-												
+
 											item.setDatatype("map");
 											item.setEventAddress(map
 													.get("eventaddress"));
@@ -421,7 +472,7 @@ public class JHTimelineActivity extends Activity {
 					});
 		} else {
 			service.getTimeLineDetails("getTimelineDetails", token,
-					careTargetId, dateTime, timeZone,latitude, longitude, 
+					careTargetId, dateTime, timeZone, latitude, longitude,
 					new Callback<SpocResponse>() {
 						@Override
 						public void success(SpocResponse spocResponse,
@@ -539,7 +590,5 @@ public class JHTimelineActivity extends Activity {
 	public void onBackPressed() {
 		// Disabled back button action
 	}
-	
-
 
 }
