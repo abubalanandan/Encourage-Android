@@ -51,22 +51,6 @@
             android:padding="5dp" >
 
             <RelativeLayout
-                android:id="@+id/emailButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:onClick="emailButtonPressed" >
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/alertButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:onClick="alertButtonPressed" >
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/rwCloseButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,8 +61,9 @@
                     android:id="@+id/rwCloseBackgroundImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/close_buton"
-                    android:layout_marginRight="5dp" />
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_action_cancel" />
+
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -168,7 +153,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="2dp"
-            android:background="@drawable/report_buton"
+            android:background="@drawable/report_selector"
             android:onClick="sendReportButtonPressed" />
 
         <RelativeLayout
