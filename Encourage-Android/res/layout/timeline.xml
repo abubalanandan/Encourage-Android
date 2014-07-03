@@ -79,7 +79,7 @@
                         android:id="@+id/alertBackgroundImage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/not_icon" />
+                        android:background="@drawable/alert_selector" />
 
                     <TextView
                         android:id="@+id/alertnumberView"
@@ -103,7 +103,7 @@
                         android:id="@+id/careTaskBackgroundImage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/et_icon" />
+                        android:background="@drawable/caretask_selector" />
 
                     <TextView
                         android:id="@+id/caretasknumberView"
