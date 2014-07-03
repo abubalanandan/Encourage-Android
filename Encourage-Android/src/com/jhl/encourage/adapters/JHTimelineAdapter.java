@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.jhl.encourage.R;
 import com.jhl.encourage.imageloader.JHImageLoader;
 import com.jhl.encourage.model.TimeLineItem;
+import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.views.JHTimelineItemView;
 
 public class JHTimelineAdapter extends BaseAdapter {
@@ -103,7 +104,7 @@ public class JHTimelineAdapter extends BaseAdapter {
 			postLL.addView(imageView);
 
 		//	 imageView.setBackgroundColor(ctx.getResources().getColor(android.R.color.darker_gray));
-				Log.i("IMAGE_URL",msgList.get(position).getFilename());
+			Log.d(JHConstants.LOG_TAG,  "IMAGE_URL ::: "+msgList.get(position).getFilename());
 
 			imageLoader.DisplayImage(msgList.get(position).getFilename(), imageView);
 		}else if(msgList.get(position).getDatatype().equalsIgnoreCase("map")){
@@ -118,6 +119,8 @@ public class JHTimelineAdapter extends BaseAdapter {
 			imageView.setTag(msgList.get(position).getTimelineid());
 			postLL.addView(imageView);
 
+			Log.d(JHConstants.LOG_TAG,  "MAP_URL ::: "+mapURL);
+			
 			// imageView.setBackgroundColor(ctx.getResources().getColor(android.R.color.darker_gray));
 			imageLoader.DisplayImage(mapURL, imageView);
 

@@ -86,12 +86,12 @@ public class JHAlertsTeaserDialog extends Dialog {
 				long id) {
 			Notification n = alerts.get(position);
 			
-			invokeMarkAlertReadApi(n.getId());	
+			invokeMarkAlertReadApi(n.getId(), position);	
 			JHUtility.showProgressDialog("Marking alert as read..", JHAppStateVariables.timeLineActivity);
 		}
 	}
 	
-public void invokeMarkAlertReadApi(final String alertkey) {
+public void invokeMarkAlertReadApi(final String alertkey, final int position) {
     	
     	RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
@@ -117,6 +117,7 @@ public void invokeMarkAlertReadApi(final String alertkey) {
 									System.out.println("success");
 									JHUtility.dismissProgressDialog(JHAppStateVariables.timeLineActivity);
 									JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_ALERT, alertkey);
+									JHAlertListActivity.position = position;
 									Intent i = new Intent(context, JHAlertListActivity.class);
 									context.startActivity(i);
 									cancel();

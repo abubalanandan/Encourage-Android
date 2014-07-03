@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 
 
@@ -66,6 +67,7 @@ public class JHImageLoader {
         if(bitmap!=null){
         	// if image is stored in MemoryCache Map then
         	// Show image in listview row
+        	System.out.println("Image FOUND IN CACHE");
             imageView.setImageBitmap(bitmap);
         }
         else
@@ -114,7 +116,12 @@ public class JHImageLoader {
         public void run() {
             try{
             	//Check if image already downloaded
-                if(imageViewReused(photoToLoad))
+            	
+            	boolean reused = imageViewReused(photoToLoad);
+            	
+            	Log.d(JHConstants.LOG_TAG, "imageViewReused "+reused);
+            	
+                if(reused)
                     return;
                 // download image from web url
                 Bitmap bmp = getBitmap(photoToLoad.url,photoToLoad.imageView);
@@ -122,8 +129,8 @@ public class JHImageLoader {
                 // set image data in Memory Cache
                 memoryCache.put(photoToLoad.url, bmp);
                 
-                if(imageViewReused(photoToLoad))
-                    return;
+                /*if(imageViewReused(photoToLoad))
+                    return;*/
                 
                 // Get bitmap to display
                 BitmapDisplayer bd=new BitmapDisplayer(bmp, photoToLoad);
@@ -151,7 +158,7 @@ public class JHImageLoader {
         
         // Download image file from web
         try {
-        	Log.i("IMAGEURL", url);
+        	Log.i(JHConstants.LOG_TAG, "IMAGEURL "+url);
             Bitmap bitmap=null;
             URL imageUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();

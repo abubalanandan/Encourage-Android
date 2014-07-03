@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.jhl.encourage.R;
 import com.jhl.encourage.activities.JHTimelineActivity;
 import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.CareTask;
@@ -13,7 +14,7 @@ import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHNotificationParser;
 import com.jhl.encourage.utilities.JHUtility;
 
-import android.R;
+
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -46,7 +47,7 @@ public class JHGCMMessageHandler extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
     	
-    	if (JHAppStateVariables.timeLineActivity != null ){// skip message as  UI cannot be updated
+    	if (JHAppStateVariables.timeLineActivity != null && JHAppStateVariables.getLoginTocken() != null ){// skip message as  UI cannot be updated
 	    	
 	        Bundle extras = intent.getExtras();
 	
@@ -104,11 +105,11 @@ public class JHGCMMessageHandler extends IntentService {
                 //use the flag FLAG_UPDATE_CURRENT to override any notification already there
                 PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
              
-                android.app.Notification notification = new android.app.Notification(R.drawable.ic_delete, "Encourage Mobile Notification", System.currentTimeMillis());
+                android.app.Notification notification = new android.app.Notification(R.drawable.encourage_icon, "Encourage Mobile Notification", System.currentTimeMillis());
                 notification.flags = android.app.Notification.FLAG_AUTO_CANCEL | android.app.Notification.DEFAULT_LIGHTS | android.app.Notification.DEFAULT_SOUND;
              
                 if(no instanceof Alert)
-                	notification.setLatestEventInfo(context, "Encourage Mobile", "There is a new alert from Encurage Mobile", contentIntent);
+                	notification.setLatestEventInfo  (context, "Encourage Mobile", "There is a new alert from Encurage Mobile", contentIntent);
                 else if (no instanceof CareTask)
                 	notification.setLatestEventInfo(context, "Encourage Mobile", "There is a new CareTask from Encurage Mobile", contentIntent);
                 

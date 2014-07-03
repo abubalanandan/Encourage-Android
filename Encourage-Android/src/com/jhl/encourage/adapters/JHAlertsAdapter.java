@@ -12,6 +12,7 @@ import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.content.Context;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -127,7 +128,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 			TextView linkTV = new TextView(context);
 			row.addView(linkTV);
 			linkTV.setMovementMethod(LinkMovementMethod.getInstance());
-			linkTV.setText(alert.getUrl());
+			linkTV.setText(Html.fromHtml("<a href='"+alert.getUrl()+"'>" + alert.getUrl() + "</a>"));
 			holder.postDetailsTL.addView(row);
 
 		}

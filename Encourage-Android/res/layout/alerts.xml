@@ -51,8 +51,9 @@
                     android:id="@+id/careTaskBackgroundImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/close_buton"
-                    android:layout_marginRight="5dp" />
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_action_cancel" />
+
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

@@ -24,6 +24,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class JHAlertListActivity extends Activity {
 	ListView listView ;
     
+	public static int position = 0;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,12 @@ public class JHAlertListActivity extends Activity {
         JHAlertsAdapter alertAdapter = new JHAlertsAdapter(this, R.layout.alertitem, alerts);
         ListView alertsList = (ListView)findViewById(R.id.alertListView);
         alertsList.setAdapter(alertAdapter);
+        
+        if(position != 0 ){
+        	alertsList.smoothScrollToPosition(position+1);
+        	alertsList.setSelectionFromTop(position+1, 10);
+        	position = 0;
+        }
 //    	listView.setOnItemClickListener(new OnItemClickListener() {
 //
 //			@Override
