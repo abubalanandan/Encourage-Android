@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -108,7 +111,15 @@ public class JHTimelineAdapter extends BaseAdapter {
 
 			imageLoader.DisplayImage(msgList.get(position).getFilename(), imageView);
 		}else if(msgList.get(position).getDatatype().equalsIgnoreCase("map")){
-			String mapURL = "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=1080x1920&markers=size:mid|color:red|" + msgList.get(position).getEventAddress();
+			//String mapURL = "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=1080x1920&markers=size:mid|color:red|" + msgList.get(position).getEventAddress();
+			String mapURL = "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=";
+			try {
+				String size = URLEncoder.encode("1080x1920", "UTF-8");
+				String markers = URLEncoder.encode("size:mid|color:red|"+ msgList.get(position).getEventAddress(), "UTF-8");
+				mapURL = mapURL + size + "&markers=" + markers;
+			} catch (UnsupportedEncodingException e) {
+				mapURL = "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=1080x1920&markers=size:mid|color:red|" + msgList.get(position).getEventAddress();
+			}
 			Log.i("MAP!!!!!",mapURL);
 			DisplayMetrics metrics = ctx.getResources().getDisplayMetrics();	
 			int width = metrics.widthPixels;
