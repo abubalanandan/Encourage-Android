@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/done" />
+                android:background="@drawable/done_caretask" />
 
             <ImageButton
                 android:id="@+id/btnNotDone"

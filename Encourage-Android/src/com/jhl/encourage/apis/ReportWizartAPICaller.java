@@ -4,26 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
-import android.content.Intent;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import android.app.AlertDialog;
 import android.util.Log;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.activities.JHReportWizardActivity;
-import com.jhl.encourage.activities.JHTimelineActivity;
-import com.jhl.encourage.model.Contact;
 import com.jhl.encourage.model.JHUploadResponse;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHHTTPClient;
 import com.jhl.encourage.utilities.JHUploadResponseParser;
 import com.jhl.encourage.utilities.JHUtility;
-
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class ReportWizartAPICaller {
@@ -71,7 +66,6 @@ public class ReportWizartAPICaller {
 								}else{
 									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 									
-									activity.finish();
 									JHAppStateVariables.clearSickEmoReport();
 								}
 								
@@ -83,7 +77,6 @@ public class ReportWizartAPICaller {
 					public void failure(RetrofitError retrofitError) {
 						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 						
-						activity.finish();
 						JHAppStateVariables.clearSickEmoReport();
 					}
 				});
@@ -119,13 +112,11 @@ public class ReportWizartAPICaller {
 								Log.d(JHConstants.LOG_TAG, "postReport success "+success);
 								
 								if(success.equalsIgnoreCase("true")){
-									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 									
 									activity.finish();
 								}else{
 									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 									
-									activity.finish();
 								}
 								
 							}
@@ -136,7 +127,6 @@ public class ReportWizartAPICaller {
 					public void failure(RetrofitError retrofitError) {
 						JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
 						
-						activity.finish();
 					}
 				});
 		
@@ -248,9 +238,8 @@ public class ReportWizartAPICaller {
 				
 				activity.finish();
 	    	}else {
-	    	//	JHUtility.showDialogOk("Reporting error", "Report posting failed", activity);
+	    		JHUtility.showDialogOk("Reporting error", "Report posting failed", activity);
 	    		
-				activity.finish();
 	    	}
 		}
 	

@@ -19,13 +19,13 @@ import android.view.Window;
 public class JHUtility {
 
 	private static ProgressDialog myProgressDialog;
+
 	public static void showDialogOk(String title, String message,
 			Activity activity) {
 		new AlertDialog.Builder(activity).setTitle(title).setMessage(message)
 				.setPositiveButton("Ok", null).setCancelable(false).create()
 				.show();
-		
-		
+
 	}
 
 	public static void CopyStream(InputStream is, OutputStream os) {
@@ -60,6 +60,7 @@ public class JHUtility {
 		Log.d(JHConstants.LOG_TAG, "datetime " + date);
 		return date;
 	}
+
 	public static String getDate() {
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 		String date = s.format(new Date());
@@ -67,7 +68,7 @@ public class JHUtility {
 		Log.d(JHConstants.LOG_TAG, "date " + date);
 		return date;
 	}
-	
+
 	public static String getFormattedDate() {
 		SimpleDateFormat s = new SimpleDateFormat("MM/dd/yyyy");
 		String date = s.format(new Date());
@@ -75,12 +76,12 @@ public class JHUtility {
 		Log.d(JHConstants.LOG_TAG, "date " + date);
 		return date;
 	}
-	
-	public static String getUUID () {
+
+	public static String getUUID() {
 		return UUID.randomUUID().toString();
 	}
-	
-	public static void showProgressDialog(String message, Activity context){
+
+	public static void showProgressDialog(String message, Activity context) {
 		myProgressDialog = new ProgressDialog(context);
 		myProgressDialog.setMessage(message);
 		myProgressDialog.setTitle("Please wait");
@@ -88,7 +89,8 @@ public class JHUtility {
 		myProgressDialog.setProgressNumberFormat(null);
 		myProgressDialog.setProgressPercentFormat(null);
 		myProgressDialog.setIndeterminate(true);
-		myProgressDialog.show();
+		if (!context.isFinishing())
+			myProgressDialog.show();
 		myProgressDialog.setCancelable(false);
 		myProgressDialog.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		myProgressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
@@ -104,12 +106,10 @@ public class JHUtility {
 
 		});
 
-		
-
 	}
-	
-	public static void dismissProgressDialog(Activity context){
-		if(myProgressDialog!=null && !context.isFinishing()){
+
+	public static void dismissProgressDialog(Activity context) {
+		if (myProgressDialog != null && !context.isFinishing()) {
 			myProgressDialog.dismiss();
 		}
 	}

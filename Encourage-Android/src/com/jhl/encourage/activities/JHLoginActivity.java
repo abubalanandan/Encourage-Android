@@ -158,7 +158,8 @@ public class JHLoginActivity extends Activity {
 								String success = map.get("success");
 								if (success.equalsIgnoreCase("true")) {
 									System.out.println("success");
-									JHAppStateVariables.setEmail(emailField.getText().toString());
+									JHAppStateVariables.setEmail(emailField
+											.getText().toString());
 									emailField.setText("");
 									passwordField.setText("");
 									String loginTocken = map.get("token");
@@ -185,15 +186,17 @@ public class JHLoginActivity extends Activity {
 									.equalsIgnoreCase("POPUP_FORM")) {
 								HashMap<String, String> map = spocObject
 										.getMap();
-								if (map.get("username") != null) {
-									JHAppStateVariables.setUsername(map
-											.get("username"));
-									JHAppStateVariables.setProfilePicURL("https://tryencourage.com/hwdsi/hwAttachedfile/"
-											+ JHAppStateVariables
-													.getLoginTocken()
-											+ "/"
-											+ map.get("profilepic"));
+								if (map != null) {
+									if (map.get("username") != null) {
+										JHAppStateVariables.setUsername(map
+												.get("username"));
+										JHAppStateVariables.setProfilePicURL("https://tryencourage.com/hwdsi/hwAttachedfile/"
+												+ JHAppStateVariables
+														.getLoginTocken()
+												+ "/"
+												+ map.get("profilepic"));
 
+									}
 								}
 							}
 						}
