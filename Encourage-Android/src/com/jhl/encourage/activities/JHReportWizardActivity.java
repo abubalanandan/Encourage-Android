@@ -28,8 +28,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 
@@ -110,8 +112,9 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		 */
 		public View createTabContent(String tag) {
 			View v = new View(mContext);
-			v.setMinimumWidth(0);
-			v.setMinimumHeight(0);
+//			v.setMinimumWidth(0);
+//			v.setMinimumHeight(0);
+			v.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			return v;
 		}
 
