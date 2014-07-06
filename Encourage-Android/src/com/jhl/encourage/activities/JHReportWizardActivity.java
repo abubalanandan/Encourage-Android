@@ -535,7 +535,11 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		Log.d(JHConstants.LOG_TAG, "UUID " + UUID);
 
 		String imagePath = imageFragment.getImagePath();
-
+		if(imagePath==null){
+			JHUtility.dismissProgressDialog(this);
+			JHUtility.showDialogOk("Error", "Please choose an image to be uploaded", this);
+			return;
+		}
 		File file = new File(imagePath);
 		if (file.length() > 4194304) {
 			JHUtility.dismissProgressDialog(this);

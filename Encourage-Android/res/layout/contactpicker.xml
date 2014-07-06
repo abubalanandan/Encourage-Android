@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:id="@+id/headerView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
@@ -15,8 +15,8 @@
             android:id="@+id/headerBG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/top_header" />
+            android:background="@drawable/top_header"
+             />
 
       <TextView 
           android:id="@+id/headingTV"
