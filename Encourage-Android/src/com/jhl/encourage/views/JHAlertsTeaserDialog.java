@@ -86,10 +86,9 @@ public class JHAlertsTeaserDialog extends Dialog {
 				long id) {
 			Notification n = alerts.get(position);
 			
-			//invokeMarkAlertReadApi(n.getId(), position);	
-			//JHUtility.showProgressDialog("Marking alert as read..", JHAppStateVariables.timeLineActivity);
-			Intent i = new Intent(context, JHAlertListActivity.class);
-			context.startActivity(i);
+			invokeMarkAlertReadApi(n.getId(), position);	
+			JHUtility.showProgressDialog("Marking alert as read..", JHAppStateVariables.timeLineActivity);
+			
 			
 		}
 	}
@@ -107,7 +106,7 @@ public void invokeMarkAlertReadApi(final String alertkey, final int position) {
 		String longitude = "";
 		String latitude = "";
 		
-		service.updateAlertRead("updateUnreadAlertStatus", JHAppStateVariables.getLoginTocken(), alertkey,timeZone, dateTime, longitude, latitude, 
+		service.updateAlertRead("updateUnreadAlertStatus", JHAppStateVariables.getLoginTocken(), alertkey,dateTime, timeZone, latitude, longitude,  
 				new Callback<SpocResponse>() {
 					@Override
 					public void success(SpocResponse spocResponse,	Response response) {
