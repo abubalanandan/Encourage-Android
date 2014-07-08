@@ -530,9 +530,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		String token = JHAppStateVariables.getLoginTocken();
 		Log.d(JHConstants.LOG_TAG, "token " + token);
 
-		String UUID = JHUtility.getUUID();
-
-		Log.d(JHConstants.LOG_TAG, "UUID " + UUID);
+		
 
 		String imagePath = imageFragment.getImagePath();
 		if(imagePath==null){

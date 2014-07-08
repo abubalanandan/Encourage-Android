@@ -121,6 +121,7 @@ public class JHTimelineActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					final int pos, long id) {
+				
 				invokeLogoutApi();
 				drawer.closeDrawer(navList);
 			}

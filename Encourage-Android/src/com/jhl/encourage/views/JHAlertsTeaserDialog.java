@@ -86,8 +86,11 @@ public class JHAlertsTeaserDialog extends Dialog {
 				long id) {
 			Notification n = alerts.get(position);
 			
-			invokeMarkAlertReadApi(n.getId(), position);	
-			JHUtility.showProgressDialog("Marking alert as read..", JHAppStateVariables.timeLineActivity);
+			//invokeMarkAlertReadApi(n.getId(), position);	
+			//JHUtility.showProgressDialog("Marking alert as read..", JHAppStateVariables.timeLineActivity);
+			Intent i = new Intent(context, JHAlertListActivity.class);
+			context.startActivity(i);
+			
 		}
 	}
 	

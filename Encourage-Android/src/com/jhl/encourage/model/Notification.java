@@ -85,6 +85,7 @@ public class Notification implements Comparable<Notification>{
 
 	@Override
 	public int compareTo(Notification another) {
-		return this.date.compareTo(another.getDate());
+		//return this.date.compareTo(another.getDate());
+		return another.getDate().compareTo(this.date);
 	}
 }

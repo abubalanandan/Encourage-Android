@@ -29,6 +29,7 @@ import com.jhl.encourage.R;
 import com.jhl.encourage.imageloader.JHImageLoader;
 import com.jhl.encourage.model.TimeLineItem;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHTimelineItemView;
 
 public class JHTimelineAdapter extends BaseAdapter {
@@ -86,7 +87,7 @@ public class JHTimelineAdapter extends BaseAdapter {
 		TextView typeTV = (TextView)convertView.findViewById(R.id.typeTV);
 		TextView profileNameTV = (TextView)convertView.findViewById(R.id.profileNameTV);
 		
-		dateTV.setText(msgList.get(position).getTimelineDate());
+		dateTV.setText(JHUtility.getFormattedDate(msgList.get(position).getTimelineDate()));
 		typeTV.setText(msgList.get(position).getType());
 		profileNameTV.setText(msgList.get(position).getPerson());
 		

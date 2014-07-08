@@ -2,8 +2,10 @@ package com.jhl.encourage.utilities;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -77,9 +79,20 @@ public class JHUtility {
 		return date;
 	}
 
-	public static String getUUID() {
-		return UUID.randomUUID().toString();
+	public static String getFormattedDate(String dateString) {
+		String formattedDate = "";
+		try {
+			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(dateString);
+			SimpleDateFormat s = new SimpleDateFormat("MMMM dd yyyy");
+			formattedDate = s.format(date);
+		} catch (ParseException e) {
+			formattedDate = dateString;
+		}
+		return formattedDate;
 	}
+	
+	//07-08 20:37:27.320: D/EncourageLog(11853): e1.getTextContent() 2014-06-25 11:40:13
+
 
 	public static void showProgressDialog(String message, Activity context) {
 		myProgressDialog = new ProgressDialog(context);

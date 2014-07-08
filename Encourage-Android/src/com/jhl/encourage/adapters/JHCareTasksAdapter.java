@@ -97,11 +97,11 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 	   Log.d(JHConstants.LOG_TAG, "careTask.getDateTime() "+careTask.getDateTime());
 	   Log.d(JHConstants.LOG_TAG, "careTask.getCareplanName() "+careTask.getCareplanName());
 	   
-	   holder.due.setText(careTask.getDateTime());
+	   holder.due.setText(JHUtility.getFormattedDate(careTask.getDateTime()));
 	   holder.title.setText(careTask.getCareplanName());
 	   
 	   
-	   if(careTask.getCareTaskType().equalsIgnoreCase("Medication")|| careTask.getCareTaskType().equalsIgnoreCase("Physical Therapy")){
+	   /*if(careTask.getCareTaskType().equalsIgnoreCase("Medication")|| careTask.getCareTaskType().equalsIgnoreCase("Physical Therapy")){
 		   holder.medTypeImageView.setBackground(context.getResources().getDrawable(R.drawable.med));
 	   }else if(careTask.getCareTaskType().equalsIgnoreCase("Diet Management")){
 		   holder.medTypeImageView.setBackground(context.getResources().getDrawable(R.drawable.food));
@@ -109,7 +109,7 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 	   }else if(careTask.getCareTaskType().equalsIgnoreCase("Appointment")){
 		   holder.medTypeImageView.setBackground(context.getResources().getDrawable(R.drawable.doc));
 
-	   }
+	   }*/
 	   
 	   LinearLayout postLL = (LinearLayout) convertView
 				.findViewById(R.id.postLL);

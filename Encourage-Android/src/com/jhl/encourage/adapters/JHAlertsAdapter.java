@@ -12,6 +12,7 @@ import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHUtility;
 
 import android.content.Context;
 import android.text.Html;
@@ -84,7 +85,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 		Alert alert = (Alert) alerts.get(position);
 
 		holder.title.setText(alert.getTitle());
-		holder.dateTime.setText(alert.getDateTime());
+		holder.dateTime.setText(JHUtility.getFormattedDate(alert.getDateTime()));
 
 		// holder.author.setTag(notification.getAuthorName());
 		// holder.title.setTag(notification.getTitle());
