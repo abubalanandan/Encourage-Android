@@ -93,7 +93,7 @@ public class JHAlertsTeaserDialog extends Dialog {
 		}
 	}
 	
-public void invokeMarkAlertReadApi(final String alertkey, final int position) {
+public void invokeMarkAlertReadApi(final String alertkey, final int position) {  
     	
     	RestAdapter restAdapter = EncourageApplication.getRestAdapter();
 
