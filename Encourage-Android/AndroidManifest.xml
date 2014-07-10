@@ -37,17 +37,18 @@
         <activity
             android:name="com.jhl.encourage.activities.JHSplashActivity"
             android:screenOrientation="portrait" >
+               <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
         </activity>
         <activity
             android:name="com.jhl.encourage.activities.JHLoginActivity"
             android:screenOrientation="portrait" >
             
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+                 </activity>
         <activity
             android:name="com.jhl.encourage.activities.JHRegistrationActivity"
             android:screenOrientation="portrait" >
