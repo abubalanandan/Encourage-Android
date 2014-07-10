@@ -9,23 +9,58 @@
         android:layout_height="match_parent"
         android:background="@drawable/page_bg" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:background="@drawable/top_header"
-        android:text="Recent Caretasks"
-        android:textColor="#FFFFFF" 
-        
-        />
+    <RelativeLayout
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <ImageView
+            android:id="@+id/headerBG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_header"
+             />
+
+      <TextView 
+          android:id="@+id/headingTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="CARETASKS LIST"
+          android:layout_centerVertical="true"
+          android:layout_centerHorizontal="true"
+          android:textStyle="bold"
+          android:textSize="15sp"
+          />
+
+            <RelativeLayout
+                android:id="@+id/closeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:onClick="closeButtonClicked"
+                 >
+
+                <ImageView
+                    android:id="@+id/closeContactBackgroundImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_action_cancel" />
+
+                
+        </RelativeLayout>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/careTaksList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        >
+        android:layout_below="@+id/headerView"
+        android:layout_marginBottom="30dp" >
+
     </ListView>
 
 </RelativeLayout>

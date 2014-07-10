@@ -1,47 +1,57 @@
 package com.jhl.encourage.activities;
 
 
+import java.util.Collections;
 import java.util.List;
 
 import com.jhl.encourage.R;
+import com.jhl.encourage.adapters.JHCareTasksAdapter;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class JHCareTaskListActivity extends Activity {
 	ListView listView ;
     
+	
+	public static int position = 0;
+	public static String id;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.caretasks);
         listView = (ListView) findViewById(R.id.careTaksList);
         
-        List<Notification> alerts = JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK);
-        int size = alerts.size();
-        String[] values = new String[size];
+        List<Notification> careTasks = JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK);
+        Collections.sort(careTasks);
+        JHCareTasksAdapter adapeter = new JHCareTasksAdapter(this,  R.layout.caretask, careTasks);
         
-        for(int i = 0 ; i<size; i++){
-        	Notification alert = alerts.get(i);
-        	values[i] = alert.toString();
+        boolean flag = false;
+        int i =0;
+        for( i=0;i<careTasks.size();i++){
+        	
+        	if(careTasks.get(i).getId().equalsIgnoreCase(id)){
+        		flag = true;
+        		break;
+        	}
         }
-       
-        Log.d(JHConstants.LOG_TAG, "Care task values "+values);
-        
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-          android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter); 
-        
-        
+        listView.setAdapter(adapeter);
+        if(flag){
+        	listView.setSelection(i);
+        }
     }
+    
+    public void closeButtonClicked(View view) {
+		finish();
+	}
 
 }

@@ -37,17 +37,17 @@ import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHCareTasksDialog;
 
-public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
+public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 	private List<Notification> careTasks;
 	private Context context;
-	
+	private JHCareTasksDialog dialog;
 
-	public JHCareTasksAdapter(Context context, 
+	public JHCareTasksTeaserAdapter(Context context, JHCareTasksDialog dialog,
 			int textViewResourceId, List<Notification> careTasks) {
 		super(context, textViewResourceId, careTasks);
 		this.careTasks = careTasks;
 		this.context = context;
-		
+		this.dialog = dialog;
 		Log.d(JHConstants.LOG_TAG, "this.careTasks " + this.careTasks);
 
 	}
@@ -147,55 +147,6 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 
 			}
 		}
-		LinearLayout postLL = (LinearLayout) convertView
-				.findViewById(R.id.postLL);
-		TableLayout postDetailsTL = (TableLayout) convertView
-				.findViewById(R.id.postDetailsTL);
-		// postLL.removeAllViews();
-		int count = postLL.getChildCount();
-		postLL.removeViews(1, count - 1);
-
-		String details = careTask.getCpDetails();
-		details = details.replace('{', ' ');
-		details = details.replace('}', ' ');
-		details = details.trim();
-		String[] elements = details.split(",");
-		ArrayList<String[]> detailList = new ArrayList<String[]>();
-		for (String element : elements) {
-			String[] pairs = element.split(":");
-			detailList.add(pairs);
-		}
-
-		Iterator iterator = detailList.iterator();
-
-		postDetailsTL.removeAllViews();
-		while (iterator.hasNext()) {
-			String[] pairs = (String[]) iterator.next();
-			if (pairs != null && pairs.length == 2) {
-				pairs[0] = pairs[0].replaceAll("\"", "");
-				pairs[1] = pairs[1].replaceAll("\"", "");
-				TableRow.LayoutParams params = new TableRow.LayoutParams(
-						TableRow.LayoutParams.MATCH_PARENT,
-						TableRow.LayoutParams.WRAP_CONTENT);
-				// JHTimelineItemView itemView = new JHTimelineItemView(ctx);
-				// itemView.setLayoutParams(params);
-				// itemView.getKeyTV().setText(pairs.getKey());
-				// itemView.getValueTV().setText(pairs.getValue());
-				// postLL.addView(itemView);
-				TableRow row = new TableRow(context);
-				row.setLayoutParams(params);
-				TextView keyTV = new TextView(context);
-				TextView valueTV = new TextView(context);
-				row.addView(keyTV);
-				row.addView(valueTV);
-				keyTV.setText(pairs[0]);
-				valueTV.setText(pairs[1]);
-
-				postDetailsTL.addView(row);
-			}
-
-		}
-
 		return convertView;
 
 	}
@@ -270,7 +221,7 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 									n.setNotificationType(JHConstants.NOT_TYPE_CARE_TASK);
 									careTasks.remove(n);
 									// JHAppStateVariables.removeCareTask(careTaskId);
-									JHCareTasksAdapter.this
+									JHCareTasksTeaserAdapter.this
 											.notifyDataSetChanged();
 								} else {
 									JHUtility

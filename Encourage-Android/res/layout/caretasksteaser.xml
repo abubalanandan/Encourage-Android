@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/page_bg" />
 
-        <RelativeLayout
+    <RelativeLayout
         android:id="@+id/headerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
           android:id="@+id/headingTV"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="RECENT ALERTS"
+          android:text="RECENT CARETASKS"
           android:layout_centerVertical="true"
           android:layout_centerHorizontal="true"
           android:textStyle="bold"
@@ -54,15 +54,14 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/alertTeaserList"
+        android:id="@+id/careTaksTeaserList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/buttonView"
-        android:layout_below="@+id/headerView"
-        android:layout_marginBottom="30dp" >
+        android:layout_below="@+id/headerView" >
 
     </ListView>
-
+    
     <RelativeLayout
         android:id="@+id/buttonView"
         android:layout_width="match_parent"
@@ -71,12 +70,12 @@
         android:layout_centerHorizontal="true" >
 
         <Button
-            android:id="@+id/viewAllAlerts"
+            android:id="@+id/viewAllCareTasks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:onClick="viewAllAlertButtonPressed"
-            android:text="View all Alerts" />
+            android:text="View all Caretasks" />
     </RelativeLayout>
 
 </RelativeLayout>
