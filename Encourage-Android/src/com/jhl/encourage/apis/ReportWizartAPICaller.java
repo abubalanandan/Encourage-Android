@@ -64,7 +64,8 @@ public class ReportWizartAPICaller {
 									activity.finish();
 									JHAppStateVariables.clearSickEmoReport();
 								}else{
-									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+									JHUtility.dismissProgressDialog(activity);
+									JHUtility.showDialogOk("Reporting error", "Report posting failed", activity);
 									
 									JHAppStateVariables.clearSickEmoReport();
 								}
@@ -115,7 +116,8 @@ public class ReportWizartAPICaller {
 									
 									activity.finish();
 								}else{
-									JHUtility.showDialogOk("Reporing error", "Report posting failed", activity);
+									JHUtility.dismissProgressDialog(activity);
+									JHUtility.showDialogOk("Reporting error", "Report posting failed", activity);
 									
 								}
 								
@@ -238,6 +240,7 @@ public class ReportWizartAPICaller {
 				
 				activity.finish();
 	    	}else {
+	    		JHUtility.dismissProgressDialog(activity);
 	    		JHUtility.showDialogOk("Reporting error", "Report posting failed", activity);
 	    		
 	    	}
