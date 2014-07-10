@@ -25,6 +25,7 @@ public class JHAlertListActivity extends Activity {
 	ListView listView ;
     
 	public static int position = 0;
+	public static String id;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +37,25 @@ public class JHAlertListActivity extends Activity {
 
         JHAlertsAdapter alertAdapter = new JHAlertsAdapter(this, R.layout.alertitem, alerts);
         ListView alertsList = (ListView)findViewById(R.id.alertListView);
-        alertsList.setAdapter(alertAdapter);
-        
-        if(position != 0 ){
-        	alertsList.smoothScrollToPosition(position+1);
-        	alertsList.setSelectionFromTop(position+1, 10);
-        	position = 0;
+       
+        boolean flag = false;
+        int i =0;
+        for( i=0;i<alerts.size();i++){
+        	
+        	if(alerts.get(i).getId().equalsIgnoreCase(id)){
+        		flag = true;
+        		break;
+        	}
         }
+        alertsList.setAdapter(alertAdapter);
+        if(flag){
+        alertsList.setSelection(i);
+        }
+//        if(position != 0 ){
+//        	alertsList.smoothScrollToPosition(position+1);
+//        	alertsList.setSelectionFromTop(position+1, 10);
+//        	position = 0;
+//        }
 //    	listView.setOnItemClickListener(new OnItemClickListener() {
 //
 //			@Override

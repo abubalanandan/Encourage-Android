@@ -120,6 +120,7 @@ public void invokeMarkAlertReadApi(final String alertkey, final int position) {
 									JHUtility.dismissProgressDialog(JHAppStateVariables.timeLineActivity);
 									JHAppStateVariables.markAsRead(JHConstants.NOT_TYPE_ALERT, alertkey);
 									JHAlertListActivity.position = position;
+									JHAlertListActivity.id = alertkey;
 									Intent i = new Intent(context, JHAlertListActivity.class);
 									context.startActivity(i);
 									cancel();
