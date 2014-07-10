@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/container_shadow"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/cell_headerRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="5dp" >
+
+            <ImageView
+                android:id="@+id/medTypeImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/med" />
+
+            <TextView
+                android:id="@+id/careTaskTitleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/medTypeImageView"
+                android:gravity="center_vertical"
+                android:text="Brian Wheeler"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dueByTV"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/careTaskTitleTV"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/medTypeImageView"
+                android:gravity="center_vertical"
+                android:text="Due by:"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/dueDateAndTimeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/careTaskTitleTV"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/dueByTV"
+                android:gravity="center_vertical"
+                android:text="Brian Wheeler"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/separatorLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:src="@drawable/post_separator" />
+
+        <RelativeLayout
+            android:id="@+id/postRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/postLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TableLayout
+                    android:id="@+id/postDetailsTL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*" >
+                </TableLayout>
+            </LinearLayout>
+
+            <!--
+                 <TextView 
+                android:id="@+id/valuesTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:text="asfkanfalnfanfa\nasfkjasjafa\nasfafasfas"
+                />
+            -->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/btnDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/done_caretask" />
+
+            <ImageButton
+                android:id="@+id/btnNotDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnDone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/not_done" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>
