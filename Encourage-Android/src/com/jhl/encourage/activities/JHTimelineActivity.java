@@ -216,7 +216,7 @@ public class JHTimelineActivity extends Activity {
 									Intent intent = new Intent(
 											JHTimelineActivity.this,
 											JHLoginActivity.class);
-									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 									startActivity(intent);
 									finish();
 								} else {

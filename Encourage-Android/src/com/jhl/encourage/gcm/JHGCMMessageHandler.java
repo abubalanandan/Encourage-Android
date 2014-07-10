@@ -101,7 +101,7 @@ public class JHGCMMessageHandler extends IntentService {
             	NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
             	 
                 Intent intent = new Intent(context, JHTimelineActivity.class);
-                 
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //use the flag FLAG_UPDATE_CURRENT to override any notification already there
                 PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
              
