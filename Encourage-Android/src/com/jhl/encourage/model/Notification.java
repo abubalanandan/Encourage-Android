@@ -47,7 +47,7 @@ public class Notification implements Comparable<Notification>{
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 		try {
-			this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm a", Locale.ENGLISH).parse(this.dateTime);
+			this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(this.dateTime);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

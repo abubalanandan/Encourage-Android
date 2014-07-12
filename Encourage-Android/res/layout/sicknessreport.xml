@@ -9,13 +9,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textview"
-        android:background="@drawable/page_bg" >
-
+         >
         <GridView
             android:id="@+id/sicknessgrid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#13294d"
+            android:layout_height="match_parent"
+            android:background="@null"
             android:gravity="center"
             android:numColumns="3" >
         </GridView>

@@ -2,7 +2,6 @@ package com.jhl.encourage.adapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import retrofit.Callback;
@@ -20,9 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jhl.encourage.EncourageApplication;
@@ -88,22 +85,13 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 					.findViewById(R.id.btnNotDone);
 			holder.medTypeImageView = (ImageView) convertView
 					.findViewById(R.id.medTypeImageView);
-//			holder.doneButton
-//					.setOnClickListener(new DoneButtonClicked(position));
+			holder.doneButton
+					.setOnClickListener(new DoneButtonClicked(
+							(ListView)parent));
 			holder.notDoneButton.setOnClickListener(new NotDoneButtonClicked(
-					position));
+					(ListView)parent));
 			
-			holder.doneButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					CareTask ct = (CareTask) careTasks.get(index);
-					invokeMarkCareTaskApi(ct.getId(), "D", "", "");
-					
-				}
-			});
-
+			
 			convertView.setTag(holder);
 
 		} else {
@@ -163,30 +151,33 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 	}
 
 	class DoneButtonClicked implements View.OnClickListener {
-		private int position;
+		private ListView listView;
 
-		public DoneButtonClicked(int position) {
-			this.position = position;
+		public DoneButtonClicked(ListView listView) {
+			this.listView = listView;
 		}
 
 		@Override
 		public void onClick(View v) {
-			CareTask ct = (CareTask) careTasks.get(position);
+			int index = listView.getPositionForView(v);
+
+			CareTask ct = (CareTask) careTasks.get(index);
 			invokeMarkCareTaskApi(ct.getId(), "D", "", "");
 
 		}
 	}
 
 	class NotDoneButtonClicked implements View.OnClickListener {
-		private int position;
+		private ListView listView;
 
-		public NotDoneButtonClicked(int position) {
-			this.position = position;
+		public NotDoneButtonClicked(ListView listView) {
+			this.listView = listView;
 		}
 
 		@Override
 		public void onClick(View v) {
-			CareTask ct = (CareTask) careTasks.get(position);
+			int index = listView.getPositionForView(v);
+			CareTask ct = (CareTask) careTasks.get(index);
 			invokeMarkCareTaskApi(ct.getId(), "ND", "", "");
 
 		}
