@@ -71,7 +71,7 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 
 		ViewHolder holder = null;
 		Log.d(JHConstants.LOG_TAG, String.valueOf(position));
-
+		final int index = position;
 		if (convertView == null) {
 			LayoutInflater vi = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -88,10 +88,21 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 					.findViewById(R.id.btnNotDone);
 			holder.medTypeImageView = (ImageView) convertView
 					.findViewById(R.id.medTypeImageView);
-			holder.doneButton
-					.setOnClickListener(new DoneButtonClicked(position));
+//			holder.doneButton
+//					.setOnClickListener(new DoneButtonClicked(position));
 			holder.notDoneButton.setOnClickListener(new NotDoneButtonClicked(
 					position));
+			
+			holder.doneButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					CareTask ct = (CareTask) careTasks.get(index);
+					invokeMarkCareTaskApi(ct.getId(), "D", "", "");
+					
+				}
+			});
 
 			convertView.setTag(holder);
 

@@ -119,6 +119,7 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 				if(pair!=null){
 				for(int i=0;i<pair.length;i++){
 					pair[i] =org.apache.commons.lang3.StringEscapeUtils.unescapeXml(pair[i]);
+					pair[i] = pair[i].replaceAll("&nbsp;", " ");
 				}
 				this.details.add(pair);
 				}

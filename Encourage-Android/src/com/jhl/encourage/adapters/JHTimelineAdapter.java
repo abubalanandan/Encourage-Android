@@ -146,6 +146,7 @@ public class JHTimelineAdapter extends BaseAdapter {
 			TableRow.LayoutParams params = new TableRow.LayoutParams(
 					TableRow.LayoutParams.MATCH_PARENT,
 					TableRow.LayoutParams.WRAP_CONTENT);
+			params.bottomMargin = (int) ctx.getResources().getDimension(R.dimen.timeline_item_bottom_margin);
 //			JHTimelineItemView itemView = new JHTimelineItemView(ctx);
 //			itemView.setLayoutParams(params);
 //			itemView.getKeyTV().setText(pairs.getKey());

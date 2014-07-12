@@ -83,7 +83,7 @@ public class JHUtility {
 		String formattedDate = "";
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(dateString);
-			SimpleDateFormat s = new SimpleDateFormat("MMMM dd yyyy");
+			SimpleDateFormat s = new SimpleDateFormat("MMMM dd yyyy hh:mm a");
 			formattedDate = s.format(date);
 		} catch (ParseException e) {
 			formattedDate = dateString;

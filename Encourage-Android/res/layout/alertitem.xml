@@ -48,11 +48,11 @@
 
         <ImageView
             android:id="@+id/separatorLine"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:src="@drawable/post_separator" />
+            android:background="@drawable/post_separator" />
 
         <RelativeLayout
             android:id="@+id/postRL"

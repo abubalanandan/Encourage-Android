@@ -51,7 +51,7 @@ public class CareTask extends Notification{
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 		try {
-			this.date = new SimpleDateFormat("MMMM dd yyyy hh:mmaa", Locale.ENGLISH).parse(this.dateTime.replace("@", " "));
+			this.date = new SimpleDateFormat("MMMM dd yyyy hh:mm a", Locale.ENGLISH).parse(this.dateTime.replace("@", " "));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
