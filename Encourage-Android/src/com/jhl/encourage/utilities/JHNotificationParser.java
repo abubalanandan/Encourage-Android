@@ -80,9 +80,11 @@ public class JHNotificationParser {
 				String url = entryMap.get(JHConstants.NOT_XML_KEY_ALERT_LINK_KEY);
 				String address = entryMap.get(JHConstants.NOT_XML_KEY_ALERT_MAP_KEY);
 				String imageName = entryMap.get(JHConstants.NOT_XML_KEY_ALERT_IMAGE_KEY);
+				String authorProfilePicName = entryMap.get("author_profilepic_name");
 				
 				if(url != null && ! url.trim().equals("")){
 					alert.setUrl(url);
+					alert.setAuthorProfilePicName(authorProfilePicName);
 				}
 				
 				if(address != null && ! address.trim().equals("")){

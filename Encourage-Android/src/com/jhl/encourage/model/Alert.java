@@ -15,7 +15,17 @@ public class Alert extends Notification{
 	
 	private String alertType;
 	
-	
+	private String authorProfilePicName;
+	public String getAuthorProfilePicName() {
+		return authorProfilePicName;
+	}
+
+	public void setAuthorProfilePicName(String authorProfilePicName) {
+		this.authorProfilePicName = authorProfilePicName;
+	}
+
+
+
 	private String address; // New Jersey City University 2039 Kennedy Boulevard
 	private String url; // full url
 	private String imageName; // 70799886-2AB7-E64A-0A8D-8DDE2C55D992.jpg etc

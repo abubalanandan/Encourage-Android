@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -133,19 +134,40 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 
 		} else if (alert.getContenType().equals(
 				JHConstants.NOT_XML_KEY_ALERT_TYPE_LINK)) {
-			TableRow.LayoutParams params = new TableRow.LayoutParams(
-					TableRow.LayoutParams.MATCH_PARENT,
-					TableRow.LayoutParams.WRAP_CONTENT);
-			TableRow row = new TableRow(context);
-			row.setLayoutParams(params);
-			TextView linkTV = new TextView(context);
-			row.addView(linkTV);
-			linkTV.setMovementMethod(LinkMovementMethod.getInstance());
-			linkTV.setText(Html.fromHtml("<a href='"+alert.getUrl()+"'>" + alert.getUrl() + "</a>"));
-			holder.postDetailsTL.addView(row);
-
+			
+			LayoutInflater vi = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View view = vi.inflate(R.layout.alert_link_item, null);
+			
+			DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+			int width = metrics.widthPixels;
+			LayoutParams params = new LayoutParams(width, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+			
+			view.setLayoutParams(params);
+			ImageView imageView = (ImageView)view.findViewById(R.id.linkImage);
+			TextView linkTitleTV = (TextView)view.findViewById(R.id.linkTitleTV);
+			TextView linkPreviewTV = (TextView)view.findViewById(R.id.linkPreviewTV);
+			
+			linkTitleTV.setMovementMethod(LinkMovementMethod.getInstance());
+			linkTitleTV.setText(Html.fromHtml("<a href='"+alert.getUrl()+"'>" + alert.getUrl() + "</a>"));
+			linkPreviewTV.setText(alert.getDetails());
+			String imageName = "https://tryencourage.com/hwdsi/hwAttachedfile/"
+					+ JHAppStateVariables.getLoginTocken() + "/"
+					+ alert.getImageName();
+//			TableRow.LayoutParams params = new TableRow.LayoutParams(
+//					TableRow.LayoutParams.MATCH_PARENT,
+//					TableRow.LayoutParams.WRAP_CONTENT);
+//			TableRow row = new TableRow(context);
+//			row.setLayoutParams(params);
+//			TextView linkTV = new TextView(context);
+//			row.addView(linkTV);
+//			linkTV.setMovementMethod(LinkMovementMethod.getInstance());
+//			linkTV.setText(Html.fromHtml("<a href='"+alert.getUrl()+"'>" + alert.getUrl() + "</a>"));
+			holder.postLL.addView(view);
+			imageLoader.DisplayImage(imageName, imageView);
 		}
 
+		if(!alert.getContenType().equals(JHConstants.NOT_XML_KEY_ALERT_TYPE_LINK)){
 		TableRow.LayoutParams params = new TableRow.LayoutParams(
 				TableRow.LayoutParams.MATCH_PARENT,
 				TableRow.LayoutParams.WRAP_CONTENT);
@@ -155,7 +177,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 		row.addView(linkTV);
 		linkTV.setText(alert.getDetails());
 		holder.postDetailsTL.addView(row);
-
+		}
 		return convertView;
 
 	}
