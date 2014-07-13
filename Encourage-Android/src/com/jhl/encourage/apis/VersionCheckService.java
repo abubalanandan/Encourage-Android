@@ -11,7 +11,7 @@ public interface VersionCheckService {
     @FormUrlEncoded
     @POST("/hwservice/getAppLatestVersion.php")
     void checkVersion(
-    			@Field("ostype") String ostype,  
+    			@Field("ostype") String ostype,    
     			Callback<SpocResponse> callback);
 
 }

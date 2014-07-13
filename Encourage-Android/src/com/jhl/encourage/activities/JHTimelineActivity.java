@@ -669,7 +669,7 @@ public class JHTimelineActivity extends Activity {
 									uVersion = 0 ;
 								}
 								
-								if(uVersion > aVersion) {
+								if(uVersion > aVersion) {  
 								//if(true) { for testing
 									//forcedupdate = "true";
 									if(forcedupdate.equalsIgnoreCase("true")){
