@@ -1,17 +1,25 @@
 package com.jhl.encourage.activities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 import retrofit.Callback;
+import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.location.Location;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -31,13 +39,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.activities.JHLoginActivity.GCMRegistrationTask;
 import com.jhl.encourage.adapters.JHTimelineAdapter;
 import com.jhl.encourage.apis.LogoutService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.apis.TimeLineService;
+import com.jhl.encourage.apis.VersionCheckService;
 import com.jhl.encourage.imageloader.JHImageLoader;
 import com.jhl.encourage.model.TimeLineItem;
 import com.jhl.encourage.utilities.JHAppStateVariables;
@@ -143,7 +154,10 @@ public class JHTimelineActivity extends Activity {
 		} else {
 			invokeTimelineDetailsApi("", JHUtility.getDateTime(),
 					JHUtility.getTimeZoneString(), 0);
+			new VersionCheckTask().execute();
 		}
+		
+		
 	}
 
 	@Override
@@ -591,6 +605,113 @@ public class JHTimelineActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		// Disabled back button action
+	}
+	
+	
+	class VersionCheckTask extends AsyncTask<String, Integer, Boolean> {
+		@Override
+		protected void onPreExecute() {
+
+			super.onPreExecute();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			
+		}
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			invokeVersionCheckApi();
+			return true;
+		}
+	}
+	
+	private void invokeVersionCheckApi() {
+		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
+		VersionCheckService service = restAdapter.create(VersionCheckService.class);
+		service.checkVersion("android", new Callback<SpocResponse>() {
+			@Override
+			public void success(SpocResponse spocResponse, Response arg1) {
+				ArrayList<SpocObject> responseList = spocResponse
+						.getSpocObjects();
+				
+				System.out.println("responseList.size() " +responseList.size());
+				
+				for (SpocObject spocObject : responseList) {
+					if (spocObject.getResultTypeCode()
+							.equalsIgnoreCase("STATUS")) {
+						HashMap<String, String> map = spocObject
+								.getMap();
+						String success = map.get("success");
+						if (success.equalsIgnoreCase("true")) {
+							spocObject = responseList.get(2);
+							map = spocObject.getMap();
+							
+							try {
+								PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+								String version = pInfo.versionName;
+								System.out.println("VERSION "+version);
+								
+								String forcedupdate = map.get("forcedupdate");
+								String updateVerion = map.get("appversion");
+								final String updateUrl = map.get("updateurl");
+								System.out.println("forcedupdate "+forcedupdate);
+								
+								long aVersion = 0 ;
+								long uVersion = 0 ;
+								
+								try {
+									aVersion = Long.parseLong(version);
+									uVersion = Long.parseLong(updateVerion);
+								} catch (NumberFormatException e) {
+									aVersion = 0 ;
+									uVersion = 0 ;
+								}
+								
+								if(uVersion > aVersion) {
+								//if(true) { for testing
+									//forcedupdate = "true";
+									if(forcedupdate.equalsIgnoreCase("true")){
+										AlertDialog dialog = new AlertDialog.Builder(JHTimelineActivity.this).setTitle("Info").setMessage("A mandatory update of Enocurage Mobile is required").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+											
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												Uri uri = Uri.parse(updateUrl);
+												Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+												startActivity(intent);
+												dialog.dismiss();
+											}
+										}).create();
+										dialog.show();
+									}else{
+											AlertDialog dialog = new AlertDialog.Builder(JHTimelineActivity.this).setTitle("Info").setMessage("An update is available for Enocurage Mobile").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+											
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												// TODO Auto-generated method stub
+												dialog.dismiss();
+											}
+										}).create();
+										dialog.show();
+									}
+								}
+								
+							} catch (NameNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+					}
+				}
+			}
+			@Override
+			public void failure(RetrofitError arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 }
