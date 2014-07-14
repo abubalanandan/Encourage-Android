@@ -148,12 +148,9 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 			TextView linkTitleTV = (TextView)view.findViewById(R.id.linkTitleTV);
 			TextView linkPreviewTV = (TextView)view.findViewById(R.id.linkPreviewTV);
 			
-			linkTitleTV.setMovementMethod(LinkMovementMethod.getInstance());
-			linkTitleTV.setText(Html.fromHtml("<a href='"+alert.getUrl()+"'>" + alert.getUrl() + "</a>"));
+			linkTitleTV.setText(alert.getUrlHeader());
 			linkPreviewTV.setText(alert.getDetails());
-			String imageName = "https://tryencourage.com/hwdsi/hwAttachedfile/"
-					+ JHAppStateVariables.getLoginTocken() + "/"
-					+ alert.getImageName();
+			String imageName =  alert.getUrlImage();
 //			TableRow.LayoutParams params = new TableRow.LayoutParams(
 //					TableRow.LayoutParams.MATCH_PARENT,
 //					TableRow.LayoutParams.WRAP_CONTENT);
