@@ -337,7 +337,7 @@ public class JHTimelineActivity extends Activity {
 							invokeTimelineDetailsApi("",
 									JHUtility.getDateTime(),
 									JHUtility.getTimeZoneString(),
-									list.size() + 1);
+									list.size() );
 
 						}
 					}
