@@ -7,7 +7,10 @@
         android:id="@+id/linkTitleTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white"
+		android:paddingRight="-5dp"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -27,7 +30,8 @@
             android:layout_alignTop="@+id/linkImage"
             android:layout_alignBottom="@+id/linkImage"
             android:layout_height="wrap_content" 
-            android:layout_marginRight="5dp"
+            android:layout_margin="5dp"
+            android:paddingRight="-10dp"
             />
     </RelativeLayout>
 

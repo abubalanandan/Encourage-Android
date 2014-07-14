@@ -11,8 +11,28 @@ public class Alert extends Notification{
 	private String authorName;
 	private String title;
 	private String details;
+	private String urlHeader;
+	private String urlImage;
 	
 	
+	public String getUrlHeader() {
+		return urlHeader;
+	}
+
+	public void setUrlHeader(String urlHeader) {
+		this.urlHeader = urlHeader;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
+
+
+
 	private String alertType;
 	
 	private String authorProfilePicName;
