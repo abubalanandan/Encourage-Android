@@ -25,14 +25,15 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 	TextView emoDesc;
 	
 	private Contact contact;
-	
+	private JHEmotonalButtonsAdapter adapter;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.emotionalsreport, container, false);
 		GridView gridView = (GridView) v.findViewById(R.id.emotionalgrid);
        // gridView.setBackground(getResources().getDrawable(R.drawable.page_bg));
-		gridView.setAdapter(new JHEmotonalButtonsAdapter(v.getContext()));
+		adapter = new JHEmotonalButtonsAdapter(v.getContext());
+		gridView.setAdapter(adapter);
 		initViews(v);
 		contact = new Contact();
 		return v;
@@ -44,6 +45,10 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 		emoDesc = (TextView)v.findViewById(R.id.emoDesc);
 		
 			
+	}
+	
+	public void clearButtonSelections(){
+		adapter.clearButtonSelections();
 	}
 	
 	public void setDate(String date){
