@@ -13,7 +13,7 @@ import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHSplashActivity extends Activity {
-
+ 
 	
 	public static int SPLASH_DISPLAY_LENGTH = 2000;
 	@Override
