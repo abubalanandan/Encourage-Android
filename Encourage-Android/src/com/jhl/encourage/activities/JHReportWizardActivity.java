@@ -255,6 +255,13 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		int pos = this.mTabHost.getCurrentTab();
 		this.mViewPager.setCurrentItem(pos);
 		JHAppStateVariables.currentRwPage = pos;
+		
+		System.out.println("pos "+pos);
+		
+		if(! ( pos ==0 || pos == 1) ) {
+			sickFragment.clearButtonSelections();
+			emoFragment.clearButtonSelections();
+		}
 
 	}
 
@@ -273,6 +280,13 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	public void onPageSelected(int arg0) {
 		JHAppStateVariables.currentRwPage = arg0;
 		this.mTabHost.setCurrentTab(arg0);
+		
+		System.out.println("arg0 "+arg0);
+		
+		if(! ( arg0 ==0 || arg0 == 1) ) {
+			sickFragment.clearButtonSelections();
+			emoFragment.clearButtonSelections();
+		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

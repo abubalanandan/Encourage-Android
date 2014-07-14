@@ -8,6 +8,7 @@ import com.jhl.encourage.adapters.JHSicknessButtonsAdapter.ButtonClickListener;
 import com.jhl.encourage.model.ReportButton;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHUtility;
 
 import android.content.Context;
 import android.view.View;
@@ -89,6 +90,10 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
         return imageView;
 	}
 	
+	public void clearButtonSelections() {
+		selectedButtons = new ArrayList<ReportButton>();
+		JHAppStateVariables.clearReport();
+	}
 	
 	class ButtonClickListener implements View.OnClickListener {
 		@Override

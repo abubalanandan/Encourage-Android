@@ -29,6 +29,7 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 	TextView sickDate;
 	TextView sickDesc;
 	private Contact contact;
+	private JHSicknessButtonsAdapter adapter;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -36,7 +37,8 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 		GridView gridView = (GridView) v.findViewById(R.id.sicknessgrid);
 //        gridView.setBackground(getResources().getDrawable(R.drawable.page_bg));
 //        gridView.setBackgroundResource(R.drawable.page_bg);
-		gridView.setAdapter(new JHSicknessButtonsAdapter(v.getContext()));
+		adapter = new JHSicknessButtonsAdapter(v.getContext());
+		gridView.setAdapter(adapter);
 
 		
 //		TextView contactList = (TextView)v.findViewById(R.id.contactsList);
@@ -78,6 +80,10 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 //			}
 //		});  ENTHONNADAI ITHU!!!!! CHUMMA ORU HINT KODUKKAN AAYT
 		
+	}
+	
+	public void clearButtonSelections(){
+		adapter.clearButtonSelections();
 	}
 	
 	public void setDate(String date){

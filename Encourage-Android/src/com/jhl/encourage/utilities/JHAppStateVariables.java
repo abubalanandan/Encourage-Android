@@ -34,6 +34,7 @@ public class JHAppStateVariables {
 
 	}
 
+	
 	private static List<String> emotionals = new ArrayList<String>();
 
 	public static void addEmotionals(String emotional) {
@@ -45,6 +46,12 @@ public class JHAppStateVariables {
 
 	}
 
+	public static void clearReport() {
+		sicknesses = new ArrayList<String>();
+		emotionals = new ArrayList<String>();
+		
+	}
+	
 	public static boolean isReadyForSubmission() {
 		if (sicknesses.size() == 0 && emotionals.size() == 0) {
 			return false;

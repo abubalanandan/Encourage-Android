@@ -72,6 +72,11 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 		return imageView;
 	}
 	
+	
+	public void clearButtonSelections() {
+		selectedButtons = new ArrayList<ReportButton>();
+		JHAppStateVariables.clearReport();
+	}
 	@Override
 	public Object getItem(int position) {
 		 return position;
