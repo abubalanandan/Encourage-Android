@@ -51,7 +51,7 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 	
 	private void initViews  (View v) {
 		sickDate = (TextView)v.findViewById(R.id.sickDate);
-		sickDate.setText(JHUtility.getFormattedDate());
+		sickDate.setText(JHUtility.getDatePickerDate());
 		sickDesc = (TextView)v.findViewById(R.id.sickDesc);
 		
 //		sickDesc.setOnTouchListener(new View.OnTouchListener() {
@@ -102,7 +102,7 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 	
 	public String getSickDate(){
 		String dateString = sickDate.getText().toString();
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
 		try {
 			Date date = formatter.parse(dateString);
 			formatter = new SimpleDateFormat("yyyy-MM-dd");

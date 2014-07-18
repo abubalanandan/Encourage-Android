@@ -50,7 +50,7 @@ public class JHReportWizardImageFragment extends Fragment implements
 		imageHolder = (ImageView) v.findViewById(R.id.imageHolder);
 		imageDate = (EditText) v.findViewById(R.id.imageDate);
 		imageName = (TextView) v.findViewById(R.id.imageName);
-		imageDate.setText(JHUtility.getFormattedDate());
+		imageDate.setText(JHUtility.getDatePickerDate());
 
 		// imageName.setOnTouchListener(new View.OnTouchListener() {
 		//
@@ -157,7 +157,7 @@ public class JHReportWizardImageFragment extends Fragment implements
 
 	public String getDate() {
 		String dateString = imageDate.getText().toString();
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
 		try {
 			Date date = formatter.parse(dateString);
 			formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -79,6 +79,26 @@ public class JHUtility {
 		return date;
 	}
 
+	public static String getDatePickerDate() {
+		SimpleDateFormat s = new SimpleDateFormat("MMMM dd, yyyy");
+		String date = s.format(new Date());
+
+		Log.d(JHConstants.LOG_TAG, "date " + date);
+		return date;
+	}
+	
+	public static String getDatePickerDate(String dateString) {
+		String formattedDate = "";
+		try {
+			Date date = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).parse(dateString);
+			SimpleDateFormat s = new SimpleDateFormat("MMMM dd, yyyy");
+			formattedDate = s.format(date);
+		} catch (ParseException e) {
+			formattedDate = dateString;
+		}
+		return formattedDate;
+	}
+	
 	public static String getFormattedDate(String dateString) {
 		String formattedDate = "";
 		try {

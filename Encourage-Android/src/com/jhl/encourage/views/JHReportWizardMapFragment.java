@@ -38,7 +38,7 @@ public class JHReportWizardMapFragment extends Fragment implements JHReportFragm
 	private void initView(View v) {
 		mapReportDateText = (TextView) v.findViewById(R.id.mapReportDateText);
 		
-		mapReportDateText.setText(JHUtility.getFormattedDate());
+		mapReportDateText.setText(JHUtility.getDatePickerDate());
 		mapReportNameText = (TextView) v.findViewById(R.id.mapReportNameText);
 		
 				
@@ -54,7 +54,7 @@ public class JHReportWizardMapFragment extends Fragment implements JHReportFragm
 	
 	public String getDate(){
 		String dateString = mapReportDateText.getText().toString();
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
 		try {
 			Date date = formatter.parse(dateString);
 			formatter = new SimpleDateFormat("yyyy-MM-dd");
