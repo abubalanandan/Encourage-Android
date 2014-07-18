@@ -17,14 +17,17 @@
                 android:id="@+id/imageLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
                 android:background="#13294d" >
 
                 <ImageView
                     android:id="@+id/imageHolder"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/image_size" />
+                    android:background="@drawable/image_size" />
 
                 <ProgressBar
                     android:id="@+id/uploadProgress"
@@ -37,16 +40,21 @@
 
             <LinearLayout
                 android:id="@+id/textsLayout"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/imageLayout"
+                android:layout_alignRight="@+id/imageLayout"
                 android:layout_below="@+id/imageLayout"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical" >
 
                 <EditText
                     android:id="@+id/imageDate"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_corner_text"
                     android:editable="false"
                     android:onClick="imageDatePressed"
@@ -57,7 +65,8 @@
                     android:id="@+id/imageName"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_corner_text"
                     android:hint="Event Name"
                     android:textColor="@android:color/primary_text_light" />
@@ -67,18 +76,18 @@
                 android:id="@+id/buttonLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textsLayout"
                 android:layout_alignParentLeft="true"
-                android:layout_marginBottom="10dp" >
+                android:layout_below="@+id/textsLayout"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
 
                 <ImageButton
                     android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="imageButtonClicked"
                     android:layout_centerHorizontal="true"
-                    
-                    android:background="@drawable/select_image" />
+                    android:background="@drawable/select_image"
+                    android:onClick="imageButtonClicked" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
