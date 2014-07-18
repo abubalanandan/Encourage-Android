@@ -146,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/sendReportButon"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal"
             android:padding="5dp" >
 
