@@ -650,9 +650,18 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				apiCaller.invokeImageApi(eventDate, eventName, ics,
 						uploadefileName, actualFileName, latitude, longitude);
 			} else {
-				JHUtility.showDialogOk("Reporing error",
-						"Report posting failed", JHReportWizardActivity.this);
-			}
+				JHReportWizardActivity.this.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						JHUtility.dismissProgressDialog(JHReportWizardActivity.this);
+						JHUtility.showDialogOk("Reporing error",
+								"Report posting failed", JHReportWizardActivity.this);
+
+					}
+				});
+							}
 
 			return null;
 		}
@@ -660,7 +669,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		@Override
 		protected void onPostExecute(String data) {
 			imageFragment.endProgress();
-			finish();
+
 		}
 
 	}
