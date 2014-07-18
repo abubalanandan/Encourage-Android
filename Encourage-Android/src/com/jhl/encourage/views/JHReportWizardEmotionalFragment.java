@@ -41,7 +41,7 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 	
 	private void initViews  (View v) {
 		emoDate = (TextView)v.findViewById(R.id.emoDate);
-		emoDate.setText(JHUtility.getFormattedDate());
+		emoDate.setText(JHUtility.getDatePickerDate());
 		emoDesc = (TextView)v.findViewById(R.id.emoDesc);
 		
 			
@@ -69,7 +69,7 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 
 
 			String dateString = emoDate.getText().toString();
-			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
 			try {
 				Date date = formatter.parse(dateString);
 				formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -143,6 +143,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		}
 
 		cboxCareCircle = (CheckBox) findViewById(R.id.cboxCareCircle);
+		cboxCareCircle.setChecked(true);
 		cal = Calendar.getInstance();
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		month = cal.get(Calendar.MONTH);
@@ -710,6 +711,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				int selectedMonth, int selectedDay) {
 			String date = (selectedMonth + 1) + "/" + selectedDay + "/"
 					+ selectedYear;
+			date = JHUtility.getDatePickerDate(date);
 			sickFragment.setDate(date);
 		}
 	};
@@ -719,6 +721,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				int selectedMonth, int selectedDay) {
 			String date = (selectedMonth + 1) + "/" + selectedDay + "/"
 					+ selectedYear;
+			date = JHUtility.getDatePickerDate(date);
 			emoFragment.setDate(date);
 		}
 	};
@@ -728,6 +731,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				int selectedMonth, int selectedDay) {
 			String date = (selectedMonth + 1) + "/" + selectedDay + "/"
 					+ selectedYear;
+			date = JHUtility.getDatePickerDate(date);
 			imageFragment.setDate(date);
 		}
 	};
@@ -737,6 +741,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 				int selectedMonth, int selectedDay) {
 			String date = (selectedMonth + 1) + "/" + selectedDay + "/"
 					+ selectedYear;
+			date = JHUtility.getDatePickerDate(date);
 			mapFragment.setDate(date);
 		}
 	};

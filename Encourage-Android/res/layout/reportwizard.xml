@@ -119,21 +119,6 @@
             android:background="@null"
             android:scaleType="fitXY"
             android:src="@drawable/top_header" />
-
-        <RelativeLayout
-            android:id="@+id/contactSelectLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal"
-            android:padding="5dp" >
-
-            <CheckBox
-                android:id="@+id/cboxCareCircle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Inform care-circle" />
-        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -141,7 +126,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:alpha="0.5"
         android:background="@drawable/translucent_bottom" >
 
@@ -157,20 +141,44 @@
             android:onClick="sendReportButtonPressed" />
 
         <RelativeLayout
+            android:id="@+id/contactSelectLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/sendReportButon"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <CheckBox
+                android:id="@+id/cboxCareCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Inform my Care-circle" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/rwContactButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/sendReportButon"
+            android:layout_alignBottom="@+id/rwContactBackgroundImage"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/rwContactBackgroundImage"
+            android:layout_alignTop="@+id/rwContactBackgroundImage"
             android:onClick="rwContactButtonPressed" >
 
-            <ImageView
-                android:id="@+id/rwContactBackgroundImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_action_add_group" />
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/rwContactBackgroundImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_action_add_group" />
+
     </RelativeLayout>
 
 </RelativeLayout>
