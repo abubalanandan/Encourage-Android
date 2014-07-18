@@ -15,9 +15,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
@@ -26,7 +28,6 @@ import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
-import com.jhl.encourage.views.JHRegistrationDialog;
 import com.jhl.encourage.views.JHTermsAndConditionsDialog;
 
 public class JHRegistrationActivity extends Activity {
@@ -54,7 +55,8 @@ public class JHRegistrationActivity extends Activity {
 		firstNameField = (EditText) findViewById(R.id.firstNameField);
 		lastNameField = (EditText) findViewById(R.id.lastNameField);
         registerButton = (Button) findViewById(R.id.registerButton);
-
+        TextView termsTV = (TextView)findViewById(R.id.termsTV);
+        termsTV.setText(Html.fromHtml("By clicking Register, you agree to our <u>Terms and Conditions</u> herein documented"));
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

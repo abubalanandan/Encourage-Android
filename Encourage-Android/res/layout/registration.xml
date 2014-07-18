@@ -82,7 +82,7 @@
         android:layout_below="@+id/formRL"
         android:paddingLeft="10dp"
         android:paddingRight="18dp"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textColor="@android:color/white"
         android:onClick="showPolicy"
         android:clickable="true"
