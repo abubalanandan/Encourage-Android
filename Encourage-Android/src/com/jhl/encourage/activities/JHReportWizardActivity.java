@@ -150,7 +150,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		month = cal.get(Calendar.MONTH);
 		year = cal.get(Calendar.YEAR);
-
+		
+		
 		// Intialise ViewPager
 		this.intialiseViewPager();
 		
