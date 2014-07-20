@@ -1,6 +1,5 @@
 package com.jhl.encourage.activities;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,10 +38,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
-import com.jhl.encourage.activities.JHLoginActivity.GCMRegistrationTask;
 import com.jhl.encourage.adapters.JHTimelineAdapter;
 import com.jhl.encourage.apis.LogoutService;
 import com.jhl.encourage.apis.SpocObject;
@@ -101,8 +98,7 @@ public class JHTimelineActivity extends Activity {
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
 		setContentView(R.layout.timeline);
-		MenuAdapter adapter = new MenuAdapter(this,
-				R.layout.menu_item, data);
+		MenuAdapter adapter = new MenuAdapter(this, R.layout.menu_item, data);
 
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		imageLoader = new JHImageLoader(this);
@@ -132,7 +128,7 @@ public class JHTimelineActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					final int pos, long id) {
-				if(pos==0)
+				if (pos == 0)
 					return;
 				invokeLogoutApi();
 				drawer.closeDrawer(navList);
@@ -156,8 +152,7 @@ public class JHTimelineActivity extends Activity {
 					JHUtility.getTimeZoneString(), 0);
 			new VersionCheckTask().execute();
 		}
-		
-		
+
 	}
 
 	@Override
@@ -230,7 +225,8 @@ public class JHTimelineActivity extends Activity {
 									Intent intent = new Intent(
 											JHTimelineActivity.this,
 											JHLoginActivity.class);
-									intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+											| Intent.FLAG_ACTIVITY_CLEAR_TASK);
 									startActivity(intent);
 									finish();
 								} else {
@@ -336,8 +332,7 @@ public class JHTimelineActivity extends Activity {
 							timelineView.addFooterView(dialog);
 							invokeTimelineDetailsApi("",
 									JHUtility.getDateTime(),
-									JHUtility.getTimeZoneString(),
-									list.size() );
+									JHUtility.getTimeZoneString(), list.size());
 
 						}
 					}
@@ -606,8 +601,7 @@ public class JHTimelineActivity extends Activity {
 	public void onBackPressed() {
 		// Disabled back button action
 	}
-	
-	
+
 	class VersionCheckTask extends AsyncTask<String, Integer, Boolean> {
 		@Override
 		protected void onPreExecute() {
@@ -617,7 +611,7 @@ public class JHTimelineActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			
+
 		}
 
 		@Override
@@ -626,90 +620,143 @@ public class JHTimelineActivity extends Activity {
 			return true;
 		}
 	}
-	
+
 	private void invokeVersionCheckApi() {
 		RestAdapter restAdapter = EncourageApplication.getRestAdapter();
-		VersionCheckService service = restAdapter.create(VersionCheckService.class);
+		VersionCheckService service = restAdapter
+				.create(VersionCheckService.class);
 		service.checkVersion("android", new Callback<SpocResponse>() {
 			@Override
 			public void success(SpocResponse spocResponse, Response arg1) {
 				ArrayList<SpocObject> responseList = spocResponse
 						.getSpocObjects();
-				
-				System.out.println("responseList.size() " +responseList.size());
-				
+
+				System.out.println("responseList.size() " + responseList.size());
+
 				for (SpocObject spocObject : responseList) {
-					if (spocObject.getResultTypeCode()
-							.equalsIgnoreCase("STATUS")) {
-						HashMap<String, String> map = spocObject
-								.getMap();
+					if (spocObject.getResultTypeCode().equalsIgnoreCase(
+							"STATUS")) {
+						HashMap<String, String> map = spocObject.getMap();
 						String success = map.get("success");
 						if (success.equalsIgnoreCase("true")) {
 							spocObject = responseList.get(2);
 							map = spocObject.getMap();
-							
+
 							try {
-								PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+								PackageInfo pInfo = getPackageManager()
+										.getPackageInfo(getPackageName(), 0);
 								String version = pInfo.versionName;
-								System.out.println("VERSION "+version);
-								
+								System.out.println("VERSION " + version);
+
 								String forcedupdate = map.get("forcedupdate");
 								String updateVerion = map.get("appversion");
 								final String updateUrl = map.get("updateurl");
-								System.out.println("forcedupdate "+forcedupdate);
-								
-								long aVersion = 0 ;
-								long uVersion = 0 ;
-								
+								System.out.println("forcedupdate "
+										+ forcedupdate);
+
+								long aVersion = 0;
+								long uVersion = 0;
+
 								try {
 									aVersion = Long.parseLong(version);
 									uVersion = Long.parseLong(updateVerion);
 								} catch (NumberFormatException e) {
-									aVersion = 0 ;
-									uVersion = 0 ;
+									aVersion = 0;
+									uVersion = 0;
 								}
-								
-								if(uVersion > aVersion) {  
-								//if(true) { for testing
-									//forcedupdate = "true";
-									if(forcedupdate.equalsIgnoreCase("true")){
-										AlertDialog dialog = new AlertDialog.Builder(JHTimelineActivity.this).setTitle("Info").setMessage("A mandatory update of Enocurage Mobile is required").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-											
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												Uri uri = Uri.parse(updateUrl);
-												Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-												startActivity(intent);
-												dialog.dismiss();
-											}
-										}).create();
-										dialog.show();
-									}else{
-											AlertDialog dialog = new AlertDialog.Builder(JHTimelineActivity.this).setTitle("Info").setMessage("An update is available for Enocurage Mobile").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-											
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												// TODO Auto-generated method stub
-												dialog.dismiss();
-											}
-										}).create();
-										dialog.show();
+
+								if (uVersion > aVersion) {
+									// if(true) { for testing
+									// forcedupdate = "true";
+									if (forcedupdate.equalsIgnoreCase("true")) {
+
+										JHTimelineActivity.this
+												.runOnUiThread(new Runnable() {
+
+													@Override
+													public void run() {
+														// TODO Auto-generated
+														// method stub
+														AlertDialog dialog = new AlertDialog.Builder(
+																JHTimelineActivity.this)
+																.setTitle(
+																		"Info")
+																.setMessage(
+																		"A mandatory update of Enocurage Mobile is required")
+																.setPositiveButton(
+																		"Ok",
+																		new DialogInterface.OnClickListener() {
+
+																			@Override
+																			public void onClick(
+																					DialogInterface dialog,
+																					int which) {
+																				Uri uri = Uri
+																						.parse(updateUrl);
+																				Intent intent = new Intent(
+																						Intent.ACTION_VIEW,
+																						uri);
+																				startActivity(intent);
+																				dialog.dismiss();
+																			}
+																		})
+																.create();
+														dialog.show();
+													}
+												});
+
+									} else {
+
+										JHTimelineActivity.this
+												.runOnUiThread(new Runnable() {
+
+													@Override
+													public void run() {
+														// TODO Auto-generated
+														// method stub
+														AlertDialog dialog = new AlertDialog.Builder(
+																JHTimelineActivity.this)
+																.setTitle(
+																		"Info")
+																.setMessage(
+																		"An update is available for Enocurage Mobile")
+																.setPositiveButton(
+																		"Ok",
+																		new DialogInterface.OnClickListener() {
+
+																			@Override
+																			public void onClick(
+																					DialogInterface dialog,
+																					int which) {
+																				// TODO
+																				// Auto-generated
+																				// method
+																				// stub
+																				dialog.dismiss();
+																			}
+																		})
+																.create();
+														dialog.show();
+													}
+												});
+
 									}
 								}
-								
+
 							} catch (NameNotFoundException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
+
 						}
 					}
 				}
 			}
+
 			@Override
 			public void failure(RetrofitError arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
