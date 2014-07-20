@@ -27,6 +27,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
@@ -156,21 +157,30 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		this.intialiseViewPager();
 		
 		TabWidget tw = (TabWidget)mTabHost.findViewById(android.R.id.tabs);
+		
 		View tabView = tw.getChildTabViewAt(0);
 		TextView tv = (TextView)tabView.findViewById(android.R.id.title);
-		tv.setTextSize(10);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+				getResources().getDimension(
+						R.dimen.tab_title_size));
 		
 		tabView = tw.getChildTabViewAt(1);
 		tv = (TextView)tabView.findViewById(android.R.id.title);
-		tv.setTextSize(10);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+				getResources().getDimension(
+						R.dimen.tab_title_size));
 		
 		tabView = tw.getChildTabViewAt(2);
 		tv = (TextView)tabView.findViewById(android.R.id.title);
-		tv.setTextSize(10);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+				getResources().getDimension(
+						R.dimen.tab_title_size));
 		
 		tabView = tw.getChildTabViewAt(3);
 		tv = (TextView)tabView.findViewById(android.R.id.title);
-		tv.setTextSize(10);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+				getResources().getDimension(
+						R.dimen.tab_title_size));
 	}
 
 	/**

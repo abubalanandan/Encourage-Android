@@ -28,6 +28,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="CARETASKS LIST"
+          android:textColor="@android:color/white"
           android:layout_centerVertical="true"
           android:layout_centerHorizontal="true"
           android:textStyle="bold"
