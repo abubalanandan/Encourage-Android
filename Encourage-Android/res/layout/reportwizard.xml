@@ -126,8 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:alpha="0.5"
-        android:background="@drawable/translucent_bottom" >
+         >
 
         <ImageButton
             android:id="@+id/sendReportButon"
@@ -145,8 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/sendReportButon"
-            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/rwContactBackgroundImage"
             android:orientation="horizontal"
             android:padding="5dp" >
 
@@ -156,7 +154,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Inform my Care-circle" />
+                android:text="Inform my Care-Circle"
+                android:textStyle="bold"
+                android:textColor="#F0FFFF" />
 
         </RelativeLayout>
 
