@@ -167,7 +167,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/rwContactBackgroundImage"
             android:layout_alignTop="@+id/rwContactBackgroundImage"
-            android:onClick="rwContactButtonPressed" >
+             >
         </RelativeLayout>
 
         <ImageButton
@@ -177,7 +177,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/contact_plus_icon_selector" />
+            android:background="@drawable/contact_plus_icon_selector"
+            android:onClick="rwContactButtonPressed" />
     </RelativeLayout>
 
 </RelativeLayout>
