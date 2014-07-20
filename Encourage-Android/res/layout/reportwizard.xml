@@ -21,16 +21,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="REPORTING WIZARD" 
-                android:textStyle="bold"/>
+                android:text="REPORTING WIZARD"
+                android:textStyle="bold" />
         </RelativeLayout>
 
-       <!--  <ImageView
+        <!--
+             <ImageView
             android:id="@+id/headerBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/top_header" /> -->
+            android:src="@drawable/top_header" />
+        -->
 
         <ImageButton
             android:id="@+id/menuButton"
@@ -38,8 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:visibility="gone"
-            android:background="@drawable/menu_select" />
+            android:background="@drawable/menu_select"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/topRightMenuLayout"
@@ -63,7 +65,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/ic_action_cancel" />
-
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -125,8 +126,7 @@
         android:id="@+id/footerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-         >
+        android:layout_alignParentBottom="true" >
 
         <ImageButton
             android:id="@+id/sendReportButon"
@@ -155,9 +155,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="Inform my Care-Circle"
-                android:textStyle="bold"
-                android:textColor="#F0FFFF" />
-
+                android:textColor="#F0FFFF"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -169,18 +168,16 @@
             android:layout_alignRight="@+id/rwContactBackgroundImage"
             android:layout_alignTop="@+id/rwContactBackgroundImage"
             android:onClick="rwContactButtonPressed" >
-
         </RelativeLayout>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/rwContactBackgroundImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/ic_action_add_group" />
-
+            android:background="@drawable/contact_plus_icon_selector" />
     </RelativeLayout>
 
 </RelativeLayout>
