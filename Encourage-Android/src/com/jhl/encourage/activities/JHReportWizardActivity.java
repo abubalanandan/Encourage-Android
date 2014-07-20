@@ -34,6 +34,8 @@ import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.TabWidget;
+import android.widget.TextView;
 
 import com.jhl.encourage.R;
 import com.jhl.encourage.adapters.JHReportWizardPageAdapter;
@@ -148,9 +150,27 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		month = cal.get(Calendar.MONTH);
 		year = cal.get(Calendar.YEAR);
-
+		
+		
 		// Intialise ViewPager
 		this.intialiseViewPager();
+		
+		TabWidget tw = (TabWidget)mTabHost.findViewById(android.R.id.tabs);
+		View tabView = tw.getChildTabViewAt(0);
+		TextView tv = (TextView)tabView.findViewById(android.R.id.title);
+		tv.setTextSize(10);
+		
+		tabView = tw.getChildTabViewAt(1);
+		tv = (TextView)tabView.findViewById(android.R.id.title);
+		tv.setTextSize(10);
+		
+		tabView = tw.getChildTabViewAt(2);
+		tv = (TextView)tabView.findViewById(android.R.id.title);
+		tv.setTextSize(10);
+		
+		tabView = tw.getChildTabViewAt(3);
+		tv = (TextView)tabView.findViewById(android.R.id.title);
+		tv.setTextSize(10);
 	}
 
 	/**
@@ -455,6 +475,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		startActivityForResult(i, JHConstants.REQUEST_CODE_IMAGE_LIB);
 	}
 
+	
+	
 	public void sendReportButtonPressed(View view) {
 		int page = JHAppStateVariables.currentRwPage;
 		Log.d(JHConstants.LOG_TAG, "page " + page);
@@ -647,6 +669,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 					longitude = location.getLongitude() + "";
 				}
 
+				System.out.println("eventDate "+eventDate);
+				
 				apiCaller.invokeImageApi(eventDate, eventName, ics,
 						uploadefileName, actualFileName, latitude, longitude);
 			} else {
