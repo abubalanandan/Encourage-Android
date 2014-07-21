@@ -158,7 +158,17 @@ public class JHRegistrationActivity extends Activity {
 						}else{
 							JHUtility.dismissProgressDialog(JHRegistrationActivity.this);
 
-							JHUtility.showDialogOk("Error", "Registration Failed. Please try again", JHRegistrationActivity.this);
+							if(responseList.size() > 1){
+								spocObject = responseList.get(1);
+								map = spocObject.getMap();
+								String message = map.get("errortitle");
+								
+								if(message.equals("User Name Exist")) {
+									JHUtility.showDialogOk("Error", map.get("errordescription"), JHRegistrationActivity.this);
+								}
+							}else {
+								JHUtility.showDialogOk("Error", "Registration Failed. Please try again", JHRegistrationActivity.this);
+							}
 							System.out.println("error");
 
 						}
