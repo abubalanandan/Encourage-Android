@@ -244,31 +244,49 @@ public class JHTimelineActivity extends Activity {
 				});
 	}
 
+	
+	JHAlertsTeaserDialog adialog;
+	
 	class AlertClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
 			if (JHAppStateVariables
 					.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT) > 0) {
-				JHAlertsTeaserDialog dialog = new JHAlertsTeaserDialog(
+				adialog = new JHAlertsTeaserDialog(
 						JHTimelineActivity.this);
-				dialog.show();
+				adialog.show();
 			}
 		}
 	}
+	
 
+	public void closeAlertTeaser(View view) {
+		if (adialog != null && adialog.isShowing()) {
+			adialog.cancel();
+		}
+	}
+	
+	JHCareTasksDialog cdialog;
+	
 	class CTClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
 			if (JHAppStateVariables
 					.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK) > 0) {
-				JHCareTasksDialog dialog = new JHCareTasksDialog(
+				cdialog = new JHCareTasksDialog(
 						JHTimelineActivity.this);
-				dialog.show();
+				cdialog.show();
 			}
 
 		}
 	}
 
+	public void closeCareTaskTeaser(View view) {
+		if (cdialog != null && cdialog.isShowing()) {
+			cdialog.cancel();
+		}
+	}
+	
 	private void initViews() {
 
 		timelineView = (ListView) findViewById(R.id.timeLineView);
