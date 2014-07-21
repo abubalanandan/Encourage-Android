@@ -292,6 +292,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		if(! ( pos ==0 || pos == 1) ) {
 			sickFragment.clearButtonSelections();
 			emoFragment.clearButtonSelections();
+		}else if (pos != 2){
+			imageFragment.clearImagePath();
 		}
 
 	}
@@ -317,6 +319,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		if(! ( arg0 ==0 || arg0 == 1) ) {
 			sickFragment.clearButtonSelections();
 			emoFragment.clearButtonSelections();
+		}else if (arg0 != 2){
+			imageFragment.clearImagePath();
 		}
 	}
 

@@ -107,6 +107,10 @@ public class JHReportWizardImageFragment extends Fragment implements
 		// imageHolder.setImageURI(uri);
 		imagePath = path;
 	}
+	
+	public void clearImagePath() {
+		imagePath = null;
+	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
