@@ -108,7 +108,7 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 				"careTask.getCareplanName() " + careTask.getCareplanName());
 
 		holder.due.setText(JHUtility.getFormattedDate(careTask.getDateTime()));
-		holder.title.setText(careTask.getCareplanName());
+		holder.title.setText(careTask.getTitle());
 
 		if (Build.VERSION.SDK_INT <= 15) {
 			if (careTask.getCareTaskType().equalsIgnoreCase("Medication")

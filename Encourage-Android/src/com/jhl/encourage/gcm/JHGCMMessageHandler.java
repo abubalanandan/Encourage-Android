@@ -77,7 +77,7 @@ public class JHGCMMessageHandler extends IntentService {
 	       		}
 	       }
 	       
-	       Log.i(JHConstants.LOG_TAG, "Alerts" );
+	       /*Log.i(JHConstants.LOG_TAG, "Alerts" );
 	       
 	       for ( Notification not : JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_ALERT) ) {
 	    	   Log.i(JHConstants.LOG_TAG, "Alert " + not);
@@ -87,7 +87,7 @@ public class JHGCMMessageHandler extends IntentService {
 	       
 	       for ( Notification not : JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK) ) {
 	    	   Log.i(JHConstants.LOG_TAG, "CareTask " + not);
-	       }
+	       }*/
 	       
 	        
 	       JHGCMBroadcastReceiver.completeWakefulIntent(intent);

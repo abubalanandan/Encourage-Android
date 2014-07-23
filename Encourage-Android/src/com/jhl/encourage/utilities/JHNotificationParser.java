@@ -56,8 +56,8 @@ public class JHNotificationParser {
 			Map<String, String> entryMap = new HashMap<String, String>();
 			for (int j = 0; j < entries.getLength(); j++) {
 				Element e1 = (Element) entries.item(j);
-				Log.d(JHConstants.LOG_TAG, "e1.getAttribute(JHConstants.NOT_XML_TAG_ATRIB_KEY) "+e1.getAttribute(JHConstants.NOT_XML_TAG_ATRIB_KEY));
-				Log.d(JHConstants.LOG_TAG, "e1.getTextContent() "+e1.getTextContent());
+				//Log.d(JHConstants.LOG_TAG, "e1.getAttribute(JHConstants.NOT_XML_TAG_ATRIB_KEY) "+e1.getAttribute(JHConstants.NOT_XML_TAG_ATRIB_KEY));
+				//Log.d(JHConstants.LOG_TAG, "e1.getTextContent() "+e1.getTextContent());
 				entryMap.put(e1.getAttribute(JHConstants.NOT_XML_TAG_ATRIB_KEY), e1.getTextContent());
 			}
 			
