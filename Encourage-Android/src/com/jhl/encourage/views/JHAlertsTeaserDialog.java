@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -57,7 +58,16 @@ public class JHAlertsTeaserDialog extends Dialog {
 		listView.setAdapter(teaserAdapter);
 		
 		listView.setOnItemClickListener(new ListItemClickListener());
-		
+		ImageButton ib = (ImageButton)findViewById(R.id.closeContactBackgroundImage);
+		ib.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				acivity.closeAlertTeaser(v);
+				
+			}
+		});
 		Button viewAll = (Button)findViewById(R.id.viewAllAlerts);
 		viewAll.setOnClickListener(new ViewAllClickListener());
 		
