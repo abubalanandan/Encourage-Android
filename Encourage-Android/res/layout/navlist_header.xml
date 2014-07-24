@@ -10,7 +10,7 @@
         android:layout_margin="5dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/head"
+        android:src="@drawable/head"
         />
     
     <TextView 
