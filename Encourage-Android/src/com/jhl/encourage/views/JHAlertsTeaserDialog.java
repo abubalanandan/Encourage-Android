@@ -50,7 +50,7 @@ public class JHAlertsTeaserDialog extends Dialog {
 		this.acivity = (JHTimelineActivity)context;
 		ListView listView = (ListView)findViewById(R.id.alertTeaserList);
 		
-		alerts = JHAppStateVariables.getUnreadNotifications(JHConstants.NOT_TYPE_ALERT);
+		alerts =new ArrayList<Notification>(JHAppStateVariables.getUnreadNotifications(JHConstants.NOT_TYPE_ALERT));
 		
 		Collections.sort(this.alerts);
 		

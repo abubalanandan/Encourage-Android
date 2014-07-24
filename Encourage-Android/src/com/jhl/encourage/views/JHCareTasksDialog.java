@@ -1,5 +1,6 @@
 package com.jhl.encourage.views;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class JHCareTasksDialog extends Dialog {
 		this.context = context;
 		setContentView(R.layout.caretasksteaser);
 		ListView listView = (ListView)findViewById(R.id.careTaksTeaserList);		
-		careTasks = JHAppStateVariables.getUnreadNotifications(JHConstants.NOT_TYPE_CARE_TASK);		
+		careTasks = new ArrayList<Notification>(JHAppStateVariables.getUnreadNotifications(JHConstants.NOT_TYPE_CARE_TASK));		
 		Collections.sort(this.careTasks);
 		//careTasksAdapter = new JHCareTasksTeaserAdapter(context, this, R.layout.caretask, careTasks);
 		careTasksAdapter = new JHCareTasksTeaserAdapter(context, this, R.layout.caretaskteaseritem, careTasks);

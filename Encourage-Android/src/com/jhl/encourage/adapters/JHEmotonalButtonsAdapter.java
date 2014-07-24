@@ -92,6 +92,8 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 	
 	public void clearButtonSelections() {
 		selectedButtons = new ArrayList<ReportButton>();
+		setButtons();
+		this.notifyDataSetChanged();
 		JHAppStateVariables.clearReport();
 	}
 	

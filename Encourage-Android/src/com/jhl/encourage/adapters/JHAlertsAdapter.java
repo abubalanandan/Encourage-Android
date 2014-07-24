@@ -85,7 +85,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 
 		Alert alert = (Alert) alerts.get(position);
 
-		holder.title.setText(alert.getTitle());
+		holder.title.setText(org.apache.commons.lang3.StringEscapeUtils.unescapeXml(alert.getTitle()));
 		holder.dateTime.setText(JHUtility.getFormattedDate(alert.getDateTime()));
 
 		// holder.author.setTag(notification.getAuthorName());
@@ -148,7 +148,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 			TextView linkTitleTV = (TextView)view.findViewById(R.id.linkTitleTV);
 			TextView linkPreviewTV = (TextView)view.findViewById(R.id.linkPreviewTV);
 			
-			linkTitleTV.setText(alert.getUrlHeader());
+			linkTitleTV.setText(org.apache.commons.lang3.StringEscapeUtils.unescapeXml(alert.getUrlHeader()));
 			linkPreviewTV.setText(alert.getDetails());
 			String imageName =  alert.getUrlImage();
 //			TableRow.LayoutParams params = new TableRow.LayoutParams(
