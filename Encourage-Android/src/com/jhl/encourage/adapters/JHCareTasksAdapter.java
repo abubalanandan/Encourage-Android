@@ -99,17 +99,17 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		Log.d(JHConstants.LOG_TAG, "position " + position);
+		//Log.d(JHConstants.LOG_TAG, "position " + position);
 
 		CareTask careTask = (CareTask) careTasks.get(position);
 
-		Log.d(JHConstants.LOG_TAG,
+		/*Log.d(JHConstants.LOG_TAG,
 				"careTask.getDateTime() " + careTask.getDateTime());
 		Log.d(JHConstants.LOG_TAG,
-				"careTask.getCareplanName() " + careTask.getCareplanName());
+				"careTask.getCareplanName() " + careTask.getCareplanName());*/
 
 		holder.due.setText(JHUtility.getFormattedDate(careTask.getDateTime()));
-		holder.title.setText(careTask.getCareplanName());
+		holder.title.setText(careTask.getTitle());
 
 		if (Build.VERSION.SDK_INT <= 15) {
 			if (careTask.getCareTaskType().equalsIgnoreCase("Medication")
