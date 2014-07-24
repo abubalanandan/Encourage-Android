@@ -1,6 +1,7 @@
 package com.jhl.encourage.activities;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class JHCareTaskListActivity extends Activity {
         setContentView(R.layout.caretasks);
         listView = (ListView) findViewById(R.id.careTaksList);
         
-        List<Notification> careTasks = JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK);
+        List<Notification> careTasks = new ArrayList<Notification>(JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_CARE_TASK));
         Collections.sort(careTasks);
         JHCareTasksAdapter adapeter = new JHCareTasksAdapter(this,  R.layout.caretask, careTasks);
         

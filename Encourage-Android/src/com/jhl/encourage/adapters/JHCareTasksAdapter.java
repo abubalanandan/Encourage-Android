@@ -12,6 +12,7 @@ import retrofit.client.Response;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -189,6 +190,11 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 				row.setLayoutParams(params);
 				TextView keyTV = new TextView(context);
 				TextView valueTV = new TextView(context);
+				keyTV.setLayoutParams(new TableRow.LayoutParams( 0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1 ) );
+				valueTV.setLayoutParams(new TableRow.LayoutParams( 0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1 ) );
+				keyTV.setTextColor(Color.BLACK);
+				valueTV.setTextColor(Color.BLACK);
+
 				row.addView(keyTV);
 				row.addView(valueTV);
 				keyTV.setText(pairs[0]);

@@ -2,6 +2,7 @@ package com.jhl.encourage.activities;
 
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class JHAlertListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alerts);
         
-        final List<Notification> alerts = JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_ALERT);
+        final List<Notification> alerts = new ArrayList<Notification>(JHAppStateVariables.getNotifications(JHConstants.NOT_TYPE_ALERT));
         Collections.sort(alerts);
     
         JHAlertsAdapter alertAdapter = new JHAlertsAdapter(this, R.layout.alertitem, alerts);
