@@ -95,9 +95,10 @@
                     android:id="@+id/postDetailsTL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="*"
                     
-                    android:shrinkColumns="0,1" >
+                    
+                    android:shrinkColumns="*"
+                     >
                 </TableLayout>
             </LinearLayout>
 

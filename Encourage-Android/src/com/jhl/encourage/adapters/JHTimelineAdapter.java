@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -156,7 +157,11 @@ public class JHTimelineAdapter extends BaseAdapter {
 			TableRow row = new TableRow(ctx);
 			row.setLayoutParams(params);
 			TextView keyTV = new TextView(ctx);
+			keyTV.setLayoutParams(new TableRow.LayoutParams( 0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1 ) );
 			TextView valueTV = new TextView(ctx);
+			valueTV.setLayoutParams(new TableRow.LayoutParams( 0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1 ) );
+			keyTV.setTextColor(Color.BLACK);
+			valueTV.setTextColor(Color.BLACK);
 			row.addView(keyTV);
 			row.addView(valueTV);
 			keyTV.setText(pairs[0]);
