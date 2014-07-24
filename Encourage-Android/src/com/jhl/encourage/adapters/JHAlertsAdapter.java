@@ -149,7 +149,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 			TextView linkPreviewTV = (TextView)view.findViewById(R.id.linkPreviewTV);
 			
 			linkTitleTV.setText(org.apache.commons.lang3.StringEscapeUtils.unescapeXml(alert.getUrlHeader()));
-			linkPreviewTV.setText(alert.getDetails());
+			linkPreviewTV.setText(org.apache.commons.lang3.StringEscapeUtils.unescapeXml(alert.getDetails()));
 			String imageName =  alert.getUrlImage();
 //			TableRow.LayoutParams params = new TableRow.LayoutParams(
 //					TableRow.LayoutParams.MATCH_PARENT,
