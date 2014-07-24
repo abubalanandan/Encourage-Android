@@ -174,6 +174,8 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 			if (pairs != null && pairs.length == 2) {
 				pairs[0] = pairs[0].replaceAll("\"", "");
 				pairs[1] = pairs[1].replaceAll("\"", "");
+				pairs[0] = pairs[0].replaceAll("&nbsp;", "");
+				pairs[1] = pairs[1].replaceAll("&nbsp;", "");
 				TableRow.LayoutParams params = new TableRow.LayoutParams(
 						TableRow.LayoutParams.MATCH_PARENT,
 						TableRow.LayoutParams.WRAP_CONTENT);
