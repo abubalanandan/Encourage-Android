@@ -671,16 +671,17 @@ public class JHTimelineActivity extends Activity {
 								final String updateUrl = map.get("updateurl");
 								System.out.println("forcedupdate "
 										+ forcedupdate);
+								System.out.println("updateUrl "+updateUrl);
 
-								long aVersion = 0;
-								long uVersion = 0;
+								float aVersion = 0.0f;
+								float uVersion = 0.0f;
 
 								try {
-									aVersion = Long.parseLong(version);
-									uVersion = Long.parseLong(updateVerion);
+									aVersion = Float.parseFloat(version);
+									uVersion = Float.parseFloat(updateVerion);
 								} catch (NumberFormatException e) {
-									aVersion = 0;
-									uVersion = 0;
+									aVersion = 0.0f;
+									uVersion = 0.0f;
 								}
 
 								if (uVersion > aVersion) {
