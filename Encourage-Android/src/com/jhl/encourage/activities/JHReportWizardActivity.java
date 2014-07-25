@@ -694,7 +694,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 					public void run() {
 						// TODO Auto-generated method stub
 						JHUtility.dismissProgressDialog(JHReportWizardActivity.this);
-						JHUtility.showDialogOk("Reporing error",
+						JHUtility.showDialogOk("Reporting error",
 								"Report posting failed", JHReportWizardActivity.this);
 
 					}

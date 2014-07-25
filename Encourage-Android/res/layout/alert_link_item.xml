@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:textColor="@android:color/black"
-        android:text="Iam a big badass and a fool and a douchebag and an asshole"
         android:textStyle="bold" />
 
     <RelativeLayout
@@ -26,7 +25,6 @@
         <TextView 
             android:id="@+id/linkPreviewTV"
             android:layout_width="match_parent"
-            android:text="  Iam a big badass and a fool and a douchebag and an asshole"
             android:layout_toRightOf="@+id/linkImage"
             android:layout_alignTop="@+id/linkImage"
             android:layout_alignBottom="@+id/linkImage"
