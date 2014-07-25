@@ -279,8 +279,8 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 									Notification n = new Notification(
 											careTaskId);
 									n.setNotificationType(JHConstants.NOT_TYPE_CARE_TASK);
-									careTasks.remove(n);
-									// JHAppStateVariables.removeCareTask(careTaskId);
+									careTasks.remove(n); 
+									JHAppStateVariables.removeCareTask(careTaskId);
 									JHCareTasksAdapter.this
 											.notifyDataSetChanged();
 								} else {

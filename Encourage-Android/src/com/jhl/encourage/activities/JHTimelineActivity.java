@@ -63,7 +63,7 @@ public class JHTimelineActivity extends Activity {
 	private int lastCount = 0;
 	private int currentFirstVisibleItem = 0;
 	private int currentVisibleItemCount = 0;
-	private int currentScrollState = 0;
+	private int currentScrollState = 0; 
 	ProgressBar dialog;
 	private boolean loadingItems = false;
 	private DrawerLayout drawer;
@@ -274,7 +274,7 @@ public class JHTimelineActivity extends Activity {
 			if (JHAppStateVariables
 					.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK) > 0) {
 				cdialog = new JHCareTasksDialog(
-						JHTimelineActivity.this);
+						JHTimelineActivity.this, JHTimelineActivity.this);
 				cdialog.show();
 			}
 
