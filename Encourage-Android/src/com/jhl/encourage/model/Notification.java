@@ -55,7 +55,7 @@ public class Notification implements Comparable<Notification>{
 	}
 
 	public Date getDate() {
-		return this.date;
+		return this.date; 
 	}
 	
 	@Override
@@ -66,8 +66,8 @@ public class Notification implements Comparable<Notification>{
 			/*Log.d(JHConstants.LOG_TAG, "equals id "+id);
 			Log.d(JHConstants.LOG_TAG, "equals n.getId() "+n.getId());
 			Log.d(JHConstants.LOG_TAG, "equals notificationType "+notificationType);
-			Log.d(JHConstants.LOG_TAG, "equals n.getNotificationType() "+n.getNotificationType());
-			*/
+			Log.d(JHConstants.LOG_TAG, "equals n.getNotificationType() "+n.getNotificationType());*/
+			
 			if(id.equals(n.getId()) && notificationType.equals(n.getNotificationType())){
 				return true;
 			}

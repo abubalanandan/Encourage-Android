@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.activities.JHLoginActivity;
 import com.jhl.encourage.apis.MarkCareTaskService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
@@ -38,14 +39,15 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 	private List<Notification> careTasks;
 	private Context context;
 	private JHCareTasksDialog dialog;
-
+	private Activity activity;
 	public JHCareTasksTeaserAdapter(Context context, JHCareTasksDialog dialog,
-			int textViewResourceId, List<Notification> careTasks) {
+			int textViewResourceId, List<Notification> careTasks, Activity activity) {
 		super(context, textViewResourceId, careTasks);
 		this.careTasks = careTasks;
 		this.context = context;
 		this.dialog = dialog;
-		Log.d(JHConstants.LOG_TAG, "this.careTasks " + this.careTasks);
+		this.activity = activity;
+		//Log.d(JHConstants.LOG_TAG, "this.careTasks " + this.careTasks);
 
 	}
 
@@ -192,7 +194,7 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 				.create(MarkCareTaskService.class);
 
 		JHUtility.showProgressDialog("Updating caretask status...",
-				(Activity) context);
+				(Activity) context); 
 		service.updateCareTask("updateCareTaskStatus", careTaskId, status,
 				JHAppStateVariables.getLoginTocken(), JHUtility.getDateTime(),
 				JHUtility.getTimeZoneString(), logitude, latitude,
@@ -206,7 +208,7 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 							if (spocObject.getResultTypeCode()
 									.equalsIgnoreCase("STATUS")) {
 								HashMap<String, String> map = spocObject
-										.getMap();
+										.getMap(); 
 								String success = map.get("success");
 
 								Log.d(JHConstants.LOG_TAG,
@@ -222,12 +224,15 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 											careTaskId);
 									n.setNotificationType(JHConstants.NOT_TYPE_CARE_TASK);
 									careTasks.remove(n);
-									// JHAppStateVariables.removeCareTask(careTaskId);
+									JHAppStateVariables.removeCareTask(careTaskId);
 									JHCareTasksTeaserAdapter.this
 											.notifyDataSetChanged();
 								} else {
 									JHUtility
 											.dismissProgressDialog((Activity) context);
+									JHUtility.showDialogOk("",
+											"Updating care tasks failed. Please try again",
+											activity);
 
 								}
 
@@ -239,7 +244,9 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 					public void failure(RetrofitError retrofitError) {
 						System.out.println("error");
 						JHUtility.dismissProgressDialog((Activity) context);
-
+						JHUtility.showDialogOk("",
+								"Updating care tasks failed. Please try again",
+								activity);
 					}
 				});
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +34,8 @@ public class JHCareTasksDialog extends Dialog {
 	private JHCareTasksTeaserAdapter careTasksAdapter;
 	private List<Notification> careTasks;
 	private final Context context;
-	public JHCareTasksDialog(Context context) {
+	
+	public JHCareTasksDialog(Context context, Activity activity) { 
 		super(context, R.style.ThemeDialogCustom);
 		this.context = context;
 		setContentView(R.layout.caretasksteaser);
@@ -41,7 +43,7 @@ public class JHCareTasksDialog extends Dialog {
 		careTasks = new ArrayList<Notification>(JHAppStateVariables.getUnreadNotifications(JHConstants.NOT_TYPE_CARE_TASK));		
 		Collections.sort(this.careTasks);
 		//careTasksAdapter = new JHCareTasksTeaserAdapter(context, this, R.layout.caretask, careTasks);
-		careTasksAdapter = new JHCareTasksTeaserAdapter(context, this, R.layout.caretaskteaseritem, careTasks);
+		careTasksAdapter = new JHCareTasksTeaserAdapter(context, this, R.layout.caretaskteaseritem, careTasks, activity);
 		listView.setAdapter(careTasksAdapter);
 		
 		listView.setOnItemClickListener(new CTClickListener());

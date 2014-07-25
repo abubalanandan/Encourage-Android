@@ -139,17 +139,17 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View view = vi.inflate(R.layout.alert_link_item, null);
 			
-//			DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-//			int width = metrics.widthPixels;
-//			LayoutParams params = new LayoutParams(width, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-//			
-//			view.setLayoutParams(params);
+			DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+			int width = metrics.widthPixels;
+			LayoutParams params = new LayoutParams(width, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+			
+			view.setLayoutParams(params);
 			ImageView imageView = (ImageView)view.findViewById(R.id.linkImage);
 			TextView linkTitleTV = (TextView)view.findViewById(R.id.linkTitleTV);
 			TextView linkPreviewTV = (TextView)view.findViewById(R.id.linkPreviewTV);
 			
 			linkTitleTV.setText(org.apache.commons.lang3.StringEscapeUtils.unescapeXml(alert.getUrlHeader()));
-			linkPreviewTV.setText(org.apache.commons.lang3.StringEscapeUtils.unescapeXml(alert.getDetails()));
+			linkPreviewTV.setText(alert.getDetails());
 			String imageName =  alert.getUrlImage();
 //			TableRow.LayoutParams params = new TableRow.LayoutParams(
 //					TableRow.LayoutParams.MATCH_PARENT,

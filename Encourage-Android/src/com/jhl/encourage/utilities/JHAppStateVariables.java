@@ -121,7 +121,11 @@ public class JHAppStateVariables {
 
 	public static void removeCareTask(String alertKey) {
 		Notification n = new Notification(alertKey);
-		careTasks.remove(n);
+		n.setNotificationType(JHConstants.NOT_TYPE_CARE_TASK);
+		/*System.out.println("NNNNNNN "+n);
+		System.out.println("careTasks "+careTasks);*/ 
+		if(n != null)
+			careTasks.remove(n);
 	}
 
 	public static List<Notification> getNotifications(String type) {
