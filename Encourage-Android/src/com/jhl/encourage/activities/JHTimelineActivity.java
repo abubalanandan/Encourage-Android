@@ -250,12 +250,12 @@ public class JHTimelineActivity extends Activity {
 	class AlertClicked implements View.OnClickListener {
 		@Override
 		public void onClick(View arg0) {
-			if (JHAppStateVariables
-					.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT) > 0) {
+			//if (JHAppStateVariables
+				//	.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT) > 0) {
 				adialog = new JHAlertsTeaserDialog(
 						JHTimelineActivity.this);
 				adialog.show();
-			}
+			//}
 		}
 	}
 	
@@ -441,8 +441,8 @@ public class JHTimelineActivity extends Activity {
 												.get("lastcount"));
 									} else {
 										TimeLineItem item = new TimeLineItem();
-										Log.e("crash", "CRASHHHHHHH");
-										Log.e("crash", map.toString());
+										//Log.e("crash", "CRASHHHHHHH");
+										//Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
 											if (map.get("eventAddress") == null) {
@@ -538,8 +538,8 @@ public class JHTimelineActivity extends Activity {
 												.get("lastcount"));
 									} else {
 										TimeLineItem item = new TimeLineItem();
-										Log.e("crash", "CRASHHHHHHH");
-										Log.e("crash", map.toString());
+										//Log.e("crash", "CRASHHHHHHH");
+										//Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
 											item.setDatatype("map");

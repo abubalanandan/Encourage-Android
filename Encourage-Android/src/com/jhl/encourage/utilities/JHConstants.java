@@ -15,6 +15,8 @@ public interface JHConstants {
 	public static final String NOT_XML_KEY_DATE_TIME_DIFF = "datetimediff";
 	public static final String NOT_XML_KEY_CONTENT_TYPE = "contentype";
 	public static final String NOT_XML_KEY_READ_STATUS = "read_status";
+	public static final String NOT_XML_KEY_READ_STATUS_READ = "read";
+	public static final String NOT_XML_KEY_READ_STATUS_UNREAD = "unread";
 	public static final String NOT_XML_KEY_AUTHOR_NAME = "authorname";
 	public static final String NOT_XML_KEY_TITLE = "title";
 	public static final String NOT_XML_KEY_DETAILS = "details";

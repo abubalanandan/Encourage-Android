@@ -3,6 +3,7 @@ package com.jhl.encourage.adapters;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Collections;
+import java.util.Currency;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.jhl.encourage.utilities.JHConstants;
 import com.jhl.encourage.utilities.JHUtility;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
@@ -51,6 +53,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 		TextView dateTime;
 		LinearLayout postLL;
 		TableLayout postDetailsTL;
+		LinearLayout cellLL;
 	}
 
 	public List<Notification> getAlerts() {
@@ -77,6 +80,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 					.findViewById(R.id.postLL);
 			holder.postDetailsTL = (TableLayout) convertView
 					.findViewById(R.id.postDetailsTL);
+			holder.cellLL = (LinearLayout) convertView.findViewById(R.id.alert_cell);
 			convertView.setTag(holder);
 
 		} else {
@@ -91,7 +95,9 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 		// holder.author.setTag(notification.getAuthorName());
 		// holder.title.setTag(notification.getTitle());
 		//
-
+		/*if(alert.getReadStatus().equalsIgnoreCase(JHConstants.NOT_XML_KEY_READ_STATUS_UNREAD)) {
+			holder.cellLL.setBackgroundColor(Color.parseColor("DDDCFB"));
+		}*/
 		int count = holder.postLL.getChildCount();
 		holder.postLL.removeViews(1, count - 1);
 		holder.postDetailsTL.removeAllViews();
