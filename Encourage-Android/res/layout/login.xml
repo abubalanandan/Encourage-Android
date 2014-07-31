@@ -48,8 +48,9 @@
                 android:layout_toRightOf="@+id/usernameIcon"
                 android:background="@null"
                 android:hint="User name"
-                android:inputType="textCapWords"
                 android:textColor="@android:color/primary_text_dark"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
                 android:textSize="14sp" />
 
            

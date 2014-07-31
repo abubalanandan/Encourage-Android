@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -34,11 +35,13 @@ import com.jhl.encourage.utilities.JHUtility;
 
 public class JHAlertListActivity extends Activity {
 	ListView listView ;
-    
+    ProgressBar dialog;
 	public static int position = 0;
 	public static String id;
 	List<Notification> alerts = null;
 	JHAlertsAdapter alertAdapter;
+	ListView alertsList;
+	private boolean isLoading = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +53,14 @@ public class JHAlertListActivity extends Activity {
     
         alertAdapter = new JHAlertsAdapter(this, R.layout.alertitem, alerts);
        
-        ListView alertsList = (ListView)findViewById(R.id.alertListView);
+         alertsList = (ListView)findViewById(R.id.alertListView);
        
         alertsList.setAdapter(alertAdapter);
+        dialog = new ProgressBar(this);
+		dialog.setProgressDrawable(getResources().getDrawable(
+				android.R.drawable.progress_indeterminate_horizontal));
+
+		alertsList.addFooterView(dialog);
         
         alertsList.setOnItemClickListener(new OnItemClickListener() {
 
@@ -84,7 +92,13 @@ public class JHAlertListActivity extends Activity {
 			}
 
 			private void isScrollCompleted() {
-				invokeAlertsApi(""+alerts.size());
+				if(alertsList.getFooterViewsCount()<=0){
+					if(!isLoading){
+						alertsList.addFooterView(dialog);
+						invokeAlertsApi(""+alerts.size());
+
+					}
+				}
 			}
 		});
 		
@@ -108,6 +122,7 @@ public class JHAlertListActivity extends Activity {
     }
     
     private void invokeAlertsApi(String start) {
+    		isLoading = true;
     	AlertsService service = EncourageApplication.getRestAdapter().create(AlertsService.class);
     	service.getAlertDetails("getUserAlertsDetails", JHAppStateVariables.getLoginTocken(),JHUtility.getDateTime(), JHUtility.getTimeZoneString(), start, 
 				new Callback<SpocResponse>() {
@@ -121,9 +136,12 @@ public class JHAlertListActivity extends Activity {
 							String success = map.get("success");
 							if (success.equalsIgnoreCase("true")) {
 								System.out.println("success");
-								
+								isLoading = false;
+								alertsList.removeFooterView(dialog);
 
 							} else {
+								isLoading = false;
+								alertsList.removeFooterView(dialog);
 								System.out.println("failure");
 
 							}
@@ -191,7 +209,8 @@ public class JHAlertListActivity extends Activity {
     				
     			}
     			public void failure(retrofit.RetrofitError arg0) {
-    				
+    				isLoading = false;
+    				alertsList.removeFooterView(dialog);
     			}
     		
     	});

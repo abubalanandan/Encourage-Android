@@ -590,6 +590,7 @@ public class JHTimelineActivity extends Activity {
 
 							System.out.println("Retro error");
 							loadingItems = false;
+							timelineView.removeFooterView(dialog);
 						}
 					});
 		}
