@@ -102,10 +102,11 @@ public class JHTimelineAdapter extends BaseAdapter {
 		if(msgList.get(position).getDatatype().equalsIgnoreCase("image")){
 			DisplayMetrics metrics = ctx.getResources().getDisplayMetrics();	
 			int width = metrics.widthPixels;
-			LayoutParams params = new LayoutParams(width, width);
-
+//			LayoutParams params = new LayoutParams(width, width);
+//			params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 			ImageView imageView = new ImageView(ctx);
-			imageView.setLayoutParams(params);
+			imageView.setMinimumHeight(width);
+		//	imageView.setLayoutParams(params);
 			postLL.addView(imageView);
 
 		//	 imageView.setBackgroundColor(ctx.getResources().getColor(android.R.color.darker_gray));
