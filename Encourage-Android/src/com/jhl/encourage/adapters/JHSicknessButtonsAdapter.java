@@ -45,6 +45,13 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 		setButtons();
 	}
 	
+	private void clearSelections(){
+		for(ReportButton button:buttons){
+			button.setState(JHConstants.BUTTON_UNSELECTED);
+			button.getImageView().setImageResource(imageIDs[button.getPosition()]);
+		}
+	}
+	
 	private void setButtons(){
 		List<ReportButton> buttons = new ArrayList<ReportButton>();
 		
@@ -75,6 +82,7 @@ public class JHSicknessButtonsAdapter extends BaseAdapter {
 	
 	public void clearButtonSelections() {
 		selectedButtons = new ArrayList<ReportButton>();
+		clearSelections();
 		JHAppStateVariables.clearReport();
 	}
 	@Override

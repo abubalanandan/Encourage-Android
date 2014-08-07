@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -34,6 +36,15 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
        // gridView.setBackground(getResources().getDrawable(R.drawable.page_bg));
 		adapter = new JHEmotonalButtonsAdapter(v.getContext());
 		gridView.setAdapter(adapter);
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		initViews(v);
 		contact = new Contact();
 		return v;

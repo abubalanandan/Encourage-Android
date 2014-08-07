@@ -58,6 +58,13 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 		this.buttons = buttons;
 	}
 	
+	private void clearSelections(){
+		for(ReportButton button:buttons){
+			button.setState(JHConstants.BUTTON_UNSELECTED);
+			button.getImageView().setImageResource(imageIDs[button.getPosition()]);
+		}
+	}
+	
 	private ImageView getButtonImageView (int imageId) {
 		ImageView imageView = new ImageView(context);
 		imageView.setLayoutParams(new
@@ -92,8 +99,9 @@ public class JHEmotonalButtonsAdapter extends BaseAdapter {
 	
 	public void clearButtonSelections() {
 		selectedButtons = new ArrayList<ReportButton>();
-		setButtons();
-		this.notifyDataSetChanged();
+		clearSelections();
+//		setButtons();
+//		this.notifyDataSetChanged();
 		JHAppStateVariables.clearReport();
 	}
 	
