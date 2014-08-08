@@ -220,6 +220,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		this.mViewPager.setOnPageChangeListener(this);
 
 		this.fragments = fragments;
+		JHAppStateVariables.currentRwPage = 0;
 	}
 
 	/**

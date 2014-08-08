@@ -69,7 +69,7 @@ public class ReportWizartAPICaller {
 										"postReport success " + success);
 
 								if (success.equalsIgnoreCase("true")) {
-
+									JHUtility.dismissProgressDialog(activity);
 									activity.finish();
 									JHAppStateVariables.clearSickEmoReport();
 								} else {
@@ -86,7 +86,8 @@ public class ReportWizartAPICaller {
 
 					@Override
 					public void failure(RetrofitError retrofitError) {
-						JHUtility.showDialogOk("Reporing error",
+						JHUtility.dismissProgressDialog(activity);
+						JHUtility.showDialogOk("Reporting error",
 								"Report posting failed", activity);
 
 						JHAppStateVariables.clearSickEmoReport();
@@ -134,7 +135,7 @@ public class ReportWizartAPICaller {
 										"postReport success " + success);
 
 								if (success.equalsIgnoreCase("true")) {
-
+									JHUtility.dismissProgressDialog(activity);
 									activity.finish();
 								} else {
 									JHUtility.dismissProgressDialog(activity);
@@ -149,7 +150,8 @@ public class ReportWizartAPICaller {
 
 					@Override
 					public void failure(RetrofitError retrofitError) {
-						JHUtility.showDialogOk("Reporing error",
+						JHUtility.dismissProgressDialog(activity);
+						JHUtility.showDialogOk("Reporting error",
 								"Report posting failed", activity);
 
 					}
@@ -291,7 +293,7 @@ public class ReportWizartAPICaller {
 					// TODO Auto-generated method stub
 					JHUtility.dismissProgressDialog(activity);
 
-					JHUtility.showDialogOk("Reporing error",
+					JHUtility.showDialogOk("Reporting error",
 							"Report posting failed", activity);
 
 				}
