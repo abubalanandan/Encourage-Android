@@ -137,10 +137,14 @@ public class JHAlertListActivity extends Activity {
 							if (success.equalsIgnoreCase("true")) {
 								System.out.println("success");
 								isLoading = false;
+			    				if(alertsList.getFooterViewsCount()>0)
+
 								alertsList.removeFooterView(dialog);
 
 							} else {
 								isLoading = false;
+			    				if(alertsList.getFooterViewsCount()>0)
+
 								alertsList.removeFooterView(dialog);
 								System.out.println("failure");
 
