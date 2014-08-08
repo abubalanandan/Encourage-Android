@@ -210,6 +210,7 @@ public class JHAlertListActivity extends Activity {
     			}
     			public void failure(retrofit.RetrofitError arg0) {
     				isLoading = false;
+    				if(alertsList.getFooterViewsCount()>0)
     				alertsList.removeFooterView(dialog);
     			}
     		
