@@ -54,13 +54,13 @@ public class JHAlertListActivity extends Activity {
         alertAdapter = new JHAlertsAdapter(this, R.layout.alertitem, alerts);
        
          alertsList = (ListView)findViewById(R.id.alertListView);
-       
-        alertsList.setAdapter(alertAdapter);
-        dialog = new ProgressBar(this);
-		dialog.setProgressDrawable(getResources().getDrawable(
-				android.R.drawable.progress_indeterminate_horizontal));
+         dialog = new ProgressBar(this);
+ 		dialog.setProgressDrawable(getResources().getDrawable(
+ 				android.R.drawable.progress_indeterminate_horizontal));
 
-		alertsList.addFooterView(dialog);
+ 		alertsList.addFooterView(dialog);
+        alertsList.setAdapter(alertAdapter);
+        
         
         alertsList.setOnItemClickListener(new OnItemClickListener() {
 
