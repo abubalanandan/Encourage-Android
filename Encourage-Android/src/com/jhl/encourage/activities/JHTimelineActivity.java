@@ -445,7 +445,7 @@ public class JHTimelineActivity extends Activity {
 										//Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
-											if (map.get("eventAddress") == null) {
+											if (map.get("eventaddress") == null) {
 												continue;
 											}
 
@@ -542,6 +542,9 @@ public class JHTimelineActivity extends Activity {
 										//Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
+											if (map.get("eventaddress") == null) {
+												continue;
+											}
 											item.setDatatype("map");
 											item.setEventAddress(map
 													.get("eventaddress"));
