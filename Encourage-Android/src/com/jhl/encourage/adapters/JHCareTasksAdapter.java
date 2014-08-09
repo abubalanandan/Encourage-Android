@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 import com.jhl.encourage.EncourageApplication;
 import com.jhl.encourage.R;
+import com.jhl.encourage.activities.JHReportWizardActivity;
 import com.jhl.encourage.apis.MarkCareTaskService;
 import com.jhl.encourage.apis.SpocObject;
 import com.jhl.encourage.apis.SpocResponse;
@@ -35,6 +37,7 @@ import com.jhl.encourage.model.CareTask;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHCareTasksDialog;
 
@@ -221,7 +224,17 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 		@Override
 		public void onClick(View v) {
 			CareTask ct = (CareTask) careTasks.get(position);
-			invokeMarkCareTaskApi(ct.getId(), "D", "", "");
+			JHGPSTracker gpsTracker = JHGPSTracker
+					.getGPSTracker(context);
+			Location location = gpsTracker.getLocation();
+			String latitude = "";
+			String longitude = "";
+			if (location != null) {
+				latitude = location.getLatitude() + "";
+				longitude = location.getLongitude() + "";
+			}
+
+			invokeMarkCareTaskApi(ct.getId(), "D", latitude, longitude);
 
 		}
 	}
@@ -236,7 +249,17 @@ public class JHCareTasksAdapter extends ArrayAdapter<Notification> {
 		@Override
 		public void onClick(View v) {
 			CareTask ct = (CareTask) careTasks.get(position);
-			invokeMarkCareTaskApi(ct.getId(), "ND", "", "");
+			JHGPSTracker gpsTracker = JHGPSTracker
+					.getGPSTracker(context);
+			Location location = gpsTracker.getLocation();
+			String latitude = "";
+			String longitude = "";
+			if (location != null) {
+				latitude = location.getLatitude() + "";
+				longitude = location.getLongitude() + "";
+			}
+
+			invokeMarkCareTaskApi(ct.getId(), "ND",latitude, longitude);
 
 		}
 	}

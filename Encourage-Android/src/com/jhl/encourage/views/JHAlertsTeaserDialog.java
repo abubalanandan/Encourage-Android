@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +35,7 @@ import com.jhl.encourage.apis.SpocResponse;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHAlertsTeaserDialog extends Dialog {
@@ -115,7 +117,15 @@ public void invokeMarkAlertReadApi(final String alertkey, final int position) {
 		String dateTime = JHUtility.getDateTime();
 		String longitude = "";
 		String latitude = "";
+		JHGPSTracker gpsTracker = JHGPSTracker
+				.getGPSTracker(context);
+		Location location = gpsTracker.getLocation();
 		
+		if (location != null) {
+			latitude = location.getLatitude() + "";
+			longitude = location.getLongitude() + "";
+		}
+
 		service.updateAlertRead("updateUnreadAlertStatus", JHAppStateVariables.getLoginTocken(), alertkey,dateTime, timeZone, latitude, longitude,  
 				new Callback<SpocResponse>() {
 					@Override

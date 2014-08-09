@@ -11,6 +11,7 @@ import retrofit.client.Response;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import com.jhl.encourage.model.CareTask;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 import com.jhl.encourage.views.JHCareTasksDialog;
 
@@ -162,9 +164,18 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 		@Override
 		public void onClick(View v) {
 			int index = listView.getPositionForView(v);
+			JHGPSTracker gpsTracker = JHGPSTracker
+					.getGPSTracker(context);
+			Location location = gpsTracker.getLocation();
+			String latitude = "";
+			String longitude = "";
+			if (location != null) {
+				latitude = location.getLatitude() + "";
+				longitude = location.getLongitude() + "";
+			}
 
 			CareTask ct = (CareTask) careTasks.get(index);
-			invokeMarkCareTaskApi(ct.getId(), "D", "", "");
+			invokeMarkCareTaskApi(ct.getId(), "D", latitude, longitude);
 
 		}
 	}
@@ -180,7 +191,17 @@ public class JHCareTasksTeaserAdapter extends ArrayAdapter<Notification> {
 		public void onClick(View v) {
 			int index = listView.getPositionForView(v);
 			CareTask ct = (CareTask) careTasks.get(index);
-			invokeMarkCareTaskApi(ct.getId(), "ND", "", "");
+			JHGPSTracker gpsTracker = JHGPSTracker
+					.getGPSTracker(context);
+			Location location = gpsTracker.getLocation();
+			String latitude = "";
+			String longitude = "";
+			if (location != null) {
+				latitude = location.getLatitude() + "";
+				longitude = location.getLongitude() + "";
+			}
+
+			invokeMarkCareTaskApi(ct.getId(), "ND", latitude, longitude);
 
 		}
 	}
