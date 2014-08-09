@@ -81,6 +81,7 @@ public class JHAlertsTeaserDialog extends Dialog {
 		public void onClick(View v) {
 			try{
 			    Intent i = new Intent(context, JHAlertListActivity.class);
+			    JHAlertListActivity.id = "";
 			    context.startActivity(i);
 			    cancel();
 			    }
