@@ -145,6 +145,7 @@ public void invokeMarkAlertReadApi(final String alertkey, final int position) {
 									context.startActivity(i);
 									cancel();
 								}else{
+									JHUtility.dismissProgressDialog((Activity)context);
 									System.out.println("error");
 									JHUtility.showDialogOk("",context.getString(R.string.alert_updation_failed), acivity);	
 								}
@@ -155,6 +156,7 @@ public void invokeMarkAlertReadApi(final String alertkey, final int position) {
 					@Override
 					public void failure(RetrofitError retrofitError) {
 						System.out.println("error");
+						JHUtility.dismissProgressDialog((Activity)context);
 						JHUtility.showDialogOk("",context.getString(R.string.alert_updation_failed), acivity);	
 					}
 				});
