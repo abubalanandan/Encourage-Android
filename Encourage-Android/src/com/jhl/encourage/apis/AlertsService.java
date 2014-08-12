@@ -15,6 +15,8 @@ public interface AlertsService {
     			@Field("token") String emailAddress, 
     			@Field("datetime") String datetime, 
     			@Field("timezone") String timezone,
+    			@Field("latitude") String latitude,
+    			@Field("longitude") String longitude,
     			@Field("start") String start,
     			Callback<SpocResponse> callback);
 

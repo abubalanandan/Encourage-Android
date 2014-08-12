@@ -4,29 +4,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.jhl.encourage.R;
-import com.jhl.encourage.activities.JHRegistrationActivity;
-import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
-import com.jhl.encourage.model.Contact;
-import com.jhl.encourage.utilities.JHAppStateVariables;
-import com.jhl.encourage.utilities.JHUtility;
-
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.jhl.encourage.R;
+import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
+import com.jhl.encourage.model.Contact;
+import com.jhl.encourage.utilities.JHUtility;
+
 public class JHReportWizardSicknessFragment extends Fragment implements JHReportFragment{
 	
-	TextView sickDate;
+	EditText sickDate;
 	TextView sickDesc;
 	private Contact contact;
 	private JHSicknessButtonsAdapter adapter;
@@ -50,7 +44,7 @@ public class JHReportWizardSicknessFragment extends Fragment implements JHReport
 	}
 	
 	private void initViews  (View v) {
-		sickDate = (TextView)v.findViewById(R.id.sickDate);
+		sickDate = (EditText)v.findViewById(R.id.sickDate);
 		sickDate.setText(JHUtility.getDatePickerDate());
 		sickDesc = (TextView)v.findViewById(R.id.sickDesc);
 		

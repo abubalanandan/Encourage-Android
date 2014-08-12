@@ -9,6 +9,7 @@ import retrofit.Callback;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.Notification;
 import com.jhl.encourage.utilities.JHAppStateVariables;
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHGPSTracker;
 import com.jhl.encourage.utilities.JHUtility;
 
 public class JHAlertListActivity extends Activity {
@@ -120,9 +122,18 @@ public class JHAlertListActivity extends Activity {
 		isLoading = true;
 		AlertsService service = EncourageApplication.getRestAdapter().create(
 				AlertsService.class);
+		JHGPSTracker gpsTracker = JHGPSTracker
+				.getGPSTracker(JHAlertListActivity.this);
+		Location location = gpsTracker.getLocation();
+		String latitude = "";
+		String longitude = "";
+		if (location != null) {
+			latitude = location.getLatitude() + "";
+			longitude = location.getLongitude() + "";
+		}
 		service.getAlertDetails("getUserAlertsDetails",
 				JHAppStateVariables.getLoginTocken(), JHUtility.getDateTime(),
-				JHUtility.getTimeZoneString(), start,
+				JHUtility.getTimeZoneString(),latitude,longitude,start,
 				new Callback<SpocResponse>() {
 					public void success(SpocResponse spocResponse,
 							retrofit.client.Response arg1) {

@@ -37,7 +37,8 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/rounded_corner_text"
             android:hint="Event Name"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/primary_text_light"
+            android:textCursorDrawable="@null" />
 
         <Space
             android:layout_width="match_parent"
@@ -51,7 +52,8 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/rounded_corner_text"
             android:hint="Event Address"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/primary_text_light"
+            android:textCursorDrawable="@null" />
 
         <Space
             android:layout_width="match_parent"
@@ -65,7 +67,8 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/rounded_corner_text"
             android:hint="Event Description"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/primary_text_light"
+            android:textCursorDrawable="@null" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -4,26 +4,25 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.jhl.encourage.R;
-import com.jhl.encourage.adapters.JHEmotonalButtonsAdapter;
-import com.jhl.encourage.adapters.JHSicknessButtonsAdapter;
-import com.jhl.encourage.model.Contact;
-import com.jhl.encourage.utilities.JHUtility;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.jhl.encourage.R;
+import com.jhl.encourage.adapters.JHEmotonalButtonsAdapter;
+import com.jhl.encourage.model.Contact;
+import com.jhl.encourage.utilities.JHUtility;
+
 public class JHReportWizardEmotionalFragment extends Fragment implements JHReportFragment{
 	
-	TextView emoDate;
+	EditText emoDate;
 	TextView emoDesc;
 	
 	private Contact contact;
@@ -51,7 +50,7 @@ public class JHReportWizardEmotionalFragment extends Fragment implements JHRepor
 	}
 	
 	private void initViews  (View v) {
-		emoDate = (TextView)v.findViewById(R.id.emoDate);
+		emoDate = (EditText)v.findViewById(R.id.emoDate);
 		emoDate.setText(JHUtility.getDatePickerDate());
 		emoDesc = (TextView)v.findViewById(R.id.emoDesc);
 		

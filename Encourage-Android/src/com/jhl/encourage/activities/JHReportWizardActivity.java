@@ -719,40 +719,40 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	private static int MAP_DATE_DIALOGUE = 4;
 
 	public void sickDatePressed(View view) {
-		showDialog(SICK_DATE_DIALOGUE);
+		new DatePickerDialog(this,sickDatePickerListener,year,month,day).show();
 	}
 
 	public void emoDatePressed(View view) {
-		showDialog(EMO_DATE_DIALOGUE);
+		new DatePickerDialog(this,emoDatePickerListener,year,month,day).show();
 	}
 
 	public void imageDatePressed(View view) {
-		showDialog(IMAGE_DATE_DIALOGUE);
+		new DatePickerDialog(this,imageDatePickerListener,year,month,day).show();
 	}
 
 	public void mapDatePressed(View view) {
-		showDialog(MAP_DATE_DIALOGUE);
+		new DatePickerDialog(this,mapDatePickerListener,year,month,day).show();
 	}
 
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-		case 1:
-			return new DatePickerDialog(this, sickDatePickerListener, year,
-					month, day);
-		case 2:
-			return new DatePickerDialog(this, emoDatePickerListener, year,
-					month, day);
-		case 3:
-			return new DatePickerDialog(this, imageDatePickerListener, year,
-					month, day);
-		case 4:
-			return new DatePickerDialog(this, mapDatePickerListener, year,
-					month, day);
-		default:
-			break;
-		}
-		return null;
-	}
+//	protected Dialog onCreateDialog(int id) {
+//		switch (id) {
+//		case 1:
+//			return new DatePickerDialog(this, sickDatePickerListener, year,
+//					month, day);
+//		case 2:
+//			return new DatePickerDialog(this, emoDatePickerListener, year,
+//					month, day);
+//		case 3:
+//			return new DatePickerDialog(this, imageDatePickerListener, year,
+//					month, day);
+//		case 4:
+//			return new DatePickerDialog(this, mapDatePickerListener, year,
+//					month, day);
+//		default:
+//			break;
+//		}
+//		return null;
+//	}
 
 	private DatePickerDialog.OnDateSetListener sickDatePickerListener = new DatePickerDialog.OnDateSetListener() {
 		public void onDateSet(DatePicker view, int selectedYear,
