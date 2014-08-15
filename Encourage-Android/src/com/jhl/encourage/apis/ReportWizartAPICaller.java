@@ -43,7 +43,7 @@ public class ReportWizartAPICaller {
 
 		String[] addToCCDetails = JHAppStateVariables.getAddToCCDetails();
 
-		System.out.println("DATAAAAAAAAAAAAAA " + data);
+		
 
 		service.postReport("getSelfReportedData", date, "datetime", "Date", "",
 				"1", "", data, "varchar", "Complaint", "", "2", "",

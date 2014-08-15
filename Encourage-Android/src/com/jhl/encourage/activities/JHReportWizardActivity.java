@@ -551,7 +551,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 			date = imageFragment.getDate();
 			String name = imageFragment.getName();
 			imageFragment.showProgrees();
-			imageUpload(apiCaller, date, name);
+			imageUpload(apiCaller, date, name, cboxCareCircle.isChecked());
 			break;
 		case 3:
 			if (mapFragment.getAddress() != null
@@ -572,7 +572,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 	}
 
 	private void imageUpload(ReportWizartAPICaller apiCaller, String eventDate,
-			String eventName) {
+			String eventName, boolean ics) {
 		// String url =
 		// "https://tryencourage.com/hwdsi/hwservice/fileUpload.php";
 		// String url = "http://192.168.1.20:80/encourage_gcm/upload.php";
@@ -618,7 +618,7 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		Log.d(JHConstants.LOG_TAG, "url " + url);
 
 		new FileUploadTask(file, url, paramters, actualfileName, apiCaller,
-				eventName, eventDate, false).execute();
+				eventName, eventDate, ics).execute();
 
 	}
 
