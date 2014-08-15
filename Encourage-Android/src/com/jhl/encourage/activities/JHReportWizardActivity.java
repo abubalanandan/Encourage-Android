@@ -293,7 +293,8 @@ public class JHReportWizardActivity extends FragmentActivity implements
 		if(! ( pos ==0 || pos == 1) ) {
 			sickFragment.clearButtonSelections();
 			emoFragment.clearButtonSelections();
-		}else if (pos != 2){
+		} 
+		if (pos != 2){
 			imageFragment.clearImagePath();
 		}
 

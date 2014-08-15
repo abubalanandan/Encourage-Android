@@ -12,8 +12,11 @@ import java.util.UUID;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -30,6 +33,19 @@ public class JHUtility {
 
 	}
 
+	
+	public static boolean isNetworkAvailable(Context context) {
+		ConnectivityManager connec = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = connec.getActiveNetworkInfo();
+
+		if (netInfo != null && netInfo.isConnected() == true) {
+			return true;
+		}
+
+		return false;
+	}
+	
 	public static void CopyStream(InputStream is, OutputStream os) {
 		final int buffer_size = 1024;
 		try {

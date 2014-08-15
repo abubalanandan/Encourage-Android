@@ -82,6 +82,7 @@ public class JHReportWizardImageFragment extends Fragment implements
 		uploadProgress.setVisibility(View.GONE);
 	}
 
+	
 	public void showProgrees() {
 	//	uploadProgress.setVisibility(View.VISIBLE);
 	}
@@ -110,6 +111,8 @@ public class JHReportWizardImageFragment extends Fragment implements
 	
 	public void clearImagePath() {
 		imagePath = null;
+		if(imageHolder!=null)
+		imageHolder.setImageResource(R.drawable.image_size);
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,

@@ -72,7 +72,13 @@ public class JHLoginActivity extends Activity {
 			JHUtility
 					.showDialogOk("", getString(R.string.pswd_empty_msg), this);
 		else {
+			
+			if(!JHUtility.isNetworkAvailable(this)){
+				JHUtility.showDialogOk("Network Error", "Please check your internet connectivity", this);
+				return;
+			}
 			JHUtility.showProgressDialog("Logging in ...", this);
+			
 			new GCMRegistrationTask().execute();
 		}
 	}
