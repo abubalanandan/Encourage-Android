@@ -22,10 +22,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -254,6 +256,13 @@ public class JHTimelineActivity extends Activity {
 				//	.getUnreadNotificationCount(JHConstants.NOT_TYPE_ALERT) > 0) {
 				adialog = new JHAlertsTeaserDialog(
 						JHTimelineActivity.this);
+				
+				WindowManager.LayoutParams WMLP = adialog.getWindow().getAttributes();
+
+				WMLP.gravity = Gravity.TOP|Gravity.RIGHT;
+
+				adialog.getWindow().setAttributes(WMLP);
+				
 				adialog.show();
 			//}
 		}
@@ -275,6 +284,14 @@ public class JHTimelineActivity extends Activity {
 					.getUnreadNotificationCount(JHConstants.NOT_TYPE_CARE_TASK) > 0) {
 				cdialog = new JHCareTasksDialog(
 						JHTimelineActivity.this, JHTimelineActivity.this);
+				
+				WindowManager.LayoutParams WMLP = cdialog.getWindow().getAttributes();
+
+				WMLP.gravity = Gravity.TOP|Gravity.RIGHT;
+
+				cdialog.getWindow().setAttributes(WMLP);
+				
+				
 				cdialog.show();
 			}
 
