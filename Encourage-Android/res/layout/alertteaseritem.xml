@@ -21,7 +21,7 @@
             android:paddingBottom="5dp" >
 
             <TextView
-                android:id="@+id/alertTaserAuthor"
+                android:id="@+id/alertTeaserTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginLeft="5dp"
@@ -32,14 +32,14 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/alertTeaserTitle"
+                android:id="@+id/alertTeaserDate"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_alignLeft="@+id/alertTaserAuthor"
+                android:layout_alignLeft="@+id/alertTeaserTitle"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/alertTaserAuthor"
+                android:layout_below="@+id/alertTeaserTitle"
                 android:gravity="center_vertical"
-                android:text="Brian Wheeler"
+                android:text="Brian Wheeler is bloody damn gay"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp" />
 

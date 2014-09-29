@@ -7,6 +7,7 @@ import com.jhl.encourage.model.Alert;
 import com.jhl.encourage.model.Notification;
 
 import com.jhl.encourage.utilities.JHConstants;
+import com.jhl.encourage.utilities.JHUtility;
 
 import android.content.Context;
 import android.util.Log;
@@ -31,8 +32,8 @@ public class JHAlertsTeaserAdapter extends ArrayAdapter<Notification> {
 	}
 	
 	private class ViewHolder {
-		TextView author;
 		TextView title;
+		TextView date;
 	}
 	
 	public List<Notification>  getAlerts() {
@@ -51,7 +52,7 @@ public class JHAlertsTeaserAdapter extends ArrayAdapter<Notification> {
 	 
 		   holder = new ViewHolder();
 		   holder.title = (TextView) convertView.findViewById(R.id.alertTeaserTitle);
-		   holder.author = (TextView) convertView.findViewById(R.id.alertTaserAuthor);
+		   holder.date = (TextView) convertView.findViewById(R.id.alertTeaserDate);
 		   convertView.setTag(holder);
 	 
 		  
@@ -67,9 +68,9 @@ public class JHAlertsTeaserAdapter extends ArrayAdapter<Notification> {
 	   Log.d(JHConstants.LOG_TAG, "alert.getAuthorName() "+alert.getAuthorName());
 	   Log.d(JHConstants.LOG_TAG, "alert.getTitle() "+alert.getTitle());
 	   
-	   holder.author.setText(alert.getAuthorName());
+	   holder.date.setText(JHUtility.getFormattedDate(alert.getDateTime()));
 	   holder.title.setText(alert.getTitle());
-	   holder.author.setTag(alert.getAuthorName());
+	   holder.date.setTag(JHUtility.getFormattedDate(alert.getDateTime()));
 	   holder.title.setTag(alert.getTitle());
 	 
 	   return convertView;
