@@ -113,6 +113,7 @@ public class JHAlertsAdapter extends ArrayAdapter<Notification> {
 			String imageName = "https://tryencourage.com/hwdsi/hwAttachedfile/"
 					+ JHAppStateVariables.getLoginTocken() + "/"
 					+ alert.getImageName();
+			Log.i("Alert image url", imageName);
 			imageLoader.DisplayImage(imageName, imageView);
 		} else if (alert.getContenType().equals(
 				JHConstants.NOT_XML_KEY_ALERT_TYPE_MAP)) {

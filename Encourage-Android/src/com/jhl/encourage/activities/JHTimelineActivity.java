@@ -159,7 +159,6 @@ public class JHTimelineActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancel(10);
@@ -191,7 +190,6 @@ public class JHTimelineActivity extends Activity {
 
 					@Override
 					public void failure(RetrofitError arg0) {
-						// TODO Auto-generated method stub
 						JHUtility
 								.dismissProgressDialog(JHTimelineActivity.this);
 						JHUtility.showDialogOk("Error",
@@ -211,7 +209,6 @@ public class JHTimelineActivity extends Activity {
 										.getMap();
 								String success = map.get("success");
 								if (success.equalsIgnoreCase("true")) {
-									System.out.println("success");
 									JHAppStateVariables.setLoginTocken(null);
 									JHAppStateVariables
 											.clearAppStateVariables();
@@ -501,6 +498,11 @@ public class JHTimelineActivity extends Activity {
 																	 * )[0]
 																	 */);
 										item.setTitle(map.get("title"));
+										item.setProfilePicURL("https://tryencourage.com/hwdsi/hwAttachedfile/"
+													+ JHAppStateVariables
+															.getLoginTocken()
+													+ "/"
+													+ map.get("person_profilepicture_name"));
 										list.add(item);
 									}
 								}
@@ -538,9 +540,6 @@ public class JHTimelineActivity extends Activity {
 										timelineView.removeFooterView(dialog);
 
 									} else {
-										// JHUtility.showDialogOk("Network Error",
-										// "Failed to fetch latest feed",
-										// JHTimelineActivity.this);
 										loadingItems = false;
 										timelineView.removeFooterView(dialog);
 
@@ -555,8 +554,6 @@ public class JHTimelineActivity extends Activity {
 												.get("lastcount"));
 									} else {
 										TimeLineItem item = new TimeLineItem();
-										//Log.e("crash", "CRASHHHHHHH");
-										//Log.e("crash", map.toString());
 										item.setType(map.get("datatype"));
 										if (map.get("datatype").contains("Map")) {
 											if (map.get("eventaddress") == null) {
@@ -597,6 +594,12 @@ public class JHTimelineActivity extends Activity {
 																	 * )[0]
 																	 */);
 										item.setTitle(map.get("title"));
+										item.setProfilePicURL("https://tryencourage.com/hwdsi/hwAttachedfile/"
+												+ JHAppStateVariables
+														.getLoginTocken()
+												+ "/"
+												+ map.get("person_profilepicture_name"));
+
 										list.add(item);
 									}
 								}

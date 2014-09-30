@@ -32,8 +32,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:padding="10dp"
                 android:onClick="menuButtonClicked"
-                android:background="@drawable/menu_select" />
+                android:src="@drawable/menu_select"
+                android:background="@android:color/transparent" />
 
             <LinearLayout
                 android:id="@+id/topRightMenuLayout"

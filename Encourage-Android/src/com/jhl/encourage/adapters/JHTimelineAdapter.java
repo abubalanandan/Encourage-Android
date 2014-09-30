@@ -88,6 +88,10 @@ public class JHTimelineAdapter extends BaseAdapter {
 		TextView typeTV = (TextView)convertView.findViewById(R.id.typeTV);
 		TextView profileNameTV = (TextView)convertView.findViewById(R.id.profileNameTV);
 		
+		ImageView profileImageView = (ImageView)convertView.findViewById(R.id.profileImageView);
+		
+		imageLoader.DisplayImage(msgList.get(position).getProfilePicURL(), profileImageView);
+		
 		dateTV.setText(JHUtility.getFormattedDate(msgList.get(position).getTimelineDate()));
 		typeTV.setText(msgList.get(position).getType());
 		profileNameTV.setText(msgList.get(position).getPerson());

@@ -4,10 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-
-import android.text.Html;
 
 public class TimeLineItem implements Comparable<TimeLineItem>{
 
@@ -19,7 +16,16 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 	private String title;
 	private String datatype;
 	private String type;
+	private String profilePicURL;
 	
+	public String getProfilePicURL() {
+		return profilePicURL;
+	}
+
+	public void setProfilePicURL(String profilePicURL) {
+		this.profilePicURL = profilePicURL;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -54,7 +60,6 @@ public class TimeLineItem implements Comparable<TimeLineItem>{
 		try {
 			this.date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(this.timelineDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	}
 
